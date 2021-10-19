@@ -1,58 +1,106 @@
 
 window.addEventListener('load', (event) => {
 
-    let v = document.getElementById("heading");
+    let p = document.getElementById("paragraph");
 
-    var root = "בּכּי";
-    v.innerHTML = nisi.getAna(root) + " " +
-        nisi.getHiye(root) + " " +
-        nisi.getHumme(root) + " " +
-        nisi.getHuwe(root) + " " +
-        nisi.getInte(root)
-        ;
+    var root = "טלבּ";
+    var form = katab;
+
+
+    p.innerHTML += "אַנַא " + form.getAna(root) + "<br/>";
+
+    console.log("root 0: " + rootLetters[0])
+    console.log("root 1: " + rootLetters[1])
+    console.log("root 2: " + rootLetters[2])
+
+    p.innerHTML += "אִנְתֵ " + form.getInte(root) + "<br/>";
+    p.innerHTML += "אִנְתִי " + form.getInti(root) + "<br/>";
+    p.innerHTML += "הֻוֵّ " + form.getHuwe(root) + "<br/>";
+    p.innerHTML += "הִיֵّ " + form.getHiye(root) + "<br/>";
+    p.innerHTML += "אִחְנַא " + form.getIhna(root) + "<br/>";
+    p.innerHTML += "אִנְתוּ " + form.getIntu(root) + "<br/>";
+    p.innerHTML += "הֻםֵّ " + form.getHumme(root) + "<br/>";
 });
 
 var letters = "אבגדהוזחטיכלמנסעפצקרשתץףךםן";
-var rootLetters = [3];
+var endingLeggers = "ץףךםן";
+var geresh = "׳";
+
+var rootLetters = ["", "", ""];
+var rootGereshes = ["", "", ""];
 
 function separateRootIntoLetters(root) {
-    var startIndex = 0;
-    var letterLength = 1;
-    var letterIndexInRoot = 0;
+    let startingIndex = 0;
 
-    for (var i = 1; i < root.length; i++) {
-
-        if (letters.indexOf(root[i]) > -1) {
-
-            rootLetters[letterIndexInRoot] = root.substr(startIndex, letterLength);
-            startIndex = i;
-
-            letterIndexInRoot++;
-            letterLength = 0;
-        }
-        letterLength++;
+    for (let i = 0; i < 3; i++) {
+        let letterIndex = getIndexOfFirstLetterAfter(root, startingIndex);
+        rootLetters[i] = root.substr(startingIndex, letterIndex - startingIndex);
+        startingIndex = letterIndex;
     }
-    rootLetters[2] = root.substr(startIndex, root.length - startIndex);
+    checkGereshes();
 }
+
+function getIndexOfFirstLetterAfter(str, afterIndex) {
+    for (let i = afterIndex + 1; i < str.length; i++) {
+        if (letters.indexOf(str[i]) > -1) {
+            return i;
+        }
+    }
+    return str.length;
+}
+
+function checkGereshes() {
+    for (let i = 0; i < 3; i++) {
+        if (rootLetters[i].includes("'")) {
+            rootLetters[i] = rootLetters[i].replace("'", '');
+            rootGereshes[i] = geresh;
+        }
+        else {
+            rootGereshes[i] = "";
+        }
+    }
+}
+
 
 function getWord(template, index0, index1, index2, root) {
 
     separateRootIntoLetters(root);
 
-    template = template.substring(0, index2) +
-        rootLetters[2] + template.substring(index2 + 1);
-    console.log(template);
+    rootLetters[0] = substituteLetterInTemplate(template, 0, index0, index1);
+    rootLetters[1] = substituteLetterInTemplate(template, 1, index1, index2);
+    rootLetters[2] = substituteLetterInTemplate(template, 2, index2, template.length);
 
-    template = template.substring(0, index1) +
-        rootLetters[1] + template.substring(index1 + 1);
-    console.log(template);
+    addGereshes();
 
-    template = template.substring(0, index0) +
-        rootLetters[0] + template.substring(index0 + 1);
-    console.log(template);
-
-    return template;
+    return rootLetters[0] +
+        rootLetters[1] +
+        rootLetters[2];
 }
+
+function addGereshes() {
+    for (let i = 0; i < 3; i++) {
+
+        if (rootGereshes[i] != "") {
+            let secondLetterIndex = getIndexOfFirstLetterAfter(rootLetters[i], 0);
+
+            rootLetters[i] = rootLetters[i].slice(0, secondLetterIndex) +
+                geresh + rootLetters[i].slice(secondLetterIndex);
+        }
+    }
+}
+
+function substituteLetterInTemplate(template, letterFromRoot, subAtIndex, untilIndex) {
+
+    return rootLetters[letterFromRoot] + template.substring(subAtIndex + 1, untilIndex);
+
+}
+
+function substituteEndingLetterToNormal(word) {
+    if (word.includes("")) {
+
+    }
+}
+
 
 
 const katab = {
