@@ -3,7 +3,7 @@ window.addEventListener('load', (event) => {
 
     let p = document.getElementById("paragraph");
 
-    var root = "טלבּ";
+    var root = "סאל";
     var form = katab;
 
 
@@ -30,6 +30,8 @@ var rootLetters = ["", "", ""];
 var rootGereshes = ["", "", ""];
 
 function separateRootIntoLetters(root) {
+
+    root = substituteEndingLettersToNormal(root);
     let startingIndex = 0;
 
     for (let i = 0; i < 3; i++) {
@@ -92,13 +94,16 @@ function addGereshes() {
 function substituteLetterInTemplate(template, letterFromRoot, subAtIndex, untilIndex) {
 
     return rootLetters[letterFromRoot] + template.substring(subAtIndex + 1, untilIndex);
-
 }
 
-function substituteEndingLetterToNormal(word) {
-    if (word.includes("")) {
+function substituteEndingLettersToNormal(word) {
 
-    }
+    word = word.replace("ץ", "צ");
+    word = word.replace("ף", "פ");
+    word = word.replace("ך", "כ");
+    word = word.replace("ם", "מ");
+    word = word.replace("ן", "נ");
+    return word;
 }
 
 
