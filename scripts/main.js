@@ -3,8 +3,8 @@ window.addEventListener('load', (event) => {
 
     let p = document.getElementById("paragraph");
 
-    var root = "סאל";
-    var form = katab;
+    var root = "ט'לّ";
+    var form = habb;
 
 
     p.innerHTML += "אַנַא " + form.getAna(root) + "<br/>";
@@ -68,9 +68,21 @@ function getWord(template, index0, index1, index2, root) {
 
     separateRootIntoLetters(root);
 
-    rootLetters[0] = substituteLetterInTemplate(template, 0, index0, index1);
-    rootLetters[1] = substituteLetterInTemplate(template, 1, index1, index2);
-    rootLetters[2] = substituteLetterInTemplate(template, 2, index2, template.length);
+    if (index1 == -1) {
+        rootLetters[0] = substituteLetterInTemplate(template, 0, index0, index2);
+        rootLetters[1] = "";
+        rootLetters[2] = substituteLetterInTemplate(template, 2, index2, template.length);
+
+    } else if (index2 == -1) {
+        rootLetters[0] = substituteLetterInTemplate(template, 0, index0, index1);
+        rootLetters[1] = substituteLetterInTemplate(template, 1, index1, template.length);
+        rootLetters[2] = "";
+
+    } else {
+        rootLetters[0] = substituteLetterInTemplate(template, 0, index0, index1);
+        rootLetters[1] = substituteLetterInTemplate(template, 1, index1, index2);
+        rootLetters[2] = substituteLetterInTemplate(template, 2, index2, template.length);
+    }
 
     addGereshes();
 
@@ -182,35 +194,35 @@ const haka = {
 
     getAna: function (root) {
         var template = "חַכֵית";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getInte: function (root) {
         var template = "חַכֵית";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getInti: function (root) {
         var template = "חַכֵיתִי";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getHuwe: function (root) {
         var template = "חַכַא";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getHiye: function (root) {
         var template = "חַכַת";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getIhna: function (root) {
         var template = "חַכֵינַא";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getIntu: function (root) {
         var template = "חַכֵיתוּ";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getHumme: function (root) {
         var template = "חַכוּ";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     }
 }
 const nisi = {
@@ -252,104 +264,104 @@ const habb = {
 
     getAna: function (root) {
         var template = "חַבֵّית";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getInte: function (root) {
         var template = "חַבֵّית";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getInti: function (root) {
         var template = "חַבֵّיתִי";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getHuwe: function (root) {
         var template = "חַבّ";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getHiye: function (root) {
         var template = "חַבַّת";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getIhna: function (root) {
         var template = "חַבֵّינַא";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getIntu: function (root) {
         var template = "חַבֵّיתוּ";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     },
     getHumme: function (root) {
         var template = "חַבّוּ";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, 2, -1, root);
     }
 }
 const rah = {
 
     getAna: function (root) {
         var template = "רֻחְת";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 2, root);
     },
     getInte: function (root) {
         var template = "רֻחְת";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 2, root);
     },
     getInti: function (root) {
         var template = "רֻחְתִי";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 2, root);
     },
     getHuwe: function (root) {
         var template = "רַאח";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 3, root);
     },
     getHiye: function (root) {
         var template = "רַאחַת";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 3, root);
     },
     getIhna: function (root) {
         var template = "רֻחְנַא";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 2, root);
     },
     getIntu: function (root) {
         var template = "רֻחְתוּ";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 2, root);
     },
     getHumme: function (root) {
         var template = "רַאחוּ";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 3, root);
     }
 }
 const jab = {
 
     getAna: function (root) {
         var template = "גִבְת";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 2, root);
     },
     getInte: function (root) {
         var template = "גִבְת";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 2, root);
     },
     getInti: function (root) {
         var template = "גִבְתִי";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 2, root);
     },
     getHuwe: function (root) {
         var template = "גַאב";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 3, root);
     },
     getHiye: function (root) {
         var template = "גַאבַת";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 3, root);
     },
     getIhna: function (root) {
         var template = "גִבְנַא";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 2, root);
     },
     getIntu: function (root) {
         var template = "גִבְתוּ";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 2, root);
     },
     getHumme: function (root) {
         var template = "גַאבוּ";
-        return getWord(template, 0, 2, 4, root);
+        return getWord(template, 0, -1, 3, root);
     }
 }
