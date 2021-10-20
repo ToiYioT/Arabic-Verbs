@@ -1,11 +1,10 @@
-
 window.addEventListener('load', (event) => {
+    var root = "רג'ע";
+    var rootForm = forms["nizel"];
+    var toForm = forms["habb"];
 
     let p = document.getElementById("paragraph");
 
-    var root = "נקל";
-    var rootForm = forms["katab"];
-    var toForm = forms["katab"];
 
 
     doProcessing(root, rootForm, toForm);
@@ -34,10 +33,12 @@ function doProcessing(root, rootForm, toForm) {
     doProcess(...rootForm.processingToForm[toForm.formName]);
 }
 
-function doProcess(addFrom, addTo, copyFrom, copyTo, removeShaddeAt) {
+function doProcess(addFrom, addTo, copyFrom, copyTo, removeShaddeAt,
+    substituteAt = -1, substituteWith = "") {
 
     addContentsOfLetterToAnother(addFrom, addTo);
     copyLetterToAnoter(copyFrom, copyTo);
+    substituteLetterAt(substituteAt, substituteWith);
     if (removeShaddeAt > -1) {
         rootLetters[removeShaddeAt] = removeShadde(rootLetters[removeShaddeAt]);
     }
@@ -82,6 +83,13 @@ function checkGereshes() {
         else {
             rootGereshes[i] = "";
         }
+    }
+}
+
+function substituteLetterAt(index, letter) {
+    if (index > -1) {
+        let str = rootLetters[index];
+        rootLetters[index] = letter + str.substr(1, str.length);
     }
 }
 
@@ -201,14 +209,16 @@ const katab = {
         "nizel": [-1, -1, -1, -1, -1],
         "haka": [1, 0, 2, 1, -1],
         "nisi": [-1, -1, -1, -1, -1],
-        "habb": [-1, -1, -1, -1, -1],
-        "rah": [-1, -1, -1, -1, -1],
-        "jab": [-1, -1, -1, -1, -1],
+        "habb": [1, 0, 2, 1, -1],
+        "rah": [1, 0, 2, 1, -1],
+        "jab": [1, 0, 2, 1, -1],
     }
 
 
 }
 const nizel = {
+
+    formName: "nizel",
 
     getAna: function () {
         var template = "נְזִלְת";
@@ -241,6 +251,16 @@ const nizel = {
     getHumme: function () {
         var template = "נִזְלוּ";
         return getWord(template, 0, 2, 4);
+    },
+
+    processingToForm: {
+        "katab": [-1, -1, -1, -1, -1],
+        "nizel": [-1, -1, -1, -1, -1],
+        "haka": [1, 0, 2, 1, -1],
+        "nisi": [-1, -1, -1, -1, -1],
+        "habb": [1, 0, 2, 1, -1],
+        "rah": [1, 0, 2, 1, -1],
+        "jab": [1, 0, 2, 1, -1],
     }
 }
 const haka = {
@@ -278,9 +298,19 @@ const haka = {
     getHumme: function () {
         var template = "חַכוּ";
         return getWord(template, 0, 2, -1);
+    },
+    processingToForm: {
+        "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
+        "nizel": [-1, -1, 1, 2, -1],
+        "haka": [-1, -1, -1, -1, -1],
+        "nisi": [-1, -1, -1, -1, -1, 2, "י"],
+        "habb": [-1, -1, -1, -1, -1],
+        "rah": [-1, -1, 1, 2, -1],
+        "jab": [-1, -1, 1, 2, -1],
     }
 }
 const nisi = {
+    formName: "nisi",
 
     getAna: function () {
         var template = "נְסִית";
@@ -313,9 +343,19 @@ const nisi = {
     getHumme: function () {
         var template = "נִסְיוּ";
         return getWord(template, 0, 2, 4);
+    },
+    processingToForm: {
+        "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
+        "nizel": [-1, -1, 1, 2, -1],
+        "haka": [-1, -1, -1, -1, -1],
+        "nisi": [-1, -1, -1, -1, -1, 2, "י"],
+        "habb": [-1, -1, -1, -1, -1],
+        "rah": [-1, -1, 1, 2, -1],
+        "jab": [-1, -1, 1, 2, -1],
     }
 }
 const habb = {
+    formName: "habb",
 
     getAna: function () {
         var template = "חַבֵّית";
@@ -348,10 +388,20 @@ const habb = {
     getHumme: function () {
         var template = "חַבّוּ";
         return getWord(template, 0, 2, -1);
+    },
+    processingToForm: {
+        "katab": [-1, -1, 1, 2, 2],
+        "nizel": [-1, -1, 1, 2, 2],
+        "haka": [-1, -1, -1, -1, 1],
+        "nisi": [-1, -1, -1, -1, 1, 2, "י"],
+        "habb": [-1, -1, -1, -1, -1],
+        "rah": [-1, -1, 1, 2, 2],
+        "jab": [-1, -1, 1, 2, 2],
     }
 }
 const rah = {
 
+    formName: "rah",
     getAna: function () {
         var template = "רֻחְת";
         return getWord(template, 0, -1, 2);
@@ -383,9 +433,19 @@ const rah = {
     getHumme: function () {
         var template = "רַאחוּ";
         return getWord(template, 0, -1, 3);
+    },
+    processingToForm: {
+        "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
+        "nizel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
+        "haka": [-1, -1, 2, 1, 1],
+        "nisi": [-1, -1, 2, 1, -1, 2, "י"],
+        "habb": [-1, -1, 2, 1, -1],
+        "rah": [-1, -1, -1, -1, -1],
+        "jab": [-1, -1, -1, -1, -1],
     }
 }
 const jab = {
+    formName: "jab",
 
     getAna: function () {
         var template = "גִבְת";
@@ -418,8 +478,16 @@ const jab = {
     getHumme: function () {
         var template = "גַאבוּ";
         return getWord(template, 0, -1, 3);
+    },
+    processingToForm: {
+        "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
+        "nizel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
+        "haka": [-1, -1, 2, 1, 1],
+        "nisi": [-1, -1, 2, 1, -1, 2, "י"],
+        "habb": [-1, -1, 2, 1, -1],
+        "rah": [-1, -1, -1, -1, -1],
+        "jab": [-1, -1, -1, -1, -1],
     }
-
 }
 
 var forms = {
