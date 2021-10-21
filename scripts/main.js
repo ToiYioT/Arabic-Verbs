@@ -1,29 +1,42 @@
 window.addEventListener('load', (event) => {
-    var root = "רג'ע";
-    var rootForm = forms["nizel"];
-    var toForm = forms["habb"];
+
+    let wordFrom = "nisi";
+    let wordTo = "nisi";
+
+    let randomWordNum = Math.floor(Math.random() * roots[wordFrom].length);
+
+    var root = roots[wordFrom][randomWordNum];
+    var rootForm = forms[wordFrom];
+    var toForm = forms[wordTo];
 
     let p = document.getElementById("paragraph");
 
+    for (let i = 0; i < 8; i++) {
 
+        doProcessing(root, rootForm, toForm);
+        p.innerHTML += pronounsArabic[i] + " " + toForm[pronouns[i]]() + "<br/>";
+    }
 
-    doProcessing(root, rootForm, toForm);
-    p.innerHTML += "אַנַא " + toForm.getAna() + "<br/>";
-    doProcessing(root, rootForm, toForm);
-    p.innerHTML += "אִנְתֵ " + toForm.getInte() + "<br/>";
-    doProcessing(root, rootForm, toForm);
-    p.innerHTML += "אִנְתִי " + toForm.getInti() + "<br/>";
-    doProcessing(root, rootForm, toForm);
-    p.innerHTML += "הֻוֵّ " + toForm.getHuwe() + "<br/>";
-    doProcessing(root, rootForm, toForm);
-    p.innerHTML += "הִיֵّ " + toForm.getHiye() + "<br/>";
-    doProcessing(root, rootForm, toForm);
-    p.innerHTML += "אִחְנַא " + toForm.getIhna() + "<br/>";
-    doProcessing(root, rootForm, toForm);
-    p.innerHTML += "אִנְתוּ " + toForm.getIntu() + "<br/>";
-    doProcessing(root, rootForm, toForm);
-    p.innerHTML += "הֻםֵّ " + toForm.getHumme() + "<br/>";
 });
+
+var pronouns = ["getAna", "getInte", "getInti", "getHuwe", "getHiye", "getIhna", "getIntu", "getHumme"];
+var pronounsArabic = ["אַנַא", "אִנְתֵ", "אִנְתִי", "הֻוֵّ", "הִיֵّ", "אִחְנַא", "אִנְתוּ", "הֻםֵّ"];
+
+var katabHebrew = ["ביקש", "חתך/ הפסיק/ קטע/ חצה ניתק", "התגורר", "העביר/ עבר דירה", "נשבע", "עבר", "ישב", "ניגב", "למד", "הקדים/ עקף את...", "אכל", "בדק", "שבר", "שחה", "שילם/ דחף", "הודה", "ניחש", "לקח", "שלח", "היכה", "צחק", "ברח", "בישל", "שתק", "הרים", "פתח", "הבטיח", "צבע", "צבע", "קרא", "שאל", "צחצח/ הבריש", "נשף", "הזמין", "התעטש", "רץ", "נשף", "הזמין", "התעטש", "רץ"];
+var katabArabic = ["טלבּ", "קטע", "סכּן", "נקל", "חלף", "מרק", "קעד", "מסח", "דרס", "סבּק", "אכּל", "פחץ", "כּסר", "סבּח", "דפע", "שכּר", "חזר", "אח'ד", "בּעת", "צ'רבּ", "צ'חכּ", "הרבּ", "טבּח'", "סכּת", "רפע", "פתח", "ועד", "צבּע'", "דהן", "קרא", "סאל", "פרכּ", "נפח'", "עזם", "עטס", "רכּץ'", "נפח'", "עזם", "עטס", "רכּץ'"];
+var nizelHebrew = ["שתה", "ירד", "הבין", "חזר", "יכול", "ידע", "הספיק,השיג את, רדף אחרי", "נולד", "לבש", "החזיק, תפס, עצר", "רכב", "הפסיד", "הרוויח", "היה דומה ל...", "שנא", "עשה", "נחלש, רזה", "הרגיש", "הגיע", "הסתיים", "שמע", "התייאש", "הצליח", "שיחק", "יצא, עלה", "חלם", "התעייף", "התרחב", "התייבש", "נבל", "נכח"];
+var nizelArabic = ["שרבּ", "נזל", "פהם", "רג'ע", "קדר", "ערף", "לחק", "ח'לק", "לבּס", "מסכּ", "רכּבּ", "ח'סר", "כּסבּ", "שבּה", "כּרה", "עמל", "צ'עף", "שער", "וצל", "ח'לץ", "סמע", "יאס", "נג'ח", "לעבּ", "טלע", "חלם", "תעבּ", "וסע", "יבּס", "דבּל", "חצ'ר"];
+var hakaHebrew = ["דיבר", "בנה", "מצא, פגש", "זרק, השליך", "טיגן", "השקה", "נשאר, היה", "עשה על האש"];
+var hakaArabic = ["חכּא", "בּנא", "לקא", "רמא", "קלא", "סקא", "בּקא", "שוא"];
+var nisiHebrew = ["שכח", "הלך", "התחיל", "ידע", "היה מרוצה", "בכה", "התייקר", "התעורר"];
+var nisiArabic = ["נסי", "משי", "בּדי", "דרי", "רצ'י", "בּכּי", "ע'לי", "צחי"];
+var habbHebrew = ["שם", "יצק, מזג", "אהב", "השתין", "זרק, שפך", "נשאר", "פירק", "הסתובב, עטף", "הריח", "פתר", "משך, מתח", "מצץ", "גזר", "השיב, ענה", "חיזק, מתח", "התמעט", "קפץ", "חנה", "ספר", "נשך", "צירף", "השתעל"];
+var habbArabic = ["חטّ", "צבּّ", "חבּّ", "שח'ّ", "כּבּّ", "ט'לّ", "פכּّ", "לףّ", "שםّ", "חלّ", "מדّ", "מץّ", "קץّ", "רדّ", "שדّ", "קל", "נטّ", "צףّ", "עדّ", "עצ'ّ", "צ'םّّ", "קחّّ"];
+var rahHebrew = ["הלך", "היה", "ראה", "ביקר", "אמר", "צם", "זכה", "נכנס, עבר", "קם", "נישק", "מת", "הסתובב"];
+var rahArabic = ["ראח", "כּאן", "שאף", "זאר", "קאל", "צאם", "פאז", "פאת", "קאם", "בּאס", "מאת", "דאר"];
+var jabHebrew = ["נהיה, נעשה, התחיל", "הביא", "חי", "מכר", "פחד", "ישן", "עף", "הוסיף", "אבד", "התעורר", "נרפא"];
+var jabArabic = ["צאר", "ג'אבּ", "עאש", "בּאע", "ח'אף", "נאם", "טאר", "זאד", "צ'אע", "פאק", "טאבּ"];
+
 
 function doProcessing(root, rootForm, toForm) {
     // console.log(...rootForm.processingToForm[toForm.formName]);
@@ -49,9 +62,9 @@ var endingLeggers = "ץףךםן";
 var geresh = "׳";
 var shadde = "ّ";
 
+var gereshedLetter = "";
 var rootLetters = ["", "", ""];
 var rootGereshes = ["", "", ""];
-
 
 function separateRootIntoLetters(root) {
 
@@ -75,15 +88,41 @@ function getIndexOfFirstLetterAfter(str, afterIndex) {
 }
 
 function checkGereshes() {
+    gereshedLetter = "";
     for (let i = 0; i < 3; i++) {
         if (rootLetters[i].includes("'")) {
             rootLetters[i] = rootLetters[i].replace("'", '');
-            rootGereshes[i] = geresh;
-        }
-        else {
-            rootGereshes[i] = "";
+            gereshedLetter = rootLetters[i];
+            console.log("got here");
         }
     }
+}
+
+function addGeresh(str) {
+    if (gereshedLetter == "") {
+        return str;
+    }
+
+
+    let indexOfGereshedLetter = str.indexOf(gereshedLetter);
+    indexOfGereshedLetter = getIndexOfFirstLetterAfter(str, indexOfGereshedLetter);
+
+
+    return str.slice(0, indexOfGereshedLetter) +
+        geresh + str.slice(indexOfGereshedLetter);
+
+    // for (let i = 0; i < 3; i++) {
+
+    //     if (rootGereshes[i] != "") {
+    //         let secondLetterIndex = rootLetters[i].length;
+    //         if (i == 2) {
+    //             secondLetterIndex = getIndexOfFirstLetterAfter(rootLetters[i], 0);
+    //         }
+
+    //         rootLetters[i] = rootLetters[i].slice(0, secondLetterIndex) +
+    //             geresh + rootLetters[i].slice(secondLetterIndex);
+    //     }
+    // }
 }
 
 function substituteLetterAt(index, letter) {
@@ -96,11 +135,14 @@ function substituteLetterAt(index, letter) {
 function copyLetterToAnoter(copyFrom, copyTo) {
     if (copyFrom == -1) return;
     rootLetters[copyTo] = rootLetters[copyFrom];
+    rootGereshes[copyTo] += rootGereshes[copyFrom];
 }
 
 function addContentsOfLetterToAnother(addFrom, addTo) {
     if (addFrom == -1) return;
     rootLetters[addTo] += rootLetters[addFrom];
+    rootGereshes[addTo] += rootGereshes[addFrom];
+    rootGereshes[addFrom] = "";
 }
 
 function removeShadde(str) {
@@ -131,25 +173,10 @@ function getWord(template, index0, index1, index2) {
         rootLetters[2] = substituteLetterInTemplate(template, 2, index2, template.length);
     }
 
-    addGereshes();
-
-    return rootLetters[0] +
+    return addGeresh(rootLetters[0] +
         rootLetters[1] +
-        rootLetters[2];
+        rootLetters[2]);
 }
-
-function addGereshes() {
-    for (let i = 0; i < 3; i++) {
-
-        if (rootGereshes[i] != "") {
-            let secondLetterIndex = getIndexOfFirstLetterAfter(rootLetters[i], 0);
-
-            rootLetters[i] = rootLetters[i].slice(0, secondLetterIndex) +
-                geresh + rootLetters[i].slice(secondLetterIndex);
-        }
-    }
-}
-
 function substituteLetterInTemplate(template, letterFromRoot, subAtIndex, untilIndex) {
 
     return rootLetters[letterFromRoot] + template.substring(subAtIndex + 1, untilIndex);
@@ -498,4 +525,24 @@ var forms = {
     "habb": habb,
     "rah": rah,
     "jab": jab
+}
+
+var roots = {
+    "katab": katabArabic,
+    "nizel": nizelArabic,
+    "haka": hakaArabic,
+    "nisi": nisiArabic,
+    "habb": habbArabic,
+    "rah": rahArabic,
+    "jab": jabArabic
+}
+
+var rootsTranslations = {
+    "katab": katabHebrew,
+    "nizel": nizelHebrew,
+    "haka": hakaHebrew,
+    "nisi": nisiHebrew,
+    "habb": habbHebrew,
+    "rah": rahHebrew,
+    "jab": jabHebrew
 }
