@@ -1,30 +1,97 @@
+
 window.addEventListener('load', (event) => {
-    let p = document.getElementById("paragraph");
+    questionHolder = document.getElementById("question");
+    nextButton = document.getElementById("next-button");
 
-    let randomFormNum = Math.floor(Math.random() * formNames.length);
-    let formName = formNames[randomFormNum];
+    nextButton.addEventListener("click", initQuestion);
 
-    let rootForm = forms[formName];
-    let conjugateTo = rootForm;
+    for (let i = 0; i < 3; i++) {
+        answerHolders.push(document.getElementById("answer" + (i + 1)));
+        answerHolders[i].addEventListener("click", answerClickHandler);
+    }
+
+    initQuestion();
+});
+
+function initQuestion() {
+
+    answers.length = 0;
+    createRandomNonRepeatingForms();
+
+    let rootForm = answerForms[0];
+    let formName = rootForm.formName;
+
+    let pronounNum = Math.floor(Math.random() * pronounFunctions.length);
+    let pronounFunction = pronounFunctions[pronounNum];
 
     let randomWordNum = Math.floor(Math.random() * roots[formName].length);
     let root = roots[formName][randomWordNum];
     let rootHebrew = rootsHebrew[formName][randomWordNum];
 
-    let pronounNum = Math.floor(Math.random() * pronounFunctions.length);
-    let pronounFunction = pronounFunctions[pronounNum];
+    questionHolder.innerHTML = rootHebrew + " + " + pronounsHebrew[pronounNum] + "<br/>";
 
-    doProcessing(root, rootForm, conjugateTo);
-    p.innerHTML += pronounsHebrew[pronounNum] + " " + rootHebrew + "<br/>";
+    for (let i = 0; i < 3; i++) {
 
-    let answer = pronounsArabic[pronounNum] + " " + conjugateTo[pronounFunction]();
+        let conjugateTo = answerForms[i];
+        doProcessing(root, rootForm, conjugateTo);
+        answers.push(pronounsArabic[pronounNum] + " " + conjugateTo[pronounFunction]());
+    }
+    correctAnswer = answers[0];
+    shuffle(answers);
 
-    p.innerHTML += answer;
-    // for (let i = 0; i < 8; i++) {
-    //     doProcessing(root, rootForm, conjugateTo);
-    //     p.innerHTML += pronounsArabic[i] + " " + conjugateTo[pronouns[i]]() + "<br/>";
-    // }
-});
+    for (let i = 0; i < answerHolders.length; i++) {
+        answerHolders[i].innerHTML = answers[i];
+        answerHolders[i].classList.remove("correct");
+        answerHolders[i].classList.remove("incorrect");
+    }
+}
+
+function answerClickHandler(event) {
+    let holderAnswer = event.target.innerHTML;
+    if (holderAnswer == correctAnswer) {
+        event.target.classList.add("correct");
+        console.log("CorrectAnswer!");
+    } else {
+        event.target.classList.add("incorrect");
+        console.log("No!");
+    }
+}
+
+var answerHolders = [];
+var answers = [];
+var correctAnswer;
+
+var answerForms = [];
+function createRandomNonRepeatingForms() {
+
+    answerForms.length = 0;
+
+    let randomFormNum = Math.floor(Math.random() * formNames.length);
+    let formName = formNames[randomFormNum];
+    let form = forms[formName];
+    answerForms.push(form);
+
+    if (form == katab || form == nizel) {
+        if (form == katab) {
+            answerForms.push(nizel);
+        }
+        if (form == nizel) {
+            answerForms.push(katab);
+        }
+    }
+    do {
+        let randomFormNum = Math.floor((Math.random() * (formNames.length - 2)) + 2);
+        let formName = formNames[randomFormNum];
+        let form = forms[formName];
+        if (answerForms.indexOf(form) == -1) {
+            answerForms.push(form);
+        }
+    } while (answerForms.length < 3)
+}
+
+var questionHolder;
+var nextButton;
+var answer1Holder, answer2Holder, answer3Holder;
 
 const pronounFunctions = ["getAna", "getInte", "getInti", "getHuwe", "getHiye", "getIhna", "getIntu", "getHumme"];
 const pronounsArabic = ["אַנַא", "אִנְתֵ", "אִנְתִי", "הֻוֵّ", "הִיֵّ", "אִחְנַא", "אִנְתוּ", "הֻםֵّ"];
@@ -106,30 +173,13 @@ function checkGereshes() {
 }
 
 function addGeresh(str) {
-    if (gereshedLetter == "") {
-        return str;
-    }
-
+    if (gereshedLetter == "") return str;
 
     let indexOfGereshedLetter = str.indexOf(gereshedLetter);
     indexOfGereshedLetter = getIndexOfFirstLetterAfter(str, indexOfGereshedLetter);
 
-
     return str.slice(0, indexOfGereshedLetter) +
         geresh + str.slice(indexOfGereshedLetter);
-
-    // for (let i = 0; i < 3; i++) {
-
-    //     if (rootGereshes[i] != "") {
-    //         let secondLetterIndex = rootLetters[i].length;
-    //         if (i == 2) {
-    //             secondLetterIndex = getIndexOfFirstLetterAfter(rootLetters[i], 0);
-    //         }
-
-    //         rootLetters[i] = rootLetters[i].slice(0, secondLetterIndex) +
-    //             geresh + rootLetters[i].slice(secondLetterIndex);
-    //     }
-    // }
 }
 
 function substituteLetterAt(index, letter) {
@@ -184,8 +234,8 @@ function getWord(template, index0, index1, index2) {
         rootLetters[1] +
         rootLetters[2]);
 }
-function substituteLetterInTemplate(template, letterFromRoot, subAtIndex, untilIndex) {
 
+function substituteLetterInTemplate(template, letterFromRoot, subAtIndex, untilIndex) {
     return rootLetters[letterFromRoot] + template.substring(subAtIndex + 1, untilIndex);
 }
 
@@ -554,4 +604,22 @@ const rootsHebrew = {
     "habb": habbHebrew,
     "rah": rahHebrew,
     "jab": jabHebrew
+}
+
+function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
 }
