@@ -17,8 +17,9 @@ window.addEventListener('load', (event) => {
     doProcessing(root, rootForm, conjugateTo);
     p.innerHTML += pronounsHebrew[pronounNum] + " " + rootHebrew + "<br/>";
 
-    console.log(pronounsArabic[pronounNum] + " " + conjugateTo[pronounFunction]());
+    let answer = pronounsArabic[pronounNum] + " " + conjugateTo[pronounFunction]();
 
+    p.innerHTML += answer;
     // for (let i = 0; i < 8; i++) {
     //     doProcessing(root, rootForm, conjugateTo);
     //     p.innerHTML += pronounsArabic[i] + " " + conjugateTo[pronouns[i]]() + "<br/>";
