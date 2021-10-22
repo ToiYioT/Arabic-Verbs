@@ -1,41 +1,48 @@
 window.addEventListener('load', (event) => {
-
-    let wordFrom = "nisi";
-    let wordTo = "nisi";
-
-    let randomWordNum = Math.floor(Math.random() * roots[wordFrom].length);
-
-    var root = roots[wordFrom][randomWordNum];
-    var rootForm = forms[wordFrom];
-    var toForm = forms[wordTo];
-
     let p = document.getElementById("paragraph");
 
-    for (let i = 0; i < 8; i++) {
+    let randomFormNum = Math.floor(Math.random() * formNames.length);
+    let formName = formNames[randomFormNum];
 
-        doProcessing(root, rootForm, toForm);
-        p.innerHTML += pronounsArabic[i] + " " + toForm[pronouns[i]]() + "<br/>";
-    }
+    let rootForm = forms[formName];
+    let conjugateTo = rootForm;
 
+    let randomWordNum = Math.floor(Math.random() * roots[formName].length);
+    let root = roots[formName][randomWordNum];
+    let rootHebrew = rootsHebrew[formName][randomWordNum];
+
+    let pronounNum = Math.floor(Math.random() * pronounFunctions.length);
+    let pronounFunction = pronounFunctions[pronounNum];
+
+    doProcessing(root, rootForm, conjugateTo);
+    p.innerHTML += pronounsHebrew[pronounNum] + " " + rootHebrew + "<br/>";
+
+    console.log(pronounsArabic[pronounNum] + " " + conjugateTo[pronounFunction]());
+
+    // for (let i = 0; i < 8; i++) {
+    //     doProcessing(root, rootForm, conjugateTo);
+    //     p.innerHTML += pronounsArabic[i] + " " + conjugateTo[pronouns[i]]() + "<br/>";
+    // }
 });
 
-var pronouns = ["getAna", "getInte", "getInti", "getHuwe", "getHiye", "getIhna", "getIntu", "getHumme"];
-var pronounsArabic = ["אַנַא", "אִנְתֵ", "אִנְתִי", "הֻוֵّ", "הִיֵّ", "אִחְנַא", "אִנְתוּ", "הֻםֵّ"];
+const pronounFunctions = ["getAna", "getInte", "getInti", "getHuwe", "getHiye", "getIhna", "getIntu", "getHumme"];
+const pronounsArabic = ["אַנַא", "אִנְתֵ", "אִנְתִי", "הֻוֵّ", "הִיֵّ", "אִחְנַא", "אִנְתוּ", "הֻםֵّ"];
+const pronounsHebrew = ["אני", "אתה", "את", "הוא", "היא", "אנחנו", "אתם", "הם"];
 
-var katabHebrew = ["ביקש", "חתך/ הפסיק/ קטע/ חצה ניתק", "התגורר", "העביר/ עבר דירה", "נשבע", "עבר", "ישב", "ניגב", "למד", "הקדים/ עקף את...", "אכל", "בדק", "שבר", "שחה", "שילם/ דחף", "הודה", "ניחש", "לקח", "שלח", "היכה", "צחק", "ברח", "בישל", "שתק", "הרים", "פתח", "הבטיח", "צבע", "צבע", "קרא", "שאל", "צחצח/ הבריש", "נשף", "הזמין", "התעטש", "רץ", "נשף", "הזמין", "התעטש", "רץ"];
-var katabArabic = ["טלבּ", "קטע", "סכּן", "נקל", "חלף", "מרק", "קעד", "מסח", "דרס", "סבּק", "אכּל", "פחץ", "כּסר", "סבּח", "דפע", "שכּר", "חזר", "אח'ד", "בּעת", "צ'רבּ", "צ'חכּ", "הרבּ", "טבּח'", "סכּת", "רפע", "פתח", "ועד", "צבּע'", "דהן", "קרא", "סאל", "פרכּ", "נפח'", "עזם", "עטס", "רכּץ'", "נפח'", "עזם", "עטס", "רכּץ'"];
-var nizelHebrew = ["שתה", "ירד", "הבין", "חזר", "יכול", "ידע", "הספיק,השיג את, רדף אחרי", "נולד", "לבש", "החזיק, תפס, עצר", "רכב", "הפסיד", "הרוויח", "היה דומה ל...", "שנא", "עשה", "נחלש, רזה", "הרגיש", "הגיע", "הסתיים", "שמע", "התייאש", "הצליח", "שיחק", "יצא, עלה", "חלם", "התעייף", "התרחב", "התייבש", "נבל", "נכח"];
-var nizelArabic = ["שרבּ", "נזל", "פהם", "רג'ע", "קדר", "ערף", "לחק", "ח'לק", "לבּס", "מסכּ", "רכּבּ", "ח'סר", "כּסבּ", "שבּה", "כּרה", "עמל", "צ'עף", "שער", "וצל", "ח'לץ", "סמע", "יאס", "נג'ח", "לעבּ", "טלע", "חלם", "תעבּ", "וסע", "יבּס", "דבּל", "חצ'ר"];
-var hakaHebrew = ["דיבר", "בנה", "מצא, פגש", "זרק, השליך", "טיגן", "השקה", "נשאר, היה", "עשה על האש"];
-var hakaArabic = ["חכּא", "בּנא", "לקא", "רמא", "קלא", "סקא", "בּקא", "שוא"];
-var nisiHebrew = ["שכח", "הלך", "התחיל", "ידע", "היה מרוצה", "בכה", "התייקר", "התעורר"];
-var nisiArabic = ["נסי", "משי", "בּדי", "דרי", "רצ'י", "בּכּי", "ע'לי", "צחי"];
-var habbHebrew = ["שם", "יצק, מזג", "אהב", "השתין", "זרק, שפך", "נשאר", "פירק", "הסתובב, עטף", "הריח", "פתר", "משך, מתח", "מצץ", "גזר", "השיב, ענה", "חיזק, מתח", "התמעט", "קפץ", "חנה", "ספר", "נשך", "צירף", "השתעל"];
-var habbArabic = ["חטّ", "צבּّ", "חבּّ", "שח'ّ", "כּבּّ", "ט'לّ", "פכּّ", "לףّ", "שםّ", "חלّ", "מדّ", "מץّ", "קץّ", "רדّ", "שדّ", "קל", "נטّ", "צףّ", "עדّ", "עצ'ّ", "צ'םّّ", "קחّّ"];
-var rahHebrew = ["הלך", "היה", "ראה", "ביקר", "אמר", "צם", "זכה", "נכנס, עבר", "קם", "נישק", "מת", "הסתובב"];
-var rahArabic = ["ראח", "כּאן", "שאף", "זאר", "קאל", "צאם", "פאז", "פאת", "קאם", "בּאס", "מאת", "דאר"];
-var jabHebrew = ["נהיה, נעשה, התחיל", "הביא", "חי", "מכר", "פחד", "ישן", "עף", "הוסיף", "אבד", "התעורר", "נרפא"];
-var jabArabic = ["צאר", "ג'אבּ", "עאש", "בּאע", "ח'אף", "נאם", "טאר", "זאד", "צ'אע", "פאק", "טאבּ"];
+const katabHebrew = ["ביקש", "חתך/ הפסיק/ קטע/ חצה ניתק", "התגורר", "העביר/ עבר דירה", "נשבע", "עבר", "ישב", "ניגב", "למד", "הקדים/ עקף את...", "אכל", "בדק", "שבר", "שחה", "שילם/ דחף", "הודה", "ניחש", "לקח", "שלח", "היכה", "צחק", "ברח", "בישל", "שתק", "הרים", "פתח", "הבטיח", "צבע", "צבע", "קרא", "שאל", "צחצח/ הבריש", "נשף", "הזמין", "התעטש", "רץ", "נשף", "הזמין", "התעטש", "רץ"];
+const katabArabic = ["טלבּ", "קטע", "סכּן", "נקל", "חלף", "מרק", "קעד", "מסח", "דרס", "סבּק", "אכּל", "פחץ", "כּסר", "סבּח", "דפע", "שכּר", "חזר", "אח'ד", "בּעת", "צ'רבּ", "צ'חכּ", "הרבּ", "טבּח'", "סכּת", "רפע", "פתח", "ועד", "צבּע'", "דהן", "קרא", "סאל", "פרכּ", "נפח'", "עזם", "עטס", "רכּץ'", "נפח'", "עזם", "עטס", "רכּץ'"];
+const nizelHebrew = ["שתה", "ירד", "הבין", "חזר", "יכול", "ידע", "הספיק,השיג את, רדף אחרי", "נולד", "לבש", "החזיק, תפס, עצר", "רכב", "הפסיד", "הרוויח", "היה דומה ל...", "שנא", "עשה", "נחלש, רזה", "הרגיש", "הגיע", "הסתיים", "שמע", "התייאש", "הצליח", "שיחק", "יצא, עלה", "חלם", "התעייף", "התרחב", "התייבש", "נבל", "נכח"];
+const nizelArabic = ["שרבּ", "נזל", "פהם", "רג'ע", "קדר", "ערף", "לחק", "ח'לק", "לבּס", "מסכּ", "רכּבּ", "ח'סר", "כּסבּ", "שבּה", "כּרה", "עמל", "צ'עף", "שער", "וצל", "ח'לץ", "סמע", "יאס", "נג'ח", "לעבּ", "טלע", "חלם", "תעבּ", "וסע", "יבּס", "דבּל", "חצ'ר"];
+const hakaHebrew = ["דיבר", "בנה", "מצא, פגש", "זרק, השליך", "טיגן", "השקה", "נשאר, היה", "עשה על האש"];
+const hakaArabic = ["חכּא", "בּנא", "לקא", "רמא", "קלא", "סקא", "בּקא", "שוא"];
+const nisiHebrew = ["שכח", "הלך", "התחיל", "ידע", "היה מרוצה", "בכה", "התייקר", "התעורר"];
+const nisiArabic = ["נסי", "משי", "בּדי", "דרי", "רצ'י", "בּכּי", "ע'לי", "צחי"];
+const habbHebrew = ["שם", "יצק, מזג", "אהב", "השתין", "זרק, שפך", "נשאר", "פירק", "הסתובב, עטף", "הריח", "פתר", "משך, מתח", "מצץ", "גזר", "השיב, ענה", "חיזק, מתח", "התמעט", "קפץ", "חנה", "ספר", "נשך", "צירף", "השתעל"];
+const habbArabic = ["חטّ", "צבּّ", "חבּّ", "שח'ّ", "כּבּّ", "ט'לّ", "פכּّ", "לףّ", "שםّ", "חלّ", "מדّ", "מץّ", "קץّ", "רדّ", "שדّ", "קל", "נטّ", "צףّ", "עדّ", "עצ'ّ", "צ'םّّ", "קחّّ"];
+const rahHebrew = ["הלך", "היה", "ראה", "ביקר", "אמר", "צם", "זכה", "נכנס, עבר", "קם", "נישק", "מת", "הסתובב"];
+const rahArabic = ["ראח", "כּאן", "שאף", "זאר", "קאל", "צאם", "פאז", "פאת", "קאם", "בּאס", "מאת", "דאר"];
+const jabHebrew = ["נהיה, נעשה, התחיל", "הביא", "חי", "מכר", "פחד", "ישן", "עף", "הוסיף", "אבד", "התעורר", "נרפא"];
+const jabArabic = ["צאר", "ג'אבּ", "עאש", "בּאע", "ח'אף", "נאם", "טאר", "זאד", "צ'אע", "פאק", "טאבּ"];
 
 
 function doProcessing(root, rootForm, toForm) {
@@ -57,10 +64,10 @@ function doProcess(addFrom, addTo, copyFrom, copyTo, removeShaddeAt,
     }
 }
 
-var letters = "אבגדהוזחטיכלמנסעפצקרשתץףךםן";
-var endingLeggers = "ץףךםן";
-var geresh = "׳";
-var shadde = "ّ";
+const letters = "אבגדהוזחטיכלמנסעפצקרשתץףךםן";
+const endingLeggers = "ץףךםן";
+const geresh = "׳";
+const shadde = "ّ";
 
 var gereshedLetter = "";
 var rootLetters = ["", "", ""];
@@ -93,7 +100,6 @@ function checkGereshes() {
         if (rootLetters[i].includes("'")) {
             rootLetters[i] = rootLetters[i].replace("'", '');
             gereshedLetter = rootLetters[i];
-            console.log("got here");
         }
     }
 }
@@ -517,7 +523,9 @@ const jab = {
     }
 }
 
-var forms = {
+const formNames = ["katab", "nizel", "haka", "nisi", "habb", "rah", "jab"];
+
+const forms = {
     "katab": katab,
     "nizel": nizel,
     "haka": haka,
@@ -527,7 +535,7 @@ var forms = {
     "jab": jab
 }
 
-var roots = {
+const roots = {
     "katab": katabArabic,
     "nizel": nizelArabic,
     "haka": hakaArabic,
@@ -537,7 +545,7 @@ var roots = {
     "jab": jabArabic
 }
 
-var rootsTranslations = {
+const rootsHebrew = {
     "katab": katabHebrew,
     "nizel": nizelHebrew,
     "haka": hakaHebrew,
