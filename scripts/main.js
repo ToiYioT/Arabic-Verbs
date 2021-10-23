@@ -2,6 +2,8 @@
 var hideAnswers = true;
 
 window.addEventListener('load', (event) => {
+
+    loadDebugCols();
     questionHolder = document.getElementById("question");
     button = document.getElementById("next-button");
     score = document.getElementById("score");
@@ -17,7 +19,16 @@ window.addEventListener('load', (event) => {
 
     buttonHandler();
     updateScore();
+
+    // debugShowConjugations(katab, [haka, habb, rah, jab]);
 });
+
+var debugCols = [];
+function loadDebugCols() {
+    for (let i = 0; i < 4; i++) {
+        debugCols.push(document.getElementById("col" + (i + 1)));
+    }
+}
 
 function buttonHandler() {
     if (!hideAnswers) {
@@ -78,6 +89,28 @@ function initQuestion() {
     updateScore();
 }
 
+function debugShowConjugations(rootForm, conjugateToArray) {
+
+    let formName = rootForm.formName;
+    let randomWordNum = Math.floor(Math.random() * roots[formName].length);
+    let root = roots[formName][randomWordNum];
+
+
+    for (let c = 0; c < conjugateToArray.length; c++) {
+        let conjugateTo = conjugateToArray[c];
+        let whereToPutText = debugCols[c];
+
+        for (let i = 0; i < pronounFunctions.length; i++) {
+            let pronounFunction = pronounFunctions[i];
+
+            doProcessing(root, rootForm, conjugateTo);
+            whereToPutText.innerHTML += pronounsArabic[i] +
+                " " + conjugateTo[pronounFunction]() + "</br>";
+        }
+    }
+
+}
+
 function answerClickHandler(event) {
     let holderAnswer = event.target.innerHTML;
     answeringAttemptNum++;
@@ -123,6 +156,7 @@ const letters = "אבגדהוזחטיכלמנסעפצקרשתץףךםן";
 const endingLeggers = "ץףךםן";
 const geresh = "׳";
 const shadde = "ّ";
+const shva = "ְ";
 
 // intermediate results
 var gereshedLetter = "";
@@ -167,15 +201,17 @@ function createRandomNonRepeatingForms() {
         if (form == nizel) {
             answerForms.push(katab);
         }
+        answerForms.push(rah);
+    } else {
+        do {
+            let randomFormNum = Math.floor((Math.random() * (formNames.length - 2)) + 2);
+            let formName = formNames[randomFormNum];
+            let form = forms[formName];
+            if (answerForms.indexOf(form) == -1) {
+                answerForms.push(form);
+            }
+        } while (answerForms.length < 3)
     }
-    do {
-        let randomFormNum = Math.floor((Math.random() * (formNames.length - 2)) + 2);
-        let formName = formNames[randomFormNum];
-        let form = forms[formName];
-        if (answerForms.indexOf(form) == -1) {
-            answerForms.push(form);
-        }
-    } while (answerForms.length < 3)
 }
 
 function doProcessing(root, rootForm, toForm) {
@@ -187,7 +223,11 @@ function doProcessing(root, rootForm, toForm) {
 }
 
 function doProcess(addFrom, addTo, copyFrom, copyTo, removeShaddeAt,
-    substituteAt = -1, substituteWith = "") {
+    substituteAt = -1, substituteWith = "", niqudToAdd = "", addNiqudAt = -1) {
+
+    if (niqudToAdd != "") {
+        rootLetters[addNiqudAt] = addNiqud(rootLetters[addNiqudAt], niqudToAdd);
+    }
 
     addContentsOfLetterToAnother(addFrom, addTo);
     copyLetterToAnoter(copyFrom, copyTo);
@@ -264,6 +304,10 @@ function removeShadde(str) {
     return str.replaceAll(shadde, "");
 }
 
+function addNiqud(str, niqud) {
+    return str[0] + niqud + str.substring(1, str.length);
+}
+
 function getWord(template, index0, index1, index2) {
 
     // after separating the letters, a processing step is necessary,
@@ -287,9 +331,11 @@ function getWord(template, index0, index1, index2) {
         rootLetters[2] = substituteLetterInTemplate(template, 2, index2, template.length);
     }
 
-    return addGeresh(rootLetters[0] +
+    let solution = addGeresh(rootLetters[0] +
         rootLetters[1] +
         rootLetters[2]);
+    // solution = addShva(solution);
+    return solution;
 }
 
 function substituteLetterInTemplate(template, letterFromRoot, subAtIndex, untilIndex) {
@@ -348,15 +394,26 @@ const katab = {
     processingToForm: {
         "katab": [-1, -1, -1, -1, -1],
         "nizel": [-1, -1, -1, -1, -1],
-        "haka": [1, 0, 2, 1, -1],
+        "haka": [1, 0, 2, 1, -1, -1, -1, shva, 0],
         "nisi": [-1, -1, -1, -1, -1],
-        "habb": [1, 0, 2, 1, -1],
-        "rah": [1, 0, 2, 1, -1],
-        "jab": [1, 0, 2, 1, -1],
+        "habb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+        "rah": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+        "jab": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+    },
+
+    // pronouns : array of possible forms
+    formsToDistractWith: {
+        0: [1, 5, 2],
+        1: [1, 1, 1],
+        2: [1, 1, 1],
+        3: [1, 1, 1],
+        4: [1, 1, 1],
+        5: [1, 1, 1],
+        6: [1, 1, 1],
+        7: [1, 1, 1]
     }
-
-
 }
+
 const nizel = {
 
     formName: "nizel",
@@ -397,12 +454,12 @@ const nizel = {
     processingToForm: {
         "katab": [-1, -1, -1, -1, -1],
         "nizel": [-1, -1, -1, -1, -1],
-        "haka": [1, 0, 2, 1, -1],
+        "haka": [1, 0, 2, 1, -1, -1, -1, shva, 0],
         "nisi": [-1, -1, -1, -1, -1],
-        "habb": [1, 0, 2, 1, -1],
-        "rah": [1, 0, 2, 1, -1],
-        "jab": [1, 0, 2, 1, -1],
-    }
+        "habb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+        "rah": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+        "jab": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+    },
 }
 const haka = {
 

@@ -12,13 +12,32 @@ body {
     background-color: rgb(167, 160, 199);
 }
 
-
+/* change display from none to flex */
 #container {
     display: flex;
+    /* display: none; */
     margin: auto;
     min-height: 100%;
     height: 100%;
     flex-direction: column;
+}
+
+/* change display from flex to none */
+#hor-container {
+    /* display: flex; */
+    display: none;
+    margin: auto;
+    min-height: 100%;
+    height: 100%;
+    flex-direction: row;
+}
+
+.col {
+    background-color: rgb(216, 216, 216);
+    flex: 1;
+    text-align: right;
+    font-size: 300%;
+    padding-right: 1%;
 }
 
 #score{
@@ -94,6 +113,7 @@ body{
 
  @media only screen and (min-width: 660px) {
   #container{
+      /* width: 100%; */
       width: 30%;
   }
  }
