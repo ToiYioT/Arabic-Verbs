@@ -1,8 +1,10 @@
+// settings
 var hideAnswers = true;
 
 window.addEventListener('load', (event) => {
     questionHolder = document.getElementById("question");
     button = document.getElementById("next-button");
+    score = document.getElementById("score");
 
     answerSection = document.getElementById("answer-section");
 
@@ -14,6 +16,7 @@ window.addEventListener('load', (event) => {
     }
 
     buttonHandler();
+    updateScore();
 });
 
 function buttonHandler() {
@@ -42,6 +45,8 @@ function setButtonText() {
 function initQuestion() {
 
     answers.length = 0;
+    answeringAttemptNum = 0;
+    numOfTotalAnswers++;
     createRandomNonRepeatingForms();
 
     let rootForm = answerForms[0];
@@ -70,26 +75,82 @@ function initQuestion() {
         answerHolders[i].classList.remove("correct");
         answerHolders[i].classList.remove("incorrect");
     }
+    updateScore();
 }
 
 function answerClickHandler(event) {
     let holderAnswer = event.target.innerHTML;
+    answeringAttemptNum++;
+
     if (holderAnswer == correctAnswer) {
         event.target.classList.add("correct");
 
         button.disabled = false;
         button.innerHTML = "השאלה הבאה"
+        if (answeringAttemptNum == 1) {
+            numOfCorrectAnswers++;
+        }
     } else {
         event.target.classList.add("incorrect");
     }
+    updateScore();
 }
 
+function updateScore() {
+    score.innerHTML = "שאלה מספר: " + numOfTotalAnswers + "</br>" +
+        "תשובות נכונות: " + numOfCorrectAnswers;
+}
+
+// html elements
+var answer1Holder, answer2Holder, answer3Holder;
 var answerHolders = [];
 var answerSection;
+var questionHolder;
+var button;
+var score;
+
+
+// logic variables 
+var answerForms = [];
 var answers = [];
 var correctAnswer;
+var numOfCorrectAnswers = 0;
+var numOfTotalAnswers = 0;
+var answeringAttemptNum;
 
-var answerForms = [];
+// constants 
+const letters = "אבגדהוזחטיכלמנסעפצקרשתץףךםן";
+const endingLeggers = "ץףךםן";
+const geresh = "׳";
+const shadde = "ّ";
+
+// intermediate results
+var gereshedLetter = "";
+var rootLetters = ["", "", ""];
+var rootGereshes = ["", "", ""];
+
+
+
+// dataaaa
+const pronounFunctions = ["getAna", "getInte", "getInti", "getHuwe", "getHiye", "getIhna", "getIntu", "getHumme"];
+const pronounsArabic = ["אַנַא", "אִנְתֵ", "אִנְתִי", "הֻוֵّ", "הִיֵّ", "אִחְנַא", "אִנְתוּ", "הֻםֵّ"];
+const pronounsHebrew = ["אני", "אתה", "את", "הוא", "היא", "אנחנו", "אתם", "הם"];
+
+const katabHebrew = ["ביקש", "חתך/ הפסיק/ קטע/ חצה ניתק", "התגורר", "העביר/ עבר דירה", "נשבע", "עבר", "ישב", "ניגב", "למד", "הקדים/ עקף את...", "אכל", "בדק", "שבר", "שחה", "שילם/ דחף", "הודה", "ניחש", "לקח", "שלח", "היכה", "צחק", "ברח", "בישל", "שתק", "הרים", "פתח", "הבטיח", "צבע", "צבע", "קרא", "שאל", "צחצח/ הבריש", "נשף", "הזמין", "התעטש", "רץ", "נשף", "הזמין", "התעטש", "רץ"];
+const katabArabic = ["טלבּ", "קטע", "סכּן", "נקל", "חלף", "מרק", "קעד", "מסח", "דרס", "סבּק", "אכּל", "פחץ", "כּסר", "סבּח", "דפע", "שכּר", "חזר", "אח'ד", "בּעת", "צ'רבּ", "צ'חכּ", "הרבּ", "טבּח'", "סכּת", "רפע", "פתח", "ועד", "צבּע'", "דהן", "קרא", "סאל", "פרכּ", "נפח'", "עזם", "עטס", "רכּץ'", "נפח'", "עזם", "עטס", "רכּץ'"];
+const nizelHebrew = ["שתה", "ירד", "הבין", "חזר", "יכול", "ידע", "הספיק,השיג את, רדף אחרי", "נולד", "לבש", "החזיק, תפס, עצר", "רכב", "הפסיד", "הרוויח", "היה דומה ל...", "שנא", "עשה", "נחלש, רזה", "הרגיש", "הגיע", "הסתיים", "שמע", "התייאש", "הצליח", "שיחק", "יצא, עלה", "חלם", "התעייף", "התרחב", "התייבש", "נבל", "נכח"];
+const nizelArabic = ["שרבּ", "נזל", "פהם", "רג'ע", "קדר", "ערף", "לחק", "ח'לק", "לבּס", "מסכּ", "רכּבּ", "ח'סר", "כּסבּ", "שבּה", "כּרה", "עמל", "צ'עף", "שער", "וצל", "ח'לץ", "סמע", "יאס", "נג'ח", "לעבּ", "טלע", "חלם", "תעבּ", "וסע", "יבּס", "דבּל", "חצ'ר"];
+const hakaHebrew = ["דיבר", "בנה", "מצא, פגש", "זרק, השליך", "טיגן", "השקה", "נשאר, היה", "עשה על האש"];
+const hakaArabic = ["חכּא", "בּנא", "לקא", "רמא", "קלא", "סקא", "בּקא", "שוא"];
+const nisiHebrew = ["שכח", "הלך", "התחיל", "ידע", "היה מרוצה", "בכה", "התייקר", "התעורר"];
+const nisiArabic = ["נסי", "משי", "בּדי", "דרי", "רצ'י", "בּכּי", "ע'לי", "צחי"];
+const habbHebrew = ["שם", "יצק, מזג", "אהב", "השתין", "זרק, שפך", "נשאר", "פירק", "הסתובב, עטף", "הריח", "פתר", "משך, מתח", "מצץ", "גזר", "השיב, ענה", "חיזק, מתח", "התמעט", "קפץ", "חנה", "ספר", "נשך", "צירף", "השתעל"];
+const habbArabic = ["חטّ", "צבּّ", "חבּّ", "שח'ّ", "כּבּّ", "ט'לّ", "פכּّ", "לףّ", "שםّ", "חלّ", "מדّ", "מץّ", "קץّ", "רדّ", "שדّ", "קל", "נטّ", "צףّ", "עדّ", "עצ'ّ", "צ'םّّ", "קחّّ"];
+const rahHebrew = ["הלך", "היה", "ראה", "ביקר", "אמר", "צם", "זכה", "נכנס, עבר", "קם", "נישק", "מת", "הסתובב"];
+const rahArabic = ["ראח", "כּאן", "שאף", "זאר", "קאל", "צאם", "פאז", "פאת", "קאם", "בּאס", "מאת", "דאר"];
+const jabHebrew = ["נהיה, נעשה, התחיל", "הביא", "חי", "מכר", "פחד", "ישן", "עף", "הוסיף", "אבד", "התעורר", "נרפא"];
+const jabArabic = ["צאר", "ג'אבּ", "עאש", "בּאע", "ח'אף", "נאם", "טאר", "זאד", "צ'אע", "פאק", "טאבּ"];
+
 function createRandomNonRepeatingForms() {
 
     answerForms.length = 0;
@@ -117,30 +178,6 @@ function createRandomNonRepeatingForms() {
     } while (answerForms.length < 3)
 }
 
-var questionHolder;
-var button;
-var answer1Holder, answer2Holder, answer3Holder;
-
-const pronounFunctions = ["getAna", "getInte", "getInti", "getHuwe", "getHiye", "getIhna", "getIntu", "getHumme"];
-const pronounsArabic = ["אַנַא", "אִנְתֵ", "אִנְתִי", "הֻוֵّ", "הִיֵّ", "אִחְנַא", "אִנְתוּ", "הֻםֵّ"];
-const pronounsHebrew = ["אני", "אתה", "את", "הוא", "היא", "אנחנו", "אתם", "הם"];
-
-const katabHebrew = ["ביקש", "חתך/ הפסיק/ קטע/ חצה ניתק", "התגורר", "העביר/ עבר דירה", "נשבע", "עבר", "ישב", "ניגב", "למד", "הקדים/ עקף את...", "אכל", "בדק", "שבר", "שחה", "שילם/ דחף", "הודה", "ניחש", "לקח", "שלח", "היכה", "צחק", "ברח", "בישל", "שתק", "הרים", "פתח", "הבטיח", "צבע", "צבע", "קרא", "שאל", "צחצח/ הבריש", "נשף", "הזמין", "התעטש", "רץ", "נשף", "הזמין", "התעטש", "רץ"];
-const katabArabic = ["טלבּ", "קטע", "סכּן", "נקל", "חלף", "מרק", "קעד", "מסח", "דרס", "סבּק", "אכּל", "פחץ", "כּסר", "סבּח", "דפע", "שכּר", "חזר", "אח'ד", "בּעת", "צ'רבּ", "צ'חכּ", "הרבּ", "טבּח'", "סכּת", "רפע", "פתח", "ועד", "צבּע'", "דהן", "קרא", "סאל", "פרכּ", "נפח'", "עזם", "עטס", "רכּץ'", "נפח'", "עזם", "עטס", "רכּץ'"];
-const nizelHebrew = ["שתה", "ירד", "הבין", "חזר", "יכול", "ידע", "הספיק,השיג את, רדף אחרי", "נולד", "לבש", "החזיק, תפס, עצר", "רכב", "הפסיד", "הרוויח", "היה דומה ל...", "שנא", "עשה", "נחלש, רזה", "הרגיש", "הגיע", "הסתיים", "שמע", "התייאש", "הצליח", "שיחק", "יצא, עלה", "חלם", "התעייף", "התרחב", "התייבש", "נבל", "נכח"];
-const nizelArabic = ["שרבּ", "נזל", "פהם", "רג'ע", "קדר", "ערף", "לחק", "ח'לק", "לבּס", "מסכּ", "רכּבּ", "ח'סר", "כּסבּ", "שבּה", "כּרה", "עמל", "צ'עף", "שער", "וצל", "ח'לץ", "סמע", "יאס", "נג'ח", "לעבּ", "טלע", "חלם", "תעבּ", "וסע", "יבּס", "דבּל", "חצ'ר"];
-const hakaHebrew = ["דיבר", "בנה", "מצא, פגש", "זרק, השליך", "טיגן", "השקה", "נשאר, היה", "עשה על האש"];
-const hakaArabic = ["חכּא", "בּנא", "לקא", "רמא", "קלא", "סקא", "בּקא", "שוא"];
-const nisiHebrew = ["שכח", "הלך", "התחיל", "ידע", "היה מרוצה", "בכה", "התייקר", "התעורר"];
-const nisiArabic = ["נסי", "משי", "בּדי", "דרי", "רצ'י", "בּכּי", "ע'לי", "צחי"];
-const habbHebrew = ["שם", "יצק, מזג", "אהב", "השתין", "זרק, שפך", "נשאר", "פירק", "הסתובב, עטף", "הריח", "פתר", "משך, מתח", "מצץ", "גזר", "השיב, ענה", "חיזק, מתח", "התמעט", "קפץ", "חנה", "ספר", "נשך", "צירף", "השתעל"];
-const habbArabic = ["חטّ", "צבּّ", "חבּّ", "שח'ّ", "כּבּّ", "ט'לّ", "פכּّ", "לףّ", "שםّ", "חלّ", "מדّ", "מץّ", "קץّ", "רדّ", "שדّ", "קל", "נטّ", "צףّ", "עדّ", "עצ'ّ", "צ'םّّ", "קחّّ"];
-const rahHebrew = ["הלך", "היה", "ראה", "ביקר", "אמר", "צם", "זכה", "נכנס, עבר", "קם", "נישק", "מת", "הסתובב"];
-const rahArabic = ["ראח", "כּאן", "שאף", "זאר", "קאל", "צאם", "פאז", "פאת", "קאם", "בּאס", "מאת", "דאר"];
-const jabHebrew = ["נהיה, נעשה, התחיל", "הביא", "חי", "מכר", "פחד", "ישן", "עף", "הוסיף", "אבד", "התעורר", "נרפא"];
-const jabArabic = ["צאר", "ג'אבּ", "עאש", "בּאע", "ח'אף", "נאם", "טאר", "זאד", "צ'אע", "פאק", "טאבּ"];
-
-
 function doProcessing(root, rootForm, toForm) {
     // console.log(...rootForm.processingToForm[toForm.formName]);
 
@@ -160,14 +197,6 @@ function doProcess(addFrom, addTo, copyFrom, copyTo, removeShaddeAt,
     }
 }
 
-const letters = "אבגדהוזחטיכלמנסעפצקרשתץףךםן";
-const endingLeggers = "ץףךםן";
-const geresh = "׳";
-const shadde = "ّ";
-
-var gereshedLetter = "";
-var rootLetters = ["", "", ""];
-var rootGereshes = ["", "", ""];
 
 function separateRootIntoLetters(root) {
 
