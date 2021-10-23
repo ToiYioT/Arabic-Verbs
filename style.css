@@ -37,6 +37,10 @@ body {
     align-items: stretch;
 }
 
+.hide{
+    visibility: hidden;
+}
+
 .answer {
     padding-right: 1em;
     font-size: xx-large;
@@ -61,7 +65,7 @@ span {
 
 #next-button {
     font-size: x-large;
-    flex: 1;
+    flex: 0.2;
 }
 
 body{

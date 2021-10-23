@@ -1,17 +1,43 @@
+var hideAnswers = true;
 
 window.addEventListener('load', (event) => {
     questionHolder = document.getElementById("question");
-    nextButton = document.getElementById("next-button");
+    button = document.getElementById("next-button");
 
-    nextButton.addEventListener("click", initQuestion);
+    answerSection = document.getElementById("answer-section");
+
+    button.addEventListener("click", buttonHandler);
 
     for (let i = 0; i < 3; i++) {
         answerHolders.push(document.getElementById("answer" + (i + 1)));
         answerHolders[i].addEventListener("click", answerClickHandler);
     }
 
-    initQuestion();
+    buttonHandler();
 });
+
+function buttonHandler() {
+    if (!hideAnswers) {
+        initQuestion();
+    } else {
+
+        if (!answerSection.classList.contains("hide")) {
+            initQuestion();
+        }
+        answerSection.classList.toggle("hide");
+        setButtonText();
+    }
+}
+
+function setButtonText() {
+    if (answerSection.classList.contains("hide")) {
+        button.innerHTML = "הצג תשובות";
+
+    } else {
+        button.innerHTML = "בחרו באחת האופציות";
+        button.disabled = true;
+    }
+}
 
 function initQuestion() {
 
@@ -50,14 +76,16 @@ function answerClickHandler(event) {
     let holderAnswer = event.target.innerHTML;
     if (holderAnswer == correctAnswer) {
         event.target.classList.add("correct");
-        console.log("CorrectAnswer!");
+
+        button.disabled = false;
+        button.innerHTML = "השאלה הבאה"
     } else {
         event.target.classList.add("incorrect");
-        console.log("No!");
     }
 }
 
 var answerHolders = [];
+var answerSection;
 var answers = [];
 var correctAnswer;
 
@@ -90,7 +118,7 @@ function createRandomNonRepeatingForms() {
 }
 
 var questionHolder;
-var nextButton;
+var button;
 var answer1Holder, answer2Holder, answer3Holder;
 
 const pronounFunctions = ["getAna", "getInte", "getInti", "getHuwe", "getHiye", "getIhna", "getIntu", "getHumme"];
