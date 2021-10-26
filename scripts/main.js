@@ -1,5 +1,6 @@
 // settings
 var hideAnswers = true;
+var numOfAnswers = 4;
 
 window.addEventListener('load', (event) => {
 
@@ -12,7 +13,7 @@ window.addEventListener('load', (event) => {
 
     button.addEventListener("click", buttonHandler);
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < numOfAnswers; i++) {
         answerHolders.push(document.getElementById("answer" + (i + 1)));
         answerHolders[i].addEventListener("click", answerClickHandler);
     }
@@ -20,7 +21,7 @@ window.addEventListener('load', (event) => {
     buttonHandler();
     updateScore();
 
-    debugShowConjugations(jab, [katab, nizel, haka, nisi, habb, rah, jab]);
+    // debugShowConjugations(jab, [katab, nizel, haka, nisi, habb, rah, jab]);
 });
 
 var debugCols = [];
@@ -58,13 +59,15 @@ function initQuestion() {
     answers.length = 0;
     answeringAttemptNum = 0;
     numOfTotalAnswers++;
-    createRandomNonRepeatingForms();
+
+    let pronounNum = Math.floor(Math.random() * pronounFunctions.length);
+    let pronounFunction = pronounFunctions[pronounNum];
+
+    createFormAndDistractingForms(pronounNum);
 
     let rootForm = answerForms[0];
     let formName = rootForm.formName;
 
-    let pronounNum = Math.floor(Math.random() * pronounFunctions.length);
-    let pronounFunction = pronounFunctions[pronounNum];
 
     let randomWordNum = Math.floor(Math.random() * roots[formName].length);
     let root = roots[formName][randomWordNum];
@@ -72,7 +75,7 @@ function initQuestion() {
 
     questionHolder.innerHTML = rootHebrew + " + " + pronounsHebrew[pronounNum] + "<br/>";
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < numOfAnswers; i++) {
 
         let conjugateTo = answerForms[i];
         doProcessing(root, rootForm, conjugateTo);
@@ -185,33 +188,24 @@ const rahArabic = ["ראח", "כּאן", "שאף", "זאר", "קאל", "צאם",
 const jabHebrew = ["נהיה, נעשה, התחיל", "הביא", "חי", "מכר", "פחד", "ישן", "עף", "הוסיף", "אבד", "התעורר", "נרפא"];
 const jabArabic = ["צאר", "ג'אבּ", "עאש", "בּאע", "ח'אף", "נאם", "טאר", "זאד", "צ'אע", "פאק", "טאבּ"];
 
-function createRandomNonRepeatingForms() {
+function createFormAndDistractingForms(pronounNum) {
 
     answerForms.length = 0;
 
-    let randomFormNum = Math.floor(Math.random() * formNames.length);
-    let formName = formNames[randomFormNum];
-    let form = forms[formName];
-    answerForms.push(form);
 
-    if (form == katab || form == nizel) {
-        if (form == katab) {
-            answerForms.push(nizel);
-        }
-        if (form == nizel) {
-            answerForms.push(katab);
-        }
-        answerForms.push(rah);
-    } else {
-        do {
-            let randomFormNum = Math.floor((Math.random() * (formNames.length - 2)) + 2);
-            let formName = formNames[randomFormNum];
-            let form = forms[formName];
-            if (answerForms.indexOf(form) == -1) {
-                answerForms.push(form);
-            }
-        } while (answerForms.length < 3)
-    }
+    let randomFormNum = Math.floor(Math.random() * formNames.length);
+    let form = getFormFromNum(randomFormNum);
+
+    answerForms.push(form);
+    answerForms.push(getFormFromNum(form.formsToDistractWith[pronounNum][0]));
+    answerForms.push(getFormFromNum(form.formsToDistractWith[pronounNum][1]));
+    answerForms.push(getFormFromNum(form.formsToDistractWith[pronounNum][2]));
+}
+
+function getFormFromNum(formNum) {
+    let formName = formNames[formNum];
+    let form = forms[formName];
+    return form;
 }
 
 function doProcessing(root, rootForm, toForm) {
