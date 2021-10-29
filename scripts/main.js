@@ -21,7 +21,8 @@ window.addEventListener('load', (event) => {
     buttonHandler();
     updateScore();
 
-    // debugShowConjugations(jab, [katab, nizel, haka, nisi, habb, rah, jab]);
+    // debugShowConjugations(habb, [katab, nizel, haka, nisi, habb, rah, jab]);
+    // debugShowConjugations(habb, [haka]);
 });
 
 var debugCols = [];
@@ -259,6 +260,10 @@ function checkGereshes() {
         if (rootLetters[i].includes("'")) {
             rootLetters[i] = rootLetters[i].replace("'", '');
             gereshedLetter = rootLetters[i];
+
+            if (gereshedLetter.includes(shadde)) {
+                gereshedLetter = gereshedLetter.replace(shadde, "");
+            }
         }
     }
 }
@@ -267,6 +272,7 @@ function addGeresh(str) {
     if (gereshedLetter == "") return str;
 
     let indexOfGereshedLetter = str.indexOf(gereshedLetter);
+
     indexOfGereshedLetter = getIndexOfFirstLetterAfter(str, indexOfGereshedLetter);
 
     return str.slice(0, indexOfGereshedLetter) +
