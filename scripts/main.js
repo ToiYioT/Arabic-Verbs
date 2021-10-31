@@ -1,10 +1,40 @@
+import { forms } from "./forms.js";
+import {
+    roots, rootsHebrew, formNames, pronounFunctions, pronounsArabic, pronounsHebrew
+} from "./data.js";
+
 // settings
-var hideAnswers = true;
-var numOfAnswers = 4;
+const hideAnswers = true;
+const numOfAnswers = 4;
+
+// html elements
+var answerHolders = [];
+var answerSection;
+var questionHolder;
+var button;
+var score;
+
+// logic variables 
+var answerForms = [];
+var answers = [];
+var correctAnswer;
+var numOfCorrectAnswers = 0;
+var numOfTotalAnswers = 0;
+var answeringAttemptNum;
+
+// constants 
+const letters = "אבגדהוזחטיכלמנסעפצקרשתץףךםן";
+const geresh = "׳";
+const shadde = "ّ";
+
+// intermediate results
+var gereshedLetter = "";
+var rootLetters = ["", "", ""];
+var rootGereshes = ["", "", ""];
+
 
 window.addEventListener('load', (event) => {
 
-    loadDebugCols();
     questionHolder = document.getElementById("question");
     button = document.getElementById("next-button");
     score = document.getElementById("score");
@@ -21,8 +51,9 @@ window.addEventListener('load', (event) => {
     buttonHandler();
     updateScore();
 
-    // debugShowConjugations(habb, [katab, nizel, haka, nisi, habb, rah, jab]);
-    // debugShowConjugations(habb, [haka]);
+    debugShowConjugations(forms.habb,
+        [forms.katab, forms.nizel, forms.haka,
+        forms.nisi, forms.habb, forms.rah, forms.jab]);
 });
 
 var debugCols = [];
@@ -80,7 +111,8 @@ function initQuestion() {
 
         let conjugateTo = answerForms[i];
         doProcessing(root, rootForm, conjugateTo);
-        answers.push(pronounsArabic[pronounNum] + " " + conjugateTo[pronounFunction]());
+        answers.push(pronounsArabic[pronounNum] + " "
+            + getWord(...conjugateTo[pronounFunction]()));
     }
     correctAnswer = answers[0];
     shuffle(answers);
@@ -94,11 +126,11 @@ function initQuestion() {
 }
 
 function debugShowConjugations(rootForm, conjugateToArray) {
+    loadDebugCols();
 
     let formName = rootForm.formName;
     let randomWordNum = Math.floor(Math.random() * roots[formName].length);
     let root = roots[formName][randomWordNum];
-
 
     for (let c = 0; c < conjugateToArray.length; c++) {
         let conjugateTo = conjugateToArray[c];
@@ -109,10 +141,9 @@ function debugShowConjugations(rootForm, conjugateToArray) {
 
             doProcessing(root, rootForm, conjugateTo);
             whereToPutText.innerHTML += pronounsArabic[i] +
-                " " + conjugateTo[pronounFunction]() + "</br>";
+                " " + getWord(...conjugateTo[pronounFunction]()) + "</br>";
         }
     }
-
 }
 
 function answerClickHandler(event) {
@@ -138,61 +169,9 @@ function updateScore() {
         "תשובות נכונות: " + numOfCorrectAnswers;
 }
 
-// html elements
-var answer1Holder, answer2Holder, answer3Holder;
-var answerHolders = [];
-var answerSection;
-var questionHolder;
-var button;
-var score;
-
-
-// logic variables 
-var answerForms = [];
-var answers = [];
-var correctAnswer;
-var numOfCorrectAnswers = 0;
-var numOfTotalAnswers = 0;
-var answeringAttemptNum;
-
-// constants 
-const letters = "אבגדהוזחטיכלמנסעפצקרשתץףךםן";
-const endingLeggers = "ץףךםן";
-const geresh = "׳";
-const shadde = "ّ";
-const shva = "ְ";
-
-// intermediate results
-var gereshedLetter = "";
-var rootLetters = ["", "", ""];
-var rootGereshes = ["", "", ""];
-
-
-
-// dataaaa
-const pronounFunctions = ["getAna", "getInte", "getInti", "getHuwe", "getHiye", "getIhna", "getIntu", "getHumme"];
-const pronounsArabic = ["אַנַא", "אִנְתֵ", "אִנְתִי", "הֻוֵّ", "הִיֵّ", "אִחְנַא", "אִנְתוּ", "הֻםֵّ"];
-const pronounsHebrew = ["אני", "אתה", "את", "הוא", "היא", "אנחנו", "אתם", "הם"];
-
-const katabHebrew = ["ביקש", "חתך", "התגורר", "עבר דירה", "נשבע", "עבר", "ישב", "ניגב", "למד", "עקף את", "אכל", "בדק", "שבר", "שילם", "הודה", "לקח", "שלח", "היכה", "ברח", "בישל", "שתק", "הרים", "פתח", "הבטיח", "צבע", "צבע", "שאל", "צחצח", "נשף", "הזמין", "התעטש", "רץ", "נשף", "הזמין", "התעטש", "רץ", "הרגיש", "גנב", "עזב", "הפך", "קשר", "אסר", "ניגן", "אסף", "קרע"];
-const katabArabic = ["טלבּ", "קטע", "סכּן", "נקל", "חלף", "מרק", "קעד", "מסח", "דרס", "סבּק", "אכּל", "פחץ", "כּסר", "דפע", "שכּר", "אח'ד", "בּעת", "צ'רבּ", "הרבּ", "טבּח'", "סכּת", "רפע", "פתח", "ועד", "צבּע'", "דהן", "סאל", "פרכּ", "נפח'", "עזם", "עטס", "רכּץ'", "נפח'", "עזם", "עטס", "רכּץ'", "שער", "סרק", "תרכּ", "קלבּ", "רבּט", "מנע", "עזף", "ג'מע", "מזע"];
-const nizelHebrew = ["שתה", "ירד", "הבין", "חזר", "יכול", "ידע", "השיג את", "נולד", "לבש", "תפס", "רכב", "הפסיד", "הרוויח", "היה דומה ל", "שנא", "עשה", "נחלש", "הגיע", "הסתיים", "שמע", "התייאש", "הצליח", "שיחק", "יצא", "חלם", "התעייף", "התרחב", "התייבש", "נבל", "צפה", "ניחש", "שחה", "צחק", "שמח", "שבע", "קטן", "חלה", "שמר", "נפל", "צמא", "הרים", "ריחם"];
-const nizelArabic = ["שרבּ", "נזל", "פהם", "רג'ע", "קדר", "ערף", "לחק", "ח'לק", "לבּס", "מסכּ", "רכּבּ", "ח'סר", "כּסבּ", "שבּה", "כּרה", "עמל", "צ'עף", "וצל", "ח'לץ", "סמע", "יאס", "נג'ח", "לעבּ", "טלע", "חלם", "תעבּ", "וסע", "יבּס", "דבּל", "חצ'ר", "חזר", "סבּח", "צ'חכּ", "פרח", "שבּע", "זע'ר", "מרד", "חפז", "וקע", "עטש", "חמל", "שפק"];
-const hakaHebrew = ["דיבר", "בנה", "מצא", "זרק", "טיגן", "השקה", "בא", "עשה על האש", "מחק", "קרא", "קנה"];
-const hakaArabic = ["חכּא", "בּנא", "לקא", "רמא", "קלא", "סקא", "אג'א", "שוא", "מחא", "קרא", "שרא"];
-const nisiHebrew = ["שכח", "הלך", "התחיל", "ידע", "היה מרוצה", "בכה", "התייקר", "התעורר", "נרדם", "נשאר", "נרגע"];
-const nisiArabic = ["נסי", "משי", "בּדי", "דרי", "רצ'י", "בּכּי", "ע'לי", "צחי", "ע'פי", "בּקי", "הדי"];
-const habbHebrew = ["שם", "מזג", "אהב", "השתין", "זרק", "נשאר", "פירק", "הסתובב", "הריח", "פתר", "משך, מתח", "מצץ", "גזר", "ענה", "מתח", "התמעט", "קפץ", "חנה", "ספר", "נשך", "צירף", "השתעל", "צלצל", "ירה", "קילל"];
-const habbArabic = ["חטّ", "צבּّ", "חבּّ", "שח'ّ", "כּבּّ", "ט'לّ", "פכּّ", "לףّ", "שםّ", "חלّ", "מדّ", "מץّ", "קץّ", "רדّ", "שדّ", "קל", "נטّ", "צףّ", "עדّ", "עצ'ّ", "צ'םّّ", "קחّّ", "רןّ", "טחّ", "סבّ"];
-const rahHebrew = ["הלך", "היה", "ראה", "ביקר", "אמר", "צם", "זכה", "נכנס", "קם", "נישק", "מת", "הסתובב", "נעשה", "פחד", "טעם", "נהג"];
-const rahArabic = ["ראח", "כּאן", "שאף", "זאר", "קאל", "צאם", "פאז", "פאת", "קאם", "בּאס", "מאת", "דאר", "צאר", "ח'אף", "דאק", "סאק"];
-const jabHebrew = ["הביא", "חי", "מכר", "ישן", "עף", "הוסיף", "אבד", "התעורר", "נרפא", "נגע", "מדד", "שפך"];
-const jabArabic = ["ג'אבּ", "עאש", "בּאע", "נאם", "טאר", "זאד", "צ'אע", "פאק", "טאבּ", "צאבּ", "קאס", "דאר"];
-
 function createFormAndDistractingForms(pronounNum) {
 
     answerForms.length = 0;
-
 
     let randomFormNum = Math.floor(Math.random() * formNames.length);
     let form = getFormFromNum(randomFormNum);
@@ -210,7 +189,6 @@ function getFormFromNum(formNum) {
 }
 
 function doProcessing(root, rootForm, toForm) {
-    // console.log(...rootForm.processingToForm[toForm.formName]);
 
     root = substituteEndingLettersToNormal(root);
     separateRootIntoLetters(root);
@@ -231,7 +209,6 @@ function doProcess(addFrom, addTo, copyFrom, copyTo, removeShaddeAt,
         rootLetters[removeShaddeAt] = removeShadde(rootLetters[removeShaddeAt]);
     }
 }
-
 
 function separateRootIntoLetters(root) {
 
@@ -310,11 +287,6 @@ function addNiqud(str, niqud) {
 
 function getWord(template, index0, index1, index2) {
 
-    // after separating the letters, a processing step is necessary,
-    // for example to copy the second letter to the third, or combine the 
-    // first and the second to the first, and the third to the second
-    // ProcessRootLetters(processingScheme);
-
     if (index1 == -1) {
         rootLetters[0] = substituteLetterInTemplate(template, 0, index0, index2);
         rootLetters[1] = "";
@@ -334,7 +306,6 @@ function getWord(template, index0, index1, index2) {
     let solution = addGeresh(rootLetters[0] +
         rootLetters[1] +
         rootLetters[2]);
-    // solution = addShva(solution);
     return solution;
 }
 
@@ -353,435 +324,6 @@ function substituteEndingLettersToNormal(word) {
 }
 
 
-
-const katab = {
-
-    formName: "katab",
-
-    getAna: function () {
-        var template = "כַתַבְת";
-        return getWord(template, 0, 2, 4);
-    },
-    getInte: function () {
-        var template = "כַתַבְת";
-        return getWord(template, 0, 2, 4);
-    },
-    getInti: function () {
-        var template = "כַתַבְתִי";
-        return getWord(template, 0, 2, 4);
-    },
-    getHuwe: function () {
-        var template = "כַתַב";
-        return getWord(template, 0, 2, 4);
-    },
-    getHiye: function () {
-        var template = "כַתְבַת";
-        return getWord(template, 0, 2, 4);
-    },
-    getIhna: function () {
-        var template = "כַתַבְנַא";
-        return getWord(template, 0, 2, 4);
-    },
-    getIntu: function () {
-        var template = "כַתַבְתוּ";
-        return getWord(template, 0, 2, 4);
-    },
-    getHumme: function () {
-        var template = "כַתַבוּ";
-        return getWord(template, 0, 2, 4);
-    },
-
-    processingToForm: {
-        "katab": [-1, -1, -1, -1, -1],
-        "nizel": [-1, -1, -1, -1, -1],
-        "haka": [1, 0, 2, 1, -1, -1, -1, shva, 0],
-        "nisi": [-1, -1, -1, -1, -1],
-        "habb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-        "rah": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-        "jab": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    },
-
-    // pronouns : array of possible forms
-    formsToDistractWith: {
-        0: [1, 2, 4, 5],
-        1: [1, 2, 4, 5],
-        2: [1, 2, 4, 5],
-        3: [1, 2, 3, 4],
-        4: [1, 2, 4, 5],
-        5: [1, 2, 4, 5],
-        6: [1, 2, 4, 5],
-        7: [1, 2, 4, 5],
-    }
-}
-
-const nizel = {
-
-    formName: "nizel",
-
-    getAna: function () {
-        var template = "נְזִלְת";
-        return getWord(template, 0, 2, 4);
-    },
-    getInte: function () {
-        var template = "נְזִלְת";
-        return getWord(template, 0, 2, 4);
-    },
-    getInti: function () {
-        var template = "נְזִלְתִי";
-        return getWord(template, 0, 2, 4);
-    },
-    getHuwe: function () {
-        var template = "נִזֵל";
-        return getWord(template, 0, 2, 4);
-    },
-    getHiye: function () {
-        var template = "נִזְלַת";
-        return getWord(template, 0, 2, 4);
-    },
-    getIhna: function () {
-        var template = "נְזִלְנַא";
-        return getWord(template, 0, 2, 4);
-    },
-    getIntu: function () {
-        var template = "נְזִלְתוּ";
-        return getWord(template, 0, 2, 4);
-    },
-    getHumme: function () {
-        var template = "נִזְלוּ";
-        return getWord(template, 0, 2, 4);
-    },
-
-    processingToForm: {
-        "katab": [-1, -1, -1, -1, -1],
-        "nizel": [-1, -1, -1, -1, -1],
-        "haka": [1, 0, 2, 1, -1, -1, -1, shva, 0],
-        "nisi": [-1, -1, -1, -1, -1],
-        "habb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-        "rah": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-        "jab": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    },
-
-    formsToDistractWith: {
-        0: [0, 2, 4, 5],
-        1: [0, 2, 4, 5],
-        2: [0, 2, 4, 5],
-        3: [0, 2, 3, 4],
-        4: [0, 2, 4, 5],
-        5: [0, 2, 4, 5],
-        6: [0, 2, 4, 5],
-        7: [0, 2, 4, 5],
-    }
-}
-const haka = {
-
-    formName: "haka",
-
-    getAna: function () {
-        var template = "חַכֵית";
-        return getWord(template, 0, 2, -1);
-    },
-    getInte: function () {
-        var template = "חַכֵית";
-        return getWord(template, 0, 2, -1);
-    },
-    getInti: function () {
-        var template = "חַכֵיתִי";
-        return getWord(template, 0, 2, -1);
-    },
-    getHuwe: function () {
-        var template = "חַכַא";
-        return getWord(template, 0, 2, -1);
-    },
-    getHiye: function () {
-        var template = "חַכַת";
-        return getWord(template, 0, 2, -1);
-    },
-    getIhna: function () {
-        var template = "חַכֵינַא";
-        return getWord(template, 0, 2, -1);
-    },
-    getIntu: function () {
-        var template = "חַכֵיתוּ";
-        return getWord(template, 0, 2, -1);
-    },
-    getHumme: function () {
-        var template = "חַכוּ";
-        return getWord(template, 0, 2, -1);
-    },
-    processingToForm: {
-        "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
-        "nizel": [-1, -1, 1, 2, -1],
-        "haka": [-1, -1, -1, -1, -1],
-        "nisi": [-1, -1, -1, -1, -1, 2, "י"],
-        "habb": [-1, -1, -1, -1, -1],
-        "rah": [-1, -1, 1, 2, -1],
-        "jab": [-1, -1, 1, 2, -1],
-    },
-
-    formsToDistractWith: {
-        0: [3, 4, 5, 6],
-        1: [3, 4, 5, 6],
-        2: [3, 4, 5, 6],
-        3: [3, 4, 5],
-        4: [3, 4, 5],
-        5: [3, 4, 5, 6],
-        6: [3, 4, 5, 6],
-        7: [0, 3, 4],
-    }
-}
-const nisi = {
-    formName: "nisi",
-
-    getAna: function () {
-        var template = "נְסִית";
-        return getWord(template, 0, 2, 4);
-    },
-    getInte: function () {
-        var template = "נְסִית";
-        return getWord(template, 0, 2, 4);
-    },
-    getInti: function () {
-        var template = "נְסִיתִי";
-        return getWord(template, 0, 2, 4);
-    },
-    getHuwe: function () {
-        var template = "נִסִי";
-        return getWord(template, 0, 2, 4);
-    },
-    getHiye: function () {
-        var template = "נִסְיַת";
-        return getWord(template, 0, 2, 4);
-    },
-    getIhna: function () {
-        var template = "נְסִינַא";
-        return getWord(template, 0, 2, 4);
-    },
-    getIntu: function () {
-        var template = "נְסִיתוּ";
-        return getWord(template, 0, 2, 4);
-    },
-    getHumme: function () {
-        var template = "נִסְיוּ";
-        return getWord(template, 0, 2, 4);
-    },
-    processingToForm: {
-        "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
-        "nizel": [-1, -1, 1, 2, -1],
-        "haka": [-1, -1, -1, -1, -1],
-        "nisi": [-1, -1, -1, -1, -1, 2, "י"],
-        "habb": [-1, -1, -1, -1, -1],
-        "rah": [-1, -1, 1, 2, -1],
-        "jab": [-1, -1, 1, 2, -1],
-    },
-    formsToDistractWith: {
-        0: [2, 4, 5, 6],
-        1: [2, 4, 5, 6],
-        2: [2, 4, 5, 6],
-        3: [2, 4, 5],
-        4: [2, 4, 5],
-        5: [2, 4, 5, 6],
-        6: [2, 4, 5, 6],
-        7: [0, 2, 4, 5],
-    }
-}
-const habb = {
-    formName: "habb",
-
-    getAna: function () {
-        var template = "חַבֵّית";
-        return getWord(template, 0, 2, -1);
-    },
-    getInte: function () {
-        var template = "חַבֵّית";
-        return getWord(template, 0, 2, -1);
-    },
-    getInti: function () {
-        var template = "חַבֵّיתִי";
-        return getWord(template, 0, 2, -1);
-    },
-    getHuwe: function () {
-        var template = "חַבّ";
-        return getWord(template, 0, 2, -1);
-    },
-    getHiye: function () {
-        var template = "חַבַّת";
-        return getWord(template, 0, 2, -1);
-    },
-    getIhna: function () {
-        var template = "חַבֵّינַא";
-        return getWord(template, 0, 2, -1);
-    },
-    getIntu: function () {
-        var template = "חַבֵّיתוּ";
-        return getWord(template, 0, 2, -1);
-    },
-    getHumme: function () {
-        var template = "חַבّוּ";
-        return getWord(template, 0, 2, -1);
-    },
-    processingToForm: {
-        "katab": [-1, -1, 1, 2, 2],
-        "nizel": [-1, -1, 1, 2, 2],
-        "haka": [-1, -1, -1, -1, 1],
-        "nisi": [-1, -1, -1, -1, 1, 2, "י"],
-        "habb": [-1, -1, -1, -1, -1],
-        "rah": [-1, -1, 1, 2, 2],
-        "jab": [-1, -1, 1, 2, 2],
-    },
-    formsToDistractWith: {
-        0: [2, 3, 5, 6],
-        1: [2, 3, 5, 6],
-        2: [2, 3, 5, 6],
-        3: [2, 3, 5],
-        4: [2, 3, 5],
-        5: [2, 3, 5, 6],
-        6: [2, 3, 5, 6],
-        7: [2, 3, 5],
-    }
-}
-const rah = {
-
-    formName: "rah",
-    getAna: function () {
-        var template = "רֻחְת";
-        return getWord(template, 0, -1, 2);
-    },
-    getInte: function () {
-        var template = "רֻחְת";
-        return getWord(template, 0, -1, 2);
-    },
-    getInti: function () {
-        var template = "רֻחְתִי";
-        return getWord(template, 0, -1, 2);
-    },
-    getHuwe: function () {
-        var template = "רַאח";
-        return getWord(template, 0, -1, 3);
-    },
-    getHiye: function () {
-        var template = "רַאחַת";
-        return getWord(template, 0, -1, 3);
-    },
-    getIhna: function () {
-        var template = "רֻחְנַא";
-        return getWord(template, 0, -1, 2);
-    },
-    getIntu: function () {
-        var template = "רֻחְתוּ";
-        return getWord(template, 0, -1, 2);
-    },
-    getHumme: function () {
-        var template = "רַאחוּ";
-        return getWord(template, 0, -1, 3);
-    },
-    processingToForm: {
-        "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-        "nizel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-        "haka": [-1, -1, 2, 1, 1],
-        "nisi": [-1, -1, 2, 1, -1, 2, "י"],
-        "habb": [-1, -1, 2, 1, -1],
-        "rah": [-1, -1, -1, -1, -1],
-        "jab": [-1, -1, -1, -1, -1],
-    },
-    formsToDistractWith: {
-        0: [2, 3, 4, 6],
-        1: [2, 3, 4, 6],
-        2: [2, 3, 4, 6],
-        3: [2, 3, 4],
-        4: [2, 3, 4],
-        5: [2, 3, 4, 6],
-        6: [2, 3, 4, 6],
-        7: [2, 3, 4],
-    }
-}
-const jab = {
-    formName: "jab",
-
-    getAna: function () {
-        var template = "גִבְת";
-        return getWord(template, 0, -1, 2);
-    },
-    getInte: function () {
-        var template = "גִבְת";
-        return getWord(template, 0, -1, 2);
-    },
-    getInti: function () {
-        var template = "גִבְתִי";
-        return getWord(template, 0, -1, 2);
-    },
-    getHuwe: function () {
-        var template = "גַאב";
-        return getWord(template, 0, -1, 3);
-    },
-    getHiye: function () {
-        var template = "גַאבַת";
-        return getWord(template, 0, -1, 3);
-    },
-    getIhna: function () {
-        var template = "גִבְנַא";
-        return getWord(template, 0, -1, 2);
-    },
-    getIntu: function () {
-        var template = "גִבְתוּ";
-        return getWord(template, 0, -1, 2);
-    },
-    getHumme: function () {
-        var template = "גַאבוּ";
-        return getWord(template, 0, -1, 3);
-    },
-    processingToForm: {
-        "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-        "nizel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-        "haka": [-1, -1, 2, 1, 1],
-        "nisi": [-1, -1, 2, 1, -1, 2, "י"],
-        "habb": [-1, -1, 2, 1, -1],
-        "rah": [-1, -1, -1, -1, -1],
-        "jab": [-1, -1, -1, -1, -1],
-    },
-    formsToDistractWith: {
-        0: [2, 3, 4, 5],
-        1: [2, 3, 4, 5],
-        2: [2, 3, 4, 5],
-        3: [2, 3, 4],
-        4: [0, 3, 4],
-        5: [2, 3, 4, 5],
-        6: [2, 3, 4, 5],
-        7: [2, 3, 4],
-    }
-}
-
-const formNames = ["katab", "nizel", "haka", "nisi", "habb", "rah", "jab"];
-
-const forms = {
-    "katab": katab,
-    "nizel": nizel,
-    "haka": haka,
-    "nisi": nisi,
-    "habb": habb,
-    "rah": rah,
-    "jab": jab
-}
-
-const roots = {
-    "katab": katabArabic,
-    "nizel": nizelArabic,
-    "haka": hakaArabic,
-    "nisi": nisiArabic,
-    "habb": habbArabic,
-    "rah": rahArabic,
-    "jab": jabArabic
-}
-
-const rootsHebrew = {
-    "katab": katabHebrew,
-    "nizel": nizelHebrew,
-    "haka": hakaHebrew,
-    "nisi": nisiHebrew,
-    "habb": habbHebrew,
-    "rah": rahHebrew,
-    "jab": jabHebrew
-}
-
 function shuffle(array) {
     let currentIndex = array.length, randomIndex;
 
@@ -796,6 +338,5 @@ function shuffle(array) {
         [array[currentIndex], array[randomIndex]] = [
             array[randomIndex], array[currentIndex]];
     }
-
     return array;
 }
