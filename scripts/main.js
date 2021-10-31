@@ -1,4 +1,4 @@
-import { forms } from "./forms.js";
+import { forms } from "./measure-1-past.js";
 import {
     roots, rootsHebrew, formNames, pronounFunctions, pronounsArabic, pronounsHebrew
 } from "./data.js";
