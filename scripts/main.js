@@ -102,14 +102,23 @@ function initQuestion() {
     let rootForm = answerForms[0];
     let formName = rootForm.formName;
 
-
+    // getting a random word from the random form
     let randomWordNum = Math.floor(Math.random() * roots[formName].length);
     let root = roots[formName][randomWordNum];
     let rootHebrew = rootsHebrew[formName][randomWordNum];
-    rootHebrew = substituteEndingLettersToNormal(rootHebrew);
 
+    // extracting the hebrew word to conjugate (the first one)
+    let firstWordEndingAt = getIndexOfFirstWordEnding(rootHebrew);
+    if (firstWordEndingAt == -1) firstWordEndingAt = rootHebrew.length;
+    let firstWord = rootHebrew.substring(0, firstWordEndingAt);
+    firstWord = substituteEndingLettersToNormal(firstWord);
+    let remainderOfTranslation = rootHebrew.substring(firstWordEndingAt, rootHebrew.length);
+
+    // conjugate the hebrew expression and view it
+    let conjugatedHebrew = hebConjugate[pronounFunction](firstWord);
+    conjugatedHebrew = substituteLetterAtEndToEndingLetter(conjugatedHebrew);
     questionHolder.innerHTML = pronounsHebrew[pronounNum] + " " +
-        hebConjugate[pronounFunction](rootHebrew) + "<br/>";
+        conjugatedHebrew + remainderOfTranslation + "<br/>";
 
     for (let i = 0; i < numOfAnswers; i++) {
 
@@ -139,16 +148,21 @@ function debugShowConjugationHebrew() {
         let formName = formNames[randomFormNum];
         let randomWordNum = Math.floor(Math.random() * rootsHebrew[formName].length);
         let rootHebrew = rootsHebrew[formName][randomWordNum];
-        rootHebrew = substituteEndingLettersToNormal(rootHebrew);
-        // rootHebrew = "נרפא";
+
+        let firstWordEndingAt = getIndexOfFirstWordEnding(rootHebrew);
+        if (firstWordEndingAt == -1) firstWordEndingAt = rootHebrew.length;
+
+        let firstWord = rootHebrew.substring(0, firstWordEndingAt);
+        firstWord = substituteEndingLettersToNormal(firstWord);
+        let remainderOfTranslation = rootHebrew.substring(firstWordEndingAt, rootHebrew.length);
 
         for (let i = 0; i < 8; i++) {
             let pronounFunc = pronounFunctions[i];
-            let conjugatedWord = hebConjugate[pronounFunc](rootHebrew);
+            let conjugatedWord = hebConjugate[pronounFunc](firstWord);
             conjugatedWord = substituteLetterAtEndToEndingLetter(conjugatedWord);
 
             whereToPutText.innerHTML += pronounsHebrew[i] + " " +
-                conjugatedWord + "<br/>";
+                conjugatedWord + remainderOfTranslation + "<br/>";
         }
     }
 }
@@ -172,6 +186,10 @@ function debugShowConjugations(rootForm, conjugateToArray) {
                 " " + getWord(...conjugateTo[pronounFunction]()) + "</br>";
         }
     }
+}
+
+function getIndexOfFirstWordEnding(word) {
+    return word.indexOf(" ");
 }
 
 function answerClickHandler(event) {
