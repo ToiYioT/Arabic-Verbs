@@ -105,6 +105,7 @@ function initQuestion() {
     let randomWordNum = Math.floor(Math.random() * roots[formName].length);
     let root = roots[formName][randomWordNum];
     let rootHebrew = rootsHebrew[formName][randomWordNum];
+    // rootHebrew = "עשה";
     rootHebrew = substituteEndingLettersToNormal(rootHebrew);
 
     questionHolder.innerHTML = pronounsHebrew[pronounNum] + " " +
