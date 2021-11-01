@@ -1,4 +1,5 @@
 import { forms } from "./measure-1-past.js";
+import { hebConjugate } from "./heb-past.js";
 import {
     roots, rootsHebrew, formNames, pronounFunctions, pronounsArabic, pronounsHebrew
 } from "./data.js";
@@ -104,8 +105,19 @@ function initQuestion() {
     let randomWordNum = Math.floor(Math.random() * roots[formName].length);
     let root = roots[formName][randomWordNum];
     let rootHebrew = rootsHebrew[formName][randomWordNum];
+    rootHebrew = substituteEndingLettersToNormal(rootHebrew);
 
-    questionHolder.innerHTML = rootHebrew + " + " + pronounsHebrew[pronounNum] + "<br/>";
+    questionHolder.innerHTML = pronounsHebrew[pronounNum] + " " +
+        hebConjugate[pronounFunction](rootHebrew) + "<br/>";
+
+    // for (let i = 0; i < 8; i++) {
+    //     let pronounFunc = pronounFunctions[i];
+    //     let conjugatedWord = hebConjugate[pronounFunc](rootHebrew);
+    //     conjugatedWord = substituteLetterAtEndToEndingLetter(conjugatedWord);
+
+    //     questionHolder.innerHTML += pronounsHebrew[i] + " " +
+    //         conjugatedWord + "<br/>";
+    // }
 
     for (let i = 0; i < numOfAnswers; i++) {
 
@@ -320,6 +332,29 @@ function substituteEndingLettersToNormal(word) {
     word = word.replaceAll("ך", "כ");
     word = word.replaceAll("ם", "מ");
     word = word.replaceAll("ן", "נ");
+    return word;
+}
+
+// for use with hebrew only
+function substituteLetterAtEndToEndingLetter(word) {
+
+    let lastLetter = word[word.length - 1];
+
+    if (lastLetter == "צ") {
+        return word.substring(0, word.length - 1) + "ץ";
+
+    } else if (lastLetter == "פ") {
+        return word.substring(0, word.length - 1) + "ף";
+
+    } else if (lastLetter == "כ") {
+        return word.substring(0, word.length - 1) + "ך";
+
+    } else if (lastLetter == "מ") {
+        return word.substring(0, word.length - 1) + "ם";
+
+    } else if (lastLetter == "נ") {
+        return word.substring(0, word.length - 1) + "ן";
+    }
     return word;
 }
 
