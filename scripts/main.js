@@ -52,9 +52,10 @@ window.addEventListener('load', (event) => {
     buttonHandler();
     updateScore();
 
-    debugShowConjugations(forms.habb,
-        [forms.katab, forms.nizel, forms.haka,
-        forms.nisi, forms.habb, forms.rah, forms.jab]);
+    // debugShowConjugations(forms.habb,
+    //     [forms.katab, forms.nizel, forms.haka,
+    //     forms.nisi, forms.habb, forms.rah, forms.jab]);
+    debugShowConjugationHebrew();
 });
 
 var debugCols = [];
@@ -105,20 +106,10 @@ function initQuestion() {
     let randomWordNum = Math.floor(Math.random() * roots[formName].length);
     let root = roots[formName][randomWordNum];
     let rootHebrew = rootsHebrew[formName][randomWordNum];
-    // rootHebrew = "עשה";
     rootHebrew = substituteEndingLettersToNormal(rootHebrew);
 
     questionHolder.innerHTML = pronounsHebrew[pronounNum] + " " +
         hebConjugate[pronounFunction](rootHebrew) + "<br/>";
-
-    // for (let i = 0; i < 8; i++) {
-    //     let pronounFunc = pronounFunctions[i];
-    //     let conjugatedWord = hebConjugate[pronounFunc](rootHebrew);
-    //     conjugatedWord = substituteLetterAtEndToEndingLetter(conjugatedWord);
-
-    //     questionHolder.innerHTML += pronounsHebrew[i] + " " +
-    //         conjugatedWord + "<br/>";
-    // }
 
     for (let i = 0; i < numOfAnswers; i++) {
 
@@ -136,6 +127,30 @@ function initQuestion() {
         answerHolders[i].classList.remove("incorrect");
     }
     updateScore();
+}
+
+function debugShowConjugationHebrew() {
+    loadDebugCols();
+
+    for (let v = 0; v < 7; v++) {
+        let whereToPutText = debugCols[v];
+
+        let randomFormNum = Math.floor(Math.random() * formNames.length);
+        let formName = formNames[randomFormNum];
+        let randomWordNum = Math.floor(Math.random() * rootsHebrew[formName].length);
+        let rootHebrew = rootsHebrew[formName][randomWordNum];
+        rootHebrew = substituteEndingLettersToNormal(rootHebrew);
+        // rootHebrew = "נרפא";
+
+        for (let i = 0; i < 8; i++) {
+            let pronounFunc = pronounFunctions[i];
+            let conjugatedWord = hebConjugate[pronounFunc](rootHebrew);
+            conjugatedWord = substituteLetterAtEndToEndingLetter(conjugatedWord);
+
+            whereToPutText.innerHTML += pronounsHebrew[i] + " " +
+                conjugatedWord + "<br/>";
+        }
+    }
 }
 
 function debugShowConjugations(rootForm, conjugateToArray) {
