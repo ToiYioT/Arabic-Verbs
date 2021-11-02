@@ -7,6 +7,8 @@ import {
 // settings
 const hideAnswers = true;
 const numOfAnswers = 4;
+const progressBarUpdateInterval = 20;
+const revealAnswersAfter = 3000;
 
 // html elements
 var answerHolders = [];
@@ -14,6 +16,9 @@ var answerSection;
 var questionHolder;
 var button;
 var score;
+var progressBar;
+
+var progressBarTimer;
 
 // logic variables 
 var answerForms = [];
@@ -39,6 +44,7 @@ window.addEventListener('load', (event) => {
     questionHolder = document.getElementById("question");
     button = document.getElementById("next-button");
     score = document.getElementById("score");
+    progressBar = document.getElementById("progress-bar");
 
     answerSection = document.getElementById("answer-section");
 
@@ -66,6 +72,8 @@ function loadDebugCols() {
 }
 
 function buttonHandler() {
+    clearInterval(progressBarTimer);
+
     if (!hideAnswers) {
         initQuestion();
     } else {
@@ -136,6 +144,26 @@ function initQuestion() {
         answerHolders[i].classList.remove("incorrect");
     }
     updateScore();
+    startProgressBarAnimation();
+}
+
+function startProgressBarAnimation() {
+    numOfProgressBarUpdates = 0;
+    progressBarTimer = setInterval(progressBarUpdate, progressBarUpdateInterval);
+}
+
+var numOfProgressBarUpdates = 0;
+const progressBarMaxUpdates = 150;
+function progressBarUpdate() {
+
+    numOfProgressBarUpdates++;
+    progressBar.style.width = 100 * numOfProgressBarUpdates / progressBarMaxUpdates + "%";
+
+    if (numOfProgressBarUpdates == progressBarMaxUpdates) {
+
+        numOfProgressBarUpdates = 0;
+        buttonHandler();
+    }
 }
 
 function debugShowConjugationHebrew() {

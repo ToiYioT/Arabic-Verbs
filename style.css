@@ -20,6 +20,9 @@ body {
     min-height: 100%;
     height: 100%;
     flex-direction: column;
+
+    border: solid rgb(162, 0, 255, 0.376);
+    border-width: 5px;
 }
 
 /* change display from flex to none */
@@ -30,6 +33,12 @@ body {
     min-height: 100%;
     height: 100%;
     flex-direction: row;
+}
+
+#progress-bar {
+    height: 1%;
+    width: 0%;
+    background-color: rgba(162, 0, 255, 0.376);
 }
 
 .col {
@@ -47,9 +56,8 @@ body {
     text-align: right;
     align-items: right;
     font-size: xx-large;
-    margin: 0;
-    margin-top: 4%;
-    margin-left: 2%;
+    margin-bottom: 2%;
+    margin-right: 2%;
 }
 
 #question {
@@ -63,7 +71,7 @@ body {
 }
 
 #answer-section {
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -74,7 +82,7 @@ body {
 }
 
 .answer {
-    padding-right: 1em;
+    padding-right: 4%;
     font-size: 250%;
     background-color: rgb(187, 187, 255);
     display: flex;
@@ -97,7 +105,7 @@ span {
 
 #next-button {
     font-size: x-large;
-    flex: 0.2;
+    flex: 0.5;
 }
 
 body{
