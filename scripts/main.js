@@ -1,4 +1,4 @@
-import { forms } from "./measure-1-past.js";
+import { forms } from "./measure-1-future.js";
 import { hebConjugate } from "./heb-past.js";
 import {
     roots, rootsHebrew, formNames, pronounFunctions, pronounsArabic, pronounsHebrew
@@ -55,13 +55,12 @@ window.addEventListener('load', (event) => {
         answerHolders[i].addEventListener("click", answerClickHandler);
     }
 
-    buttonHandler();
+    // buttonHandler();
     updateScore();
 
-    // debugShowConjugations(forms.habb,
-    //     [forms.katab, forms.nizel, forms.haka,
-    //     forms.nisi, forms.habb, forms.rah, forms.jab]);
-    debugShowConjugationHebrew();
+    debugShowConjugations(forms.yuktol,
+        [forms.yuktol]);
+    // debugShowConjugationHebrew();
 });
 
 var debugCols = [];
@@ -198,12 +197,18 @@ function debugShowConjugationHebrew() {
 function debugShowConjugations(rootForm, conjugateToArray) {
     loadDebugCols();
 
-    let formName = rootForm.formName;
-    let randomWordNum = Math.floor(Math.random() * roots[formName].length);
-    let root = roots[formName][randomWordNum];
+    // to get random root:
+    // let formName = rootForm.formName;
+    // let randomWordNum = Math.floor(Math.random() * roots[formName].length);
+    // let root = roots[formName][randomWordNum];
+
+    // to set specific root and forms:
+    let root = "כּבּّ";
+    rootForm = forms.ihutt;
+    let conjugateTo = forms.ihutt;
 
     for (let c = 0; c < conjugateToArray.length; c++) {
-        let conjugateTo = conjugateToArray[c];
+        // let conjugateTo = conjugateToArray[c];
         let whereToPutText = debugCols[c];
 
         for (let i = 0; i < pronounFunctions.length; i++) {
@@ -384,7 +389,14 @@ function getWord(template, index0, index1, index2) {
 }
 
 function substituteLetterInTemplate(template, letterFromRoot, subAtIndex, untilIndex) {
-    return rootLetters[letterFromRoot] + template.substring(subAtIndex + 1, untilIndex);
+    if (letterFromRoot == 0) {
+        // for future conjugation, grabs the prefix 
+        return template.substring(0, subAtIndex) + rootLetters[letterFromRoot] +
+            template.substring(subAtIndex + 1, untilIndex);
+
+    } else {
+        return rootLetters[letterFromRoot] + template.substring(subAtIndex + 1, untilIndex);
+    }
 }
 
 function substituteEndingLettersToNormal(word) {
