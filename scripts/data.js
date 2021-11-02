@@ -3,6 +3,7 @@ export const pronounFunctions = ["getAna", "getInte", "getInti", "getHuwe", "get
 export const pronounsArabic = ["אַנַא", "אִנְתֵ", "אִנְתִי", "הֻוֵّ", "הִיֵّ", "אִחְנַא", "אִנְתוּ", "הֻםֵّ"];
 export const pronounsHebrew = ["אני", "אתה", "את", "הוא", "היא", "אנחנו", "אתם", "הם"];
 
+// past verbs
 const katabHebrew = ["ביקש", "חתך", "התגורר", "עבר דירה", "נשבע", "עבר", "ישב", "ניגב", "למד", "עקף את", "אכל", "בדק", "שבר", "שילם", "הודה", "לקח", "שלח", "היכה", "ברח", "בישל", "שתק", "הרים", "פתח", "הבטיח", "צבע", "צבע", "שאל", "צחצח", "נשף", "הזמין", "התעטש", "רץ", "נשף", "הזמין", "התעטש", "רץ", "הרגיש", "גנב", "עזב", "הפך", "קשר", "אסר", "ניגן", "אסף", "קרע"];
 const katabArabic = ["טלבּ", "קטע", "סכּן", "נקל", "חלף", "מרק", "קעד", "מסח", "דרס", "סבּק", "אכּל", "פחץ", "כּסר", "דפע", "שכּר", "אח'ד", "בּעת", "צ'רבּ", "הרבּ", "טבּח'", "סכּת", "רפע", "פתח", "ועד", "צבּע'", "דהן", "סאל", "פרכּ", "נפח'", "עזם", "עטס", "רכּץ'", "נפח'", "עזם", "עטס", "רכּץ'", "שער", "סרק", "תרכּ", "קלבּ", "רבּט", "מנע", "עזף", "ג'מע", "מזע"];
 const nizelHebrew = ["שתה", "ירד", "הבין", "חזר", "יכול", "ידע", "השיג את", "נולד", "לבש", "תפס", "רכב", "הפסיד", "הרוויח", "היה דומה ל", "שנא", "עשה", "נחלש", "הגיע", "הסתיים", "שמע", "התייאש", "הצליח", "שיחק", "יצא", "חלם", "התעייף", "התרחב", "התייבש", "נבל", "צפה", "ניחש", "שחה", "צחק", "שמח", "שבע", "קטן", "חלה", "שמר", "נפל", "צמא", "הרים", "ריחם"];
@@ -18,10 +19,31 @@ const rahArabic = ["ראח", "כּאן", "שאף", "זאר", "קאל", "צאם",
 const jabHebrew = ["הביא", "חי", "מכר", "ישן", "עף", "הוסיף", "אבד", "התעורר", "נרפא", "נגע", "מדד", "שפך"];
 const jabArabic = ["ג'אבּ", "עאש", "בּאע", "נאם", "טאר", "זאד", "צ'אע", "פאק", "טאבּ", "צאבּ", "קאס", "דאר"];
 
+// future verbs
+const yuktobHebrew = [];
+const yuktobArabic = [];
+const yinzelHebrew = [];
+const yinzelArabic = [];
+const yismaHebrew = [];
+const yismaArabic = [];
+const iruhHebrew = [];
+const iruhArabic = [];
+const ijibHebrew = [];
+const ijibArabic = [];
+const ihkiHebrew = [];
+const ihkiArabic = [];
+const insaHebrew = [];
+const insaArabic = [];
+const ihibbHebrew = [];
+const ihibbArabic = [];
+const ihuttHebrew = [];
+const ihuttArabic = [];
 
-export const formNames = ["katab", "nizel", "haka", "nisi", "habb", "rah", "jab"];
 
-export const roots = {
+export const formNamesPast = ["katab", "nizel", "haka", "nisi", "habb", "rah", "jab"];
+export const formNamesFuture = ["yuktob", "yinzel", "yisma", "iruh", "ijib", "ihki", "insa", "ihibb", "ihutt"];
+
+export const rootsArabicPast = {
     "katab": katabArabic,
     "nizel": nizelArabic,
     "haka": hakaArabic,
@@ -31,7 +53,7 @@ export const roots = {
     "jab": jabArabic
 }
 
-export const rootsHebrew = {
+export const rootsHebrewPast = {
     "katab": katabHebrew,
     "nizel": nizelHebrew,
     "haka": hakaHebrew,
@@ -39,4 +61,28 @@ export const rootsHebrew = {
     "habb": habbHebrew,
     "rah": rahHebrew,
     "jab": jabHebrew
+}
+
+export const rootsArabicFuture = {
+    "yuktob": yuktobArabic,
+    "yinzel": yinzelArabic,
+    "yisma": yismaArabic,
+    "iruh": iruhArabic,
+    "ijib": ijibArabic,
+    "ihki": ihkiArabic,
+    "insa": insaArabic,
+    "ihibb": ihibbArabic,
+    "ihutt": ihuttArabic
+}
+
+export const rootsHebrewFuture = {
+    "yuktob": yuktobHebrew,
+    "yinzel": yinzelHebrew,
+    "yisma": yismaHebrew,
+    "iruh": iruhHebrew,
+    "ijib": ijibHebrew,
+    "ihki": ihkiHebrew,
+    "insa": insaHebrew,
+    "ihibb": ihibbHebrew,
+    "ihutt": ihuttHebrew
 }

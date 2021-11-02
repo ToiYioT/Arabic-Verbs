@@ -1,7 +1,7 @@
 import { forms } from "./measure-1-future.js";
 import { hebConjugate } from "./heb-past.js";
 import {
-    roots, rootsHebrew, formNames, pronounFunctions, pronounsArabic, pronounsHebrew
+    rootsArabicPast, rootsHebrewPast, formNamesPast, pronounFunctions, pronounsArabic, pronounsHebrew
 } from "./data.js";
 
 // settings
@@ -110,9 +110,9 @@ function initQuestion() {
     let formName = rootForm.formName;
 
     // getting a random word from the random form
-    let randomWordNum = Math.floor(Math.random() * roots[formName].length);
-    let root = roots[formName][randomWordNum];
-    let rootHebrew = rootsHebrew[formName][randomWordNum];
+    let randomWordNum = Math.floor(Math.random() * rootsArabicPast[formName].length);
+    let root = rootsArabicPast[formName][randomWordNum];
+    let rootHebrew = rootsHebrewPast[formName][randomWordNum];
 
     // extracting the hebrew word to conjugate (the first one)
     let firstWordEndingAt = getIndexOfFirstWordEnding(rootHebrew);
@@ -171,10 +171,10 @@ function debugShowConjugationHebrew() {
     for (let v = 0; v < 7; v++) {
         let whereToPutText = debugCols[v];
 
-        let randomFormNum = Math.floor(Math.random() * formNames.length);
-        let formName = formNames[randomFormNum];
-        let randomWordNum = Math.floor(Math.random() * rootsHebrew[formName].length);
-        let rootHebrew = rootsHebrew[formName][randomWordNum];
+        let randomFormNum = Math.floor(Math.random() * formNamesPast.length);
+        let formName = formNamesPast[randomFormNum];
+        let randomWordNum = Math.floor(Math.random() * rootsHebrewPast[formName].length);
+        let rootHebrew = rootsHebrewPast[formName][randomWordNum];
 
         let firstWordEndingAt = getIndexOfFirstWordEnding(rootHebrew);
         if (firstWordEndingAt == -1) firstWordEndingAt = rootHebrew.length;
@@ -252,7 +252,7 @@ function createFormAndDistractingForms(pronounNum) {
 
     answerForms.length = 0;
 
-    let randomFormNum = Math.floor(Math.random() * formNames.length);
+    let randomFormNum = Math.floor(Math.random() * formNamesPast.length);
     let form = getFormFromNum(randomFormNum);
 
     answerForms.push(form);
@@ -262,7 +262,7 @@ function createFormAndDistractingForms(pronounNum) {
 }
 
 function getFormFromNum(formNum) {
-    let formName = formNames[formNum];
+    let formName = formNamesPast[formNum];
     let form = forms[formName];
     return form;
 }
