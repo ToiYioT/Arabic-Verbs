@@ -1,6 +1,7 @@
 import { formsFuture } from "./measure-1-future.js";
 import { formsPast } from "./measure-1-past.js";
-import { hebConjugate } from "./heb-past.js";
+import { hebConjugatePast } from "./heb-past.js";
+import { hebConjugateFuture } from "./heb-future.js";
 import {
     rootsArabicPast, rootsHebrewPast, formNamesPast,
     formNamesFuture, pronounFunctions, pronounsArabic, pronounsHebrew, rootsArabicFuture, rootsHebrewFuture
@@ -10,6 +11,7 @@ const forms = formsFuture;
 const formNames = formNamesFuture;
 const rootsArabic = rootsArabicFuture;
 const rootsHebrew = rootsHebrewFuture;
+const hebConjugate = hebConjugateFuture;
 
 // settings
 const hideAnswers = true;

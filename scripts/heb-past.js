@@ -1,5 +1,5 @@
 
-export const hebConjugate = {
+export const hebConjugatePast = {
 
     getAna: function (root) {
         if (root[root.length - 1] == "ה") {
