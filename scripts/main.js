@@ -1,7 +1,7 @@
 import { forms } from "./measure-1-future.js";
 import { hebConjugate } from "./heb-past.js";
 import {
-    rootsArabicPast, rootsHebrewPast, formNamesPast, pronounFunctions, pronounsArabic, pronounsHebrew
+    rootsArabicPast, rootsHebrewPast, formNamesPast, pronounFunctions, pronounsArabic, pronounsHebrew, rootsArabicFuture
 } from "./data.js";
 
 // settings
@@ -61,8 +61,8 @@ window.addEventListener('load', (event) => {
     // buttonHandler();
     updateScore();
 
-    debugShowConjugations(forms.yuktol,
-        [forms.yuktol]);
+    debugShowConjugations(forms.yisma,
+        [forms.yuktol, forms.yimsek, forms.yisma, forms.iruh]);
     // debugShowConjugationHebrew();
 });
 
@@ -199,17 +199,17 @@ function debugShowConjugations(rootForm, conjugateToArray) {
     loadDebugCols();
 
     // to get random root:
-    // let formName = rootForm.formName;
-    // let randomWordNum = Math.floor(Math.random() * roots[formName].length);
-    // let root = roots[formName][randomWordNum];
+    let formName = rootForm.formName;
+    let randomWordNum = Math.floor(Math.random() * rootsArabicFuture[formName].length);
+    let root = rootsArabicFuture[formName][randomWordNum];
 
-    // to set specific root and forms:
-    let root = "כּבּّ";
-    rootForm = forms.ihutt;
-    let conjugateTo = forms.ihutt;
+    // // to set specific root and forms:
+    // let root = "כּבּّ";
+    // rootForm = forms.ihutt;
+    // let conjugateTo = forms.ihutt;
 
     for (let c = 0; c < conjugateToArray.length; c++) {
-        // let conjugateTo = conjugateToArray[c];
+        let conjugateTo = conjugateToArray[c];
         let whereToPutText = debugCols[c];
 
         for (let i = 0; i < pronounFunctions.length; i++) {
