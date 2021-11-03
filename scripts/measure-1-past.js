@@ -397,7 +397,7 @@ const jab = {
 }
 
 
-export const forms = {
+export const formsPast = {
     "katab": katab,
     "nizel": nizel,
     "haka": haka,

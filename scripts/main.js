@@ -1,8 +1,15 @@
-import { forms } from "./measure-1-future.js";
+import { formsFuture } from "./measure-1-future.js";
+import { formsPast } from "./measure-1-past.js";
 import { hebConjugate } from "./heb-past.js";
 import {
-    rootsArabicPast, rootsHebrewPast, formNamesPast, pronounFunctions, pronounsArabic, pronounsHebrew, rootsArabicFuture
+    rootsArabicPast, rootsHebrewPast, formNamesPast,
+    formNamesFuture, pronounFunctions, pronounsArabic, pronounsHebrew, rootsArabicFuture, rootsHebrewFuture
 } from "./data.js";
+
+const forms = formsFuture;
+const formNames = formNamesFuture;
+const rootsArabic = rootsArabicFuture;
+const rootsHebrew = rootsHebrewFuture;
 
 // settings
 const hideAnswers = true;
@@ -58,11 +65,11 @@ window.addEventListener('load', (event) => {
         answerHolders[i].addEventListener("click", answerClickHandler);
     }
 
-    // buttonHandler();
+    buttonHandler();
     updateScore();
 
-    debugShowConjugations(forms.yisma,
-        [forms.yuktol, forms.yimsek, forms.yisma, forms.iruh]);
+    // debugShowConjugations(forms.ihutt,
+    //     [forms.ihutt, forms.ihibb, forms.insa, forms.iruh]);
     // debugShowConjugationHebrew();
 });
 
@@ -113,9 +120,9 @@ function initQuestion() {
     let formName = rootForm.formName;
 
     // getting a random word from the random form
-    let randomWordNum = Math.floor(Math.random() * rootsArabicPast[formName].length);
-    let root = rootsArabicPast[formName][randomWordNum];
-    let rootHebrew = rootsHebrewPast[formName][randomWordNum];
+    let randomWordNum = Math.floor(Math.random() * rootsArabic[formName].length);
+    let root = rootsArabic[formName][randomWordNum];
+    let rootHebrew = rootsHebrew[formName][randomWordNum];
 
     // extracting the hebrew word to conjugate (the first one)
     let firstWordEndingAt = getIndexOfFirstWordEnding(rootHebrew);
@@ -172,10 +179,10 @@ function debugShowConjugationHebrew() {
     for (let v = 0; v < 7; v++) {
         let whereToPutText = debugCols[v];
 
-        let randomFormNum = Math.floor(Math.random() * formNamesPast.length);
-        let formName = formNamesPast[randomFormNum];
-        let randomWordNum = Math.floor(Math.random() * rootsHebrewPast[formName].length);
-        let rootHebrew = rootsHebrewPast[formName][randomWordNum];
+        let randomFormNum = Math.floor(Math.random() * formNames.length);
+        let formName = formNames[randomFormNum];
+        let randomWordNum = Math.floor(Math.random() * rootsHebrew[formName].length);
+        let rootHebrew = rootsHebrew[formName][randomWordNum];
 
         let firstWordEndingAt = getIndexOfFirstWordEnding(rootHebrew);
         if (firstWordEndingAt == -1) firstWordEndingAt = rootHebrew.length;
@@ -200,8 +207,8 @@ function debugShowConjugations(rootForm, conjugateToArray) {
 
     // to get random root:
     let formName = rootForm.formName;
-    let randomWordNum = Math.floor(Math.random() * rootsArabicFuture[formName].length);
-    let root = rootsArabicFuture[formName][randomWordNum];
+    let randomWordNum = Math.floor(Math.random() * rootsArabic[formName].length);
+    let root = rootsArabic[formName][randomWordNum];
 
     // // to set specific root and forms:
     // let root = "כּבּّ";
@@ -253,7 +260,7 @@ function createFormAndDistractingForms(pronounNum) {
 
     answerForms.length = 0;
 
-    let randomFormNum = Math.floor(Math.random() * formNamesPast.length);
+    let randomFormNum = Math.floor(Math.random() * formNames.length);
     let form = getFormFromNum(randomFormNum);
 
     answerForms.push(form);
@@ -263,7 +270,7 @@ function createFormAndDistractingForms(pronounNum) {
 }
 
 function getFormFromNum(formNum) {
-    let formName = formNamesPast[formNum];
+    let formName = formNames[formNum];
     let form = forms[formName];
     return form;
 }
