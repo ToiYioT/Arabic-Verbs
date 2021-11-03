@@ -39,7 +39,7 @@ const yuktol = {
 
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
-        "yinzel": [-1, -1, -1, -1, -1],
+        "yimsek": [-1, -1, -1, -1, -1],
         "yisma": [-1, -1, -1, -1, -1],
         "iruh": [1, 0, 2, 1, -1, -1, -1, shva, 0],
         "ijib": [-1, -1, -1, -1, -1],
@@ -62,9 +62,9 @@ const yuktol = {
     }
 }
 
-const yinzel = {
+const yimsek = {
 
-    formName: "yinzel",
+    formName: "yimsek",
 
     getAna: function () {
         let template = "אַנְזֵל";
@@ -101,7 +101,7 @@ const yinzel = {
 
     processingToForm: {
         "katab": [-1, -1, -1, -1, -1],
-        "yinzel": [-1, -1, -1, -1, -1],
+        "yimsek": [-1, -1, -1, -1, -1],
         "yisma": [-1, -1, -1, -1, -1],
         "iruh": [1, 0, 2, 1, -1, -1, -1, shva, 0],
         "ijib": [-1, -1, -1, -1, -1],
@@ -162,7 +162,7 @@ const yisma = {
 
     processingToForm: {
         "katab": [-1, -1, -1, -1, -1],
-        "yinzel": [-1, -1, -1, -1, -1],
+        "yimsek": [-1, -1, -1, -1, -1],
         "yisma": [-1, -1, -1, -1, -1],
         "iruh": [1, 0, 2, 1, -1, -1, -1, shva, 0],
         "ijib": [-1, -1, -1, -1, -1],
@@ -222,7 +222,7 @@ const iruh = {
     },
     processingToForm: {
         "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
-        "yinzel": [-1, -1, 1, 2, -1],
+        "yimsek": [-1, -1, 1, 2, -1],
         "yisma": [-1, -1, -1, -1, -1],
         "iruh": [-1, -1, -1, -1, -1],
         "ijib": [-1, -1, -1, -1, -1, 2, "י"],
@@ -281,7 +281,7 @@ const ijib = {
     },
     processingToForm: {
         "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
-        "yinzel": [-1, -1, 1, 2, -1],
+        "yimsek": [-1, -1, 1, 2, -1],
         "yisma": [-1, -1, -1, -1, -1],
         "iruh": [-1, -1, -1, -1, -1],
         "ijib": [-1, -1, -1, -1, -1],
@@ -338,7 +338,7 @@ const ihki = {
     },
     processingToForm: {
         "katab": [-1, -1, 1, 2, 2],
-        "yinzel": [-1, -1, 1, 2, 2],
+        "yimsek": [-1, -1, 1, 2, 2],
         "yisma": [-1, -1, -1, -1, -1],
         "iruh": [-1, -1, -1, -1, 1],
         "ijib": [-1, -1, -1, -1, 1, 2, "י"],
@@ -395,7 +395,7 @@ const insa = {
     },
     processingToForm: {
         "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-        "yinzel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
+        "yimsek": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
         "yisma": [-1, -1, -1, -1, -1],
         "iruh": [-1, -1, 2, 1, 1],
         "ijib": [-1, -1, 2, 1, -1, 2, "י"],
@@ -452,7 +452,7 @@ const ihibb = {
     },
     processingToForm: {
         "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-        "yinzel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
+        "yimsek": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
         "yisma": [-1, -1, -1, -1, -1],
         "iruh": [-1, -1, 2, 1, 1],
         "ijib": [-1, -1, 2, 1, -1, 2, "י"],
@@ -510,7 +510,7 @@ const ihutt = {
     },
     processingToForm: {
         "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-        "yinzel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
+        "yimsek": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
         "yisma": [-1, -1, -1, -1, -1],
         "iruh": [-1, -1, 2, 1, 1],
         "ijib": [-1, -1, 2, 1, -1, 2, "י"],
@@ -534,7 +534,7 @@ const ihutt = {
 
 export const forms = {
     "yuktol": yuktol,
-    "yinzel": yinzel,
+    "yimsek": yimsek,
     "yisma": yisma,
     "iruh": iruh,
     "ijib": ijib,

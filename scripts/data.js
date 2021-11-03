@@ -22,8 +22,8 @@ const jabArabic = ["ג'אבּ", "עאש", "בּאע", "נאם", "טאר", "זא�
 // future verbs
 const yuktobHebrew = [];
 const yuktobArabic = [];
-const yinzelHebrew = [];
-const yinzelArabic = [];
+const yimsekHebrew = [];
+const yimsekArabic = [];
 const yismaHebrew = [];
 const yismaArabic = [];
 const iruhHebrew = [];
@@ -41,7 +41,7 @@ const ihuttArabic = [];
 
 
 export const formNamesPast = ["katab", "nizel", "haka", "nisi", "habb", "rah", "jab"];
-export const formNamesFuture = ["yuktob", "yinzel", "yisma", "iruh", "ijib", "ihki", "insa", "ihibb", "ihutt"];
+export const formNamesFuture = ["yuktob", "yimsek", "yisma", "iruh", "ijib", "ihki", "insa", "ihibb", "ihutt"];
 
 export const rootsArabicPast = {
     "katab": katabArabic,
@@ -65,7 +65,7 @@ export const rootsHebrewPast = {
 
 export const rootsArabicFuture = {
     "yuktob": yuktobArabic,
-    "yinzel": yinzelArabic,
+    "yimsek": yimsekArabic,
     "yisma": yismaArabic,
     "iruh": iruhArabic,
     "ijib": ijibArabic,
@@ -77,7 +77,7 @@ export const rootsArabicFuture = {
 
 export const rootsHebrewFuture = {
     "yuktob": yuktobHebrew,
-    "yinzel": yinzelHebrew,
+    "yimsek": yimsekHebrew,
     "yisma": yismaHebrew,
     "iruh": iruhHebrew,
     "ijib": ijibHebrew,

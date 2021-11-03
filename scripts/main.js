@@ -10,6 +10,9 @@ const numOfAnswers = 4;
 const progressBarUpdateInterval = 20;
 const revealAnswersAfter = 3000;
 
+var numOfProgressBarUpdates = 0;
+const progressBarMaxUpdates = 150;
+
 // html elements
 var answerHolders = [];
 var answerSection;
@@ -151,8 +154,6 @@ function startProgressBarAnimation() {
     progressBarTimer = setInterval(progressBarUpdate, progressBarUpdateInterval);
 }
 
-var numOfProgressBarUpdates = 0;
-const progressBarMaxUpdates = 150;
 function progressBarUpdate() {
 
     numOfProgressBarUpdates++;
