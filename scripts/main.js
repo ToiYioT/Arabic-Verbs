@@ -38,7 +38,6 @@ var answers = [];
 var correctAnswer;
 var numOfCorrectAnswers = 0;
 var numOfTotalAnswers = 0;
-var answeringAttemptNum;
 
 // constants 
 const letters = "אבגדהוזחטיכלמנסעפצקרשתץףךםן";
@@ -60,7 +59,7 @@ window.addEventListener('load', (event) => {
 
     answerSection = document.getElementById("answer-section");
 
-    button.addEventListener("click", buttonHandler);
+    enableButton();
 
     for (let i = 0; i < numOfAnswers; i++) {
         answerHolders.push(document.getElementById("answer" + (i + 1)));
@@ -103,15 +102,15 @@ function setButtonText() {
 
     } else {
         button.innerHTML = "בחרו באחת האופציות";
-        button.disabled = true;
+        disableButton();
     }
 }
 
 function initQuestion() {
 
     answers.length = 0;
-    answeringAttemptNum = 0;
     numOfTotalAnswers++;
+    questionAnswered = false;
 
     let pronounNum = Math.floor(Math.random() * pronounFunctions.length);
     let pronounFunction = pronounFunctions[pronounNum];
@@ -153,6 +152,7 @@ function initQuestion() {
         answerHolders[i].innerHTML = answers[i];
         answerHolders[i].classList.remove("correct");
         answerHolders[i].classList.remove("incorrect");
+        answerHolders[i].classList.remove("faded");
     }
     updateScore();
     startProgressBarAnimation();
@@ -235,22 +235,49 @@ function getIndexOfFirstWordEnding(word) {
     return word.indexOf(" ");
 }
 
+var questionAnswered = false;
 function answerClickHandler(event) {
+    if (questionAnswered) return;
+    questionAnswered = true;
+
     let holderAnswer = event.target.innerHTML;
-    answeringAttemptNum++;
 
     if (holderAnswer == correctAnswer) {
         event.target.classList.add("correct");
 
-        button.disabled = false;
-        button.innerHTML = "השאלה הבאה"
-        if (answeringAttemptNum == 1) {
-            numOfCorrectAnswers++;
+        for (let i = 0; i < answerHolders.length; i++) {
+            if (answerHolders[i].innerHTML != correctAnswer) {
+                answerHolders[i].classList.add("faded");
+            }
         }
+
+        numOfCorrectAnswers++;
     } else {
+
         event.target.classList.add("incorrect");
+
+        for (let i = 0; i < answerHolders.length; i++) {
+            if (answerHolders[i].innerHTML == correctAnswer) {
+                answerHolders[i].classList.add("correct");
+
+            } else if (answerHolders[i].innerHTML != holderAnswer) {
+                answerHolders[i].classList.add("faded");
+            }
+        }
     }
+    enableButton();
+    button.innerHTML = "השאלה הבאה"
     updateScore();
+}
+
+function enableButton() {
+    button.onclick = buttonHandler;
+    button.classList.remove("faded");
+}
+
+function disableButton() {
+    button.onclick = "";
+    button.classList.add("faded");
 }
 
 function updateScore() {

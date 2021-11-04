@@ -1,6 +1,7 @@
 :root {
   --blue: #CEDBE8;
   --blue-accent: #90B2D0;
+  --button-disabled-color: #b4c6d8;
   --blue-accent-darker: #7aa1c3;
   --white : white;
   --text-color: rgb(44, 44, 44);
@@ -113,7 +114,6 @@ body {
 }
 
 .answer:hover{
-    font-size: 165%;
     background-color: var(--white);
 }
 
@@ -121,14 +121,17 @@ body {
     color: var(--correct-answer-color);
     border: solid var(--correct-answer-color);
     background-color: white;
-    font-size: 165%;
 }
 
 .answer.incorrect {
     color: var(--incorrect-answer-color);
     border: solid var(--incorrect-answer-color);
     background-color: white;
-    font-size: 165%;
+}
+
+.answer.faded{
+    color: var(--text-color-faded);
+    pointer-events: none;
 }
 
 span {
@@ -150,6 +153,12 @@ span {
     align-items: center;
     border: solid var(--blue-accent);
     transition-duration: 0.2s;
+}
+
+.next-button.faded{
+    background-color: var(--button-disabled-color);
+    border-color: transparent;
+    pointer-events: none;
 }
 
 .next-button:hover{
