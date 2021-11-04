@@ -254,7 +254,7 @@ function answerClickHandler(event) {
 }
 
 function updateScore() {
-    score.innerHTML = "שאלה מספר: " + numOfTotalAnswers + "</br>" +
+    score.innerHTML = "שאלה מספר: " + numOfTotalAnswers + ",    " +
         "תשובות נכונות: " + numOfCorrectAnswers;
 }
 
