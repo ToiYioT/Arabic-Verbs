@@ -1,11 +1,13 @@
 :root {
-  --blue: #bddff3;
-  --blue-accent: #79b8dd;
-  --green: green;
+  --blue: #CEDBE8;
+  --blue-accent: #90B2D0;
+  --blue-accent-darker: #7aa1c3;
   --white : white;
   --text-color: rgb(44, 44, 44);
-  --correct-answer-color: rgb(20, 195, 20);
+  --text-color-faded: rgb(190, 190, 190);
+  --correct-answer-color: rgb(34, 223, 34);
   --incorrect-answer-color: red;
+  --answer-highlight-color: rgb(240, 248, 255);
 }
 
 html, body {
@@ -20,6 +22,7 @@ html, body {
 body {
     align-content: center;
     background-color: var(--blue);
+    font-family: 'IBM Plex Sans Hebrew', sans-serif;
 }
 
 /* change display from none to flex */
@@ -31,8 +34,8 @@ body {
     height: 100%;
     flex-direction: column;
 
-    border-left: solid var(--white); 
-    border-right: solid var(--white); 
+    border-left: solid var(--answer-highlight-color); 
+    border-right: solid var(--answer-highlight-color); 
     border-width: 5px;
 }
 
@@ -49,7 +52,7 @@ body {
 #progress-bar {
     height: 1%;
     width: 0%;
-    background-color: var(--white);
+    background-color: var(--answer-highlight-color);
 }
 
 .col {
@@ -78,8 +81,7 @@ body {
     justify-content: center;
     align-items: center;
     line-height: 100%;
-    margin-right: 5%;
-    font-size: 300%;
+    font-size: 250%;
 }
 
 #answer-section {
@@ -98,55 +100,64 @@ body {
     margin-left: 5%;
     margin-top: 2%;
     padding-right: 6%;
-    font-size: 200%;
-    background-color: var(--white);
+    font-size: 160%;
+    background-color: var(--answer-highlight-color);
     color: var(--text-color);
+
     display: flex;
+    flex: 1;
     justify-content: right;
     align-items: center;
     border-radius: 40px;
-    flex: 1;
     border: solid transparent;
+}
+
+.answer:hover{
+    font-size: 165%;
+    background-color: var(--white);
 }
 
 .answer.correct {
     color: var(--correct-answer-color);
     border: solid var(--correct-answer-color);
-    
+    background-color: white;
+    font-size: 165%;
 }
 
 .answer.incorrect {
     color: var(--incorrect-answer-color);
     border: solid var(--incorrect-answer-color);
+    background-color: white;
+    font-size: 165%;
 }
 
 span {
     flex: 1;
 }
 
-#next-button {
+.next-button {
     font-size: x-large;
-    flex: 0.5;
-    color: rgb(87, 74, 74);
-    /* border-radius: 40px; */
-    /* margin-right: 3%;
-    margin-left: 3%;
-    margin-bottom: 3%; */
-    /* background-color: var(--blue-accent); */
-    transition-duration: 0.4s;
-}
-.button {
-  transition-duration: 0.4s;
+    flex: 0.35;
+    color: var(--white);
+    background-color: var(--blue-accent);
+    border-radius: 40px;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-bottom: 3%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid var(--blue-accent);
+    transition-duration: 0.2s;
 }
 
-.button:hover {
-  background-color: #4CAF50; /* Green */
-  color: white;
+.next-button:hover{
+    background-color: var(--blue-accent-darker);
+
 }
 
-body{
-    font-family: 'IBM Plex Sans Hebrew', sans-serif;
-}
+
 
 @media only screen and (max-width: 460px) {
   #container{
