@@ -97,8 +97,20 @@ body {
     align-items: center;
 }
 
+#answer-holder{
+    display: flex;
+
+}
+
 .hide{
     visibility: hidden;
+}
+
+.icon{
+    position: absolute;
+    margin-left: 32px;
+    margin-top: -48px;
+    width: 32px;
 }
 
 .answer {
@@ -114,7 +126,8 @@ body {
     max-width: 480px;
     margin-right: 16px;
     margin-left: 16px;
-    margin-top: 8px; 
+    margin-top: 4px; 
+    margin-bottom: 4px;
     padding-right:16px;
     font-size: 1em;
     background-color: var(--answer-highlight-color);

@@ -24,6 +24,8 @@ const progressBarMaxUpdates = 150;
 
 // html elements
 var answerHolders = [];
+var correctIcons = [];
+var incorrectIcons = [];
 var answerSection;
 var questionHolder;
 var button;
@@ -63,6 +65,8 @@ window.addEventListener('load', (event) => {
 
     for (let i = 0; i < numOfAnswers; i++) {
         answerHolders.push(document.getElementById("answer" + (i + 1)));
+        correctIcons.push(document.getElementById("icon-correct" + (i + 1)));
+        incorrectIcons.push(document.getElementById("icon-incorrect" + (i + 1)));
         answerHolders[i].addEventListener("click", answerClickHandler);
     }
 
@@ -158,8 +162,16 @@ function initQuestion() {
         answerHolders[i].classList.remove("incorrect");
         answerHolders[i].classList.remove("faded");
     }
+    hideAllIcons();
     updateScore();
     startProgressBarAnimation();
+}
+
+function hideAllIcons() {
+    for (let i = 0; i < 4; i++) {
+        correctIcons[i].classList.add("hide");
+        incorrectIcons[i].classList.add("hide");
+    }
 }
 
 function startProgressBarAnimation() {
@@ -250,12 +262,14 @@ function answerClickHandler(event) {
         event.target.classList.add("correct");
 
         for (let i = 0; i < answerHolders.length; i++) {
-            if (answerHolders[i].innerHTML != correctAnswer) {
+            if (answerHolders[i].innerHTML == correctAnswer) {
+                correctIcons[i].classList.remove("hide");
+            } else {
                 answerHolders[i].classList.add("faded");
             }
         }
-
         numOfCorrectAnswers++;
+
     } else {
 
         event.target.classList.add("incorrect");
@@ -266,6 +280,9 @@ function answerClickHandler(event) {
 
             } else if (answerHolders[i].innerHTML != holderAnswer) {
                 answerHolders[i].classList.add("faded");
+            } else if (answerHolders[i].innerHTML == holderAnswer) {
+                incorrectIcons[i].classList.remove("hide");
+
             }
         }
     }
