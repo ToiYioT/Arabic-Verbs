@@ -6,7 +6,6 @@ import {
     rootsArabicPast, rootsHebrewPast, formNamesPast,
     formNamesFuture, pronounFunctions, pronounsArabic, pronounsHebrew, rootsArabicFuture, rootsHebrewFuture
 } from "./data.js";
-import { AnswerInfo } from "../info-box.js";
 
 const forms = formsFuture;
 const formNames = formNamesFuture;
@@ -30,7 +29,6 @@ var questionHolder;
 var button;
 var score;
 var progressBar;
-var infoBox;
 
 var progressBarTimer;
 
@@ -58,7 +56,6 @@ window.addEventListener('load', (event) => {
     button = document.getElementById("next-button");
     score = document.getElementById("score");
     progressBar = document.getElementById("progress-bar");
-    infoBox = document.getElementById("info-box");
 
     answerSection = document.getElementById("answer-section");
 
@@ -110,16 +107,11 @@ function setButtonText() {
     }
 }
 
-function setInfoBox(str) {
-    infoBox.innerHTML = str;
-}
-
 function initQuestion() {
 
     answers.length = 0;
     numOfTotalAnswers++;
     questionAnswered = false;
-    setInfoBox("");
 
     let pronounNum = Math.floor(Math.random() * pronounFunctions.length);
     let pronounFunction = pronounFunctions[pronounNum];
@@ -280,11 +272,6 @@ function answerClickHandler(event) {
     enableButton();
     button.innerHTML = "השאלה הבאה"
     updateScore();
-
-    let info = AnswerInfo.getInfo(correctAnswer);
-    if (info[0] != null) {
-        setInfoBox(info[0]);
-    }
 }
 
 function enableButton() {

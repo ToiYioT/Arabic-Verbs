@@ -88,15 +88,6 @@ body {
     margin-bottom: 0px;
 }
 
-#info-box{
-    display: flex;
-    justify-content: flex-end;
-    flex: 1;
-    padding-right: 18px;
-    padding-left: 18px;
-    font-size: 0.7em;
-}
-
 #answer-section {
     display: flex;
     flex: 1;
