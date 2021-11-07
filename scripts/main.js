@@ -142,8 +142,11 @@ function initQuestion() {
 
         let conjugateTo = answerForms[i];
         doProcessing(root, rootForm, conjugateTo);
-        answers.push(pronounsArabic[pronounNum] + " "
-            + getWord(...conjugateTo[pronounFunction]()));
+
+        let answer = pronounsArabic[pronounNum] + " "
+            + getWord(...conjugateTo[pronounFunction]());
+        answer = substituteLetterAtEndToEndingLetter(answer);
+        answers.push(answer);
     }
     correctAnswer = answers[0];
     shuffle(answers);
