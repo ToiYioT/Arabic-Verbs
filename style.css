@@ -1,4 +1,5 @@
 :root {
+    --green: green;
   --blue: #CEDBE8;
   --blue-accent: #90B2D0;
   --button-disabled-color: #b4c6d8;
@@ -67,7 +68,7 @@ body {
 #score{
     display: flex;
     justify-content: center;
-    font-size: 0.7em;
+    font-size: 0.6em;
     color: var(--text-color);
 }
 
@@ -79,11 +80,21 @@ body {
 
 #question {
     display: flex;
-    flex: 1;
+    flex: 0.5;
     justify-content: center;
     align-items: start;
     /* line-height: 100%; */
     font-size: 1.5em;
+    margin-bottom: 0px;
+}
+
+#info-box{
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    padding-right: 18px;
+    padding-left: 18px;
+    font-size: 0.7em;
 }
 
 #answer-section {
