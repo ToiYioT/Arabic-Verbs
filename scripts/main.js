@@ -150,7 +150,7 @@ function initQuestion() {
 
         let answer = pronounsArabic[pronounNum] + " "
             + getWord(...conjugateTo[pronounFunction]());
-        answer = substituteLetterAtEndToEndingLetter(answer);
+        answer = substituteLetterAtEndToEndingLetter(answer, true);
         answers.push(answer);
     }
     correctAnswer = answers[0];
@@ -341,7 +341,7 @@ function doProcess(addFrom, addTo, copyFrom, copyTo, removeShaddeAt,
 
     addContentsOfLetterToAnother(addFrom, addTo);
     copyLetterToAnoter(copyFrom, copyTo);
-    substituteLetterAt(substituteAt, substituteWith);
+    substituteRootLetterAt(substituteAt, substituteWith);
     if (removeShaddeAt > -1) {
         rootLetters[removeShaddeAt] = removeShadde(rootLetters[removeShaddeAt]);
     }
@@ -393,7 +393,7 @@ function addGeresh(str) {
         geresh + str.slice(indexOfGereshedLetter);
 }
 
-function substituteLetterAt(index, letter) {
+function substituteRootLetterAt(index, letter) {
     if (index > -1) {
         let str = rootLetters[index];
         rootLetters[index] = letter + str.substr(1, str.length);
@@ -467,27 +467,41 @@ function substituteEndingLettersToNormal(word) {
     return word;
 }
 
-// for use with hebrew only
-function substituteLetterAtEndToEndingLetter(word) {
+function substituteLetterAtEndToEndingLetter(word, arabic = false) {
 
-    let lastLetter = word[word.length - 1];
+    let lastLetterIndex = getLastLetterIndex(word);
+    let lastLetter = word[lastLetterIndex];
 
     if (lastLetter == "צ") {
-        return word.substring(0, word.length - 1) + "ץ";
+        word = substituteLetterAt(word, lastLetterIndex, "ץ");
 
     } else if (lastLetter == "פ") {
-        return word.substring(0, word.length - 1) + "ף";
+        word = substituteLetterAt(word, lastLetterIndex, "ף");
 
-    } else if (lastLetter == "כ") {
-        return word.substring(0, word.length - 1) + "ך";
+    } else if (lastLetter == "כ" && !arabic) {
+        word = substituteLetterAt(word, lastLetterIndex, "ך");
 
     } else if (lastLetter == "מ") {
-        return word.substring(0, word.length - 1) + "ם";
+        word = substituteLetterAt(word, lastLetterIndex, "ם");
 
     } else if (lastLetter == "נ") {
-        return word.substring(0, word.length - 1) + "ן";
+        word = substituteLetterAt(word, lastLetterIndex, "ן");
     }
     return word;
+}
+
+function substituteLetterAt(word, substituteAtIndex, substituteWith) {
+    return word.substring(0, substituteAtIndex) + substituteWith +
+        word.substring(substituteAtIndex + 1, word.length);
+}
+
+function getLastLetterIndex(word) {
+
+    for (let i = word.length - 1; i > 0; i--) {
+        if (letters.indexOf(word[i]) > -1) {
+            return i;
+        }
+    }
 }
 
 
