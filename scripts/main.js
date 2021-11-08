@@ -43,6 +43,10 @@ var correctAnswer;
 var numOfCorrectAnswers = 0;
 var numOfTotalAnswers = 0;
 
+// debug
+var container;
+var horizontalContainer;
+
 
 window.addEventListener('load', (event) => {
 
@@ -52,6 +56,8 @@ window.addEventListener('load', (event) => {
     progressBar = document.getElementById("progress-bar");
 
     answerSection = document.getElementById("answer-section");
+    container = document.getElementById("container");
+    horizontalContainer = document.getElementById("hor-container");
 
     enableButton();
 
@@ -65,13 +71,16 @@ window.addEventListener('load', (event) => {
     buttonHandler();
     updateScore();
 
-    // debugShowConjugations(forms.ihutt,
-    //     [forms.ihutt, forms.ihibb, forms.insa, forms.iruh]);
+    // debugShowConjugations(forms.ihki,
+    //     [forms.ihki, forms.iruh, forms.ijib, forms.ihibb]);
     // debugShowConjugationHebrew();
 });
 
 var debugCols = [];
 function loadDebugCols() {
+
+    container.style.display = "none";
+    horizontalContainer.style.display = "flex";
     for (let i = 0; i < 7; i++) {
         debugCols.push(document.getElementById("col" + (i + 1)));
     }
@@ -193,6 +202,7 @@ function debugShowConjugationHebrew() {
         let formName = formNames[randomFormNum];
         let randomWordNum = Math.floor(Math.random() * rootsHebrew[formName].length);
         let rootHebrew = rootsHebrew[formName][randomWordNum];
+        // rootHebrew = "ילך לאיבוד"
 
         let firstWordEndingAt = util.getIndexOfFirstWordEnding(rootHebrew);
         if (firstWordEndingAt == -1) firstWordEndingAt = rootHebrew.length;

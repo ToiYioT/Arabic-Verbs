@@ -31,10 +31,8 @@ body {
     font-family: 'IBM Plex Sans Hebrew', sans-serif;
 }
 
-/* change display from none to flex */
 #container {
     display: flex;
-    /* display: none; */
     margin: auto;
     max-width: 550px;
     min-height: 100%;
@@ -46,9 +44,7 @@ body {
     border-width: 5px;
 }
 
-/* change display from flex to none */
 #hor-container {
-    /* display: flex; */
     display: none;
     margin: auto;
     min-height: 100%;
