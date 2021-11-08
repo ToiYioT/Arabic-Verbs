@@ -6,6 +6,7 @@ import {
     rootsArabicPast, rootsHebrewPast, formNamesPast,
     formNamesFuture, pronounFunctions, pronounsArabic, pronounsHebrew, rootsArabicFuture, rootsHebrewFuture
 } from "./data.js";
+import { util } from "./util.js";
 
 const forms = formsFuture;
 const formNames = formNamesFuture;
@@ -131,15 +132,15 @@ function initQuestion() {
     let rootHebrew = rootsHebrew[formName][randomWordNum];
 
     // extracting the hebrew word to conjugate (the first one)
-    let firstWordEndingAt = getIndexOfFirstWordEnding(rootHebrew);
+    let firstWordEndingAt = util.getIndexOfFirstWordEnding(rootHebrew);
     if (firstWordEndingAt == -1) firstWordEndingAt = rootHebrew.length;
     let firstWord = rootHebrew.substring(0, firstWordEndingAt);
-    firstWord = substituteEndingLettersToNormal(firstWord);
+    firstWord = util.substituteEndingLettersToNormal(firstWord);
     let remainderOfTranslation = rootHebrew.substring(firstWordEndingAt, rootHebrew.length);
 
     // conjugate the hebrew expression and view it
     let conjugatedHebrew = hebConjugate[pronounFunction](firstWord);
-    conjugatedHebrew = substituteLetterAtEndToEndingLetter(conjugatedHebrew);
+    conjugatedHebrew = util.substituteLetterAtEndToEndingLetter(conjugatedHebrew);
     questionHolder.innerHTML = pronounsHebrew[pronounNum] + " " +
         conjugatedHebrew + remainderOfTranslation + "<br/>";
 
@@ -150,11 +151,11 @@ function initQuestion() {
 
         let answer = pronounsArabic[pronounNum] + " "
             + getWord(...conjugateTo[pronounFunction]());
-        answer = substituteLetterAtEndToEndingLetter(answer, true);
+        answer = util.substituteLetterAtEndToEndingLetter(answer, true);
         answers.push(answer);
     }
     correctAnswer = answers[0];
-    shuffle(answers);
+    util.shuffle(answers);
 
     for (let i = 0; i < answerHolders.length; i++) {
         answerHolders[i].innerHTML = answers[i];
@@ -202,17 +203,17 @@ function debugShowConjugationHebrew() {
         let randomWordNum = Math.floor(Math.random() * rootsHebrew[formName].length);
         let rootHebrew = rootsHebrew[formName][randomWordNum];
 
-        let firstWordEndingAt = getIndexOfFirstWordEnding(rootHebrew);
+        let firstWordEndingAt = util.getIndexOfFirstWordEnding(rootHebrew);
         if (firstWordEndingAt == -1) firstWordEndingAt = rootHebrew.length;
 
         let firstWord = rootHebrew.substring(0, firstWordEndingAt);
-        firstWord = substituteEndingLettersToNormal(firstWord);
+        firstWord = util.substituteEndingLettersToNormal(firstWord);
         let remainderOfTranslation = rootHebrew.substring(firstWordEndingAt, rootHebrew.length);
 
         for (let i = 0; i < 8; i++) {
             let pronounFunc = pronounFunctions[i];
             let conjugatedWord = hebConjugate[pronounFunc](firstWord);
-            conjugatedWord = substituteLetterAtEndToEndingLetter(conjugatedWord);
+            conjugatedWord = util.substituteLetterAtEndToEndingLetter(conjugatedWord);
 
             whereToPutText.innerHTML += pronounsHebrew[i] + " " +
                 conjugatedWord + remainderOfTranslation + "<br/>";
@@ -247,9 +248,6 @@ function debugShowConjugations(rootForm, conjugateToArray) {
     }
 }
 
-function getIndexOfFirstWordEnding(word) {
-    return word.indexOf(" ");
-}
 
 var questionAnswered = false;
 function answerClickHandler(event) {
@@ -327,7 +325,7 @@ function getFormFromNum(formNum) {
 
 function doProcessing(root, rootForm, toForm) {
 
-    root = substituteEndingLettersToNormal(root);
+    root = util.substituteEndingLettersToNormal(root);
     separateRootIntoLetters(root);
     doProcess(...rootForm.processingToForm[toForm.formName]);
 }
@@ -336,14 +334,14 @@ function doProcess(addFrom, addTo, copyFrom, copyTo, removeShaddeAt,
     substituteAt = -1, substituteWith = "", niqudToAdd = "", addNiqudAt = -1) {
 
     if (niqudToAdd != "") {
-        rootLetters[addNiqudAt] = addNiqud(rootLetters[addNiqudAt], niqudToAdd);
+        rootLetters[addNiqudAt] = util.addNiqud(rootLetters[addNiqudAt], niqudToAdd);
     }
 
     addContentsOfLetterToAnother(addFrom, addTo);
     copyLetterToAnoter(copyFrom, copyTo);
     substituteRootLetterAt(substituteAt, substituteWith);
     if (removeShaddeAt > -1) {
-        rootLetters[removeShaddeAt] = removeShadde(rootLetters[removeShaddeAt]);
+        rootLetters[removeShaddeAt] = util.removeShadde(rootLetters[removeShaddeAt]);
     }
 }
 
@@ -352,20 +350,11 @@ function separateRootIntoLetters(root) {
     let startingIndex = 0;
 
     for (let i = 0; i < 3; i++) {
-        let letterIndex = getIndexOfFirstLetterAfter(root, startingIndex);
+        let letterIndex = util.getIndexOfFirstLetterAfter(root, startingIndex);
         rootLetters[i] = root.substr(startingIndex, letterIndex - startingIndex);
         startingIndex = letterIndex;
     }
     checkGereshes();
-}
-
-function getIndexOfFirstLetterAfter(str, afterIndex) {
-    for (let i = afterIndex + 1; i < str.length; i++) {
-        if (letters.indexOf(str[i]) > -1) {
-            return i;
-        }
-    }
-    return str.length;
 }
 
 function checkGereshes() {
@@ -387,7 +376,7 @@ function addGeresh(str) {
 
     let indexOfGereshedLetter = str.indexOf(gereshedLetter);
 
-    indexOfGereshedLetter = getIndexOfFirstLetterAfter(str, indexOfGereshedLetter);
+    indexOfGereshedLetter = util.getIndexOfFirstLetterAfter(str, indexOfGereshedLetter);
 
     return str.slice(0, indexOfGereshedLetter) +
         geresh + str.slice(indexOfGereshedLetter);
@@ -413,14 +402,6 @@ function addContentsOfLetterToAnother(addFrom, addTo) {
     rootGereshes[addFrom] = "";
 }
 
-function removeShadde(str) {
-    if (str == -1) return;
-    return str.replaceAll(shadde, "");
-}
-
-function addNiqud(str, niqud) {
-    return str[0] + niqud + str.substring(1, str.length);
-}
 
 function getWord(template, index0, index1, index2) {
 
@@ -455,69 +436,4 @@ function substituteLetterInTemplate(template, letterFromRoot, subAtIndex, untilI
     } else {
         return rootLetters[letterFromRoot] + template.substring(subAtIndex + 1, untilIndex);
     }
-}
-
-function substituteEndingLettersToNormal(word) {
-
-    word = word.replaceAll("ץ", "צ");
-    word = word.replaceAll("ף", "פ");
-    word = word.replaceAll("ך", "כ");
-    word = word.replaceAll("ם", "מ");
-    word = word.replaceAll("ן", "נ");
-    return word;
-}
-
-function substituteLetterAtEndToEndingLetter(word, arabic = false) {
-
-    let lastLetterIndex = getLastLetterIndex(word);
-    let lastLetter = word[lastLetterIndex];
-
-    if (lastLetter == "צ") {
-        word = substituteLetterAt(word, lastLetterIndex, "ץ");
-
-    } else if (lastLetter == "פ") {
-        word = substituteLetterAt(word, lastLetterIndex, "ף");
-
-    } else if (lastLetter == "כ" && !arabic) {
-        word = substituteLetterAt(word, lastLetterIndex, "ך");
-
-    } else if (lastLetter == "מ") {
-        word = substituteLetterAt(word, lastLetterIndex, "ם");
-
-    } else if (lastLetter == "נ") {
-        word = substituteLetterAt(word, lastLetterIndex, "ן");
-    }
-    return word;
-}
-
-function substituteLetterAt(word, substituteAtIndex, substituteWith) {
-    return word.substring(0, substituteAtIndex) + substituteWith +
-        word.substring(substituteAtIndex + 1, word.length);
-}
-
-function getLastLetterIndex(word) {
-
-    for (let i = word.length - 1; i > 0; i--) {
-        if (letters.indexOf(word[i]) > -1) {
-            return i;
-        }
-    }
-}
-
-
-function shuffle(array) {
-    let currentIndex = array.length, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (currentIndex != 0) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-    }
-    return array;
 }
