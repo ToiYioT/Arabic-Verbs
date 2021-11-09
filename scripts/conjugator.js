@@ -87,6 +87,7 @@ function getWord(template, index0, index1, index2) {
     let solution = addGeresh(rootLetters[0] +
         rootLetters[1] +
         rootLetters[2]);
+
     return solution;
 }
 

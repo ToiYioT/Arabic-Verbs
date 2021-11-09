@@ -1,19 +1,10 @@
-import { formsFuture } from "./measure-1-future.js";
-import { formsPast } from "./measure-1-past.js";
-import { hebConjugatePast } from "./heb-past.js";
-import { hebConjugateFuture } from "./heb-future.js";
-import {
-    rootsArabicPast, rootsHebrewPast, formNamesPast,
-    formNamesFuture, pronounFunctions, pronounsArabic, pronounsHebrew, rootsArabicFuture, rootsHebrewFuture
-} from "./data.js";
 import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
+import { pronounsArabic, pronounsHebrew, pronounFunctions } from "./data.js";
+import { future, past } from "./tenses.js";
 
-const forms = formsFuture;
-const formNames = formNamesFuture;
-const rootsArabic = rootsArabicFuture;
-const rootsHebrew = rootsHebrewFuture;
-const hebConjugate = hebConjugateFuture;
+const tenses = [future, past];
+var zman;
 
 // settings
 const hideAnswers = true;
@@ -77,10 +68,14 @@ window.addEventListener('load', (event) => {
     buttonHandler();
     updateScore();
 
-    // debugShowConjugations(forms.ihki,
-    //     [forms.ihki, forms.iruh, forms.ijib, forms.ihibb]);
+    // debugShowConjugations(zman.forms.ihki,
+    //     [zman.forms.ihki, zman.forms.iruh, zman.forms.ijib, zman.forms.ihibb]);
     // debugShowConjugationHebrew();
 });
+
+function setTense(tenseIndex) {
+    zman = tenses[tenseIndex];
+}
 
 function buttonHandler() {
     clearInterval(progressBarTimer);
@@ -133,16 +128,20 @@ function addRandomQuestionsToQueue(numberOfQuestionsToAdd) {
 
 function generateRandomQuestionParams() {
 
-    let pronounNum = Math.floor(Math.random() * pronounFunctions.length);
-    let randomFormNum = Math.floor(Math.random() * formNames.length);
+    let tenseIndex = Math.floor(Math.random() * tenses.length);
+    setTense(tenseIndex);
 
-    let formName = formNames[randomFormNum];
-    let randomWordNum = Math.floor(Math.random() * rootsArabic[formName].length);
+    let pronounIndex = Math.floor(Math.random() * pronounFunctions.length);
+    let randomFormIndex = Math.floor(Math.random() * zman.formNames.length);
+
+    let formName = zman.formNames[randomFormIndex];
+    let randomWordIndex = Math.floor(Math.random() * zman.rootsArabic[formName].length);
 
     let random = {
-        pronounNum: pronounNum,
-        randomFormNum: randomFormNum,
-        randomWordNum: randomWordNum
+        tenseIndex: tenseIndex,
+        pronounIndex: pronounIndex,
+        formIndex: randomFormIndex,
+        wordIndex: randomWordIndex
     }
 
     return random;
@@ -152,15 +151,16 @@ function initQuestionFromParams(qParams) {
 
     resetQuestionState();
 
-    // pronoun num, form num, word num
-    let pronounFunction = pronounFunctions[qParams.pronounNum];
-    createAnswerForms(qParams.randomFormNum, qParams.pronounNum);
+    setTense(qParams.tenseIndex);
+    let pronounFunction = pronounFunctions[qParams.pronounIndex];
+    createAnswerForms(qParams.formIndex, qParams.pronounIndex);
 
     let rootForm = answerForms[0];
     let formName = rootForm.formName;
 
-    let rootArabic = rootsArabic[formName][qParams.randomWordNum];
-    let rootHebrew = rootsHebrew[formName][qParams.randomWordNum];
+    let rootArabic = zman.rootsArabic[formName][qParams.wordIndex];
+    let rootHebrew = zman.rootsHebrew[formName][qParams.wordIndex];
+
 
     // extracting the hebrew word to conjugate (the first one)
     let firstWordEndingAt = util.getIndexOfFirstWordEnding(rootHebrew);
@@ -170,9 +170,9 @@ function initQuestionFromParams(qParams) {
     let remainderOfTranslation = rootHebrew.substring(firstWordEndingAt, rootHebrew.length);
 
     // conjugate the hebrew expression and view it
-    let conjugatedHebrew = hebConjugate[pronounFunction](firstWord);
+    let conjugatedHebrew = zman.hebConjugate[pronounFunction](firstWord);
     conjugatedHebrew = util.substituteLetterAtEndToEndingLetter(conjugatedHebrew);
-    questionHolder.innerHTML = pronounsHebrew[qParams.pronounNum] + " " +
+    questionHolder.innerHTML = pronounsHebrew[qParams.pronounIndex] + " " +
         conjugatedHebrew + remainderOfTranslation + "<br/>";
 
     for (let i = 0; i < numOfAnswers; i++) {
@@ -180,8 +180,11 @@ function initQuestionFromParams(qParams) {
         let conjugateTo = answerForms[i];
         conjugator.doProcessing(rootArabic, rootForm, conjugateTo);
 
-        let answer = pronounsArabic[qParams.pronounNum] + " "
+
+        let answer = pronounsArabic[qParams.pronounIndex] + zman.answerPrefix
             + conjugator.getWord(...conjugateTo[pronounFunction]());
+
+
         answer = util.substituteLetterAtEndToEndingLetter(answer, true);
         answers.push(answer);
     }
@@ -298,8 +301,8 @@ function createAnswerForms(formNum, pronounNum) {
 }
 
 function getFormFromNum(formNum) {
-    let formName = formNames[formNum];
-    let form = forms[formName];
+    let formName = zman.formNames[formNum];
+    let form = zman.forms[formName];
     return form;
 }
 
@@ -313,10 +316,10 @@ function debugShowConjugationHebrew() {
     for (let v = 0; v < 7; v++) {
         let whereToPutText = debugCols[v];
 
-        let randomFormNum = Math.floor(Math.random() * formNames.length);
-        let formName = formNames[randomFormNum];
-        let randomWordNum = Math.floor(Math.random() * rootsHebrew[formName].length);
-        let rootHebrew = rootsHebrew[formName][randomWordNum];
+        let randomFormNum = Math.floor(Math.random() * zman.formNames.length);
+        let formName = zman.formNames[randomFormNum];
+        let randomWordNum = Math.floor(Math.random() * zman.rootsHebrew[formName].length);
+        let rootHebrew = zman.rootsHebrew[formName][randomWordNum];
         // rootHebrew = "ילך לאיבוד"
 
         let firstWordEndingAt = util.getIndexOfFirstWordEnding(rootHebrew);
@@ -328,7 +331,7 @@ function debugShowConjugationHebrew() {
 
         for (let i = 0; i < 8; i++) {
             let pronounFunc = pronounFunctions[i];
-            let conjugatedWord = hebConjugate[pronounFunc](firstWord);
+            let conjugatedWord = zman.hebConjugate[pronounFunc](firstWord);
             conjugatedWord = util.substituteLetterAtEndToEndingLetter(conjugatedWord);
 
             whereToPutText.innerHTML += pronounsHebrew[i] + " " +
@@ -342,8 +345,8 @@ function debugShowConjugations(rootForm, conjugateToArray) {
 
     // to get random root:
     let formName = rootForm.formName;
-    let randomWordNum = Math.floor(Math.random() * rootsArabic[formName].length);
-    let root = rootsArabic[formName][randomWordNum];
+    let randomWordNum = Math.floor(Math.random() * zman.rootsArabic[formName].length);
+    let root = zman.rootsArabic[formName][randomWordNum];
 
     // // to set specific root and forms:
     // let root = "כּבּّ";
