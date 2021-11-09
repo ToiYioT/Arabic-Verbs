@@ -41,7 +41,11 @@ var answerForms = [];
 var answers = [];
 var correctAnswer;
 var numOfCorrectAnswers = 0;
-var numOfTotalAnswers = 0;
+
+var questionNumber = 0;
+var currentQuestionParams;
+var questionQueue = [];
+var incorrectAnswer = false;
 
 // debug
 var container;
@@ -67,6 +71,8 @@ window.addEventListener('load', (event) => {
         incorrectIcons.push(document.getElementById("icon-incorrect" + (i + 1)));
         answerHolders[i].addEventListener("click", answerClickHandler);
     }
+
+    addRandomQuestionsToQueue(5);
 
     buttonHandler();
     updateScore();
@@ -114,22 +120,57 @@ function setButtonText() {
 
 function initQuestion() {
 
-    answers.length = 0;
-    numOfTotalAnswers++;
-    questionAnswered = false;
+    if (incorrectAnswer) {
+        incorrectAnswer = false;
+        questionQueue.push(currentQuestionParams);
+
+    } else {
+        addRandomQuestionsToQueue(1);
+    }
+
+    currentQuestionParams = questionQueue[questionNumber];
+    initQuestionFromParams(currentQuestionParams);
+
+}
+
+function addRandomQuestionsToQueue(numberOfQuestionsToAdd) {
+
+    for (let i = 0; i < numberOfQuestionsToAdd; i++) {
+        let randomParams = generateRandomQuestionParams();
+        questionQueue.push(randomParams);
+    }
+}
+
+function generateRandomQuestionParams() {
 
     let pronounNum = Math.floor(Math.random() * pronounFunctions.length);
-    let pronounFunction = pronounFunctions[pronounNum];
+    let randomFormNum = Math.floor(Math.random() * formNames.length);
 
-    createFormAndDistractingForms(pronounNum);
+    let formName = formNames[randomFormNum];
+    let randomWordNum = Math.floor(Math.random() * rootsArabic[formName].length);
+
+    let random = {
+        pronounNum: pronounNum,
+        randomFormNum: randomFormNum,
+        randomWordNum: randomWordNum
+    }
+
+    return random;
+}
+
+function initQuestionFromParams(qParams) {
+
+    resetQuestionState();
+
+    // pronoun num, form num, word num
+    let pronounFunction = pronounFunctions[qParams.pronounNum];
+    createAnswerForms(qParams.randomFormNum, qParams.pronounNum);
 
     let rootForm = answerForms[0];
     let formName = rootForm.formName;
 
-    // getting a random word from the random form
-    let randomWordNum = Math.floor(Math.random() * rootsArabic[formName].length);
-    let root = rootsArabic[formName][randomWordNum];
-    let rootHebrew = rootsHebrew[formName][randomWordNum];
+    let rootArabic = rootsArabic[formName][qParams.randomWordNum];
+    let rootHebrew = rootsHebrew[formName][qParams.randomWordNum];
 
     // extracting the hebrew word to conjugate (the first one)
     let firstWordEndingAt = util.getIndexOfFirstWordEnding(rootHebrew);
@@ -141,15 +182,15 @@ function initQuestion() {
     // conjugate the hebrew expression and view it
     let conjugatedHebrew = hebConjugate[pronounFunction](firstWord);
     conjugatedHebrew = util.substituteLetterAtEndToEndingLetter(conjugatedHebrew);
-    questionHolder.innerHTML = pronounsHebrew[pronounNum] + " " +
+    questionHolder.innerHTML = pronounsHebrew[qParams.pronounNum] + " " +
         conjugatedHebrew + remainderOfTranslation + "<br/>";
 
     for (let i = 0; i < numOfAnswers; i++) {
 
         let conjugateTo = answerForms[i];
-        conjugator.doProcessing(root, rootForm, conjugateTo);
+        conjugator.doProcessing(rootArabic, rootForm, conjugateTo);
 
-        let answer = pronounsArabic[pronounNum] + " "
+        let answer = pronounsArabic[qParams.pronounNum] + " "
             + conjugator.getWord(...conjugateTo[pronounFunction]());
         answer = util.substituteLetterAtEndToEndingLetter(answer, true);
         answers.push(answer);
@@ -163,6 +204,13 @@ function initQuestion() {
         answerHolders[i].classList.remove("incorrect");
         answerHolders[i].classList.remove("faded");
     }
+}
+
+function resetQuestionState() {
+
+    answers.length = 0;
+    questionNumber++;
+    questionAnswered = false;
     hideAllIcons();
     updateScore();
     startProgressBarAnimation();
@@ -272,6 +320,7 @@ function answerClickHandler(event) {
     } else {
 
         event.target.classList.add("incorrect");
+        incorrectAnswer = true;
 
         for (let i = 0; i < answerHolders.length; i++) {
             if (answerHolders[i].innerHTML == correctAnswer) {
@@ -301,17 +350,15 @@ function disableButton() {
 }
 
 function updateScore() {
-    score.innerHTML = "שאלה מספר: " + numOfTotalAnswers + ",    " +
+    score.innerHTML = "שאלה מספר: " + questionNumber + ",    " +
         "תשובות נכונות: " + numOfCorrectAnswers;
 }
 
-function createFormAndDistractingForms(pronounNum) {
+function createAnswerForms(formNum, pronounNum) {
+
+    let form = getFormFromNum(formNum);
 
     answerForms.length = 0;
-
-    let randomFormNum = Math.floor(Math.random() * formNames.length);
-    let form = getFormFromNum(randomFormNum);
-
     answerForms.push(form);
     answerForms.push(getFormFromNum(form.formsToDistractWith[pronounNum][0]));
     answerForms.push(getFormFromNum(form.formsToDistractWith[pronounNum][1]));
