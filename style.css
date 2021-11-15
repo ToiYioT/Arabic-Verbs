@@ -28,7 +28,8 @@ html, body {
 body {
     align-content: center;
     background-color: var(--blue);
-    font-family: 'IBM Plex Sans Hebrew', sans-serif;
+    /* font-family: 'IBM Plex Sans Hebrew', sans-serif; */
+    font-family: sans-serif;
 }
 
 #container {

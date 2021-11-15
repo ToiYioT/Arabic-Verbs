@@ -1,6 +1,7 @@
 const geresh = "׳";
 const shadde = "ّ";
 const letters = "אבגדהוזחטיכלמנסעפצקרשתץףךםן";
+const sgolta = "֒";
 
 function shuffle(array) {
     let currentIndex = array.length, randomIndex;
@@ -88,6 +89,11 @@ function substituteLetterAtEndToEndingLetter(word, arabic = false) {
     return word;
 }
 
+function postProcess(word) {
+    word = word.replaceAll(shadde, sgolta);
+    return word;
+}
+
 export const util = {
     shuffle,
     getIndexOfFirstWordEnding,
@@ -98,4 +104,5 @@ export const util = {
     removeShadde,
     addNiqud,
     substituteLetterAtEndToEndingLetter,
+    postProcess,
 }

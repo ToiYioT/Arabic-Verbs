@@ -186,6 +186,7 @@ function initQuestionFromParams(qParams) {
 
 
         answer = util.substituteLetterAtEndToEndingLetter(answer, true);
+        answer = util.postProcess(answer);
         answers.push(answer);
     }
     correctAnswer = answers[0];
