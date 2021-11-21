@@ -3,7 +3,7 @@ import { conjugator } from "./conjugator.js";
 import { pronounsArabic, pronounsHebrew, pronounFunctions } from "./data.js";
 import { future, past } from "./tenses.js";
 
-const tenses = [future, past];
+var tenses = [future, past];
 var zman;
 
 // settings
@@ -24,9 +24,11 @@ var questionHolder;
 var button;
 var score;
 var progressBar;
-var settingsWindow;
 
-var progressBarTimer;
+var settingsWindow;
+var checkboxPast;
+var checkboxFuture;
+
 
 // logic variables 
 var answerForms = [];
@@ -38,6 +40,7 @@ var questionNumber = 0;
 var currentQuestionParams;
 var questionQueue = [];
 var incorrectAnswer = false;
+var progressBarTimer;
 
 // debug
 var container;
@@ -58,6 +61,11 @@ window.addEventListener('load', (event) => {
     settingsWindow = document.getElementsByClassName("settings-overlay")[0];
     document.getElementsByClassName("cog")[0].onclick = openSettingsWindow;
     document.getElementsByClassName("x-button")[0].onclick = closeSettingsWindow;
+    checkboxFuture = document.getElementById("checkbox-future");
+    checkboxPast = document.getElementById("checkbox-past");
+
+    checkboxFuture.addEventListener("change", changeTenses);
+    checkboxPast.addEventListener("change", changeTenses);
 
     enableButton();
 
@@ -95,7 +103,6 @@ function buttonHandler() {
         answerSection.classList.toggle("hide");
         setButtonText();
     }
-
 }
 
 function setButtonText() {
@@ -120,7 +127,6 @@ function initQuestion() {
 
     currentQuestionParams = questionQueue[questionNumber];
     initQuestionFromParams(currentQuestionParams);
-
 }
 
 function addRandomQuestionsToQueue(numberOfQuestionsToAdd) {
@@ -185,10 +191,8 @@ function initQuestionFromParams(qParams) {
         let conjugateTo = answerForms[i];
         conjugator.doProcessing(rootArabic, rootForm, conjugateTo);
 
-
         let answer = pronounsArabic[qParams.pronounIndex] + zman.answerPrefix
             + conjugator.getWord(...conjugateTo[pronounFunction]());
-
 
         answer = util.substituteLetterAtEndToEndingLetter(answer, true);
         answer = util.postProcess(answer);
@@ -317,6 +321,29 @@ function openSettingsWindow() {
 }
 function closeSettingsWindow() {
     settingsWindow.style.visibility = "hidden";
+}
+function changeTenses(e) {
+    tenses = [];
+    if (checkboxPast.checked) {
+        tenses.push(past);
+    }
+    if (checkboxFuture.checked) {
+        tenses.push(future);
+    }
+
+    resetGame();
+}
+
+function resetGame() {
+    questionQueue.length = 0;
+    addRandomQuestionsToQueue(5);
+    incorrectAnswer = false;
+
+    numOfCorrectAnswers = 0;
+    questionNumber = 0;
+
+    enableButton();
+    buttonHandler();
 }
 
 
