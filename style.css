@@ -83,12 +83,6 @@ body {
     visibility: hidden;
 }
 
-.icon{
-    position: absolute;
-    margin-left: 32px;
-    margin-top: -48px;
-    width: 32px;
-}
 
 .answer {
     display: flex;
@@ -101,12 +95,13 @@ body {
 
     height: 56px;
     width: 320px;
-    margin: 4px 16px;
+    margin: 4px 0px;
     padding-right: 1rem;
     font-size: 1.5rem;
     background-color: var(--answer-highlight-color);
     color: var(--text-color);
 }
+
 
 .answer:hover{
     background-color: var(--white);
@@ -131,6 +126,23 @@ body {
 .answer.faded{
     color: var(--text-color-faded);
     pointer-events: none;
+}
+
+.answer-holder{
+    position: relative;
+    display: flex;
+
+}
+
+.icon{
+    position: absolute;
+    /* margin-left: 32px;
+    margin-top: -48px;
+    width: 32px; */
+    z-index: 1;
+    width: 32px;
+    align-self: center;
+    left: 16px;
 }
 
 .next-button {
