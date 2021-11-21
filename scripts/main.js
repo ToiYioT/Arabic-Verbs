@@ -24,6 +24,7 @@ var questionHolder;
 var button;
 var score;
 var progressBar;
+var settingsWindow;
 
 var progressBarTimer;
 
@@ -53,6 +54,10 @@ window.addEventListener('load', (event) => {
     answerSection = document.getElementById("answer-section");
     container = document.getElementById("container");
     horizontalContainer = document.getElementById("hor-container");
+
+    settingsWindow = document.getElementsByClassName("settings-overlay")[0];
+    document.getElementsByClassName("cog")[0].onclick = openSettingsWindow;
+    document.getElementsByClassName("x-button")[0].onclick = closeSettingsWindow;
 
     enableButton();
 
@@ -305,6 +310,13 @@ function getFormFromNum(formNum) {
     let formName = zman.formNames[formNum];
     let form = zman.forms[formName];
     return form;
+}
+
+function openSettingsWindow() {
+    settingsWindow.style.visibility = "visible";
+}
+function closeSettingsWindow() {
+    settingsWindow.style.visibility = "hidden";
 }
 
 

@@ -4,6 +4,7 @@
   --blue-accent: #90B2D0;
   --button-disabled-color: #b4c6d8;
   --blue-accent-darker: #7aa1c3;
+  --blue-darkest: #4c6c88;
   --white : white;
   --text-color: rgb(44, 44, 44);
   --text-color-faded: rgb(190, 190, 190);
@@ -46,13 +47,23 @@ body {
     border-width: 5px;
     box-shadow: 0 0 20px 10px var(--border-color);
 }
-
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 #score{
     text-align: center;
-    padding: .5rem;
-    font-size: 0.6rem;
+    padding: .5rem 1.5rem;
+    font-size: 0.8rem;
     color: var(--text-color);
+}
+
+.cog{
+    width: 32px;
+    height: 32px;
+    margin: .5rem 1rem;
 }
 
 #progress-bar {
@@ -172,6 +183,62 @@ body {
     cursor: pointer;
 }
 
+.settings-overlay{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.609);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    visibility: hidden;
+}
+
+.settings-container{
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    background-color: var(--blue);
+    border: .3rem solid var(--blue-darkest);
+    width: 80%;
+    height: 400px;
+    max-width: 500px;
+    border-radius: 1rem;
+    color: var(--blue-darkest);
+}
+
+.settings-title-container{
+    display: flex;
+    justify-content:space-between;
+    align-self: stretch;
+    margin-bottom: 1rem;
+    font-weight: bold;
+
+    border-bottom: 1px solid var(--blue-darkest);
+}
+.x-button{
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    font-size: 1.5rem;
+}
+.settings-title{
+    padding: .7rem 2rem;
+    font-size: 1.5rem;
+}
+
+.setting{
+    margin: 1rem 2rem;
+}
+
 
 
 /* @media only screen and (max-width: 360px) {
@@ -196,6 +263,8 @@ body {
      }
  }  */
 
+
+/* debug */
 #hor-container {
     display: none;
     margin: auto;
