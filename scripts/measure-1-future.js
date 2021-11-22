@@ -6,36 +6,28 @@ const yuktol = {
     formName: "yuktol",
 
     getAna: function () {
-        let template = "אַקְתֺל";
-        return [template, 2, 4, 6];
+        return "אַפְעֺל";
     },
     getInte: function () {
-        let template = "תֻקְתֺל";
-        return [template, 2, 4, 6];
+        return "תֻפְעֺל";
     },
     getInti: function () {
-        let template = "תֻקֻתְלִי";
-        return [template, 2, 4, 6];
+        return "תֻפֻעְלִי";
     },
     getHuwe: function () {
-        let template = "יֻקְתֺל";
-        return [template, 2, 4, 6];
+        return "יֻפְעֺל";
     },
     getHiye: function () {
-        let template = "תֻקְתֺל";
-        return [template, 2, 4, 6];
+        return "תֻפְעֺל";
     },
     getIhna: function () {
-        let template = "נֻקְתֺל";
-        return [template, 2, 4, 6];
+        return "נֻפְעֺל";
     },
     getIntu: function () {
-        let template = "תֻקֻתְלוּ";
-        return [template, 2, 4, 6];
+        return "תֻפֻעְלוּ";
     },
     getHumme: function () {
-        let template = "יֻקֻתְלוּ";
-        return [template, 2, 4, 6];
+        return "יֻפֻעְלוּ";
     },
 
     processingToForm: {
@@ -68,36 +60,28 @@ const yimsek = {
     formName: "yimsek",
 
     getAna: function () {
-        let template = "אַנְזֵל";
-        return [template, 2, 4, 6];
+        return "אַפְעֵל";
     },
     getInte: function () {
-        let template = "תִנְזֵל";
-        return [template, 2, 4, 6];
+        return "תִפְעֵל";
     },
     getInti: function () {
-        let template = "תִנִזְלִי";
-        return [template, 2, 4, 6];
+        return "תִפִעְלִי";
     },
     getHuwe: function () {
-        let template = "יִנְזֵל";
-        return [template, 2, 4, 6];
+        return "יִפְעֵל";
     },
     getHiye: function () {
-        let template = "תִנְזֵל";
-        return [template, 2, 4, 6];
+        return "תִפְעֵל";
     },
     getIhna: function () {
-        let template = "נִנְזֵל";
-        return [template, 2, 4, 6];
+        return "נִפְעֵל";
     },
     getIntu: function () {
-        let template = "תִנִזְלוּ";
-        return [template, 2, 4, 6];
+        return "תִפִעְלוּ";
     },
     getHumme: function () {
-        let template = "יִנִזְלוּ";
-        return [template, 2, 4, 6];
+        return "יִפִעְלוּ";
     },
 
     processingToForm: {
@@ -129,36 +113,28 @@ const yisma = {
     formName: "yisma",
 
     getAna: function () {
-        let template = "אַסְמַע";
-        return [template, 2, 4, 6];
+        return "אַפְעַל";
     },
     getInte: function () {
-        let template = "תִסְמַע";
-        return [template, 2, 4, 6];
+        return "תִפְעַל";
     },
     getInti: function () {
-        let template = "תִסְמַעִי";
-        return [template, 2, 4, 6];
+        return "תִפְעַלִי";
     },
     getHuwe: function () {
-        let template = "יִסְמַע";
-        return [template, 2, 4, 6];
+        return "יִפְעַל";
     },
     getHiye: function () {
-        let template = "תִסְמַע";
-        return [template, 2, 4, 6];
+        return "תִפְעַל";
     },
     getIhna: function () {
-        let template = "נִסְמַע";
-        return [template, 2, 4, 6];
+        return "נִפְעַל";
     },
     getIntu: function () {
-        let template = "תִסְמַעוּ";
-        return [template, 2, 4, 6];
+        return "תִפְעַלוּ";
     },
     getHumme: function () {
-        let template = "יִסְמַעוּ";
-        return [template, 2, 4, 6];
+        return "יִפְעַלוּ";
     },
 
     processingToForm: {
@@ -190,36 +166,28 @@ const iruh = {
     formName: "iruh",
 
     getAna: function () {
-        let template = "אַרוּח";
-        return [template, 2, -1, 5];
+        return "אַפוּל";
     },
     getInte: function () {
-        let template = "תְרוּח";
-        return [template, 2, -1, 5];
+        return "תְפוּל";
     },
     getInti: function () {
-        let template = "תְרוּחי";
-        return [template, 2, -1, 5];
+        return "תְפוּלי";
     },
     getHuwe: function () {
-        let template = "יְרוּח";
-        return [template, 2, -1, 5];
+        return "יְפוּל";
     },
     getHiye: function () {
-        let template = "תְרוּח";
-        return [template, 2, -1, 5];
+        return "תְפוּל";
     },
     getIhna: function () {
-        let template = "נְרוּח";
-        return [template, 2, -1, 5];
+        return "נְפוּל";
     },
     getIntu: function () {
-        let template = "תְרוּחוּ";
-        return [template, 2, -1, 5];
+        return "תְפוּלוּ";
     },
     getHumme: function () {
-        let template = "יְרוּחוּ";
-        return [template, 2, -1, 5];
+        return "יְפוּלוּ";
     },
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
@@ -249,36 +217,28 @@ const ijib = {
     formName: "ijib",
 
     getAna: function () {
-        let template = "אַגִיב";
-        return [template, 2, -1, 5];
+        return "אַפִיל";
     },
     getInte: function () {
-        let template = "תְגִיב";
-        return [template, 2, -1, 5];
+        return "תְפִיל";
     },
     getInti: function () {
-        let template = "תְגִיבִי";
-        return [template, 2, -1, 5];
+        return "תְפִילִי";
     },
     getHuwe: function () {
-        let template = "יְגִיב";
-        return [template, 2, -1, 5];
+        return "יְפִיל";
     },
     getHiye: function () {
-        let template = "תְגִיב";
-        return [template, 2, -1, 5];
+        return "תְפִיל";
     },
     getIhna: function () {
-        let template = "נְגִיב";
-        return [template, 2, -1, 5];
+        return "נְפִיל";
     },
     getIntu: function () {
-        let template = "תְגִיבו";
-        return [template, 2, -1, 5];
+        return "תְפִילו";
     },
     getHumme: function () {
-        let template = "יְגִיבוּ";
-        return [template, 2, -1, 5];
+        return "יְפִילוּ";
     },
     processingToForm: {
         "yuktol": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
@@ -306,36 +266,28 @@ const ihki = {
     formName: "ihki",
 
     getAna: function () {
-        let template = "אַחְכִי";
-        return [template, 2, 4, 6];
+        return "אַפְעִי";
     },
     getInte: function () {
-        let template = "תִחְכִי";
-        return [template, 2, 4, 6];
+        return "תִפְעִי";
     },
     getInti: function () {
-        let template = "תִחְכִי";
-        return [template, 2, 4, 6];
+        return "תִפְעִי";
     },
     getHuwe: function () {
-        let template = "יִחְכִי";
-        return [template, 2, 4, 6];
+        return "יִפְעִי";
     },
     getHiye: function () {
-        let template = "תִחְכִי";
-        return [template, 2, 4, 6];
+        return "תִפְעִי";
     },
     getIhna: function () {
-        let template = "נִחְכִי";
-        return [template, 2, 4, 6];
+        return "נִפְעִי";
     },
     getIntu: function () {
-        let template = "תִחְכוּ";
-        return [template, 2, 4, -1];
+        return "תִפְעוּ";
     },
     getHumme: function () {
-        let template = "יִחְכוּ";
-        return [template, 2, 4, -1];
+        return "יִפְעוּ";
     },
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
@@ -364,36 +316,28 @@ const insa = {
 
     formName: "insa",
     getAna: function () {
-        let template = "אַנְסַא";
-        return [template, 2, 4, -1];
+        return "אַפְעַא";
     },
     getInte: function () {
-        let template = "תִנְסַא";
-        return [template, 2, 4, -1];
+        return "תִפְעַא";
     },
     getInti: function () {
-        let template = "תִנְסִי";
-        return [template, 2, 4, -1];
+        return "תִפְעִי";
     },
     getHuwe: function () {
-        let template = "יִנְסַא";
-        return [template, 2, 4, -1];
+        return "יִפְעַא";
     },
     getHiye: function () {
-        let template = "תִנְסַא";
-        return [template, 2, 4, -1];
+        return "תִפְעַא";
     },
     getIhna: function () {
-        let template = "נִנְסַא";
-        return [template, 2, 4, -1];
+        return "נִפְעַא";
     },
     getIntu: function () {
-        let template = "תִנְסוּ";
-        return [template, 2, 4, -1];
+        return "תִפְעוּ";
     },
     getHumme: function () {
-        let template = "יִנְסוּ";
-        return [template, 2, 4, -1];
+        return "יִפְעוּ";
     },
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
@@ -421,36 +365,28 @@ const ihibb = {
     formName: "ihibb",
 
     getAna: function () {
-        let template = "אַחִבّ";
-        return [template, 2, 4, -1];
+        return "אַפִעّ";
     },
     getInte: function () {
-        let template = "תְחִבّ";
-        return [template, 2, 4, -1];
+        return "תְפִעّ";
     },
     getInti: function () {
-        let template = "תְחִבִّי";
-        return [template, 2, 4, -1];
+        return "תְפִעִّי";
     },
     getHuwe: function () {
-        let template = "יְחִבّ";
-        return [template, 2, 4, -1];
+        return "יְפִעّ";
     },
     getHiye: function () {
-        let template = "תְחִבّ";
-        return [template, 2, 4, -1];
+        return "תְפִעّ";
     },
     getIhna: function () {
-        let template = "נְחִבّ";
-        return [template, 2, 4, -1];
+        return "נְפִעّ";
     },
     getIntu: function () {
-        let template = "תְחִבّוּ";
-        return [template, 2, 4, -1];
+        return "תְפִעّוּ";
     },
     getHumme: function () {
-        let template = "יְחִבّוּ";
-        return [template, 2, 4, -1];
+        return "יְפִעّוּ";
     },
     processingToForm: {
         "yuktol": [-1, -1, 0, 2, 2],
@@ -479,36 +415,28 @@ const ihutt = {
     formName: "ihutt",
 
     getAna: function () {
-        let template = "אַחֻטّ";
-        return [template, 2, 4, -1];
+        return "אַפֻעّ";
     },
     getInte: function () {
-        let template = "תְחֻטّ";
-        return [template, 2, 4, -1];
+        return "תְפֻעّ";
     },
     getInti: function () {
-        let template = "תְחֻטִّי";
-        return [template, 2, 4, -1];
+        return "תְפֻעִّי";
     },
     getHuwe: function () {
-        let template = "יְחֻטّ";
-        return [template, 2, 4, -1];
+        return "יְפֻעّ";
     },
     getHiye: function () {
-        let template = "תְחֻטّ";
-        return [template, 2, 4, -1];
+        return "תְפֻעّ";
     },
     getIhna: function () {
-        let template = "נְחֻטّ";
-        return [template, 2, 4, -1];
+        return "נְפֻעّ";
     },
     getIntu: function () {
-        let template = "תְחֻטّוּ";
-        return [template, 2, 4, -1];
+        return "תְפֻעّוּ";
     },
     getHumme: function () {
-        let template = "יְחֻטّוּ";
-        return [template, 2, 4, -1];
+        return "יְפֻעّוּ";
     },
     processingToForm: {
         "yuktol": [-1, -1, 0, 2, 2],

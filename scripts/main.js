@@ -402,7 +402,7 @@ function debugShowConjugations(rootForm, conjugateToArray) {
 
             conjugator.doProcessing(root, rootForm, conjugateTo);
             whereToPutText.innerHTML += pronounsArabic[i] +
-                " " + conjugator.getWord(...conjugateTo[pronounFunction]()) + "</br>";
+                " " + conjugator.getWord(conjugateTo[pronounFunction]()) + "</br>";
         }
     }
 }
