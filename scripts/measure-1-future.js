@@ -6,21 +6,13 @@ const yuktol = {
     formName: "yuktol",
 
     Ana: "אַפְעֺל",
-
     Inte: "תֻפְעֺל",
-
     Inti: "תֻפֻעְלִי",
-
     Huwe: "יֻפְעֺל",
-
     Hiye: "תֻפְעֺל",
-
     Ihna: "נֻפְעֺל",
-
     Intu: "תֻפֻעְלוּ",
-
     Humme: "יֻפֻעְלוּ",
-
 
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
@@ -53,21 +45,13 @@ const yimsek = {
     formName: "yimsek",
 
     Ana: "אַפְעֵל",
-
     Inte: "תִפְעֵל",
-
     Inti: "תִפִעְלִי",
-
     Huwe: "יִפְעֵל",
-
     Hiye: "תִפְעֵל",
-
     Ihna: "נִפְעֵל",
-
     Intu: "תִפִעְלוּ",
-
     Humme: "יִפִעְלוּ",
-
 
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
@@ -99,21 +83,13 @@ const yisma = {
     formName: "yisma",
 
     Ana: "אַפְעַל",
-
     Inte: "תִפְעַל",
-
     Inti: "תִפְעַלִי",
-
     Huwe: "יִפְעַל",
-
     Hiye: "תִפְעַל",
-
     Ihna: "נִפְעַל",
-
     Intu: "תִפְעַלוּ",
-
     Humme: "יִפְעַלוּ",
-
 
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
@@ -145,19 +121,12 @@ const iruh = {
     formName: "iruh",
 
     Ana: "אַפוּל",
-
     Inte: "תְפוּל",
-
     Inti: "תְפוּלי",
-
     Huwe: "יְפוּל",
-
     Hiye: "תְפוּל",
-
     Ihna: "נְפוּל",
-
     Intu: "תְפוּלוּ",
-
     Humme: "יְפוּלוּ",
 
     processingToForm: {
@@ -189,19 +158,12 @@ const ijib = {
     formName: "ijib",
 
     Ana: "אַפִיל",
-
     Inte: "תְפִיל",
-
     Inti: "תְפִילִי",
-
     Huwe: "יְפִיל",
-
     Hiye: "תְפִיל",
-
     Ihna: "נְפִיל",
-
     Intu: "תְפִילו",
-
     Humme: "יְפִילוּ",
 
     processingToForm: {
@@ -231,19 +193,12 @@ const ihki = {
     formName: "ihki",
 
     Ana: "אַפְעִי",
-
     Inte: "תִפְעִי",
-
     Inti: "תִפְעִי",
-
     Huwe: "יִפְעִי",
-
     Hiye: "תִפְעִי",
-
     Ihna: "נִפְעִי",
-
     Intu: "תִפְעוּ",
-
     Humme: "יִפְעוּ",
 
     processingToForm: {
@@ -273,20 +228,14 @@ const ihki = {
 const insa = {
 
     formName: "insa",
+
     Ana: "אַפְעַא",
-
     Inte: "תִפְעַא",
-
     Inti: "תִפְעִי",
-
     Huwe: "יִפְעַא",
-
     Hiye: "תִפְעַא",
-
     Ihna: "נִפְעַא",
-
     Intu: "תִפְעוּ",
-
     Humme: "יִפְעוּ",
 
     processingToForm: {
@@ -316,19 +265,12 @@ const ihibb = {
     formName: "ihibb",
 
     Ana: "אַפִעّ",
-
     Inte: "תְפִעّ",
-
     Inti: "תְפִעִّי",
-
     Huwe: "יְפִעّ",
-
     Hiye: "תְפִעّ",
-
     Ihna: "נְפִעّ",
-
     Intu: "תְפִעّוּ",
-
     Humme: "יְפִעّוּ",
 
     processingToForm: {
@@ -358,19 +300,12 @@ const ihutt = {
     formName: "ihutt",
 
     Ana: "אַפֻעّ",
-
     Inte: "תְפֻעّ",
-
     Inti: "תְפֻעִّי",
-
     Huwe: "יְפֻעّ",
-
     Hiye: "תְפֻעّ",
-
     Ihna: "נְפֻעّ",
-
     Intu: "תְפֻעّוּ",
-
     Humme: "יְפֻעّוּ",
 
     processingToForm: {
