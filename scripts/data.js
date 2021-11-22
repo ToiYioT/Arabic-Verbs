@@ -1,5 +1,5 @@
 
-export const pronounFunctions = ["getAna", "getInte", "getInti", "getHuwe", "getHiye", "getIhna", "getIntu", "getHumme"];
+export const pronounFunctions = ["Ana", "Inte", "Inti", "Huwe", "Hiye", "Ihna", "Intu", "Humme"];
 export const pronounsArabic = ["אַנַא", "אִנְתֵ", "אִנְתִי", "הֻוֵّ", "הִיֵّ", "אִחְנַא", "אִנְתוּ", "הֻםֵّ"];
 export const pronounsHebrew = ["אני", "אתה", "את", "הוא", "היא", "אנחנו", "אתם", "הם"];
 

@@ -5,30 +5,22 @@ const yuktol = {
 
     formName: "yuktol",
 
-    getAna: function () {
-        return "אַפְעֺל";
-    },
-    getInte: function () {
-        return "תֻפְעֺל";
-    },
-    getInti: function () {
-        return "תֻפֻעְלִי";
-    },
-    getHuwe: function () {
-        return "יֻפְעֺל";
-    },
-    getHiye: function () {
-        return "תֻפְעֺל";
-    },
-    getIhna: function () {
-        return "נֻפְעֺל";
-    },
-    getIntu: function () {
-        return "תֻפֻעְלוּ";
-    },
-    getHumme: function () {
-        return "יֻפֻעְלוּ";
-    },
+    Ana: "אַפְעֺל",
+
+    Inte: "תֻפְעֺל",
+
+    Inti: "תֻפֻעְלִי",
+
+    Huwe: "יֻפְעֺל",
+
+    Hiye: "תֻפְעֺל",
+
+    Ihna: "נֻפְעֺל",
+
+    Intu: "תֻפֻעְלוּ",
+
+    Humme: "יֻפֻעְלוּ",
+
 
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
@@ -40,6 +32,7 @@ const yuktol = {
         "insa": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
         "ihibb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
         "ihutt": [-1, -1, -1, -1, -1],
+
     },
 
     formsToDistractWith: {
@@ -59,30 +52,22 @@ const yimsek = {
 
     formName: "yimsek",
 
-    getAna: function () {
-        return "אַפְעֵל";
-    },
-    getInte: function () {
-        return "תִפְעֵל";
-    },
-    getInti: function () {
-        return "תִפִעְלִי";
-    },
-    getHuwe: function () {
-        return "יִפְעֵל";
-    },
-    getHiye: function () {
-        return "תִפְעֵל";
-    },
-    getIhna: function () {
-        return "נִפְעֵל";
-    },
-    getIntu: function () {
-        return "תִפִעְלוּ";
-    },
-    getHumme: function () {
-        return "יִפִעְלוּ";
-    },
+    Ana: "אַפְעֵל",
+
+    Inte: "תִפְעֵל",
+
+    Inti: "תִפִעְלִי",
+
+    Huwe: "יִפְעֵל",
+
+    Hiye: "תִפְעֵל",
+
+    Ihna: "נִפְעֵל",
+
+    Intu: "תִפִעְלוּ",
+
+    Humme: "יִפִעְלוּ",
+
 
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
@@ -94,6 +79,7 @@ const yimsek = {
         "insa": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
         "ihibb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
         "ihutt": [-1, -1, -1, -1, -1],
+
     },
 
     formsToDistractWith: {
@@ -112,30 +98,22 @@ const yisma = {
 
     formName: "yisma",
 
-    getAna: function () {
-        return "אַפְעַל";
-    },
-    getInte: function () {
-        return "תִפְעַל";
-    },
-    getInti: function () {
-        return "תִפְעַלִי";
-    },
-    getHuwe: function () {
-        return "יִפְעַל";
-    },
-    getHiye: function () {
-        return "תִפְעַל";
-    },
-    getIhna: function () {
-        return "נִפְעַל";
-    },
-    getIntu: function () {
-        return "תִפְעַלוּ";
-    },
-    getHumme: function () {
-        return "יִפְעַלוּ";
-    },
+    Ana: "אַפְעַל",
+
+    Inte: "תִפְעַל",
+
+    Inti: "תִפְעַלִי",
+
+    Huwe: "יִפְעַל",
+
+    Hiye: "תִפְעַל",
+
+    Ihna: "נִפְעַל",
+
+    Intu: "תִפְעַלוּ",
+
+    Humme: "יִפְעַלוּ",
+
 
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
@@ -147,6 +125,7 @@ const yisma = {
         "insa": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
         "ihibb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
         "ihutt": [-1, -1, -1, -1, -1],
+
     },
 
     formsToDistractWith: {
@@ -165,30 +144,22 @@ const iruh = {
 
     formName: "iruh",
 
-    getAna: function () {
-        return "אַפוּל";
-    },
-    getInte: function () {
-        return "תְפוּל";
-    },
-    getInti: function () {
-        return "תְפוּלי";
-    },
-    getHuwe: function () {
-        return "יְפוּל";
-    },
-    getHiye: function () {
-        return "תְפוּל";
-    },
-    getIhna: function () {
-        return "נְפוּל";
-    },
-    getIntu: function () {
-        return "תְפוּלוּ";
-    },
-    getHumme: function () {
-        return "יְפוּלוּ";
-    },
+    Ana: "אַפוּל",
+
+    Inte: "תְפוּל",
+
+    Inti: "תְפוּלי",
+
+    Huwe: "יְפוּל",
+
+    Hiye: "תְפוּל",
+
+    Ihna: "נְפוּל",
+
+    Intu: "תְפוּלוּ",
+
+    Humme: "יְפוּלוּ",
+
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
         "yimsek": [-1, -1, -1, -1, -1],
@@ -199,6 +170,7 @@ const iruh = {
         "insa": [-1, -1, 2, 1, -1],
         "ihibb": [-1, -1, 2, 1, -1],
         "ihutt": [-1, -1, 2, 1, -1],
+
     },
 
     formsToDistractWith: {
@@ -216,30 +188,22 @@ const iruh = {
 const ijib = {
     formName: "ijib",
 
-    getAna: function () {
-        return "אַפִיל";
-    },
-    getInte: function () {
-        return "תְפִיל";
-    },
-    getInti: function () {
-        return "תְפִילִי";
-    },
-    getHuwe: function () {
-        return "יְפִיל";
-    },
-    getHiye: function () {
-        return "תְפִיל";
-    },
-    getIhna: function () {
-        return "נְפִיל";
-    },
-    getIntu: function () {
-        return "תְפִילו";
-    },
-    getHumme: function () {
-        return "יְפִילוּ";
-    },
+    Ana: "אַפִיל",
+
+    Inte: "תְפִיל",
+
+    Inti: "תְפִילִי",
+
+    Huwe: "יְפִיל",
+
+    Hiye: "תְפִיל",
+
+    Ihna: "נְפִיל",
+
+    Intu: "תְפִילו",
+
+    Humme: "יְפִילוּ",
+
     processingToForm: {
         "yuktol": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
         "yimsek": [-1, -1, 1, 2, -1],
@@ -250,6 +214,7 @@ const ijib = {
         "insa": [-1, -1, 2, 1, -1],
         "ihibb": [-1, -1, 2, 1, -1],
         "ihutt": [-1, -1, 2, 1, -1],
+
     },
     formsToDistractWith: {
         0: [2, 6, 7],
@@ -265,30 +230,22 @@ const ijib = {
 const ihki = {
     formName: "ihki",
 
-    getAna: function () {
-        return "אַפְעִי";
-    },
-    getInte: function () {
-        return "תִפְעִי";
-    },
-    getInti: function () {
-        return "תִפְעִי";
-    },
-    getHuwe: function () {
-        return "יִפְעִי";
-    },
-    getHiye: function () {
-        return "תִפְעִי";
-    },
-    getIhna: function () {
-        return "נִפְעִי";
-    },
-    getIntu: function () {
-        return "תִפְעוּ";
-    },
-    getHumme: function () {
-        return "יִפְעוּ";
-    },
+    Ana: "אַפְעִי",
+
+    Inte: "תִפְעִי",
+
+    Inti: "תִפְעִי",
+
+    Huwe: "יִפְעִי",
+
+    Hiye: "תִפְעִי",
+
+    Ihna: "נִפְעִי",
+
+    Intu: "תִפְעוּ",
+
+    Humme: "יִפְעוּ",
+
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
         "yimsek": [-1, -1, -1, -1, -1],
@@ -299,6 +256,7 @@ const ihki = {
         "insa": [-1, -1, 1, 2, 2],
         "ihibb": [-1, -1, -1, -1, -1],
         "ihutt": [-1, -1, -1, -1, -1],
+
     },
     formsToDistractWith: {
         0: [3, 6, 7],
@@ -315,30 +273,22 @@ const ihki = {
 const insa = {
 
     formName: "insa",
-    getAna: function () {
-        return "אַפְעַא";
-    },
-    getInte: function () {
-        return "תִפְעַא";
-    },
-    getInti: function () {
-        return "תִפְעִי";
-    },
-    getHuwe: function () {
-        return "יִפְעַא";
-    },
-    getHiye: function () {
-        return "תִפְעַא";
-    },
-    getIhna: function () {
-        return "נִפְעַא";
-    },
-    getIntu: function () {
-        return "תִפְעוּ";
-    },
-    getHumme: function () {
-        return "יִפְעוּ";
-    },
+    Ana: "אַפְעַא",
+
+    Inte: "תִפְעַא",
+
+    Inti: "תִפְעִי",
+
+    Huwe: "יִפְעַא",
+
+    Hiye: "תִפְעַא",
+
+    Ihna: "נִפְעַא",
+
+    Intu: "תִפְעוּ",
+
+    Humme: "יִפְעוּ",
+
     processingToForm: {
         "yuktol": [-1, -1, -1, -1, -1],
         "yimsek": [-1, -1, -1, -1, -1],
@@ -350,6 +300,7 @@ const insa = {
         "ihibb": [-1, -1, -1, -1, -1],
         "ihutt": [-1, -1, -1, -1, -1],
     },
+
     formsToDistractWith: {
         0: [1, 3, 8],
         1: [1, 3, 8],
@@ -364,30 +315,22 @@ const insa = {
 const ihibb = {
     formName: "ihibb",
 
-    getAna: function () {
-        return "אַפִעّ";
-    },
-    getInte: function () {
-        return "תְפִעّ";
-    },
-    getInti: function () {
-        return "תְפִעִّי";
-    },
-    getHuwe: function () {
-        return "יְפִעّ";
-    },
-    getHiye: function () {
-        return "תְפִעّ";
-    },
-    getIhna: function () {
-        return "נְפִעّ";
-    },
-    getIntu: function () {
-        return "תְפִעّוּ";
-    },
-    getHumme: function () {
-        return "יְפִעّוּ";
-    },
+    Ana: "אַפִעّ",
+
+    Inte: "תְפִעّ",
+
+    Inti: "תְפִעִّי",
+
+    Huwe: "יְפִעّ",
+
+    Hiye: "תְפִעّ",
+
+    Ihna: "נְפִעّ",
+
+    Intu: "תְפִעّוּ",
+
+    Humme: "יְפִעّוּ",
+
     processingToForm: {
         "yuktol": [-1, -1, 0, 2, 2],
         "yimsek": [-1, -1, 0, 2, 2],
@@ -414,30 +357,22 @@ const ihibb = {
 const ihutt = {
     formName: "ihutt",
 
-    getAna: function () {
-        return "אַפֻעّ";
-    },
-    getInte: function () {
-        return "תְפֻעّ";
-    },
-    getInti: function () {
-        return "תְפֻעִّי";
-    },
-    getHuwe: function () {
-        return "יְפֻעّ";
-    },
-    getHiye: function () {
-        return "תְפֻעّ";
-    },
-    getIhna: function () {
-        return "נְפֻעّ";
-    },
-    getIntu: function () {
-        return "תְפֻעّוּ";
-    },
-    getHumme: function () {
-        return "יְפֻעّוּ";
-    },
+    Ana: "אַפֻעّ",
+
+    Inte: "תְפֻעّ",
+
+    Inti: "תְפֻעִّי",
+
+    Huwe: "יְפֻעّ",
+
+    Hiye: "תְפֻעّ",
+
+    Ihna: "נְפֻעّ",
+
+    Intu: "תְפֻעّוּ",
+
+    Humme: "יְפֻעّוּ",
+
     processingToForm: {
         "yuktol": [-1, -1, 0, 2, 2],
         "yimsek": [-1, -1, 0, 2, 2],

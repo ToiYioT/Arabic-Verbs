@@ -1,13 +1,13 @@
 
 export const hebConjugateFuture = {
 
-    getAna: function (root) {
+    Ana: function (root) {
         return "א" + root.substring(1, root.length);
     },
-    getInte: function (root) {
+    Inte: function (root) {
         return "ת" + root.substring(1, root.length);
     },
-    getInti: function (root) {
+    Inti: function (root) {
         if (root[root.length - 1] == "ה") {
             return "ת" + root.substring(1, root.length - 1) + "י";
 
@@ -21,16 +21,16 @@ export const hebConjugateFuture = {
             return "ת" + root.substring(1, root.length) + "י";
         }
     },
-    getHuwe: function (root) {
+    Huwe: function (root) {
         return root;
     },
-    getHiye: function (root) {
+    Hiye: function (root) {
         return "ת" + root.substring(1, root.length);
     },
-    getIhna: function (root) {
+    Ihna: function (root) {
         return "נ" + root.substring(1, root.length);
     },
-    getIntu: function (root) {
+    Intu: function (root) {
         if (root[root.length - 1] == "ה") {
             return "ת" + root.substring(1, root.length - 1) + "ו";
 
@@ -44,7 +44,7 @@ export const hebConjugateFuture = {
             return "ת" + root.substring(1, root.length) + "ו";
         }
     },
-    getHumme: function (root) {
+    Humme: function (root) {
         if (root[root.length - 1] == "ה") {
             return "י" + root.substring(1, root.length - 1) + "ו";
 

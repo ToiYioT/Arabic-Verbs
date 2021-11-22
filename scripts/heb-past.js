@@ -1,7 +1,7 @@
 
 export const hebConjugatePast = {
 
-    getAna: function (root) {
+    Ana: function (root) {
         if (root[root.length - 1] == "ה") {
             return root.substring(0, root.length - 1) + "יתי";
 
@@ -13,7 +13,7 @@ export const hebConjugatePast = {
             return root + "תי";
         }
     },
-    getInte: function (root) {
+    Inte: function (root) {
         if (root[root.length - 1] == "ה") {
             return root.substring(0, root.length - 1) + "ית";
 
@@ -25,7 +25,7 @@ export const hebConjugatePast = {
             return root + "ת";
         }
     },
-    getInti: function (root) {
+    Inti: function (root) {
         if (root[root.length - 1] == "ה") {
             return root.substring(0, root.length - 1) + "ית";
 
@@ -37,10 +37,10 @@ export const hebConjugatePast = {
             return root + "ת";
         }
     },
-    getHuwe: function (root) {
+    Huwe: function (root) {
         return root;
     },
-    getHiye: function (root) {
+    Hiye: function (root) {
         if (root[root.length - 1] == "ה") {
             return root.substring(0, root.length - 1) + "תה";
 
@@ -48,7 +48,7 @@ export const hebConjugatePast = {
             return root + "ה";
         }
     },
-    getIhna: function (root) {
+    Ihna: function (root) {
         if (root[root.length - 1] == "ה") {
             return root.substring(0, root.length - 1) + "ינו";
 
@@ -60,7 +60,7 @@ export const hebConjugatePast = {
             return root + "נו";
         }
     },
-    getIntu: function (root) {
+    Intu: function (root) {
         if (root[root.length - 1] == "ה") {
             return root.substring(0, root.length - 1) + "יתם";
 
@@ -72,7 +72,7 @@ export const hebConjugatePast = {
             return root + "תם";
         }
     },
-    getHumme: function (root) {
+    Humme: function (root) {
         if (root[root.length - 1] == "ה") {
             return root.substring(0, root.length - 1) + "ו";
 

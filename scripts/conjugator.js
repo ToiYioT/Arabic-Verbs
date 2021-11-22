@@ -71,7 +71,6 @@ function getWord(template, index0, index1, index2) {
     index0 = template.indexOf("פ");
     index1 = template.indexOf("ע");
     index2 = template.indexOf("ל");
-    console.log(index0, index1, index2);
 
     if (index1 == -1) {
         rootLetters[0] = substituteLetterInTemplate(template, 0, index0, index2);
