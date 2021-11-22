@@ -64,6 +64,7 @@ body {
     width: 32px;
     height: 32px;
     margin: .5rem 1rem;
+    cursor: pointer;
 }
 
 #progress-bar {
@@ -196,7 +197,7 @@ body {
     right: 0;
 
     z-index: 2;
-    visibility: visible;
+    visibility: hidden;
 }
 
 .settings-container{
@@ -230,6 +231,7 @@ body {
     align-items: center;
     width: 48px;
     font-size: 1.5rem;
+    cursor: pointer;
 }
 .settings-title{
     padding: .7rem 1.5rem;
