@@ -5,36 +5,28 @@ const katab = {
     formName: "katab",
 
     getAna: function () {
-        let template = "כַתַבְת";
-        return [template, 0, 2, 4];
+        return "פַעַלְת";
     },
     getInte: function () {
-        let template = "כַתַבְת";
-        return [template, 0, 2, 4];
+        return "פַעַלְת";
     },
     getInti: function () {
-        let template = "כַתַבְתִי";
-        return [template, 0, 2, 4];
+        return "פַעַלְתִי";
     },
     getHuwe: function () {
-        let template = "כַתַב";
-        return [template, 0, 2, 4];
+        return "פַעַל";
     },
     getHiye: function () {
-        let template = "כַתְבַת";
-        return [template, 0, 2, 4];
+        return "פַעְלַת";
     },
     getIhna: function () {
-        let template = "כַתַבְנַא";
-        return [template, 0, 2, 4];
+        return "פַעַלְנַא";
     },
     getIntu: function () {
-        let template = "כַתַבְתוּ";
-        return [template, 0, 2, 4];
+        return "פַעַלְתוּ";
     },
     getHumme: function () {
-        let template = "כַתַבוּ";
-        return [template, 0, 2, 4];
+        return "פַעַלוּ";
     },
 
     processingToForm: {
@@ -65,36 +57,28 @@ const nizel = {
     formName: "nizel",
 
     getAna: function () {
-        let template = "נְזִלְת";
-        return [template, 0, 2, 4];
+        return "פְעִלְת";
     },
     getInte: function () {
-        let template = "נְזִלְת";
-        return [template, 0, 2, 4];
+        return "פְעִלְת";
     },
     getInti: function () {
-        let template = "נְזִלְתִי";
-        return [template, 0, 2, 4];
+        return "פְעִלְתִי";
     },
     getHuwe: function () {
-        let template = "נִזֵל";
-        return [template, 0, 2, 4];
+        return "פִעֵל";
     },
     getHiye: function () {
-        let template = "נִזְלַת";
-        return [template, 0, 2, 4];
+        return "פִעְלַת";
     },
     getIhna: function () {
-        let template = "נְזִלְנַא";
-        return [template, 0, 2, 4];
+        return "פְעִלְנַא";
     },
     getIntu: function () {
-        let template = "נְזִלְתוּ";
-        return [template, 0, 2, 4];
+        return "פְעִלְתוּ";
     },
     getHumme: function () {
-        let template = "נִזְלוּ";
-        return [template, 0, 2, 4];
+        return "פִעְלוּ";
     },
 
     processingToForm: {
@@ -123,36 +107,28 @@ const haka = {
     formName: "haka",
 
     getAna: function () {
-        let template = "חַכֵית";
-        return [template, 0, 2, -1];
+        return "פַעֵית";
     },
     getInte: function () {
-        let template = "חַכֵית";
-        return [template, 0, 2, -1];
+        return "פַעֵית";
     },
     getInti: function () {
-        let template = "חַכֵיתִי";
-        return [template, 0, 2, -1];
+        return "פַעֵיתִי";
     },
     getHuwe: function () {
-        let template = "חַכַא";
-        return [template, 0, 2, -1];
+        return "פַעַא";
     },
     getHiye: function () {
-        let template = "חַכַת";
-        return [template, 0, 2, -1];
+        return "פַעַת";
     },
     getIhna: function () {
-        let template = "חַכֵינַא";
-        return [template, 0, 2, -1];
+        return "פַעֵינַא";
     },
     getIntu: function () {
-        let template = "חַכֵיתוּ";
-        return [template, 0, 2, -1];
+        return "פַעֵיתוּ";
     },
     getHumme: function () {
-        let template = "חַכוּ";
-        return [template, 0, 2, -1];
+        return "פַעוּ";
     },
     processingToForm: {
         "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
@@ -179,36 +155,28 @@ const nisi = {
     formName: "nisi",
 
     getAna: function () {
-        let template = "נְסִית";
-        return [template, 0, 2, 4];
+        return "פְעִית";
     },
     getInte: function () {
-        let template = "נְסִית";
-        return [template, 0, 2, 4];
+        return "פְעִית";
     },
     getInti: function () {
-        let template = "נְסִיתִי";
-        return [template, 0, 2, 4];
+        return "פְעִיתִי";
     },
     getHuwe: function () {
-        let template = "נִסִי";
-        return [template, 0, 2, 4];
+        return "פִעִי";
     },
     getHiye: function () {
-        let template = "נִסְיַת";
-        return [template, 0, 2, 4];
+        return "פִעְיַת";
     },
     getIhna: function () {
-        let template = "נְסִינַא";
-        return [template, 0, 2, 4];
+        return "פְעִינַא";
     },
     getIntu: function () {
-        let template = "נְסִיתוּ";
-        return [template, 0, 2, 4];
+        return "פְעִיתוּ";
     },
     getHumme: function () {
-        let template = "נִסְיוּ";
-        return [template, 0, 2, 4];
+        return "פִעְיוּ";
     },
     processingToForm: {
         "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
@@ -234,36 +202,28 @@ const habb = {
     formName: "habb",
 
     getAna: function () {
-        let template = "חַבֵّית";
-        return [template, 0, 2, -1];
+        return "פַעֵّית";
     },
     getInte: function () {
-        let template = "חַבֵّית";
-        return [template, 0, 2, -1];
+        return "פַעֵّית";
     },
     getInti: function () {
-        let template = "חַבֵّיתִי";
-        return [template, 0, 2, -1];
+        return "פַעֵّיתִי";
     },
     getHuwe: function () {
-        let template = "חַבّ";
-        return [template, 0, 2, -1];
+        return "פַעّ";
     },
     getHiye: function () {
-        let template = "חַבַّת";
-        return [template, 0, 2, -1];
+        return "פַעַّת";
     },
     getIhna: function () {
-        let template = "חַבֵّינַא";
-        return [template, 0, 2, -1];
+        return "פַעֵّינַא";
     },
     getIntu: function () {
-        let template = "חַבֵّיתוּ";
-        return [template, 0, 2, -1];
+        return "פַעֵّיתוּ";
     },
     getHumme: function () {
-        let template = "חַבّוּ";
-        return [template, 0, 2, -1];
+        return "פַעّוּ";
     },
     processingToForm: {
         "katab": [-1, -1, 1, 2, 2],
@@ -289,36 +249,28 @@ const rah = {
 
     formName: "rah",
     getAna: function () {
-        let template = "רֻחְת";
-        return [template, 0, -1, 2];
+        return "פֻלְת";
     },
     getInte: function () {
-        let template = "רֻחְת";
-        return [template, 0, -1, 2];
+        return "פֻלְת";
     },
     getInti: function () {
-        let template = "רֻחְתִי";
-        return [template, 0, -1, 2];
+        return "פֻלְתִי";
     },
     getHuwe: function () {
-        let template = "רַאח";
-        return [template, 0, -1, 3];
+        return "פַאל";
     },
     getHiye: function () {
-        let template = "רַאחַת";
-        return [template, 0, -1, 3];
+        return "פַאלַת";
     },
     getIhna: function () {
-        let template = "רֻחְנַא";
-        return [template, 0, -1, 2];
+        return "פֻלְנַא";
     },
     getIntu: function () {
-        let template = "רֻחְתוּ";
-        return [template, 0, -1, 2];
+        return "פֻלְתוּ";
     },
     getHumme: function () {
-        let template = "רַאחוּ";
-        return [template, 0, -1, 3];
+        return "פַאלוּ";
     },
     processingToForm: {
         "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
@@ -344,36 +296,28 @@ const jab = {
     formName: "jab",
 
     getAna: function () {
-        let template = "גִבְת";
-        return [template, 0, -1, 2];
+        return "פִלְת";
     },
     getInte: function () {
-        let template = "גִבְת";
-        return [template, 0, -1, 2];
+        return "פִלְת";
     },
     getInti: function () {
-        let template = "גִבְתִי";
-        return [template, 0, -1, 2];
+        return "פִלְתִי";
     },
     getHuwe: function () {
-        let template = "גַאב";
-        return [template, 0, -1, 3];
+        return "פַאל";
     },
     getHiye: function () {
-        let template = "גַאבַת";
-        return [template, 0, -1, 3];
+        return "פַאלַת";
     },
     getIhna: function () {
-        let template = "גִבְנַא";
-        return [template, 0, -1, 2];
+        return "פִלְנַא";
     },
     getIntu: function () {
-        let template = "גִבְתוּ";
-        return [template, 0, -1, 2];
+        return "פִלְתוּ";
     },
     getHumme: function () {
-        let template = "גַאבוּ";
-        return [template, 0, -1, 3];
+        return "פַאלוּ";
     },
     processingToForm: {
         "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],

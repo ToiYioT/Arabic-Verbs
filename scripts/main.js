@@ -192,7 +192,7 @@ function initQuestionFromParams(qParams) {
         conjugator.doProcessing(rootArabic, rootForm, conjugateTo);
 
         let answer = pronounsArabic[qParams.pronounIndex] + zman.answerPrefix
-            + conjugator.getWord(...conjugateTo[pronounFunction]());
+            + conjugator.getWord(conjugateTo[pronounFunction]());
 
         answer = util.substituteLetterAtEndToEndingLetter(answer, true);
         answer = util.postProcess(answer);
