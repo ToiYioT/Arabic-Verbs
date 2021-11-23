@@ -4,8 +4,7 @@ import { hebConjugatePast } from "./heb-past.js";
 import { hebConjugateFuture } from "./heb-future.js";
 import {
     rootsArabicPast, rootsHebrewPast, formNamesPast,
-    formNamesFuture, pronounFunctions, pronounsArabic,
-    pronounsHebrew, rootsArabicFuture, rootsHebrewFuture
+    formNamesFuture, rootsArabicFuture, rootsHebrewFuture
 } from "./data.js";
 
 export const future = {

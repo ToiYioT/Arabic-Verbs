@@ -1,7 +1,22 @@
 
-export const pronounFunctions = ["Ana", "Inte", "Inti", "Huwe", "Hiye", "Ihna", "Intu", "Humme"];
-export const pronounsArabic = ["אַנַא", "אִנְתֵ", "אִנְתִי", "הֻוֵّ", "הִיֵّ", "אִחְנַא", "אִנְתוּ", "הֻםֵّ"];
-export const pronounsHebrew = ["אני", "אתה", "את", "הוא", "היא", "אנחנו", "אתם", "הם"];
+function createPronoun(name, hebrew, arabic) {
+    return {
+        name: name,
+        hebrew: hebrew,
+        arabic: arabic
+    }
+}
+
+export const pronouns = [
+    createPronoun("Ana", "אני", "אַנַא"),
+    createPronoun("Inte", "אתה", "אִנְתֵ"),
+    createPronoun("Inti", "את", "אִנְתִי"),
+    createPronoun("Huwe", "הוא", "הֻוֵّ"),
+    createPronoun("Hiye", "היא", "הִיֵّ"),
+    createPronoun("Ihna", "אנחנו", "אִחְנַא"),
+    createPronoun("Intu", "אתם", "אִנְתוּ"),
+    createPronoun("Humme", "הם", "הֻםֵّ"),
+]
 
 // past verbs
 const katabHebrew = ["ביקש", "חתך", "התגורר", "עבר דירה", "נשבע", "עבר", "ישב", "ניגב", "למד", "עקף את", "אכל", "בדק", "שבר", "שילם", "הודה", "לקח", "שלח", "היכה", "ברח", "בישל", "שתק", "הרים", "פתח", "הבטיח", "צבע", "צבע", "שאל", "צחצח", "נשף", "הזמין", "התעטש", "רץ", "נשף", "הזמין", "התעטש", "רץ", "הרגיש", "גנב", "עזב", "הפך", "קשר", "אסר", "ניגן", "אסף", "קרע"];

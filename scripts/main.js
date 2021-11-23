@@ -1,6 +1,6 @@
 import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
-import { pronounsArabic, pronounsHebrew, pronounFunctions } from "./data.js";
+import { pronouns } from "./data.js";
 import { future, past } from "./tenses.js";
 
 var tenses = [future, past];
@@ -142,7 +142,7 @@ function generateRandomQuestionParams() {
     let tenseIndex = Math.floor(Math.random() * tenses.length);
     setTense(tenseIndex);
 
-    let pronounIndex = Math.floor(Math.random() * pronounFunctions.length);
+    let pronounIndex = Math.floor(Math.random() * pronouns.length);
     let randomFormIndex = Math.floor(Math.random() * zman.formNames.length);
 
     let formName = zman.formNames[randomFormIndex];
@@ -163,8 +163,8 @@ function initQuestionFromParams(qParams) {
     resetQuestionState();
 
     setTense(qParams.tenseIndex);
-    let pronounFunction = pronounFunctions[qParams.pronounIndex];
-    createAnswerForms(qParams.formIndex, qParams.pronounIndex);
+    let pronoun = pronouns[qParams.pronounIndex];
+    createAnswerForms(qParams.formIndex, pronoun);
 
     let rootForm = answerForms[0];
     let formName = rootForm.formName;
@@ -181,9 +181,9 @@ function initQuestionFromParams(qParams) {
     let remainderOfTranslation = rootHebrew.substring(firstWordEndingAt, rootHebrew.length);
 
     // conjugate the hebrew expression and view it
-    let conjugatedHebrew = zman.hebConjugate[pronounFunction](firstWord);
+    let conjugatedHebrew = zman.hebConjugate[pronoun.name](firstWord);
     conjugatedHebrew = util.substituteLetterAtEndToEndingLetter(conjugatedHebrew);
-    questionHolder.innerHTML = pronounsHebrew[qParams.pronounIndex] + " " +
+    questionHolder.innerHTML = pronoun.hebrew + " " +
         conjugatedHebrew + remainderOfTranslation + "<br/>";
 
     for (let i = 0; i < numOfAnswers; i++) {
@@ -191,8 +191,8 @@ function initQuestionFromParams(qParams) {
         let conjugateTo = answerForms[i];
         conjugator.doProcessing(rootArabic, rootForm, conjugateTo);
 
-        let answer = pronounsArabic[qParams.pronounIndex] + zman.answerPrefix
-            + conjugator.getWord(conjugateTo[pronounFunction].template);
+        let answer = pronoun.arabic + zman.answerPrefix
+            + conjugator.getWord(conjugateTo[pronoun.name].template);
 
         answer = util.substituteLetterAtEndToEndingLetter(answer, true);
         answer = util.postProcess(answer);
@@ -299,16 +299,15 @@ function updateScore() {
         "תשובות נכונות: " + numOfCorrectAnswers;
 }
 
-function createAnswerForms(formNum, pronounNum) {
+function createAnswerForms(formNum, pronoun) {
 
     let form = getFormFromNum(formNum);
-    let pronoun = pronounFunctions[pronounNum];
 
     answerForms.length = 0;
     answerForms.push(form);
-    answerForms.push(zman.forms[form[pronoun].distractingForms[0]]);
-    answerForms.push(zman.forms[form[pronoun].distractingForms[1]]);
-    answerForms.push(zman.forms[form[pronoun].distractingForms[2]]);
+    answerForms.push(zman.forms[form[pronoun.name].distractingForms[0]]);
+    answerForms.push(zman.forms[form[pronoun.name].distractingForms[1]]);
+    answerForms.push(zman.forms[form[pronoun.name].distractingForms[2]]);
 }
 
 function getFormFromNum(formNum) {
@@ -371,11 +370,11 @@ function debugShowConjugationHebrew() {
         let remainderOfTranslation = rootHebrew.substring(firstWordEndingAt, rootHebrew.length);
 
         for (let i = 0; i < 8; i++) {
-            let pronounFunc = pronounFunctions[i];
-            let conjugatedWord = zman.hebConjugate[pronounFunc](firstWord);
+            let pronoun = pronouns[i];
+            let conjugatedWord = zman.hebConjugate[pronoun.name](firstWord);
             conjugatedWord = util.substituteLetterAtEndToEndingLetter(conjugatedWord);
 
-            whereToPutText.innerHTML += pronounsHebrew[i] + " " +
+            whereToPutText.innerHTML += pronoun.hebrew[i] + " " +
                 conjugatedWord + remainderOfTranslation + "<br/>";
         }
     }
@@ -398,12 +397,12 @@ function debugShowConjugations(rootForm, conjugateToArray) {
         let conjugateTo = conjugateToArray[c];
         let whereToPutText = debugCols[c];
 
-        for (let i = 0; i < pronounFunctions.length; i++) {
-            let pronounFunction = pronounFunctions[i];
+        for (let i = 0; i < pronouns.length; i++) {
+            let pronoun = pronouns[i];
 
             conjugator.doProcessing(root, rootForm, conjugateTo);
-            whereToPutText.innerHTML += pronounsArabic[i] +
-                " " + conjugator.getWord(conjugateTo[pronounFunction].template) + "</br>";
+            whereToPutText.innerHTML += pronoun[i].arabic +
+                " " + conjugator.getWord(conjugateTo[pronoun.name].template) + "</br>";
         }
     }
 }
