@@ -66,11 +66,11 @@ function addContentsOfLetterToAnother(addFrom, addTo) {
     rootGereshes[addFrom] = "";
 }
 
-function getWord(template, index0, index1, index2) {
+function getWord(template) {
 
-    index0 = template.indexOf("פ");
-    index1 = template.indexOf("ע");
-    index2 = template.indexOf("ל");
+    let index0 = template.indexOf("פ");
+    let index1 = template.indexOf("ע");
+    let index2 = template.indexOf("ל");
 
     if (index1 == -1) {
         rootLetters[0] = substituteLetterInTemplate(template, 0, index0, index2);
@@ -110,6 +110,10 @@ function doProcessing(root, rootForm, toForm) {
 
     root = util.substituteEndingLettersToNormal(root);
     separateRootIntoLetters(root);
+    console.log(toForm);
+
+    // console.log(rootForm.processingToForm[toForm.formName]);
+
     doProcess(...rootForm.processingToForm[toForm.formName]);
 }
 

@@ -3,7 +3,7 @@ import { conjugator } from "./conjugator.js";
 import { pronounsArabic, pronounsHebrew, pronounFunctions } from "./data.js";
 import { future, past } from "./tenses.js";
 
-var tenses = [future, past];
+var tenses = [future];
 var zman;
 
 // settings
@@ -13,7 +13,8 @@ const progressBarUpdateInterval = 20;
 const revealAnswersAfter = 3000;
 
 var numOfProgressBarUpdates = 0;
-const progressBarMaxUpdates = 150;
+// const progressBarMaxUpdates = 150;
+const progressBarMaxUpdates = 150000;
 
 // html elements
 var answerHolders = [];
@@ -192,7 +193,7 @@ function initQuestionFromParams(qParams) {
         conjugator.doProcessing(rootArabic, rootForm, conjugateTo);
 
         let answer = pronounsArabic[qParams.pronounIndex] + zman.answerPrefix
-            + conjugator.getWord(conjugateTo[pronounFunction]);
+            + conjugator.getWord(conjugateTo[pronounFunction].template);
 
         answer = util.substituteLetterAtEndToEndingLetter(answer, true);
         answer = util.postProcess(answer);
@@ -302,12 +303,13 @@ function updateScore() {
 function createAnswerForms(formNum, pronounNum) {
 
     let form = getFormFromNum(formNum);
+    let pronoun = pronounFunctions[pronounNum];
 
     answerForms.length = 0;
     answerForms.push(form);
-    answerForms.push(getFormFromNum(form.formsToDistractWith[pronounNum][0]));
-    answerForms.push(getFormFromNum(form.formsToDistractWith[pronounNum][1]));
-    answerForms.push(getFormFromNum(form.formsToDistractWith[pronounNum][2]));
+    answerForms.push(zman.forms[form[pronoun].distractingForms[0]]);
+    answerForms.push(zman.forms[form[pronoun].distractingForms[1]]);
+    answerForms.push(zman.forms[form[pronoun].distractingForms[2]]);
 }
 
 function getFormFromNum(formNum) {
@@ -402,7 +404,7 @@ function debugShowConjugations(rootForm, conjugateToArray) {
 
             conjugator.doProcessing(root, rootForm, conjugateTo);
             whereToPutText.innerHTML += pronounsArabic[i] +
-                " " + conjugator.getWord(conjugateTo[pronounFunction]) + "</br>";
+                " " + conjugator.getWord(conjugateTo[pronounFunction].template) + "</br>";
         }
     }
 }
