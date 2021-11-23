@@ -3,7 +3,7 @@ import { conjugator } from "./conjugator.js";
 import { pronounsArabic, pronounsHebrew, pronounFunctions } from "./data.js";
 import { future, past } from "./tenses.js";
 
-var tenses = [future];
+var tenses = [future, past];
 var zman;
 
 // settings
@@ -13,8 +13,7 @@ const progressBarUpdateInterval = 20;
 const revealAnswersAfter = 3000;
 
 var numOfProgressBarUpdates = 0;
-// const progressBarMaxUpdates = 150;
-const progressBarMaxUpdates = 150000;
+const progressBarMaxUpdates = 150;
 
 // html elements
 var answerHolders = [];

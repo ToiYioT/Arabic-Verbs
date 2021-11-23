@@ -1,245 +1,184 @@
 const shva = "ְ";
 
-const katab = {
 
-    formName: "katab",
+const KATAB = "katab";
+const NIZEL = "nizel";
+const HAKA = "haka";
+const NISI = "nisi";
+const HABB = "habb";
+const RAH = "rah";
+const JAB = "jab";
 
-    Ana: "פַעַלְת",
-    Inte: "פַעַלְת",
-    Inti: "פַעַלְתִי",
-    Huwe: "פַעַל",
-    Hiye: "פַעְלַת",
-    Ihna: "פַעַלְנַא",
-    Intu: "פַעַלְתוּ",
-    Humme: "פַעַלוּ",
-
-    processingToForm: {
-        "katab": [-1, -1, -1, -1, -1],
-        "nizel": [-1, -1, -1, -1, -1],
-        "haka": [1, 0, 2, 1, -1, -1, -1, shva, 0],
-        "nisi": [-1, -1, -1, -1, -1],
-        "habb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-        "rah": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-        "jab": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    },
-
-    // pronouns : array of possible forms
-    formsToDistractWith: {
-        0: [1, 2, 4, 5],
-        1: [1, 2, 4, 5],
-        2: [1, 2, 4, 5],
-        3: [1, 2, 3, 4],
-        4: [1, 2, 4, 5],
-        5: [1, 2, 4, 5],
-        6: [1, 2, 4, 5],
-        7: [1, 2, 4, 5],
+function buildPronoun(template, distractions) {
+    return {
+        template: template,
+        distractingForms: distractions
     }
 }
 
-const nizel = {
+function createNewForm() {
+    return {
+        formName: "default",
+        Ana: "",
+        Inte: "",
+        Inti: "",
+        Huwe: "",
+        Hiye: "",
+        Ihna: "",
+        Intu: "",
+        Humme: "",
 
-    formName: "nizel",
-
-    Ana: "פְעִלְת",
-    Inte: "פְעִלְת",
-    Inti: "פְעִלְתִי",
-    Huwe: "פִעֵל",
-    Hiye: "פִעְלַת",
-    Ihna: "פְעִלְנַא",
-    Intu: "פְעִלְתוּ",
-    Humme: "פִעְלוּ",
-
-
-    processingToForm: {
-        "katab": [-1, -1, -1, -1, -1],
-        "nizel": [-1, -1, -1, -1, -1],
-        "haka": [1, 0, 2, 1, -1, -1, -1, shva, 0],
-        "nisi": [-1, -1, -1, -1, -1],
-        "habb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-        "rah": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-        "jab": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-
-    },
-
-    formsToDistractWith: {
-        0: [0, 2, 4, 5],
-        1: [0, 2, 4, 5],
-        2: [0, 2, 4, 5],
-        3: [0, 2, 3, 4],
-        4: [0, 2, 4, 5],
-        5: [0, 2, 4, 5],
-        6: [0, 2, 4, 5],
-        7: [0, 2, 4, 5],
+        processingToForm: ""
     }
 }
-const haka = {
 
-    formName: "haka",
 
-    Ana: "פַעֵית",
-    Inte: "פַעֵית",
-    Inti: "פַעֵיתִי",
-    Huwe: "פַעַא",
-    Hiye: "פַעַת",
-    Ihna: "פַעֵינַא",
-    Intu: "פַעֵיתוּ",
-    Humme: "פַעוּ",
+const katab = createNewForm();
+katab.formName = KATAB;
+katab.Ana = buildPronoun("פַעַלְת", [NIZEL, HAKA, HABB, RAH]);
+katab.Inte = buildPronoun("פַעַלְת", [NIZEL, HAKA, HABB, RAH]);
+katab.Inti = buildPronoun("פַעַלְתִי", [NIZEL, HAKA, HABB, RAH]);
+katab.Huwe = buildPronoun("פַעַל", [NIZEL, HAKA, NISI, HABB]);
+katab.Hiye = buildPronoun("פַעְלַת", [NIZEL, HAKA, HABB, RAH]);
+katab.Ihna = buildPronoun("פַעַלְנַא", [NIZEL, HAKA, HABB, RAH]);
+katab.Intu = buildPronoun("פַעַלְתוּ", [NIZEL, HAKA, HABB, RAH]);
+katab.Humme = buildPronoun("פַעַלוּ", [NIZEL, HAKA, HABB, RAH]);
+katab.processingToForm = {
+    "katab": [-1, -1, -1, -1, -1],
+    "nizel": [-1, -1, -1, -1, -1],
+    "haka": [1, 0, 2, 1, -1, -1, -1, shva, 0],
+    "nisi": [-1, -1, -1, -1, -1],
+    "habb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+    "rah": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+    "jab": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+};
 
-    processingToForm: {
-        "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
-        "nizel": [-1, -1, 1, 2, -1],
-        "haka": [-1, -1, -1, -1, -1],
-        "nisi": [-1, -1, -1, -1, -1, 2, "י"],
-        "habb": [-1, -1, -1, -1, -1],
-        "rah": [-1, -1, 1, 2, -1],
-        "jab": [-1, -1, 1, 2, -1],
 
-    },
+const nizel = createNewForm();
+nizel.formName = NIZEL;
+nizel.Ana = buildPronoun("פְעִלְת", [KATAB, HAKA, HABB, RAH]);
+nizel.Inte = buildPronoun("פְעִלְת", [KATAB, HAKA, HABB, RAH]);
+nizel.Inti = buildPronoun("פְעִלְתִי", [KATAB, HAKA, HABB, RAH]);
+nizel.Huwe = buildPronoun("פִעֵל", [KATAB, HAKA, NISI, HABB]);
+nizel.Hiye = buildPronoun("פִעְלַת", [KATAB, HAKA, HABB, RAH]);
+nizel.Ihna = buildPronoun("פְעִלְנַא", [KATAB, HAKA, HABB, RAH]);
+nizel.Intu = buildPronoun("פְעִלְתוּ", [KATAB, HAKA, HABB, RAH]);
+nizel.Humme = buildPronoun("פִעְלוּ", [KATAB, HAKA, HABB, RAH]);
+nizel.processingToForm = {
+    "katab": [-1, -1, -1, -1, -1],
+    "nizel": [-1, -1, -1, -1, -1],
+    "haka": [1, 0, 2, 1, -1, -1, -1, shva, 0],
+    "nisi": [-1, -1, -1, -1, -1],
+    "habb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+    "rah": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+    "jab": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+};
 
-    formsToDistractWith: {
-        0: [3, 4, 5, 6],
-        1: [3, 4, 5, 6],
-        2: [3, 4, 5, 6],
-        3: [3, 4, 5],
-        4: [3, 4, 5],
-        5: [3, 4, 5, 6],
-        6: [3, 4, 5, 6],
-        7: [0, 3, 4],
-    }
-}
-const nisi = {
-    formName: "nisi",
 
-    Ana: "פְעִית",
-    Inte: "פְעִית",
-    Inti: "פְעִיתִי",
-    Huwe: "פִעִי",
-    Hiye: "פִעְיַת",
-    Ihna: "פְעִינַא",
-    Intu: "פְעִיתוּ",
-    Humme: "פִעְיוּ",
+const haka = createNewForm();
+haka.formName = HAKA;
+haka.Ana = buildPronoun("פַעֵית", [NISI, HABB, RAH, JAB]);
+haka.Inte = buildPronoun("פַעֵית", [NISI, HABB, RAH, JAB]);
+haka.Inti = buildPronoun("פַעֵיתִי", [NISI, HABB, RAH, JAB]);
+haka.Huwe = buildPronoun("פַעַא", [NISI, HABB, RAH]);
+haka.Hiye = buildPronoun("פַעַת", [NISI, HABB, RAH]);
+haka.Ihna = buildPronoun("פַעֵינַא", [NISI, HABB, RAH, JAB]);
+haka.Intu = buildPronoun("פַעֵיתוּ", [NISI, HABB, RAH, JAB]);
+haka.Humme = buildPronoun("פַעוּ", [NISI, HABB, KATAB]);
+haka.processingToForm = {
+    "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
+    "nizel": [-1, -1, 1, 2, -1],
+    "haka": [-1, -1, -1, -1, -1],
+    "nisi": [-1, -1, -1, -1, -1, 2, "י"],
+    "habb": [-1, -1, -1, -1, -1],
+    "rah": [-1, -1, 1, 2, -1],
+    "jab": [-1, -1, 1, 2, -1],
+};
 
-    processingToForm: {
-        "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
-        "nizel": [-1, -1, 1, 2, -1],
-        "haka": [-1, -1, -1, -1, -1],
-        "nisi": [-1, -1, -1, -1, -1, 2, "י"],
-        "habb": [-1, -1, -1, -1, -1],
-        "rah": [-1, -1, 1, 2, -1],
-        "jab": [-1, -1, 1, 2, -1],
-    },
 
-    formsToDistractWith: {
-        0: [2, 4, 5, 6],
-        1: [2, 4, 5, 6],
-        2: [2, 4, 5, 6],
-        3: [2, 4, 5],
-        4: [2, 4, 5],
-        5: [2, 4, 5, 6],
-        6: [2, 4, 5, 6],
-        7: [0, 2, 4, 5],
-    }
-}
-const habb = {
-    formName: "habb",
 
-    Ana: "פַעֵّית",
-    Inte: "פַעֵّית",
-    Inti: "פַעֵّיתִי",
-    Huwe: "פַעّ",
-    Hiye: "פַעַّת",
-    Ihna: "פַעֵّינַא",
-    Intu: "פַעֵّיתוּ",
-    Humme: "פַעّוּ",
+const nisi = createNewForm();
+nisi.formName = NISI;
+nisi.Ana = buildPronoun("פְעִית", [HAKA, HABB, RAH, JAB]);
+nisi.Inte = buildPronoun("פְעִית", [HAKA, HABB, RAH, JAB]);
+nisi.Inti = buildPronoun("פְעִיתִי", [HAKA, HABB, RAH, JAB]);
+nisi.Huwe = buildPronoun("פִעִי", [HAKA, HABB, RAH]);
+nisi.Hiye = buildPronoun("פִעְיַת", [HAKA, HABB, RAH]);
+nisi.Ihna = buildPronoun("פְעִינַא", [HAKA, HABB, RAH, JAB]);
+nisi.Intu = buildPronoun("פְעִיתוּ", [HAKA, HABB, RAH, JAB]);
+nisi.Humme = buildPronoun("פִעְיוּ", [HAKA, HABB, RAH, KATAB]);
+nisi.processingToForm = {
+    "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
+    "nizel": [-1, -1, 1, 2, -1],
+    "haka": [-1, -1, -1, -1, -1],
+    "nisi": [-1, -1, -1, -1, -1, 2, "י"],
+    "habb": [-1, -1, -1, -1, -1],
+    "rah": [-1, -1, 1, 2, -1],
+    "jab": [-1, -1, 1, 2, -1],
+};
 
-    processingToForm: {
-        "katab": [-1, -1, 1, 2, 2],
-        "nizel": [-1, -1, 1, 2, 2],
-        "haka": [-1, -1, -1, -1, 1],
-        "nisi": [-1, -1, -1, -1, 1, 2, "י"],
-        "habb": [-1, -1, -1, -1, -1],
-        "rah": [-1, -1, 1, 2, 2],
-        "jab": [-1, -1, 1, 2, 2],
-    },
+const habb = createNewForm();
+habb.formName = HABB;
+habb.Ana = buildPronoun("פַעֵّית", [HAKA, NISI, RAH, JAB]);
+habb.Inte = buildPronoun("פַעֵّית", [HAKA, NISI, RAH, JAB]);
+habb.Inti = buildPronoun("פַעֵّיתִי", [HAKA, NISI, RAH, JAB]);
+habb.Huwe = buildPronoun("פַעّ", [HAKA, NISI, RAH]);
+habb.Hiye = buildPronoun("פַעַّת", [HAKA, NISI, RAH]);
+habb.Ihna = buildPronoun("פַעֵّינַא", [HAKA, NISI, RAH, JAB]);
+habb.Intu = buildPronoun("פַעֵّיתוּ", [HAKA, NISI, RAH, JAB]);
+habb.Humme = buildPronoun("פַעّוּ", [HAKA, NISI, RAH]);
+habb.processingToForm = {
+    "katab": [-1, -1, 1, 2, 2],
+    "nizel": [-1, -1, 1, 2, 2],
+    "haka": [-1, -1, -1, -1, 1],
+    "nisi": [-1, -1, -1, -1, 1, 2, "י"],
+    "habb": [-1, -1, -1, -1, -1],
+    "rah": [-1, -1, 1, 2, 2],
+    "jab": [-1, -1, 1, 2, 2],
+};
 
-    formsToDistractWith: {
-        0: [2, 3, 5, 6],
-        1: [2, 3, 5, 6],
-        2: [2, 3, 5, 6],
-        3: [2, 3, 5],
-        4: [2, 3, 5],
-        5: [2, 3, 5, 6],
-        6: [2, 3, 5, 6],
-        7: [2, 3, 5],
-    }
-}
-const rah = {
 
-    formName: "rah",
+const rah = createNewForm();
+rah.formName = RAH;
+rah.Ana = buildPronoun("פֻלְת", [HAKA, NISI, HABB, JAB]);
+rah.Inte = buildPronoun("פֻלְת", [HAKA, NISI, HABB, JAB]);
+rah.Inti = buildPronoun("פֻלְתִי", [HAKA, NISI, HABB, JAB]);
+rah.Huwe = buildPronoun("פַאל", [HAKA, NISI, HABB]);
+rah.Hiye = buildPronoun("פַאלַת", [HAKA, NISI, HABB]);
+rah.Ihna = buildPronoun("פֻלְנַא", [HAKA, NISI, HABB, JAB]);
+rah.Intu = buildPronoun("פֻלְתוּ", [HAKA, NISI, HABB, JAB]);
+rah.Humme = buildPronoun("פַאלוּ", [HAKA, NISI, HABB]);
+rah.processingToForm = {
+    "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
+    "nizel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
+    "haka": [-1, -1, 2, 1, 1],
+    "nisi": [-1, -1, 2, 1, -1, 2, "י"],
+    "habb": [-1, -1, 2, 1, -1],
+    "rah": [-1, -1, -1, -1, -1],
+    "jab": [-1, -1, -1, -1, -1],
+};
 
-    Ana: "פֻלְת",
-    Inte: "פֻלְת",
-    Inti: "פֻלְתִי",
-    Huwe: "פַאל",
-    Hiye: "פַאלַת",
-    Ihna: "פֻלְנַא",
-    Intu: "פֻלְתוּ",
-    Humme: "פַאלוּ",
 
-    processingToForm: {
-        "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-        "nizel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-        "haka": [-1, -1, 2, 1, 1],
-        "nisi": [-1, -1, 2, 1, -1, 2, "י"],
-        "habb": [-1, -1, 2, 1, -1],
-        "rah": [-1, -1, -1, -1, -1],
-        "jab": [-1, -1, -1, -1, -1],
-    },
+const jab = createNewForm();
+jab.formName = JAB;
+jab.Ana = buildPronoun("פִלְת", [HAKA, NISI, HABB, RAH]);
+jab.Inte = buildPronoun("פִלְת", [HAKA, NISI, HABB, RAH]);
+jab.Inti = buildPronoun("פִלְתִי", [HAKA, NISI, HABB, RAH]);
+jab.Huwe = buildPronoun("פַאל", [HAKA, NISI, HABB]);
+jab.Hiye = buildPronoun("פַאלַת", [KATAB, NISI, HABB]);
+jab.Ihna = buildPronoun("פִלְנַא", [HAKA, NISI, HABB, RAH]);
+jab.Intu = buildPronoun("פִלְתוּ", [HAKA, NISI, HABB, RAH]);
+jab.Humme = buildPronoun("פַאלוּ", [HAKA, NISI, HABB]);
+jab.processingToForm = {
+    "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
+    "nizel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
+    "haka": [-1, -1, 2, 1, 1],
+    "nisi": [-1, -1, 2, 1, -1, 2, "י"],
+    "habb": [-1, -1, 2, 1, -1],
+    "rah": [-1, -1, -1, -1, -1],
+    "jab": [-1, -1, -1, -1, -1],
+};
 
-    formsToDistractWith: {
-        0: [2, 3, 4, 6],
-        1: [2, 3, 4, 6],
-        2: [2, 3, 4, 6],
-        3: [2, 3, 4],
-        4: [2, 3, 4],
-        5: [2, 3, 4, 6],
-        6: [2, 3, 4, 6],
-        7: [2, 3, 4],
-    }
-}
-const jab = {
-    formName: "jab",
-
-    Ana: "פִלְת",
-    Inte: "פִלְת",
-    Inti: "פִלְתִי",
-    Huwe: "פַאל",
-    Hiye: "פַאלַת",
-    Ihna: "פִלְנַא",
-    Intu: "פִלְתוּ",
-    Humme: "פַאלוּ",
-
-    processingToForm: {
-        "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-        "nizel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-        "haka": [-1, -1, 2, 1, 1],
-        "nisi": [-1, -1, 2, 1, -1, 2, "י"],
-        "habb": [-1, -1, 2, 1, -1],
-        "rah": [-1, -1, -1, -1, -1],
-        "jab": [-1, -1, -1, -1, -1],
-    },
-
-    formsToDistractWith: {
-        0: [2, 3, 4, 5],
-        1: [2, 3, 4, 5],
-        2: [2, 3, 4, 5],
-        3: [2, 3, 4],
-        4: [0, 3, 4],
-        5: [2, 3, 4, 5],
-        6: [2, 3, 4, 5],
-        7: [2, 3, 4],
-    }
-}
 
 export const formsPast = {
     "katab": katab,
