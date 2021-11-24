@@ -91,7 +91,25 @@ function substituteLetterAtEndToEndingLetter(word, arabic = false) {
 
 function postProcess(word) {
     word = word.replaceAll(shadde, sgolta);
-    return word;
+
+
+    // move gereshes to the right place
+    let wordLetters = word.split("");
+    let lastLetterIndex = word.length;
+    let index = word.length - 1;
+
+    while (index >= 0) {
+
+        if (letters.indexOf(wordLetters[index]) > -1) {
+            lastLetterIndex = index;
+        }
+        if (wordLetters[index].indexOf(geresh) > -1) {
+            wordLetters[index] = wordLetters[lastLetterIndex - 1];
+            wordLetters[lastLetterIndex - 1] = geresh;
+        }
+        index--;
+    }
+    return wordLetters.join("");
 }
 
 export const util = {

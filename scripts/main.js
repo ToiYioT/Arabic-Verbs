@@ -3,7 +3,7 @@ import { conjugator } from "./conjugator.js";
 import { pronouns } from "./data.js";
 import { future, past } from "./tenses.js";
 
-var tenses = [future, past];
+var tenses = [past, future];
 var zman;
 
 // settings
@@ -81,8 +81,8 @@ window.addEventListener('load', (event) => {
     buttonHandler();
     updateScore();
 
-    // debugShowConjugations(zman.forms.ihki,
-    //     [zman.forms.ihki, zman.forms.iruh, zman.forms.ijib, zman.forms.ihibb]);
+    // debugShowConjugations(zman.forms.nizel,
+    //     [zman.forms.nizel]);
     // debugShowConjugationHebrew();
 });
 
@@ -389,7 +389,7 @@ function debugShowConjugations(rootForm, conjugateToArray) {
     let root = zman.rootsArabic[formName][randomWordNum];
 
     // // to set specific root and forms:
-    // let root = "כּבּّ";
+    // let root = "ח׳לץ";
     // rootForm = forms.ihutt;
     // let conjugateTo = forms.ihutt;
 
@@ -397,12 +397,18 @@ function debugShowConjugations(rootForm, conjugateToArray) {
         let conjugateTo = conjugateToArray[c];
         let whereToPutText = debugCols[c];
 
+
         for (let i = 0; i < pronouns.length; i++) {
-            let pronoun = pronouns[i];
 
             conjugator.doProcessing(root, rootForm, conjugateTo);
-            whereToPutText.innerHTML += pronoun[i].arabic +
-                " " + conjugator.getWord(conjugateTo[pronoun.name].template) + "</br>";
+            let pronoun = pronouns[i];
+
+            let output = pronoun.arabic + " " +
+                conjugator.getWord(conjugateTo[pronoun.name].template);
+            output = util.substituteLetterAtEndToEndingLetter(output, true);
+            output = util.postProcess(output);
+
+            whereToPutText.innerHTML += output + "</br>";
         }
     }
 }

@@ -1,9 +1,7 @@
 import { util } from "./util.js";
 
 // intermediate results
-var gereshedLetter = "";
 var rootLetters = ["", "", ""];
-var rootGereshes = ["", "", ""];
 
 // constants
 const geresh = "׳";
@@ -11,6 +9,7 @@ const shadde = "ّ";
 
 function separateRootIntoLetters(root) {
 
+    root = root.replaceAll("'", geresh);
     let startingIndex = 0;
 
     for (let i = 0; i < 3; i++) {
@@ -18,33 +17,8 @@ function separateRootIntoLetters(root) {
         rootLetters[i] = root.substr(startingIndex, letterIndex - startingIndex);
         startingIndex = letterIndex;
     }
-    checkGereshes();
 }
 
-function checkGereshes() {
-    gereshedLetter = "";
-    for (let i = 0; i < 3; i++) {
-        if (rootLetters[i].includes("'")) {
-            rootLetters[i] = rootLetters[i].replace("'", '');
-            gereshedLetter = rootLetters[i];
-
-            if (gereshedLetter.includes(shadde)) {
-                gereshedLetter = gereshedLetter.replace(shadde, "");
-            }
-        }
-    }
-}
-
-function addGeresh(str) {
-    if (gereshedLetter == "") return str;
-
-    let indexOfGereshedLetter = str.indexOf(gereshedLetter);
-
-    indexOfGereshedLetter = util.getIndexOfFirstLetterAfter(str, indexOfGereshedLetter);
-
-    return str.slice(0, indexOfGereshedLetter) +
-        geresh + str.slice(indexOfGereshedLetter);
-}
 
 function substituteRootLetterAt(index, letter) {
     if (index > -1) {
@@ -56,14 +30,11 @@ function substituteRootLetterAt(index, letter) {
 function copyLetterToAnoter(copyFrom, copyTo) {
     if (copyFrom == -1) return;
     rootLetters[copyTo] = rootLetters[copyFrom];
-    rootGereshes[copyTo] += rootGereshes[copyFrom];
 }
 
 function addContentsOfLetterToAnother(addFrom, addTo) {
     if (addFrom == -1) return;
     rootLetters[addTo] += rootLetters[addFrom];
-    rootGereshes[addTo] += rootGereshes[addFrom];
-    rootGereshes[addFrom] = "";
 }
 
 function getWord(template) {
@@ -88,9 +59,9 @@ function getWord(template) {
         rootLetters[2] = substituteLetterInTemplate(template, 2, index2, template.length);
     }
 
-    let solution = addGeresh(rootLetters[0] +
+    let solution = rootLetters[0] +
         rootLetters[1] +
-        rootLetters[2]);
+        rootLetters[2];
 
     return solution;
 }
@@ -110,9 +81,6 @@ function doProcessing(root, rootForm, toForm) {
 
     root = util.substituteEndingLettersToNormal(root);
     separateRootIntoLetters(root);
-    console.log(toForm);
-
-    // console.log(rootForm.processingToForm[toForm.formName]);
 
     doProcess(...rootForm.processingToForm[toForm.formName]);
 }
@@ -134,7 +102,6 @@ function doProcess(addFrom, addTo, copyFrom, copyTo, removeShaddeAt,
 
 export const conjugator = {
     separateRootIntoLetters,
-    addGeresh,
     substituteRootLetterAt,
     copyLetterToAnoter,
     addContentsOfLetterToAnother,
