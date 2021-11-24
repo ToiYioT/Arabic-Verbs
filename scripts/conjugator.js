@@ -7,18 +7,6 @@ var rootLetters = ["", "", ""];
 const geresh = "׳";
 const shadde = "ّ";
 
-function separateRootIntoLetters(root) {
-
-    root = root.replaceAll("'", geresh);
-    let startingIndex = 0;
-
-    for (let i = 0; i < 3; i++) {
-        let letterIndex = util.getIndexOfFirstLetterAfter(root, startingIndex);
-        rootLetters[i] = root.substr(startingIndex, letterIndex - startingIndex);
-        startingIndex = letterIndex;
-    }
-}
-
 
 function substituteRootLetterAt(index, letter) {
     if (index > -1) {
@@ -79,14 +67,14 @@ function substituteLetterInTemplate(template, letterFromRoot, subAtIndex, untilI
 
 function doProcessing(root, rootForm, toForm) {
 
-    root = util.substituteEndingLettersToNormal(root);
-    separateRootIntoLetters(root);
+    rootLetters = root;
 
     doProcess(...rootForm.processingToForm[toForm.formName]);
 }
 
 function doProcess(addFrom, addTo, copyFrom, copyTo, removeShaddeAt,
     substituteAt = -1, substituteWith = "", niqudToAdd = "", addNiqudAt = -1) {
+
 
     if (niqudToAdd != "") {
         rootLetters[addNiqudAt] = util.addNiqud(rootLetters[addNiqudAt], niqudToAdd);
@@ -101,7 +89,6 @@ function doProcess(addFrom, addTo, copyFrom, copyTo, removeShaddeAt,
 }
 
 export const conjugator = {
-    separateRootIntoLetters,
     substituteRootLetterAt,
     copyLetterToAnoter,
     addContentsOfLetterToAnother,

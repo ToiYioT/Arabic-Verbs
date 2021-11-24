@@ -33,6 +33,20 @@ function getIndexOfFirstLetterAfter(str, afterIndex) {
     return str.length;
 }
 
+function separateRootIntoLetters(root) {
+
+    let startingIndex = 0;
+    let rootLetters = ["", "", ""];
+
+    for (let i = 0; i < 3; i++) {
+        let letterIndex = getIndexOfFirstLetterAfter(root, startingIndex);
+        rootLetters[i] = root.substr(startingIndex, letterIndex - startingIndex);
+        startingIndex = letterIndex;
+    }
+
+    return rootLetters;
+}
+
 function substituteLetterAt(word, substituteAtIndex, substituteWith) {
     return word.substring(0, substituteAtIndex) + substituteWith +
         word.substring(substituteAtIndex + 1, word.length);
@@ -89,6 +103,10 @@ function substituteLetterAtEndToEndingLetter(word, arabic = false) {
     return word;
 }
 
+function replaceApostropheWithGeresh(word) {
+    return word.replaceAll("'", geresh);
+}
+
 function postProcess(word) {
     word = word.replaceAll(shadde, sgolta);
 
@@ -123,4 +141,6 @@ export const util = {
     addNiqud,
     substituteLetterAtEndToEndingLetter,
     postProcess,
+    separateRootIntoLetters,
+    replaceApostropheWithGeresh
 }
