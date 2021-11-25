@@ -44,13 +44,11 @@ katab.Ihna = buildPronoun("פַעַלְנַא", [NIZEL, HAKA, HABB, RAH]);
 katab.Intu = buildPronoun("פַעַלְתוּ", [NIZEL, HAKA, HABB, RAH]);
 katab.Humme = buildPronoun("פַעַלוּ", [NIZEL, HAKA, HABB, RAH]);
 katab.processingToForm = {
-    "katab": [-1, -1, -1, -1, -1],
-    "nizel": [-1, -1, -1, -1, -1],
-    "haka": [1, 0, 2, 1, -1, -1, -1, shva, 0],
-    "nisi": [-1, -1, -1, -1, -1],
-    "habb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "rah": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "jab": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+    "nizel": "פעל",
+    "haka": "פְעלא",
+    "nisi": "פעל",
+    "habb": "פְעלא",
+    "rah": "פְעלא",
 };
 
 
@@ -65,13 +63,11 @@ nizel.Ihna = buildPronoun("פְעִלְנַא", [KATAB, HAKA, HABB, RAH]);
 nizel.Intu = buildPronoun("פְעִלְתוּ", [KATAB, HAKA, HABB, RAH]);
 nizel.Humme = buildPronoun("פִעְלוּ", [KATAB, HAKA, HABB, RAH]);
 nizel.processingToForm = {
-    "katab": [-1, -1, -1, -1, -1],
-    "nizel": [-1, -1, -1, -1, -1],
-    "haka": [1, 0, 2, 1, -1, -1, -1, shva, 0],
-    "nisi": [-1, -1, -1, -1, -1],
-    "habb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "rah": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "jab": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
+    "katab": "פעל",
+    "haka": "פְעלא",
+    "nisi": "פעל",
+    "habb": "פְעלא",
+    "rah": "פְעלא",
 };
 
 
@@ -86,13 +82,11 @@ haka.Ihna = buildPronoun("פַעֵינַא", [NISI, HABB, RAH, JAB]);
 haka.Intu = buildPronoun("פַעֵיתוּ", [NISI, HABB, RAH, JAB]);
 haka.Humme = buildPronoun("פַעוּ", [NISI, HABB, KATAB]);
 haka.processingToForm = {
-    "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
-    "nizel": [-1, -1, 1, 2, -1],
-    "haka": [-1, -1, -1, -1, -1],
-    "nisi": [-1, -1, -1, -1, -1, 2, "י"],
-    "habb": [-1, -1, -1, -1, -1],
-    "rah": [-1, -1, 1, 2, -1],
-    "jab": [-1, -1, 1, 2, -1],
+    "katab": Math.random() > 0.5 ? "פע" : "פעל",
+    "nisi": "פעי",
+    "habb": "פעל",
+    "rah": "פאע",
+    "jab": "פאע",
 };
 
 
@@ -108,13 +102,11 @@ nisi.Ihna = buildPronoun("פְעִינַא", [HAKA, HABB, RAH, JAB]);
 nisi.Intu = buildPronoun("פְעִיתוּ", [HAKA, HABB, RAH, JAB]);
 nisi.Humme = buildPronoun("פִעְיוּ", [HAKA, HABB, RAH, KATAB]);
 nisi.processingToForm = {
-    "katab": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
-    "nizel": [-1, -1, 1, 2, -1],
-    "haka": [-1, -1, -1, -1, -1],
-    "nisi": [-1, -1, -1, -1, -1, 2, "י"],
-    "habb": [-1, -1, -1, -1, -1],
-    "rah": [-1, -1, 1, 2, -1],
-    "jab": [-1, -1, 1, 2, -1],
+    "katab": Math.random() > 0.5 ? "פע" : "פעל",
+    "haka": "פעל",
+    "habb": "פעל",
+    "rah": "פאע",
+    "jab": "פאע",
 };
 
 const habb = createNewForm();
@@ -128,13 +120,10 @@ habb.Ihna = buildPronoun("פַעֵّינַא", [HAKA, NISI, RAH, JAB]);
 habb.Intu = buildPronoun("פַעֵّיתוּ", [HAKA, NISI, RAH, JAB]);
 habb.Humme = buildPronoun("פַעّוּ", [HAKA, NISI, RAH]);
 habb.processingToForm = {
-    "katab": [-1, -1, 1, 2, 2],
-    "nizel": [-1, -1, 1, 2, 2],
-    "haka": [-1, -1, -1, -1, 1],
-    "nisi": [-1, -1, -1, -1, 1, 2, "י"],
-    "habb": [-1, -1, -1, -1, -1],
-    "rah": [-1, -1, 1, 2, 2],
-    "jab": [-1, -1, 1, 2, 2],
+    "haka": "פעל",
+    "nisi": "פעי",
+    "rah": "פאע",
+    "jab": "פאע",
 };
 
 
@@ -149,13 +138,10 @@ rah.Ihna = buildPronoun("פֻלְנַא", [HAKA, NISI, HABB, JAB]);
 rah.Intu = buildPronoun("פֻלְתוּ", [HAKA, NISI, HABB, JAB]);
 rah.Humme = buildPronoun("פַאלוּ", [HAKA, NISI, HABB]);
 rah.processingToForm = {
-    "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-    "nizel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-    "haka": [-1, -1, 2, 1, 1],
-    "nisi": [-1, -1, 2, 1, -1, 2, "י"],
-    "habb": [-1, -1, 2, 1, -1],
-    "rah": [-1, -1, -1, -1, -1],
-    "jab": [-1, -1, -1, -1, -1],
+    "haka": "פלא",
+    "nisi": "פלי",
+    "habb": "פל",
+    "jab": "פעל",
 };
 
 
@@ -170,13 +156,10 @@ jab.Ihna = buildPronoun("פִלְנַא", [HAKA, NISI, HABB, RAH]);
 jab.Intu = buildPronoun("פִלְתוּ", [HAKA, NISI, HABB, RAH]);
 jab.Humme = buildPronoun("פַאלוּ", [HAKA, NISI, HABB]);
 jab.processingToForm = {
-    "katab": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-    "nizel": Math.random() > 0.2 ? [-1, -1, -1, -1, -1] : [-1, -1, 2, 1, -1],
-    "haka": [-1, -1, 2, 1, 1],
-    "nisi": [-1, -1, 2, 1, -1, 2, "י"],
-    "habb": [-1, -1, 2, 1, -1],
-    "rah": [-1, -1, -1, -1, -1],
-    "jab": [-1, -1, -1, -1, -1],
+    "haka": "פלא",
+    "nisi": "פלי",
+    "habb": "פל",
+    "rah": "פעל",
 };
 
 

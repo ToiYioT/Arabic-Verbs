@@ -81,8 +81,8 @@ window.addEventListener('load', (event) => {
     buttonHandler();
     updateScore();
 
-    debugShowConjugations(zman.forms.nizel,
-        [zman.forms.nizel, zman.forms.katab, zman.forms.haka]);
+    // debugShowConjugations(zman.forms.nizel,
+    //     [zman.forms.nizel, zman.forms.katab, zman.forms.haka]);
     // debugShowConjugationHebrew();
 
 
