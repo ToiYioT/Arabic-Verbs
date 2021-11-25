@@ -45,15 +45,9 @@ yuktol.Ihna = buildPronoun("נֻפְעֺל", [YIMSEK, YISMA, IRUH]);
 yuktol.Intu = buildPronoun("תֻפֻעְלוּ", [YIMSEK, YISMA, IRUH]);
 yuktol.Humme = buildPronoun("יֻפֻעְלוּ", [YIMSEK, YISMA, IRUH]);
 yuktol.processingToForm = {
-    "yuktol": [-1, -1, -1, -1, -1],
-    "yimsek": [-1, -1, -1, -1, -1],
-    "yisma": [-1, -1, -1, -1, -1],
-    "iruh": [1, 0, 2, 1, -1, -1, -1, patakh, 0],
-    "ijib": [1, 0, 2, 1, -1, -1, -1, shva, 0],
-    "ihki": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "insa": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "ihibb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "ihutt": [-1, -1, -1, -1, -1],
+    "yimsek": "פעל",
+    "yisma": "פעל",
+    "iruh": "פַעאל",
 };
 
 
@@ -68,15 +62,9 @@ yimsek.Ihna = buildPronoun("נִפְעֵל", [YUKTOL, YISMA, IRUH]);
 yimsek.Intu = buildPronoun("תִפִעְלוּ", [YUKTOL, YISMA, IRUH]);
 yimsek.Humme = buildPronoun("יִפִעְלוּ", [YUKTOL, YISMA, IRUH]);
 yimsek.processingToForm = {
-    "yuktol": [-1, -1, -1, -1, -1],
-    "yimsek": [-1, -1, -1, -1, -1],
-    "yisma": [-1, -1, -1, -1, -1],
-    "iruh": [1, 0, 2, 1, -1, -1, -1, patakh, 0],
-    "ijib": [-1, -1, -1, -1, -1],
-    "ihki": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "insa": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "ihibb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "ihutt": [-1, -1, -1, -1, -1],
+    "yuktol": "פעל",
+    "yisma": "פעל",
+    "iruh": "פַעאל",
 };
 
 
@@ -91,16 +79,9 @@ yisma.Ihna = buildPronoun("נִפְעַל", [YUKTOL, YIMSEK, IRUH]);
 yisma.Intu = buildPronoun("תִפְעַלוּ", [YUKTOL, YIMSEK, IRUH]);
 yisma.Humme = buildPronoun("יִפְעַלוּ", [YUKTOL, YIMSEK, IRUH]);
 yisma.processingToForm = {
-    "yuktol": [-1, -1, -1, -1, -1],
-    "yimsek": [-1, -1, -1, -1, -1],
-    "yisma": [-1, -1, -1, -1, -1],
-    "iruh": [1, 0, 2, 1, -1, -1, -1, patakh, 0],
-    "ijib": [-1, -1, -1, -1, -1],
-    "ihki": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "insa": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "ihibb": [1, 0, 2, 1, -1, -1, - 1, shva, 0],
-    "ihutt": [-1, -1, -1, -1, -1],
-
+    "yuktol": "פעל",
+    "yimsek": "פעל",
+    "iruh": "פַעאל",
 };
 
 
@@ -115,15 +96,9 @@ iruh.Ihna = buildPronoun("נְפוּל", [IJIB, INSA, IHUTT]);
 iruh.Intu = buildPronoun("תְפוּלוּ", [IJIB, INSA, IHUTT]);
 iruh.Humme = buildPronoun("יְפוּלוּ", [IJIB, INSA, IHUTT]);
 iruh.processingToForm = {
-    "yuktol": [-1, -1, -1, -1, -1],
-    "yimsek": [-1, -1, -1, -1, -1],
-    "yisma": [-1, -1, -1, -1, -1],
-    "iruh": [-1, -1, -1, -1, -1],
-    "ijib": [-1, -1, -1, -1, -1],
-    "ihki": [-1, -1, 2, 1, -1],
-    "insa": [-1, -1, 2, 1, -1],
-    "ihibb": [-1, -1, 2, 1, -1],
-    "ihutt": [-1, -1, 2, 1, -1],
+    "ijib": "פעל",
+    "insa": "פלא",
+    "ihutt": "פל",
 };
 
 const ijib = createNewForm();
@@ -137,15 +112,9 @@ ijib.Ihna = buildPronoun("נְפִיל", [YISMA, INSA, IHIBB]);
 ijib.Intu = buildPronoun("תְפִילו", [YISMA, INSA, IHIBB]);
 ijib.Humme = buildPronoun("יְפִילוּ", [YISMA, INSA, IHIBB]);
 ijib.processingToForm = {
-    "yuktol": Math.random() > 0.5 ? [-1, -1, 1, 2, -1] : [-1, -1, -1, -1, -1],
-    "yimsek": [-1, -1, 1, 2, -1],
-    "yisma": [-1, -1, -1, -1, -1],
-    "iruh": [-1, -1, -1, -1, -1],
-    "ijib": [-1, -1, -1, -1, -1],
-    "ihki": [-1, -1, 2, 1, -1],
-    "insa": [-1, -1, 2, 1, -1],
-    "ihibb": [-1, -1, 2, 1, -1],
-    "ihutt": [-1, -1, 2, 1, -1],
+    "yisma": "פעל",
+    "insa": "פלא",
+    "ihibb": "פל",
 };
 
 
@@ -160,15 +129,10 @@ ihki.Ihna = buildPronoun("נִפְעִי", [IRUH, INSA, IHIBB]);
 ihki.Intu = buildPronoun("תִפְעוּ", [IRUH, IJIB, IHIBB]);
 ihki.Humme = buildPronoun("יִפְעוּ", [IRUH, IJIB, IHIBB]);
 ihki.processingToForm = {
-    "yuktol": [-1, -1, -1, -1, -1],
-    "yimsek": [-1, -1, -1, -1, -1],
-    "yisma": [-1, -1, -1, -1, -1],
-    "iruh": [-1, -1, 1, 2, -1],
-    "ijib": [-1, -1, 1, 2, -1],
-    "ihki": [-1, -1, -1, -1, -1],
-    "insa": [-1, -1, 1, 2, 2],
-    "ihibb": [-1, -1, -1, -1, -1],
-    "ihutt": [-1, -1, -1, -1, -1],
+    "iruh": "פוע",
+    "ijib": "פיע",
+    "insa": "פעא",
+    "ihibb": "פע",
 };
 
 const insa = createNewForm();
@@ -182,15 +146,10 @@ insa.Ihna = buildPronoun("נִפְעַא", [YIMSEK, IRUH, IHUTT]);
 insa.Intu = buildPronoun("תִפְעוּ", [YIMSEK, YISMA, IHUTT]);
 insa.Humme = buildPronoun("יִפְעוּ", [YIMSEK, YISMA, IHUTT]);
 insa.processingToForm = {
-    "yuktol": [-1, -1, -1, -1, -1],
-    "yimsek": [-1, -1, -1, -1, -1],
-    "yisma": [-1, -1, -1, -1, -1],
-    "iruh": [-1, -1, 1, 2, -1],
-    "ijib": [-1, -1, 1, 2, -1],
-    "ihki": [-1, -1, -1, -1, -1],
-    "insa": [-1, -1, -1, -1, -1],
-    "ihibb": [-1, -1, -1, -1, -1],
-    "ihutt": [-1, -1, -1, -1, -1],
+    "yimsek": "פעל",
+    "yisma": "פעל",
+    "iruh": "פוע",
+    "ihutt": "פע",
 };
 
 const ihibb = createNewForm();
@@ -204,15 +163,9 @@ ihibb.Ihna = buildPronoun("נְפִעّ", [IJIB, INSA, IHUTT]);
 ihibb.Intu = buildPronoun("תְפִעّוּ", [IJIB, INSA, IHUTT]);
 ihibb.Humme = buildPronoun("יְפִעّוּ", [IJIB, INSA, IHUTT]);
 ihibb.processingToForm = {
-    "yuktol": [-1, -1, 0, 2, 2],
-    "yimsek": [-1, -1, 0, 2, 2],
-    "yisma": [-1, -1, 0, 2, 2],
-    "iruh": [-1, -1, 1, 2, -1],
-    "ijib": [-1, -1, 1, 2, 2],
-    "ihki": [-1, -1, -1, -1, 1],
-    "insa": [-1, -1, -1, -1, 1],
-    "ihibb": [-1, -1, -1, -1, -1],
-    "ihutt": [-1, -1, -1, -1, -1],
+    "ijib": "פיע",
+    "insa": "פעל",
+    "ihutt": "פעל",
 };
 
 const ihutt = createNewForm();
@@ -226,15 +179,9 @@ ihutt.Ihna = buildPronoun("נְפֻעّ", [IRUH, INSA, IHIBB]);
 ihutt.Intu = buildPronoun("תְפֻעّוּ", [IRUH, INSA, IHIBB]);
 ihutt.Humme = buildPronoun("יְפֻעّוּ", [IRUH, INSA, IHIBB]);
 ihutt.processingToForm = {
-    "yuktol": [-1, -1, 0, 2, 2],
-    "yimsek": [-1, -1, 0, 2, 2],
-    "yisma": [-1, -1, 0, 2, 2],
-    "iruh": [-1, -1, 1, 2, 2],
-    "ijib": [-1, -1, 1, 2, 2],
-    "ihki": [-1, -1, -1, -1, 1],
-    "insa": [-1, -1, -1, -1, 1],
-    "ihibb": [-1, -1, -1, -1, -1],
-    "ihutt": [-1, -1, -1, -1, -1],
+    "iruh": "פוע",
+    "insa": "פעל",
+    "ihibb": "פעל",
 };
 
 export const formsFuture = {
