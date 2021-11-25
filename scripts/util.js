@@ -37,11 +37,19 @@ function separateRootIntoLetters(root) {
 
     let startingIndex = 0;
     let rootLetters = ["", "", ""];
+    let numOflettersInRoot = numOfLetters(root);
 
     for (let i = 0; i < 3; i++) {
+
         let letterIndex = getIndexOfFirstLetterAfter(root, startingIndex);
+        if (numOflettersInRoot == 4 && i == 0) {
+            letterIndex = getIndexOfFirstLetterAfter(root, letterIndex);
+        }
         rootLetters[i] = root.substr(startingIndex, letterIndex - startingIndex);
         startingIndex = letterIndex;
+    }
+    if (numOflettersInRoot == 2) {
+        rootLetters[2] = rootLetters[1];
     }
 
     return rootLetters;
@@ -109,15 +117,18 @@ function replaceApostropheWithGeresh(word) {
 
 function postProcess(word) {
     word = word.replaceAll(shadde, sgolta);
+    return handleGeresh(word);
+}
 
+function handleGeresh(word) {
 
-    // move gereshes to the right place
+    if (word.indexOf(geresh) == -1) return word;
+
     let wordLetters = word.split("");
     let lastLetterIndex = word.length;
     let index = word.length - 1;
 
     while (index >= 0) {
-
         if (letters.indexOf(wordLetters[index]) > -1) {
             lastLetterIndex = index;
         }
@@ -128,6 +139,52 @@ function postProcess(word) {
         index--;
     }
     return wordLetters.join("");
+}
+
+function numOfLetters(str) {
+
+    let nOfLetters = 0;
+    for (let i = 0; i < str.length; i++) {
+        if (letters.indexOf(str[i]) > -1) {
+            nOfLetters++;
+        }
+    }
+    return nOfLetters;
+}
+
+function substituteFAAL(root, template) {
+    // the root has to be separated already?
+    // template = word.replaceAll(shadde, sgolta);
+    root = separateRootIntoLetters(root);
+    let indexP = template.indexOf("פ");
+    let indexA = template.indexOf("ע");
+    let indexL = template.indexOf("ל");
+    let maxIndex = template.length;
+
+    if (indexL > -1) {
+        console.log("indexL: " + indexL);
+        template = template.substring(0, indexL) + root[2]
+            + template.substring(indexL + 1, template.length);
+        console.log("after L sub: " + template);
+    }
+
+    if (indexA > -1) {
+        console.log("indexA: " + indexA);
+        template = template.substring(0, indexA) + root[1]
+            + template.substring(indexA + 1, template.length);
+        console.log("after A sub: " + template);
+
+    }
+    if (indexP > -1) {
+        console.log("indexP: " + indexP);
+        template = template.substring(0, indexP) + root[0]
+            + template.substring(indexP + 1, template.length);
+        console.log("after P sub: " + template);
+    }
+
+    console.log("before geresh: " + template);
+    template = handleGeresh(template);
+    return template;
 }
 
 export const util = {
@@ -142,5 +199,7 @@ export const util = {
     substituteLetterAtEndToEndingLetter,
     postProcess,
     separateRootIntoLetters,
-    replaceApostropheWithGeresh
+    replaceApostropheWithGeresh,
+    substituteFAAL,
+    numOfLetters
 }

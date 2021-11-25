@@ -81,9 +81,17 @@ window.addEventListener('load', (event) => {
     buttonHandler();
     updateScore();
 
-    // debugShowConjugations(zman.forms.nizel,
-    //     [zman.forms.nizel, zman.forms.katab, zman.forms.haka]);
+    debugShowConjugations(zman.forms.nizel,
+        [zman.forms.nizel, zman.forms.katab, zman.forms.haka]);
     // debugShowConjugationHebrew();
+
+
+    // yimsek to iruh:
+    // let root = "כּסר";
+    // root = util.replaceApostropheWithGeresh(root);
+    // let template = "תְפוּלוּ";
+    // template = util.substituteFAAL(root, template);
+    // console.log(template);
 });
 
 function setTense(tenseIndex) {
