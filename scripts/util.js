@@ -153,36 +153,27 @@ function numOfLetters(str) {
 }
 
 function substituteFAAL(root, template) {
-    // the root has to be separated already?
-    // template = word.replaceAll(shadde, sgolta);
-    root = separateRootIntoLetters(root);
+    //the root has to be separated already
+
     let indexP = template.indexOf("פ");
     let indexA = template.indexOf("ע");
     let indexL = template.indexOf("ל");
-    let maxIndex = template.length;
 
     if (indexL > -1) {
-        console.log("indexL: " + indexL);
         template = template.substring(0, indexL) + root[2]
             + template.substring(indexL + 1, template.length);
-        console.log("after L sub: " + template);
     }
 
     if (indexA > -1) {
-        console.log("indexA: " + indexA);
         template = template.substring(0, indexA) + root[1]
             + template.substring(indexA + 1, template.length);
-        console.log("after A sub: " + template);
 
     }
     if (indexP > -1) {
-        console.log("indexP: " + indexP);
         template = template.substring(0, indexP) + root[0]
             + template.substring(indexP + 1, template.length);
-        console.log("after P sub: " + template);
     }
 
-    console.log("before geresh: " + template);
     template = handleGeresh(template);
     return template;
 }

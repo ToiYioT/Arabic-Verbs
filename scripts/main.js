@@ -3,7 +3,7 @@ import { conjugator } from "./conjugator.js";
 import { pronouns } from "./data.js";
 import { future, past } from "./tenses.js";
 
-var tenses = [past];
+var tenses = [future, past];
 var zman;
 
 // settings
@@ -179,8 +179,6 @@ function initQuestionFromParams(qParams) {
 
     let rootArabic = zman.rootsArabic[formName][qParams.wordIndex];
     let rootHebrew = zman.rootsHebrew[formName][qParams.wordIndex];
-    rootArabic = util.replaceApostropheWithGeresh(rootArabic);
-    rootArabic = util.substituteEndingLettersToNormal(rootArabic);
 
 
     // extracting the hebrew word to conjugate (the first one)
@@ -200,8 +198,7 @@ function initQuestionFromParams(qParams) {
 
         let conjugateTo = answerForms[i];
 
-        let rootArabicSeparated = util.separateRootIntoLetters(rootArabic);
-        conjugator.doProcessing(rootArabicSeparated, rootForm, conjugateTo);
+        conjugator.rootProcessing(rootArabic, rootForm, conjugateTo);
 
         let answer = pronoun.arabic + zman.answerPrefix
             + conjugator.getWord(conjugateTo[pronoun.name].template);
@@ -395,12 +392,18 @@ function debugShowConjugationHebrew() {
 function debugShowConjugations(rootForm, conjugateToArray) {
     loadDebugCols();
 
+    rootForm = zman.forms.habb;
+    conjugateToArray = [
+        zman.forms.habb,
+        zman.forms.katab,
+        zman.forms.nisi,
+        zman.forms.rah,
+    ]
+
     // to get random root:
     let formName = rootForm.formName;
     let randomWordNum = Math.floor(Math.random() * zman.rootsArabic[formName].length);
     let root = zman.rootsArabic[formName][randomWordNum];
-    root = util.replaceApostropheWithGeresh(root);
-    root = util.substituteEndingLettersToNormal(root);
 
     // // to set specific root and forms:
     // let root = "ח׳לץ";
@@ -414,8 +417,7 @@ function debugShowConjugations(rootForm, conjugateToArray) {
 
         for (let i = 0; i < pronouns.length; i++) {
 
-            let rootSeparated = util.separateRootIntoLetters(root);
-            conjugator.doProcessing(rootSeparated, rootForm, conjugateTo);
+            conjugator.rootProcessing(root, rootForm, conjugateTo);
             let pronoun = pronouns[i];
 
             let output = pronoun.arabic + " " +

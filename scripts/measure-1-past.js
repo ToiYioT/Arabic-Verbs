@@ -111,19 +111,20 @@ nisi.processingToForm = {
 
 const habb = createNewForm();
 habb.formName = HABB;
-habb.Ana = buildPronoun("פַעֵّית", [HAKA, NISI, RAH, JAB]);
-habb.Inte = buildPronoun("פַעֵّית", [HAKA, NISI, RAH, JAB]);
-habb.Inti = buildPronoun("פַעֵّיתִי", [HAKA, NISI, RAH, JAB]);
+habb.Ana = buildPronoun("פַעֵّית", [NISI, RAH, JAB]);
+habb.Inte = buildPronoun("פַעֵّית", [NISI, RAH, JAB]);
+habb.Inti = buildPronoun("פַעֵّיתִי", [NISI, RAH, JAB]);
 habb.Huwe = buildPronoun("פַעّ", [HAKA, NISI, RAH]);
-habb.Hiye = buildPronoun("פַעַّת", [HAKA, NISI, RAH]);
-habb.Ihna = buildPronoun("פַעֵّינַא", [HAKA, NISI, RAH, JAB]);
-habb.Intu = buildPronoun("פַעֵّיתוּ", [HAKA, NISI, RAH, JAB]);
-habb.Humme = buildPronoun("פַעّוּ", [HAKA, NISI, RAH]);
+habb.Hiye = buildPronoun("פַעַّת", [KATAB, NISI, RAH]);
+habb.Ihna = buildPronoun("פַעֵّינַא", [NISI, RAH, JAB]);
+habb.Intu = buildPronoun("פַעֵّיתוּ", [NISI, RAH, JAB]);
+habb.Humme = buildPronoun("פַעّוּ", [NISI, RAH, KATAB]);
 habb.processingToForm = {
-    "haka": "פעל",
+    "jab": "פאע",
     "nisi": "פעי",
     "rah": "פאע",
-    "jab": "פאע",
+    "haka": "פעל",
+    "katab": "פעל",
 };
 
 
