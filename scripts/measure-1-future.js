@@ -1,5 +1,3 @@
-const shva = "ְ";
-const patakh = "ַ";
 
 const TENSE = "future";
 const YUKTOL = "yuktol";

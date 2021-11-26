@@ -1,5 +1,3 @@
-const shva = "ְ";
-
 
 const TENSE = "past";
 const KATAB = "katab";

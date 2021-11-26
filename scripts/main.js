@@ -13,7 +13,7 @@ const progressBarUpdateInterval = 20;
 const revealAnswersAfter = 3000;
 
 var numOfProgressBarUpdates = 0;
-const progressBarMaxUpdates = 15000;
+const progressBarMaxUpdates = 150;
 
 // html elements
 var answerHolders = [];
@@ -81,8 +81,7 @@ window.addEventListener('load', (event) => {
     buttonHandler();
     updateScore();
 
-    // debugShowConjugations(zman.forms.nizel,
-    //     [zman.forms.nizel, zman.forms.katab, zman.forms.haka]);
+    // debugShowConjugations();
     // debugShowConjugationHebrew();
 
 
@@ -385,21 +384,21 @@ function debugShowConjugationHebrew() {
     }
 }
 
-function debugShowConjugations(rootForm, conjugateToArray) {
+function debugShowConjugations() {
     loadDebugCols();
 
-    rootForm = zman.forms.habb;
-    conjugateToArray = [
-        zman.forms.habb,
-        zman.forms.katab,
-        zman.forms.nisi,
-        zman.forms.rah,
-    ]
+    let rootNum = Math.floor(Math.random() * roots.length);
+    let root = roots[rootNum]["arabic"];
+    let formName = roots[rootNum]["form"];
 
-    // to get random root:
-    let formName = rootForm.formName;
-    let randomWordNum = Math.floor(Math.random() * zman.rootsArabic[formName].length);
-    let root = zman.rootsArabic[formName][randomWordNum];
+    let rootForm = forms[formName];
+    console.log(rootForm);
+    let conjugateToArray = [
+        rootForm,
+        forms[rootForm.Ana.distractingForms[0]],
+        forms[rootForm.Ana.distractingForms[1]],
+        forms[rootForm.Ana.distractingForms[2]],
+    ]
 
     // // to set specific root and forms:
     // let root = "ח׳לץ";
