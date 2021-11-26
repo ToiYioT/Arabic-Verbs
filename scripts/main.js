@@ -4,9 +4,9 @@ import { pronouns, filterRoots, formNamesPast, formNamesFuture } from "./data.js
 import { forms, future, past } from "./tenses.js";
 
 let roots = filterRoots(["yuktol", "katab"], [""]);
-
-var tenses = [future, past];
 var tense;
+
+var settingsChanged = false;
 
 // settings
 const hideAnswers = true;
@@ -15,7 +15,7 @@ const progressBarUpdateInterval = 20;
 const revealAnswersAfter = 3000;
 
 var numOfProgressBarUpdates = 0;
-const progressBarMaxUpdates = 15000;
+const progressBarMaxUpdates = 150;
 
 // html elements
 var answerHolders = [];
@@ -65,11 +65,10 @@ window.addEventListener('load', (event) => {
     document.getElementsByClassName("x-button")[0].onclick = closeSettingsWindow;
     checkboxFuture = document.getElementById("checkbox-future");
     checkboxPast = document.getElementById("checkbox-past");
+    document.getElementById("x-button").addEventListener("click", onExitSettings);
 
-    checkboxFuture.addEventListener("change", changeTenses);
-    checkboxPast.addEventListener("change", changeTenses);
-
-    enableButton();
+    checkboxFuture.addEventListener("change", tenseCheckboxChanged);
+    checkboxPast.addEventListener("change", tenseCheckboxChanged);
 
     for (let i = 0; i < numOfAnswers; i++) {
         answerHolders.push(document.getElementById("answer" + (i + 1)));
@@ -78,21 +77,9 @@ window.addEventListener('load', (event) => {
         answerHolders[i].addEventListener("click", answerClickHandler);
     }
 
-    addRandomQuestionsToQueue(5);
-
-    buttonHandler();
-    updateScore();
-
+    resetGame();
     // debugShowConjugations();
     // debugShowConjugationHebrew();
-
-
-    // yimsek to iruh:
-    // let root = "כּסר";
-    // root = util.replaceApostropheWithGeresh(root);
-    // let template = "תְפוּלוּ";
-    // template = util.substituteFAAL(root, template);
-    // console.log(template);
 });
 
 function setTense(form) {
@@ -322,15 +309,26 @@ function openSettingsWindow() {
 function closeSettingsWindow() {
     settingsWindow.style.visibility = "hidden";
 }
-function changeTenses(e) {
-    tenses = [];
+function tenseCheckboxChanged() {
+    settingsChanged = true;
+}
+function onExitSettings() {
+    if (settingsChanged) {
+        settingsChanged = false;
+        changeTenses();
+    }
+}
+function changeTenses() {
+
+    let newForms = [];
     if (checkboxPast.checked) {
-        tenses.push(past);
+        newForms.push(...formNamesPast);
     }
     if (checkboxFuture.checked) {
-        tenses.push(future);
+        newForms.push(...formNamesFuture);
     }
 
+    roots = filterRoots(newForms, [""]);
     resetGame();
 }
 
@@ -344,6 +342,8 @@ function resetGame() {
 
     enableButton();
     buttonHandler();
+
+    updateScore();
 }
 
 
