@@ -1,6 +1,7 @@
 const shva = "ְ";
 
 
+const TENSE = "past";
 const KATAB = "katab";
 const NIZEL = "nizel";
 const HAKA = "haka";
@@ -19,6 +20,7 @@ function buildPronoun(template, distractions) {
 function createNewForm() {
     return {
         formName: "default",
+        tense: TENSE,
         Ana: "",
         Inte: "",
         Inti: "",

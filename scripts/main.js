@@ -1,7 +1,7 @@
 import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
-import { pronouns } from "./data.js";
-import { future, past } from "./tenses.js";
+import { pronouns, roots } from "./data.js";
+import { forms, future, past } from "./tenses.js";
 
 var tenses = [future, past];
 var zman;
@@ -13,7 +13,7 @@ const progressBarUpdateInterval = 20;
 const revealAnswersAfter = 3000;
 
 var numOfProgressBarUpdates = 0;
-const progressBarMaxUpdates = 150;
+const progressBarMaxUpdates = 15000;
 
 // html elements
 var answerHolders = [];
@@ -94,8 +94,13 @@ window.addEventListener('load', (event) => {
     // console.log(template);
 });
 
-function setTense(tenseIndex) {
-    zman = tenses[tenseIndex];
+function setTense(form) {
+    if (form.tense == "future") {
+        zman = future;
+    }
+    else if (form.tense == "past") {
+        zman = past;
+    }
 }
 
 function buttonHandler() {
@@ -147,39 +152,29 @@ function addRandomQuestionsToQueue(numberOfQuestionsToAdd) {
 
 function generateRandomQuestionParams() {
 
-    let tenseIndex = Math.floor(Math.random() * tenses.length);
-    setTense(tenseIndex);
-
+    let randomRootIndex = Math.floor(Math.random() * roots.length);
     let pronounIndex = Math.floor(Math.random() * pronouns.length);
-    let randomFormIndex = Math.floor(Math.random() * zman.formNames.length);
 
-    let formName = zman.formNames[randomFormIndex];
-    let randomWordIndex = Math.floor(Math.random() * zman.rootsArabic[formName].length);
-
-    let random = {
-        tenseIndex: tenseIndex,
-        pronounIndex: pronounIndex,
-        formIndex: randomFormIndex,
-        wordIndex: randomWordIndex
+    let randomQuestionParams = {
+        root: roots[randomRootIndex],
+        pronoun: pronouns[pronounIndex]
     }
 
-    return random;
+    return randomQuestionParams;
 }
 
 function initQuestionFromParams(qParams) {
 
     resetQuestionState();
 
-    setTense(qParams.tenseIndex);
-    let pronoun = pronouns[qParams.pronounIndex];
-    createAnswerForms(qParams.formIndex, pronoun);
+    let pronoun = qParams.pronoun;
+    createAnswerForms(qParams);
 
     let rootForm = answerForms[0];
-    let formName = rootForm.formName;
+    setTense(rootForm);
 
-    let rootArabic = zman.rootsArabic[formName][qParams.wordIndex];
-    let rootHebrew = zman.rootsHebrew[formName][qParams.wordIndex];
-
+    let rootArabic = qParams.root["arabic"];
+    let rootHebrew = qParams.root["hebrew"];
 
     // extracting the hebrew word to conjugate (the first one)
     let firstWordEndingAt = util.getIndexOfFirstWordEnding(rootHebrew);
@@ -308,15 +303,16 @@ function updateScore() {
         "תשובות נכונות: " + numOfCorrectAnswers;
 }
 
-function createAnswerForms(formNum, pronoun) {
+function createAnswerForms(qParams) {
 
-    let form = getFormFromNum(formNum);
+    let form = forms[qParams.root["form"]];
+    let pronoun = qParams.pronoun;
 
     answerForms.length = 0;
     answerForms.push(form);
-    answerForms.push(zman.forms[form[pronoun.name].distractingForms[0]]);
-    answerForms.push(zman.forms[form[pronoun.name].distractingForms[1]]);
-    answerForms.push(zman.forms[form[pronoun.name].distractingForms[2]]);
+    answerForms.push(forms[form[pronoun.name].distractingForms[0]]);
+    answerForms.push(forms[form[pronoun.name].distractingForms[1]]);
+    answerForms.push(forms[form[pronoun.name].distractingForms[2]]);
 }
 
 function getFormFromNum(formNum) {

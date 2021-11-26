@@ -1,6 +1,7 @@
 const shva = "ְ";
 const patakh = "ַ";
 
+const TENSE = "future";
 const YUKTOL = "yuktol";
 const YIMSEK = "yimsek";
 const YISMA = "yisma";
@@ -21,6 +22,7 @@ function buildPronoun(template, distractions) {
 function createNewForm() {
     return {
         formName: "default",
+        tense: TENSE,
         Ana: "",
         Inte: "",
         Inti: "",
