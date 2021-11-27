@@ -2,6 +2,7 @@ import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
 import { pronouns, filterRoots, formNamesPast, formNamesFuture } from "./data.js";
 import { forms, future, past } from "./tenses.js";
+import { AnswerButton, Label } from "./views.js";
 
 let roots = filterRoots(["yuktol", "katab"], [""]);
 var tense;
@@ -18,9 +19,7 @@ var numOfProgressBarUpdates = 0;
 const progressBarMaxUpdates = 150;
 
 // html elements
-var answerHolders = [];
-var correctIcons = [];
-var incorrectIcons = [];
+var answerButtons = [];
 var answerSection;
 var questionHolder;
 var button;
@@ -34,7 +33,6 @@ var checkboxFuture;
 
 // logic variables 
 var answerForms = [];
-var answers = [];
 var correctAnswer;
 var numOfCorrectAnswers = 0;
 
@@ -46,19 +44,19 @@ var progressBarTimer;
 
 // debug
 var container;
-var horizontalContainer;
+var debugContainer;
 
 
 window.addEventListener('load', (event) => {
 
     questionHolder = document.getElementById("question");
     button = document.getElementById("next-button");
-    score = document.getElementById("score");
+    score = new Label("score");
     progressBar = document.getElementById("progress-bar");
 
     answerSection = document.getElementById("answer-section");
     container = document.getElementById("container");
-    horizontalContainer = document.getElementById("hor-container");
+    debugContainer = document.getElementById("debug-container");
 
     settingsWindow = document.getElementsByClassName("settings-overlay")[0];
     document.getElementsByClassName("cog")[0].onclick = openSettingsWindow;
@@ -71,10 +69,7 @@ window.addEventListener('load', (event) => {
     checkboxPast.addEventListener("change", tenseCheckboxChanged);
 
     for (let i = 0; i < numOfAnswers; i++) {
-        answerHolders.push(document.getElementById("answer" + (i + 1)));
-        correctIcons.push(document.getElementById("icon-correct" + (i + 1)));
-        incorrectIcons.push(document.getElementById("icon-incorrect" + (i + 1)));
-        answerHolders[i].addEventListener("click", answerClickHandler);
+        answerButtons.push(new AnswerButton(i + 1, answerClickHandler));
     }
 
     resetGame();
@@ -177,6 +172,7 @@ function initQuestionFromParams(qParams) {
     questionHolder.innerHTML = pronoun.hebrew + " " +
         conjugatedHebrew + remainderOfTranslation + "<br/>";
 
+    let answers = [];
     for (let i = 0; i < numOfAnswers; i++) {
 
         let conjugateTo = answerForms[i];
@@ -192,18 +188,18 @@ function initQuestionFromParams(qParams) {
     }
     correctAnswer = answers[0];
     util.shuffle(answers);
+    setAnswersToButtons(answers);
+}
 
-    for (let i = 0; i < answerHolders.length; i++) {
-        answerHolders[i].innerHTML = answers[i];
-        answerHolders[i].classList.remove("correct");
-        answerHolders[i].classList.remove("incorrect");
-        answerHolders[i].classList.remove("faded");
+function setAnswersToButtons(answers) {
+    for (let i = 0; i < answerButtons.length; i++) {
+        answerButtons[i].setAnswer(answers[i]);
+        answerButtons[i].removeStyles();
     }
 }
 
 function resetQuestionState() {
 
-    answers.length = 0;
     questionNumber++;
     questionAnswered = false;
     hideAllIcons();
@@ -213,8 +209,7 @@ function resetQuestionState() {
 
 function hideAllIcons() {
     for (let i = 0; i < 4; i++) {
-        correctIcons[i].classList.add("hide");
-        incorrectIcons[i].classList.add("hide");
+        answerButtons[i].setNoIcons();
     }
 }
 
@@ -236,38 +231,28 @@ function progressBarUpdate() {
 }
 
 var questionAnswered = false;
-function answerClickHandler(event) {
+function answerClickHandler(clickedButton) {
+
     if (questionAnswered) return;
     questionAnswered = true;
 
-    let holderAnswer = event.target.innerHTML;
+    for (let i = 0; i < answerButtons.length; i++) {
 
-    if (holderAnswer == correctAnswer) {
-        event.target.classList.add("correct");
+        if (answerButtons[i].answer == correctAnswer) {
+            answerButtons[i].setCorrect();
 
-        for (let i = 0; i < answerHolders.length; i++) {
-            if (answerHolders[i].innerHTML == correctAnswer) {
-                correctIcons[i].classList.remove("hide");
-            } else {
-                answerHolders[i].classList.add("faded");
+            if (clickedButton == answerButtons[i]) {
+                console.log("correct answer");
+                numOfCorrectAnswers++;
             }
-        }
-        numOfCorrectAnswers++;
+        } else {
 
-    } else {
+            incorrectAnswer = true;
+            if (clickedButton == answerButtons[i]) {
+                answerButtons[i].setIncorrect();
 
-        event.target.classList.add("incorrect");
-        incorrectAnswer = true;
-
-        for (let i = 0; i < answerHolders.length; i++) {
-            if (answerHolders[i].innerHTML == correctAnswer) {
-                answerHolders[i].classList.add("correct");
-
-            } else if (answerHolders[i].innerHTML != holderAnswer) {
-                answerHolders[i].classList.add("faded");
-            } else if (answerHolders[i].innerHTML == holderAnswer) {
-                incorrectIcons[i].classList.remove("hide");
-
+            } else {
+                answerButtons[i].setFaded();
             }
         }
     }
@@ -287,8 +272,10 @@ function disableButton() {
 }
 
 function updateScore() {
-    score.innerHTML = "שאלה מספר: " + questionNumber + ",    " +
-        "תשובות נכונות: " + numOfCorrectAnswers;
+    score.setText(
+        "שאלה מספר: " + questionNumber + ",    " +
+        "תשובות נכונות: " + numOfCorrectAnswers
+    );
 }
 
 function createAnswerForms(qParams) {
@@ -425,7 +412,7 @@ var debugCols = [];
 function loadDebugCols() {
 
     container.style.display = "none";
-    horizontalContainer.style.display = "flex";
+    debugContainer.style.display = "flex";
     for (let i = 0; i < 7; i++) {
         debugCols.push(document.getElementById("col" + (i + 1)));
     }
