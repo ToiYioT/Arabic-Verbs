@@ -209,6 +209,8 @@ function hideAllIcons() {
 }
 
 function startProgressBarAnimation() {
+
+    clearInterval(progressBarTimer);
     numOfProgressBarUpdates = 0;
     progressBarTimer = setInterval(progressBarUpdate, progressBarUpdateInterval);
 }

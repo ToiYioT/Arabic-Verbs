@@ -24,7 +24,7 @@ export class MainButton {
 
     setChooseAnswer() {
         this.disable();
-        this.setText("בחרו באחת האופציות");
+        this.setText("בחרו באחת התשובות");
         this.state = "choose-answer";
         console.log("setting state: " + this.state);
     }
@@ -42,12 +42,12 @@ export class MainButton {
 
     enable() {
         this.element.onclick = this.handler;
-        this.element.classList.remove("faded");
+        this.element.classList.remove("faded-button");
     }
 
     disable() {
         this.element.onclick = "";
-        this.element.classList.add("faded");
+        this.element.classList.add("faded-button");
     }
 }
 

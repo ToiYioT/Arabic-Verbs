@@ -169,13 +169,15 @@ body {
     width: 320px;
     height: 96px;
     color: var(--white);
-    background-color: var(--blue-accent);
+    background-color: var(--blue-accent-darker);
     border-radius: 1em;
     margin: 24px 16px;
+    cursor: pointer;
 }
 
-.next-button.faded{
+.faded-button{
     background-color: var(--button-disabled-color);
+    color: rgb(223, 231, 241);
     pointer-events: none;
 }
 
