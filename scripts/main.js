@@ -2,9 +2,9 @@ import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
 import { pronouns, filterRoots, formNamesPast, formNamesFuture } from "./data.js";
 import { forms, future, past } from "./tenses.js";
-import { AnswerButton, Label } from "./views.js";
+import { AnswerButton, Label, MainButton } from "./views.js";
 
-let roots = filterRoots(["yuktol", "katab"], [""]);
+let roots = filterRoots(["katab"], [""]);
 var tense;
 
 var settingsChanged = false;
@@ -49,13 +49,14 @@ var debugContainer;
 
 window.addEventListener('load', (event) => {
 
+    container = document.getElementById("container");
     questionHolder = document.getElementById("question");
-    button = document.getElementById("next-button");
+    button = new MainButton("main-button", buttonHandler);
+
     score = new Label("score");
     progressBar = document.getElementById("progress-bar");
 
     answerSection = document.getElementById("answer-section");
-    container = document.getElementById("container");
     debugContainer = document.getElementById("debug-container");
 
     settingsWindow = document.getElementsByClassName("settings-overlay")[0];
@@ -87,27 +88,23 @@ function setTense(form) {
 }
 
 function buttonHandler() {
-    clearInterval(progressBarTimer);
 
     if (!hideAnswers) {
         initQuestion();
-    } else {
 
-        if (!answerSection.classList.contains("hide")) {
+    } else {
+        if (button.state == "show-answers") {
+            console.log("button handler: state is: " + button.state);
+            cancelTimerAndShowQuestion();
+
+        } else if (button.state == "next-question") {
+            console.log("state was 'next-question'");
+            hideAllIcons();
+            startProgressBarAnimation();
+            answerSection.classList.add("hide");
+            button.setShowAnswers();
             initQuestion();
         }
-        answerSection.classList.toggle("hide");
-        setButtonText();
-    }
-}
-
-function setButtonText() {
-    if (answerSection.classList.contains("hide")) {
-        button.innerHTML = "הצג תשובות";
-
-    } else {
-        button.innerHTML = "בחרו באחת האופציות";
-        disableButton();
     }
 }
 
@@ -202,9 +199,7 @@ function resetQuestionState() {
 
     questionNumber++;
     questionAnswered = false;
-    hideAllIcons();
     updateScore();
-    startProgressBarAnimation();
 }
 
 function hideAllIcons() {
@@ -224,10 +219,15 @@ function progressBarUpdate() {
     progressBar.style.width = 100 * numOfProgressBarUpdates / progressBarMaxUpdates + "%";
 
     if (numOfProgressBarUpdates == progressBarMaxUpdates) {
-
-        numOfProgressBarUpdates = 0;
-        buttonHandler();
+        cancelTimerAndShowQuestion();
     }
+}
+
+function cancelTimerAndShowQuestion() {
+    clearInterval(progressBarTimer);
+    progressBarTimer = false;
+    answerSection.classList.remove("hide");
+    button.setChooseAnswer();
 }
 
 var questionAnswered = false;
@@ -242,7 +242,6 @@ function answerClickHandler(clickedButton) {
             answerButtons[i].setCorrect();
 
             if (clickedButton == answerButtons[i]) {
-                console.log("correct answer");
                 numOfCorrectAnswers++;
             }
         } else {
@@ -256,19 +255,10 @@ function answerClickHandler(clickedButton) {
             }
         }
     }
-    enableButton();
-    button.innerHTML = "השאלה הבאה"
+    console.log("answer clicked.. state is " + button.state
+        + ", ... going to set to next-question");
+    button.setNextQuestion();
     updateScore();
-}
-
-function enableButton() {
-    button.onclick = buttonHandler;
-    button.classList.remove("faded");
-}
-
-function disableButton() {
-    button.onclick = "";
-    button.classList.add("faded");
 }
 
 function updateScore() {
@@ -327,8 +317,12 @@ function resetGame() {
     numOfCorrectAnswers = 0;
     questionNumber = 0;
 
-    enableButton();
-    buttonHandler();
+    button.setShowAnswers();
+    answerSection.classList.add("hide");
+    // buttonHandler();
+    hideAllIcons();
+    startProgressBarAnimation();
+    initQuestion();
 
     updateScore();
 }

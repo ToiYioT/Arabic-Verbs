@@ -8,6 +8,49 @@ export class Label {
     }
 }
 
+export class MainButton {
+    constructor(id, handler) {
+        this.element = document.getElementById(id);
+        this.handler = handler;
+        this.state = "";
+    }
+
+    setShowAnswers() {
+        this.enable();
+        this.setText("הצג תשובות");
+        this.state = "show-answers";
+        console.log("setting state: " + this.state);
+    }
+
+    setChooseAnswer() {
+        this.disable();
+        this.setText("בחרו באחת האופציות");
+        this.state = "choose-answer";
+        console.log("setting state: " + this.state);
+    }
+
+    setNextQuestion() {
+        this.enable();
+        this.setText("השאלה הבאה");
+        this.state = "next-question";
+        console.log("setting state: " + this.state);
+    }
+
+    setText(text) {
+        this.element.innerHTML = text;
+    }
+
+    enable() {
+        this.element.onclick = this.handler;
+        this.element.classList.remove("faded");
+    }
+
+    disable() {
+        this.element.onclick = "";
+        this.element.classList.add("faded");
+    }
+}
+
 export class AnswerButton {
     constructor(num, callback) {
         this.answerNum = num;

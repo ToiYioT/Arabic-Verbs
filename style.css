@@ -157,7 +157,7 @@ body {
     left: 16px;
 }
 
-.next-button {
+.main-button {
     display: flex;
     justify-content: center;
     align-self: center;
@@ -282,7 +282,7 @@ body {
 
 
 /* debug */
-#hor-container {
+#debug-container {
     display: none;
     margin: auto;
     min-height: 100%;

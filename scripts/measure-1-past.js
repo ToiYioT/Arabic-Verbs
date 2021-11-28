@@ -46,7 +46,7 @@ katab.Humme = buildPronoun("פַעַלוּ", [NIZEL, HAKA, HABB, RAH]);
 katab.processingToForm = {
     "nizel": "פעל",
     "haka": "פְעלא",
-    "nisi": "פעל",
+    "nisi": "פְעלי",
     "habb": "פְעלא",
     "rah": "פְעלא",
 };
@@ -65,7 +65,7 @@ nizel.Humme = buildPronoun("פִעְלוּ", [KATAB, HAKA, HABB, RAH]);
 nizel.processingToForm = {
     "katab": "פעל",
     "haka": "פְעלא",
-    "nisi": "פעל",
+    "nisi": "פְעלי",
     "habb": "פְעלא",
     "rah": "פְעלא",
 };
