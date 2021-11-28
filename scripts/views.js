@@ -19,21 +19,18 @@ export class MainButton {
         this.enable();
         this.setText("הצג תשובות");
         this.state = "show-answers";
-        console.log("setting state: " + this.state);
     }
 
     setChooseAnswer() {
         this.disable();
         this.setText("בחרו באחת התשובות");
         this.state = "choose-answer";
-        console.log("setting state: " + this.state);
     }
 
     setNextQuestion() {
         this.enable();
         this.setText("השאלה הבאה");
         this.state = "next-question";
-        console.log("setting state: " + this.state);
     }
 
     setText(text) {
@@ -48,6 +45,31 @@ export class MainButton {
     disable() {
         this.element.onclick = "";
         this.element.classList.add("faded-button");
+    }
+}
+
+export class Checkbox {
+    constructor(id) {
+        this.element = document.getElementById(id);
+        this.changed = false;
+
+        const self = this;
+        this.onCheckboxChange = function () {
+            self.changed = true;
+        }
+
+        this.element.addEventListener("change", this.onCheckboxChange);
+    }
+
+
+    isChanged() {
+        let temp = this.changed;
+        this.changed = false;
+        return temp;
+    }
+
+    checked() {
+        return this.element.checked;
     }
 }
 

@@ -2,12 +2,10 @@ import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
 import { pronouns, filterRoots, formNamesPast, formNamesFuture } from "./data.js";
 import { forms, future, past } from "./tenses.js";
-import { AnswerButton, Label, MainButton } from "./views.js";
+import { AnswerButton, Label, MainButton, Checkbox } from "./views.js";
 
 let roots = filterRoots(["katab"], [""]);
 var tense;
-
-var settingsChanged = false;
 
 // settings
 const hideAnswers = true;
@@ -16,7 +14,7 @@ const progressBarUpdateInterval = 20;
 const revealAnswersAfter = 3000;
 
 var numOfProgressBarUpdates = 0;
-const progressBarMaxUpdates = 150;
+const progressBarMaxUpdates = 350;
 
 // html elements
 var answerButtons = [];
@@ -62,12 +60,10 @@ window.addEventListener('load', (event) => {
     settingsWindow = document.getElementsByClassName("settings-overlay")[0];
     document.getElementsByClassName("cog")[0].onclick = openSettingsWindow;
     document.getElementsByClassName("x-button")[0].onclick = closeSettingsWindow;
-    checkboxFuture = document.getElementById("checkbox-future");
-    checkboxPast = document.getElementById("checkbox-past");
+    checkboxFuture = new Checkbox("checkbox-future");
+    checkboxPast = new Checkbox("checkbox-past");
     document.getElementById("x-button").addEventListener("click", onExitSettings);
 
-    checkboxFuture.addEventListener("change", tenseCheckboxChanged);
-    checkboxPast.addEventListener("change", tenseCheckboxChanged);
 
     for (let i = 0; i < numOfAnswers; i++) {
         answerButtons.push(new AnswerButton(i + 1, answerClickHandler));
@@ -91,14 +87,14 @@ function buttonHandler() {
 
     if (!hideAnswers) {
         initQuestion();
+        button.setChooseAnswer();
+        hideAllIcons();
 
     } else {
         if (button.state == "show-answers") {
-            console.log("button handler: state is: " + button.state);
             cancelTimerAndShowQuestion();
 
         } else if (button.state == "next-question") {
-            console.log("state was 'next-question'");
             hideAllIcons();
             startProgressBarAnimation();
             answerSection.classList.add("hide");
@@ -248,17 +244,15 @@ function answerClickHandler(clickedButton) {
             }
         } else {
 
-            incorrectAnswer = true;
             if (clickedButton == answerButtons[i]) {
                 answerButtons[i].setIncorrect();
+                incorrectAnswer = true;
 
             } else {
                 answerButtons[i].setFaded();
             }
         }
     }
-    console.log("answer clicked.. state is " + button.state
-        + ", ... going to set to next-question");
     button.setNextQuestion();
     updateScore();
 }
@@ -288,22 +282,19 @@ function openSettingsWindow() {
 function closeSettingsWindow() {
     settingsWindow.style.visibility = "hidden";
 }
-function tenseCheckboxChanged() {
-    settingsChanged = true;
-}
+
 function onExitSettings() {
-    if (settingsChanged) {
-        settingsChanged = false;
+    if (checkboxFuture.isChanged() || checkboxPast.isChanged()) {
         changeTenses();
     }
 }
 function changeTenses() {
 
     let newForms = [];
-    if (checkboxPast.checked) {
+    if (checkboxPast.checked()) {
         newForms.push(...formNamesPast);
     }
-    if (checkboxFuture.checked) {
+    if (checkboxFuture.checked()) {
         newForms.push(...formNamesFuture);
     }
 
@@ -319,11 +310,15 @@ function resetGame() {
     numOfCorrectAnswers = 0;
     questionNumber = 0;
 
-    button.setShowAnswers();
-    answerSection.classList.add("hide");
-    // buttonHandler();
+    if (hideAnswers) {
+        answerSection.classList.add("hide");
+        startProgressBarAnimation();
+        button.setShowAnswers();
+    } else {
+        button.setChooseAnswer();
+    }
+
     hideAllIcons();
-    startProgressBarAnimation();
     initQuestion();
 
     updateScore();
