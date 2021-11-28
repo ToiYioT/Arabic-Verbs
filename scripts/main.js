@@ -8,7 +8,7 @@ let roots = filterRoots(["katab"], [""]);
 var tense;
 
 // settings
-const hideAnswers = true;
+var hideAnswers = true;
 const numOfAnswers = 4;
 const progressBarUpdateInterval = 20;
 const revealAnswersAfter = 3000;
@@ -27,6 +27,7 @@ var progressBar;
 var settingsWindow;
 var checkboxPast;
 var checkboxFuture;
+var checkboxTimer;
 
 
 // logic variables 
@@ -62,7 +63,7 @@ window.addEventListener('load', (event) => {
     document.getElementsByClassName("x-button")[0].onclick = closeSettingsWindow;
     checkboxFuture = new Checkbox("checkbox-future");
     checkboxPast = new Checkbox("checkbox-past");
-    document.getElementById("x-button").addEventListener("click", onExitSettings);
+    checkboxTimer = new Checkbox("checkbox-timer");
 
 
     for (let i = 0; i < numOfAnswers; i++) {
@@ -281,13 +282,20 @@ function openSettingsWindow() {
 }
 function closeSettingsWindow() {
     settingsWindow.style.visibility = "hidden";
-}
 
-function onExitSettings() {
     if (checkboxFuture.isChanged() || checkboxPast.isChanged()) {
         changeTenses();
     }
+    if (checkboxTimer.isChanged()) {
+        hideAnswers = checkboxTimer.checked();
+        if (!hideAnswers) {
+            clearInterval(progressBarTimer);
+            progressBar.style.width = "100%";
+        }
+        resetGame();
+    }
 }
+
 function changeTenses() {
 
     let newForms = [];
@@ -315,6 +323,7 @@ function resetGame() {
         startProgressBarAnimation();
         button.setShowAnswers();
     } else {
+        answerSection.classList.remove("hide");
         button.setChooseAnswer();
     }
 
