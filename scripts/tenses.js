@@ -5,12 +5,13 @@ import { hebConjugateFuture } from "./heb-future.js";
 
 export const forms = Object.assign(formsFuture, formsPast);
 
-export const future = {
-    hebConjugate: hebConjugateFuture,
-    answerPrefix: " רַח ",
-}
-
-export const past = {
-    hebConjugate: hebConjugatePast,
-    answerPrefix: " ",
+export const tenses = {
+    future: {
+        hebConjugate: hebConjugateFuture,
+        answerPrefix: " רַח ",
+    },
+    past: {
+        hebConjugate: hebConjugatePast,
+        answerPrefix: " ",
+    }
 }

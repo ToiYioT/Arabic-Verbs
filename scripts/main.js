@@ -1,7 +1,7 @@
 import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
 import { pronouns, filterRoots, formNamesPast, formNamesFuture } from "./data.js";
-import { forms, future, past } from "./tenses.js";
+import { forms, tenses } from "./tenses.js";
 import { AnswerButton, Label, MainButton, Checkbox } from "./views.js";
 
 let roots = filterRoots(["katab"], [""]);
@@ -76,12 +76,7 @@ window.addEventListener('load', (event) => {
 });
 
 function setTense(form) {
-    if (form.tense == "future") {
-        tense = future;
-    }
-    else if (form.tense == "past") {
-        tense = past;
-    }
+    tense = tenses[form.tense];
 }
 
 function buttonHandler() {
