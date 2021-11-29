@@ -1,5 +1,5 @@
 
-export const hebConjugatePast = {
+const HebConjugatePast = {
 
     Ana: function (root) {
         if (root[root.length - 1] == "ה") {
@@ -72,6 +72,18 @@ export const hebConjugatePast = {
             return root + "תם";
         }
     },
+    IntuFem: function (root) {
+        if (root[root.length - 1] == "ה") {
+            return root.substring(0, root.length - 1) + "יתן";
+
+        } else if (root[root.length - 2] == "י") {
+            return root.substring(0, root.length - 2) +
+                root.substring(root.length - 1, root.length) + "תן";
+
+        } else {
+            return root + "תן";
+        }
+    },
     Humme: function (root) {
         if (root[root.length - 1] == "ה") {
             return root.substring(0, root.length - 1) + "ו";
@@ -81,3 +93,9 @@ export const hebConjugatePast = {
         }
     }
 }
+
+HebConjugatePast.AnaFem = HebConjugatePast.Ana;
+HebConjugatePast.IhnaFem = HebConjugatePast.Ihna;
+HebConjugatePast.Henne = HebConjugatePast.Humme;
+
+export let hebConjugatePast = HebConjugatePast;

@@ -4,7 +4,7 @@ import { pronouns, filterRoots, formNamesPast, formNamesFuture } from "./data.js
 import { forms, tenses } from "./tenses.js";
 import { AnswerButton, Label, MainButton, Checkbox } from "./views.js";
 
-let roots = filterRoots(["katab"], [""]);
+let roots = filterRoots(["yuktol"], [""]);
 var tense;
 
 // settings
@@ -159,7 +159,10 @@ function initQuestionFromParams(qParams) {
     let conjugatedHebrew = tense.hebConjugate[pronoun.name](firstWord);
     conjugatedHebrew = util.substituteLetterAtEndToEndingLetter(conjugatedHebrew);
     questionHolder.innerHTML = pronoun.hebrew + " " +
-        conjugatedHebrew + remainderOfTranslation + "<br/>";
+        conjugatedHebrew + remainderOfTranslation;
+    if (pronoun.gender != "") {
+        questionHolder.innerHTML += " ❨" + pronoun.gender + "❩" + "<br/>";
+    }
 
     let answers = [];
     for (let i = 0; i < numOfAnswers; i++) {

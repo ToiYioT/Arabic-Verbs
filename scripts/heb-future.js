@@ -1,5 +1,4 @@
-
-export const hebConjugateFuture = {
+const HebConjugateFuture = {
 
     Ana: function (root) {
         return "א" + root.substring(1, root.length);
@@ -57,5 +56,12 @@ export const hebConjugateFuture = {
         } else {
             return "י" + root.substring(1, root.length) + "ו";
         }
-    }
+    },
 }
+HebConjugateFuture.AnaFem = HebConjugateFuture.Ana;
+HebConjugateFuture.IntuFem = HebConjugateFuture.Intu;
+HebConjugateFuture.IhnaFem = HebConjugateFuture.Ihna;
+HebConjugateFuture.Henne = HebConjugateFuture.Humme;
+
+export let hebConjugateFuture = HebConjugateFuture;
+

@@ -27,6 +27,12 @@ function createNewForm() {
         Ihna: "",
         Intu: "",
         Humme: "",
+        populateRemainingPronouns: function () {
+            this.AnaFem = this.Ana;
+            this.IntuFem = this.Intu;
+            this.Henne = this.Humme;
+            this.IhnaFem = this.Ihna;
+        },
 
         processingToForm: ""
     }
@@ -43,6 +49,7 @@ katab.Hiye = buildPronoun("פַעְלַת", [NIZEL, HAKA, HABB, RAH]);
 katab.Ihna = buildPronoun("פַעַלְנַא", [NIZEL, HAKA, HABB, RAH]);
 katab.Intu = buildPronoun("פַעַלְתוּ", [NIZEL, HAKA, HABB, RAH]);
 katab.Humme = buildPronoun("פַעַלוּ", [NIZEL, HAKA, HABB, RAH]);
+katab.populateRemainingPronouns();
 katab.processingToForm = {
     "nizel": "פעל",
     "haka": "פְעלא",
@@ -62,6 +69,7 @@ nizel.Hiye = buildPronoun("פִעְלַת", [KATAB, HAKA, HABB, RAH]);
 nizel.Ihna = buildPronoun("פְעִלְנַא", [KATAB, HAKA, HABB, RAH]);
 nizel.Intu = buildPronoun("פְעִלְתוּ", [KATAB, HAKA, HABB, RAH]);
 nizel.Humme = buildPronoun("פִעְלוּ", [KATAB, HAKA, HABB, RAH]);
+nizel.populateRemainingPronouns();
 nizel.processingToForm = {
     "katab": "פעל",
     "haka": "פְעלא",
@@ -81,6 +89,7 @@ haka.Hiye = buildPronoun("פַעַת", [NISI, HABB, RAH]);
 haka.Ihna = buildPronoun("פַעֵינַא", [NISI, HABB, RAH, JAB]);
 haka.Intu = buildPronoun("פַעֵיתוּ", [NISI, HABB, RAH, JAB]);
 haka.Humme = buildPronoun("פַעוּ", [NISI, HABB, KATAB]);
+haka.populateRemainingPronouns();
 haka.processingToForm = {
     "katab": Math.random() > 0.5 ? "פע" : "פעל",
     "nisi": "פעי",
@@ -101,6 +110,7 @@ nisi.Hiye = buildPronoun("פִעְיַת", [HAKA, HABB, RAH]);
 nisi.Ihna = buildPronoun("פְעִינַא", [HAKA, HABB, RAH, JAB]);
 nisi.Intu = buildPronoun("פְעִיתוּ", [HAKA, HABB, RAH, JAB]);
 nisi.Humme = buildPronoun("פִעְיוּ", [HAKA, HABB, RAH, KATAB]);
+nisi.populateRemainingPronouns();
 nisi.processingToForm = {
     "katab": Math.random() > 0.5 ? "פע" : "פעל",
     "haka": "פעל",
@@ -119,6 +129,7 @@ habb.Hiye = buildPronoun("פַעַّת", [KATAB, NISI, RAH]);
 habb.Ihna = buildPronoun("פַעֵّינַא", [NISI, RAH, JAB]);
 habb.Intu = buildPronoun("פַעֵّיתוּ", [NISI, RAH, JAB]);
 habb.Humme = buildPronoun("פַעّוּ", [NISI, RAH, KATAB]);
+habb.populateRemainingPronouns();
 habb.processingToForm = {
     "jab": "פאע",
     "nisi": "פעי",
@@ -138,6 +149,7 @@ rah.Hiye = buildPronoun("פַאלַת", [HAKA, NISI, HABB]);
 rah.Ihna = buildPronoun("פֻלְנַא", [HAKA, NISI, HABB, JAB]);
 rah.Intu = buildPronoun("פֻלְתוּ", [HAKA, NISI, HABB, JAB]);
 rah.Humme = buildPronoun("פַאלוּ", [HAKA, NISI, HABB]);
+rah.populateRemainingPronouns();
 rah.processingToForm = {
     "haka": "פלא",
     "nisi": "פלי",
@@ -156,6 +168,7 @@ jab.Hiye = buildPronoun("פַאלַת", [KATAB, NISI, HABB]);
 jab.Ihna = buildPronoun("פִלְנַא", [HAKA, NISI, HABB, RAH]);
 jab.Intu = buildPronoun("פִלְתוּ", [HAKA, NISI, HABB, RAH]);
 jab.Humme = buildPronoun("פַאלוּ", [HAKA, NISI, HABB]);
+jab.populateRemainingPronouns();
 jab.processingToForm = {
     "haka": "פלא",
     "nisi": "פלי",

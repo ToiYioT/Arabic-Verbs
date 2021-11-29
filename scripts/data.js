@@ -1,10 +1,11 @@
 import { allRoots } from "./roots-data.js";
 
-function createPronoun(name, hebrew, arabic) {
+function createPronoun(name, hebrew, arabic, gender = "") {
     return {
         name: name,
         hebrew: hebrew,
-        arabic: arabic
+        arabic: arabic,
+        gender: gender
     }
 }
 
@@ -12,14 +13,19 @@ export const formNamesPast = ["katab", "nizel", "haka", "nisi", "habb", "rah", "
 export const formNamesFuture = ["yuktol", "yimsek", "yisma", "iruh", "ijib", "ihki", "insa", "ihibb", "ihutt"];
 
 export const pronouns = [
-    createPronoun("Ana", "אני", "אַנַא"),
+    createPronoun("Ana", "אני", "אַנַא", "זכר"),
     createPronoun("Inte", "אתה", "אִנְתֵ"),
     createPronoun("Inti", "את", "אִנְתִי"),
     createPronoun("Huwe", "הוא", "הֻוֵّ"),
     createPronoun("Hiye", "היא", "הִיֵّ"),
-    createPronoun("Ihna", "אנחנו", "אִחְנַא"),
+    createPronoun("Ihna", "אנחנו", "אִחְנַא", "זכר"),
     createPronoun("Intu", "אתם", "אִנְתוּ"),
     createPronoun("Humme", "הם", "הֻםֵّ"),
+
+    createPronoun("AnaFem", "אני", "אַנַא", "נקבה"),
+    createPronoun("IhnaFem", "אנחנו", "אִחְנַא", "נקבה"),
+    createPronoun("IntuFem", "אתן", "אִנְתוּ"),
+    createPronoun("Henne", "הן", "הֵןֵّ"),
 ]
 
 export function filterRoots(forms, lessons) {
