@@ -10,6 +10,7 @@ function createPronoun(name, hebrew, arabic, gender = "") {
 }
 
 export const formNamesPast = ["katab", "nizel", "haka", "nisi", "habb", "rah", "jab"];
+export const formNamesPresent = ["saken", "rayeh", "mashi", "mittakked", "mawjood"];
 export const formNamesFuture = ["yuktol", "yimsek", "yisma", "iruh", "ijib", "ihki", "insa", "ihibb", "ihutt"];
 
 export const pronouns = [
@@ -41,5 +42,6 @@ export function filterRoots(forms, lessons) {
             filteredData.push(allRoots[i]);
         }
     }
+    console.log(filteredData);
     return filteredData;
 }

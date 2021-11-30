@@ -1,10 +1,11 @@
 import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
-import { pronouns, filterRoots, formNamesPast, formNamesFuture } from "./data.js";
+import { pronouns, filterRoots, formNamesPast, formNamesPresent, formNamesFuture } from "./data.js";
 import { forms, tenses } from "./tenses.js";
 import { AnswerButton, Label, MainButton, Checkbox } from "./views.js";
 
-let roots = filterRoots(["yuktol"], [""]);
+let roots = filterRoots([...formNamesPresent],
+    ["", 1, 2, 3, 4, 5, 6, 7, 8]);
 var tense;
 
 // settings
@@ -341,10 +342,10 @@ function debugShowConjugationHebrew() {
     for (let v = 0; v < 7; v++) {
         let whereToPutText = debugCols[v];
 
-        let randomFormNum = Math.floor(Math.random() * tense.formNames.length);
-        let formName = tense.formNames[randomFormNum];
-        let randomWordNum = Math.floor(Math.random() * tense.rootsHebrew[formName].length);
-        let rootHebrew = tense.rootsHebrew[formName][randomWordNum];
+        let randomRootNum = Math.floor(Math.random() * roots.length);
+        let root = roots[randomRootNum];
+        let rootHebrew = root.hebrew;
+        let hebConjugate = tenses[forms[root.form].tense].hebConjugate;
         // rootHebrew = "ילך לאיבוד"
 
         let firstWordEndingAt = util.getIndexOfFirstWordEnding(rootHebrew);
@@ -354,12 +355,12 @@ function debugShowConjugationHebrew() {
         firstWord = util.substituteEndingLettersToNormal(firstWord);
         let remainderOfTranslation = rootHebrew.substring(firstWordEndingAt, rootHebrew.length);
 
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 12; i++) {
             let pronoun = pronouns[i];
-            let conjugatedWord = tense.hebConjugate[pronoun.name](firstWord);
+            let conjugatedWord = hebConjugate[pronoun.name](firstWord);
             conjugatedWord = util.substituteLetterAtEndToEndingLetter(conjugatedWord);
 
-            whereToPutText.innerHTML += pronoun.hebrew[i] + " " +
+            whereToPutText.innerHTML += pronoun.hebrew + " " +
                 conjugatedWord + remainderOfTranslation + "<br/>";
         }
     }
@@ -373,7 +374,6 @@ function debugShowConjugations() {
     let formName = roots[rootNum].form;
 
     let rootForm = forms[formName];
-    console.log(rootForm);
     let conjugateToArray = [
         rootForm,
         forms[rootForm.Ana.distractingForms[0]],
@@ -387,14 +387,16 @@ function debugShowConjugations() {
     // let conjugateTo = forms.ihutt;
 
     for (let c = 0; c < conjugateToArray.length; c++) {
-        let conjugateTo = conjugateToArray[c];
         let whereToPutText = debugCols[c];
 
 
         for (let i = 0; i < pronouns.length; i++) {
 
-            conjugator.rootProcessing(root, rootForm, conjugateTo);
             let pronoun = pronouns[i];
+            let conjugateTo = forms[rootForm[pronoun.name].distractingForms[c - 1]];
+            if (c == 0) conjugateTo = rootForm;
+
+            conjugator.rootProcessing(root, rootForm, conjugateTo);
 
             let output = pronoun.arabic + " " +
                 conjugator.getWord(conjugateTo[pronoun.name].template);
