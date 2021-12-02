@@ -11,6 +11,7 @@ function createPronoun(name, hebrew, arabic, gender = "") {
 
 export const formNamesPast = ["katab", "nizel", "haka", "nisi", "habb", "rah", "jab"];
 export const formNamesParticiple = ["saken", "rayeh", "mashi", "mittakked", "mawjood"];
+export const formNamesPresent = ["buktol", "bimsek", "bisma", "biruh", "bijib", "bihki", "binsa", "bihibb", "bihutt"];
 export const formNamesFuture = ["yuktol", "yimsek", "yisma", "iruh", "ijib", "ihki", "insa", "ihibb", "ihutt"];
 
 export const pronouns = [

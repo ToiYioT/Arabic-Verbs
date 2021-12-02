@@ -1,10 +1,17 @@
 import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
-import { pronouns, filterRoots, formNamesPast, formNamesParticiple, formNamesFuture } from "./data.js";
+import {
+    pronouns, filterRoots, formNamesPast, formNamesParticiple, formNamesFuture,
+    formNamesPresent
+} from "./data.js";
 import { forms, tenses } from "./tenses.js";
 import { AnswerButton, Label, MainButton, Checkbox } from "./views.js";
+import { formsPresent } from "./measure-1-present.js";
 
-let roots = filterRoots([...formNamesParticiple],
+let allFormNames = [...formNamesPast, ...formNamesPresent, ...formNamesFuture,
+...formNamesParticiple];
+
+let roots = filterRoots(allFormNames,
     ["", 1, 2, 3, 4, 5, 6, 7, 8]);
 var tense;
 
@@ -161,7 +168,7 @@ function initQuestionFromParams(qParams) {
     conjugatedHebrew = util.substituteLetterAtEndToEndingLetter(conjugatedHebrew);
     questionHolder.innerHTML = pronoun.hebrew + " " +
         conjugatedHebrew + remainderOfTranslation;
-    if (pronoun.gender != "") {
+    if (tense.specifyPronounGender && pronoun.gender != "") {
         questionHolder.innerHTML += " ❨" + pronoun.gender + "❩" + "<br/>";
     }
 
