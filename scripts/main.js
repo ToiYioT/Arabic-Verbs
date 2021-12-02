@@ -1,10 +1,10 @@
 import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
-import { pronouns, filterRoots, formNamesPast, formNamesPresent, formNamesFuture } from "./data.js";
+import { pronouns, filterRoots, formNamesPast, formNamesParticiple, formNamesFuture } from "./data.js";
 import { forms, tenses } from "./tenses.js";
 import { AnswerButton, Label, MainButton, Checkbox } from "./views.js";
 
-let roots = filterRoots([...formNamesPresent],
+let roots = filterRoots([...formNamesParticiple],
     ["", 1, 2, 3, 4, 5, 6, 7, 8]);
 var tense;
 

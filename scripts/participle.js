@@ -1,5 +1,5 @@
 
-const TENSE = "present";
+const TENSE = "participle";
 const SAKEN = "saken";
 const RAYEH = "rayeh";
 const MASHI = "mashi";
@@ -146,7 +146,7 @@ muwajeed.populateRemainingPronouns();
 muwajeed.processingToForm = {
 };
 
-export const formsPresent = {
+export const formsParticiple = {
     "saken": saken,
     "rayeh": rayeh,
     "mashi": mashi,
