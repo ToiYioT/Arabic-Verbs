@@ -186,6 +186,20 @@ function initQuestionFromParams(qParams) {
         answer = util.postProcess(answer);
         answers.push(answer);
     }
+
+    // substitute last answer with confusing pronoun, if exists:
+    if (tense.confuseWithPronouns && pronoun.confusingPronoun != null) {
+        let confusingPronoun = pronoun.confusingPronoun;
+
+        conjugator.rootProcessing(rootArabic, rootForm, rootForm);
+
+        let answer = pronoun.arabic + tense.answerPrefix
+            + conjugator.getWord(rootForm[confusingPronoun.name].template);
+        answer = util.substituteLetterAtEndToEndingLetter(answer, true);
+        answer = util.postProcess(answer);
+        answers[answers.length] = answer;
+    }
+
     correctAnswer = answers[0];
     util.shuffle(answers);
     setAnswersToButtons(answers);

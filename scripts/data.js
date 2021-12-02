@@ -5,30 +5,44 @@ function createPronoun(name, hebrew, arabic, gender = "") {
         name: name,
         hebrew: hebrew,
         arabic: arabic,
-        gender: gender
+        gender: gender,
+        confusingPronoun: null,
+        setConfusingPronoun: function (confusingPronoun) {
+            this.confusingPronoun = confusingPronoun;
+        }
     }
 }
+
 
 export const formNamesPast = ["katab", "nizel", "haka", "nisi", "habb", "rah", "jab"];
 export const formNamesParticiple = ["saken", "rayeh", "mashi", "mittakked", "mawjood"];
 export const formNamesPresent = ["buktol", "bimsek", "bisma", "biruh", "bijib", "bihki", "binsa", "bihibb", "bihutt"];
 export const formNamesFuture = ["yuktol", "yimsek", "yisma", "iruh", "ijib", "ihki", "insa", "ihibb", "ihutt"];
 
-export const pronouns = [
-    createPronoun("Ana", "אני", "אַנַא", "זכר"),
-    createPronoun("Inte", "אתה", "אִנְתֵ"),
-    createPronoun("Inti", "את", "אִנְתִי"),
-    createPronoun("Huwe", "הוא", "הֻוֵّ"),
-    createPronoun("Hiye", "היא", "הִיֵّ"),
-    createPronoun("Ihna", "אנחנו", "אִחְנַא", "זכר"),
-    createPronoun("Intu", "אתם", "אִנְתוּ"),
-    createPronoun("Humme", "הם", "הֻםֵّ"),
 
-    createPronoun("AnaFem", "אני", "אַנַא", "נקבה"),
-    createPronoun("IhnaFem", "אנחנו", "אִחְנַא", "נקבה"),
-    createPronoun("IntuFem", "אתן", "אִנְתוּ"),
-    createPronoun("Henne", "הן", "הֵןֵّ"),
+const Ana = createPronoun("Ana", "אני", "אַנַא", "זכר");
+const Inte = createPronoun("Inte", "אתה", "אִנְתֵ");
+const Inti = createPronoun("Inti", "את", "אִנְתִי");
+const Huwe = createPronoun("Huwe", "הוא", "הֻוֵّ");
+const Hiye = createPronoun("Hiye", "היא", "הִיֵّ");
+const Ihna = createPronoun("Ihna", "אנחנו", "אִחְנַא", "זכר");
+const Intu = createPronoun("Intu", "אתם", "אִנְתוּ");
+const Humme = createPronoun("Humme", "הם", "הֻםֵّ");
+
+const AnaFem = createPronoun("AnaFem", "אני", "אַנַא", "נקבה");
+const IhnaFem = createPronoun("IhnaFem", "אנחנו", "אִחְנַא", "נקבה");
+const IntuFem = createPronoun("IntuFem", "אתן", "אִנְתוּ");
+const Henne = createPronoun("Henne", "הן", "הֵןֵّ");
+
+Ana.setConfusingPronoun(Inti);
+AnaFem.setConfusingPronoun(Inti);
+Inti.setConfusingPronoun(Ana);
+
+export const pronouns = [
+    Ana, Inte, Inti, Huwe, Hiye, Ihna, Intu, Humme,
+    AnaFem, IhnaFem, IntuFem, Henne
 ]
+
 
 export function filterRoots(forms, lessons) {
 
@@ -43,6 +57,6 @@ export function filterRoots(forms, lessons) {
             filteredData.push(allRoots[i]);
         }
     }
-    console.log(filteredData);
+    // console.log(filteredData);
     return filteredData;
 }

@@ -14,20 +14,24 @@ export const tenses = {
         hebConjugate: hebConjugateFuture,
         answerPrefix: " רַח ",
         specifyPronounGender: true,
+        confuseWithPronouns: false,
     },
     past: {
         hebConjugate: hebConjugatePast,
         answerPrefix: " ",
         specifyPronounGender: true,
+        confuseWithPronouns: true,
     },
     participle: {
         hebConjugate: hebConjugatePresent,
         answerPrefix: " ",
         specifyPronounGender: false,
+        confuseWithPronouns: false,
     },
     present: {
         hebConjugate: hebConjugatePresent,
         answerPrefix: " ",
         specifyPronounGender: false,
+        confuseWithPronouns: false,
     }
 }
