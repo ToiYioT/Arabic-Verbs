@@ -144,7 +144,6 @@ function generateRandomQuestionParams() {
 }
 
 function initQuestionFromParams(qParams) {
-
     resetQuestionState();
 
     let pronoun = qParams.pronoun;
@@ -187,10 +186,12 @@ function getAnswers(rootArabic, answerForms, pronoun) {
 function getAnswersConfuseWithPronouns(rootArabic, answerForms, correctPronoun) {
     let answers = [];
     let correctAnswer;
+    let confusingPronounAnswer = null;
+    let confusingPronoun = correctPronoun.confusingPronoun;
     let rootForm = answerForms[0];
 
     pronouns = util.shuffle(pronouns);
-    conjugator.rootProcessing(rootArabic, rootForm, rootForm); /// move out
+    conjugator.rootProcessing(rootArabic, rootForm, rootForm);
 
     for (let i = 0; i < pronouns.length; i++) {
 
@@ -204,9 +205,16 @@ function getAnswersConfuseWithPronouns(rootArabic, answerForms, correctPronoun) 
         if (pronouns[i] == correctPronoun) {
             correctAnswer = answer;
         }
+        if (tense.confuseWithPronouns && pronouns[i] == confusingPronoun) {
+            confusingPronounAnswer = answer;
+        }
     }
     answers = [...new Set(answers)]; // leave only unique answers
     answers = answers.filter(item => item !== correctAnswer); // remove correct ones
+    answers = answers.filter(item => item !== confusingPronounAnswer); // remove confusing pronoun
+    if (confusingPronounAnswer != null) {
+        answers.unshift(confusingPronounAnswer); // add back the confusingPronoun answer
+    }
     answers.unshift(correctAnswer); // add back the correct one at the start of the array
     answers.length = 4;
     return answers;

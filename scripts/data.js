@@ -45,6 +45,7 @@ export const pronounsConst = [
 
 
 export function filterRoots(forms, lessons) {
+    // var startTime = performance.now()
 
     let filteredData = [];
 
@@ -57,6 +58,9 @@ export function filterRoots(forms, lessons) {
             filteredData.push(allRoots[i]);
         }
     }
-    // console.log(filteredData);
+
+    // var endTime = performance.now()
+    // console.log(`Call to filteringRoots took ${endTime - startTime} milliseconds`);
+
     return filteredData;
 }
