@@ -39,7 +39,6 @@ var checkboxTimer;
 
 
 // logic variables 
-var answerForms = [];
 var correctAnswer;
 var numOfCorrectAnswers = 0;
 
@@ -148,14 +147,55 @@ function initQuestionFromParams(qParams) {
     resetQuestionState();
 
     let pronoun = qParams.pronoun;
-    createAnswerForms(qParams);
+    // first one is the correct root form:
+    let answerForms = createAnswerForms(qParams);
+    setTense(answerForms[0]);
 
+    conjugateHebrew(qParams.root.hebrew, pronoun);
+    let answers = getAnswers(qParams.root.arabic, answerForms, pronoun);
+
+    correctAnswer = answers[0];
+    util.shuffle(answers);
+    setAnswersToButtons(answers);
+}
+
+function getAnswers(rootArabic, answerForms, pronoun) {
+    let answers = [];
     let rootForm = answerForms[0];
-    setTense(rootForm);
 
-    let rootArabic = qParams.root.arabic;
-    let rootHebrew = qParams.root.hebrew;
+    for (let i = 0; i < numOfAnswers; i++) {
+        let conjugateTo = answerForms[i];
+        conjugator.rootProcessing(rootArabic, rootForm, conjugateTo);
 
+        let answer = pronoun.arabic + tense.answerPrefix
+            + conjugator.getWord(conjugateTo[pronoun.name].template);
+
+        answer = util.substituteLetterAtEndToEndingLetter(answer, true);
+        answer = util.postProcess(answer);
+        answers.push(answer);
+    }
+
+    if (tense.confuseWithPronouns && pronoun.confusingPronoun != null) {
+        answers = substituteLastAnswerWithConfusingPronoun(
+            answers, pronoun, rootArabic, rootForm);
+    }
+    return answers;
+}
+
+function substituteLastAnswerWithConfusingPronoun(
+    answers, pronoun, rootArabic, rootForm) {
+    let confusingPronoun = pronoun.confusingPronoun;
+    conjugator.rootProcessing(rootArabic, rootForm, rootForm);
+
+    let answer = pronoun.arabic + tense.answerPrefix
+        + conjugator.getWord(rootForm[confusingPronoun.name].template);
+    answer = util.substituteLetterAtEndToEndingLetter(answer, true);
+    answer = util.postProcess(answer);
+    answers[answers.length] = answer;
+    return answers;
+}
+
+function conjugateHebrew(rootHebrew, pronoun) {
     // extracting the hebrew word to conjugate (the first one)
     let firstWordEndingAt = util.getIndexOfFirstWordEnding(rootHebrew);
     if (firstWordEndingAt == -1) firstWordEndingAt = rootHebrew.length;
@@ -171,38 +211,6 @@ function initQuestionFromParams(qParams) {
     if (tense.specifyPronounGender && pronoun.gender != "") {
         questionHolder.innerHTML += " ❨" + pronoun.gender + "❩" + "<br/>";
     }
-
-    let answers = [];
-    for (let i = 0; i < numOfAnswers; i++) {
-
-        let conjugateTo = answerForms[i];
-
-        conjugator.rootProcessing(rootArabic, rootForm, conjugateTo);
-
-        let answer = pronoun.arabic + tense.answerPrefix
-            + conjugator.getWord(conjugateTo[pronoun.name].template);
-
-        answer = util.substituteLetterAtEndToEndingLetter(answer, true);
-        answer = util.postProcess(answer);
-        answers.push(answer);
-    }
-
-    // substitute last answer with confusing pronoun, if exists:
-    if (tense.confuseWithPronouns && pronoun.confusingPronoun != null) {
-        let confusingPronoun = pronoun.confusingPronoun;
-
-        conjugator.rootProcessing(rootArabic, rootForm, rootForm);
-
-        let answer = pronoun.arabic + tense.answerPrefix
-            + conjugator.getWord(rootForm[confusingPronoun.name].template);
-        answer = util.substituteLetterAtEndToEndingLetter(answer, true);
-        answer = util.postProcess(answer);
-        answers[answers.length] = answer;
-    }
-
-    correctAnswer = answers[0];
-    util.shuffle(answers);
-    setAnswersToButtons(answers);
 }
 
 function setAnswersToButtons(answers) {
@@ -290,11 +298,14 @@ function createAnswerForms(qParams) {
     let form = forms[qParams.root.form];
     let pronoun = qParams.pronoun;
 
-    answerForms.length = 0;
+    let answerForms = [];
+
     answerForms.push(form);
     answerForms.push(forms[form[pronoun.name].distractingForms[0]]);
     answerForms.push(forms[form[pronoun.name].distractingForms[1]]);
     answerForms.push(forms[form[pronoun.name].distractingForms[2]]);
+
+    return answerForms;
 }
 
 function openSettingsWindow() {
