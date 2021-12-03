@@ -38,7 +38,7 @@ Ana.setConfusingPronoun(Inti);
 AnaFem.setConfusingPronoun(Inti);
 Inti.setConfusingPronoun(Ana);
 
-export const pronouns = [
+export const pronounsConst = [
     Ana, Inte, Inti, Huwe, Hiye, Ihna, Intu, Humme,
     AnaFem, IhnaFem, IntuFem, Henne
 ]

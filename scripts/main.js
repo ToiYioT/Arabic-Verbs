@@ -1,19 +1,20 @@
 import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
 import {
-    pronouns, filterRoots, formNamesPast, formNamesParticiple, formNamesFuture,
+    pronounsConst, filterRoots, formNamesPast, formNamesParticiple, formNamesFuture,
     formNamesPresent
 } from "./data.js";
 import { forms, tenses } from "./tenses.js";
 import { AnswerButton, Label, MainButton, Checkbox } from "./views.js";
-import { formsPresent } from "./measure-1-present.js";
 
 let allFormNames = [...formNamesPast, ...formNamesPresent, ...formNamesFuture,
 ...formNamesParticiple];
 
+/// FILTERING
 let roots = filterRoots(allFormNames,
     ["", 1, 2, 3, 4, 5, 6, 7, 8]);
 var tense;
+var pronouns = pronounsConst;
 
 // settings
 var hideAnswers = true;
@@ -22,7 +23,7 @@ const progressBarUpdateInterval = 20;
 const revealAnswersAfter = 3000;
 
 var numOfProgressBarUpdates = 0;
-const progressBarMaxUpdates = 350;
+const progressBarMaxUpdates = 150;
 
 // html elements
 var answerButtons = [];
@@ -152,7 +153,8 @@ function initQuestionFromParams(qParams) {
     setTense(answerForms[0]);
 
     conjugateHebrew(qParams.root.hebrew, pronoun);
-    let answers = getAnswers(qParams.root.arabic, answerForms, pronoun);
+    // let answers = getAnswers(qParams.root.arabic, answerForms, pronoun);
+    let answers = getAnswersConfuseWithPronouns(qParams.root.arabic, answerForms, pronoun);
 
     correctAnswer = answers[0];
     util.shuffle(answers);
@@ -182,6 +184,34 @@ function getAnswers(rootArabic, answerForms, pronoun) {
     return answers;
 }
 
+function getAnswersConfuseWithPronouns(rootArabic, answerForms, correctPronoun) {
+    let answers = [];
+    let correctAnswer;
+    let rootForm = answerForms[0];
+
+    pronouns = util.shuffle(pronouns);
+    conjugator.rootProcessing(rootArabic, rootForm, rootForm); /// move out
+
+    for (let i = 0; i < pronouns.length; i++) {
+
+        let answer = correctPronoun.arabic + tense.answerPrefix
+            + conjugator.getWord(rootForm[pronouns[i].name].template);
+
+        answer = util.substituteLetterAtEndToEndingLetter(answer, true);
+        answer = util.postProcess(answer);
+
+        answers.push(answer);
+        if (pronouns[i] == correctPronoun) {
+            correctAnswer = answer;
+        }
+    }
+    answers = [...new Set(answers)]; // leave only unique answers
+    answers = answers.filter(item => item !== correctAnswer); // remove correct ones
+    answers.unshift(correctAnswer); // add back the correct one at the start of the array
+    answers.length = 4;
+    return answers;
+}
+
 function substituteLastAnswerWithConfusingPronoun(
     answers, pronoun, rootArabic, rootForm) {
     let confusingPronoun = pronoun.confusingPronoun;
@@ -208,7 +238,13 @@ function conjugateHebrew(rootHebrew, pronoun) {
     conjugatedHebrew = util.substituteLetterAtEndToEndingLetter(conjugatedHebrew);
     questionHolder.innerHTML = pronoun.hebrew + " " +
         conjugatedHebrew + remainderOfTranslation;
-    if (tense.specifyPronounGender && pronoun.gender != "") {
+
+    // add the gender in parentheses to the question (זכר/נקבה) only when applies:
+    if (tense.specifyPronounGender && pronoun.gender != ""
+        ||
+        (tense == tenses.participle && pronoun.name.includes("Ana")
+            && rootHebrew.charAt(rootHebrew.length - 1) == "ה")) {
+
         questionHolder.innerHTML += " ❨" + pronoun.gender + "❩" + "<br/>";
     }
 }
