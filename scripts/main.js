@@ -2,7 +2,7 @@ import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
 import { pronounsConst, filterRoots } from "./data.js";
 import { forms, tenses } from "./tenses.js";
-import { getFilteringParams } from "./urlParams.js";
+import { getConfuseType, getFilteringParams } from "./urlParams.js";
 import { AnswerButton, Label, MainButton, Checkbox } from "./views.js";
 
 var tense;
@@ -38,16 +38,35 @@ var currentQuestionParams;
 var questionQueue = [];
 var incorrectAnswer = false;
 var progressBarTimer;
+var getAnswers;
 
 // debug
 var container;
 var debugContainer;
 
+function setConfuseType() {
+    let confuseType = getConfuseType();
+
+    switch (confuseType) {
+        case "form":
+            getAnswers = getAnswersConfuseWithForms;
+            break;
+        case "pronoun":
+            getAnswers = getAnswersConfuseWithPronouns;
+            break;
+        case "mixed":
+            getAnswers = getAnswersAlternateConfuse;
+            break;
+        default:
+            getAnswers = getAnswersConfuseWithForms;
+    }
+}
 
 window.addEventListener('load', (event) => {
 
     /// FILTERING
     roots = filterRoots(...getFilteringParams());
+    setConfuseType();
 
     container = document.getElementById("container");
     questionHolder = document.getElementById("question");
@@ -143,15 +162,14 @@ function initQuestionFromParams(qParams) {
     setTense(answerForms[0]);
 
     conjugateHebrew(qParams.root.hebrew, pronoun);
-    // let answers = getAnswers(qParams.root.arabic, answerForms, pronoun);
-    let answers = getAnswersConfuseWithPronouns(qParams.root.arabic, answerForms, pronoun);
+    let answers = getAnswers(qParams.root.arabic, answerForms, pronoun);
 
     correctAnswer = answers[0];
     util.shuffle(answers);
     setAnswersToButtons(answers);
 }
 
-function getAnswers(rootArabic, answerForms, pronoun) {
+function getAnswersConfuseWithForms(rootArabic, answerForms, pronoun) {
     let answers = [];
     let rootForm = answerForms[0];
 
@@ -172,6 +190,14 @@ function getAnswers(rootArabic, answerForms, pronoun) {
             answers, pronoun, rootArabic, rootForm);
     }
     return answers;
+}
+
+function getAnswersAlternateConfuse(rootArabic, answerForms, correctPronoun) {
+    if (Math.random() > 0.5) {
+        return getAnswersConfuseWithForms(rootArabic, answerForms, correctPronoun);
+    } else {
+        return getAnswersConfuseWithPronouns(rootArabic, answerForms, correctPronoun);
+    }
 }
 
 function getAnswersConfuseWithPronouns(rootArabic, answerForms, correctPronoun) {

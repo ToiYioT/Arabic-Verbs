@@ -54,5 +54,21 @@ export function getFilteringParams() {
 
 export function getConfuseType() {
     let urlParams = new URLSearchParams(document.location.search);
-    let confuse = urlParams.get("confuse");// forms, pronouns, mixed?
+    let confuseQuery = urlParams.get("confuse");// forms, pronouns, mixed?
+    let confuseType;
+
+    switch (confuseQuery) {
+        case "form":
+            confuseType = "form";
+            break;
+        case "pronoun":
+            confuseType = "pronoun";
+            break;
+        case "mixed":
+            confuseType = "mixed";
+            break;
+        default:
+            confuseType = "form";
+    }
+    return confuseType;
 }
