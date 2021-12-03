@@ -1,19 +1,12 @@
 import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
-import {
-    pronounsConst, filterRoots, formNamesPast, formNamesParticiple, formNamesFuture,
-    formNamesPresent
-} from "./data.js";
+import { pronounsConst, filterRoots } from "./data.js";
 import { forms, tenses } from "./tenses.js";
+import { getFilteringParams } from "./urlParams.js";
 import { AnswerButton, Label, MainButton, Checkbox } from "./views.js";
 
-let allFormNames = [...formNamesPast, ...formNamesPresent, ...formNamesFuture,
-...formNamesParticiple];
-
-/// FILTERING
-let roots = filterRoots(allFormNames,
-    ["", 1, 2, 3, 4, 5, 6, 7, 8]);
 var tense;
+var roots;
 var pronouns = pronounsConst;
 
 // settings
@@ -34,10 +27,7 @@ var score;
 var progressBar;
 
 var settingsWindow;
-var checkboxPast;
-var checkboxFuture;
 var checkboxTimer;
-
 
 // logic variables 
 var correctAnswer;
@@ -56,6 +46,9 @@ var debugContainer;
 
 window.addEventListener('load', (event) => {
 
+    /// FILTERING
+    roots = filterRoots(...getFilteringParams());
+
     container = document.getElementById("container");
     questionHolder = document.getElementById("question");
     button = new MainButton("main-button", buttonHandler);
@@ -69,8 +62,6 @@ window.addEventListener('load', (event) => {
     settingsWindow = document.getElementsByClassName("settings-overlay")[0];
     document.getElementsByClassName("cog")[0].onclick = openSettingsWindow;
     document.getElementsByClassName("x-button")[0].onclick = closeSettingsWindow;
-    checkboxFuture = new Checkbox("checkbox-future");
-    checkboxPast = new Checkbox("checkbox-past");
     checkboxTimer = new Checkbox("checkbox-timer");
 
 
@@ -358,9 +349,6 @@ function openSettingsWindow() {
 function closeSettingsWindow() {
     settingsWindow.style.visibility = "hidden";
 
-    if (checkboxFuture.isChanged() || checkboxPast.isChanged()) {
-        changeTenses();
-    }
     if (checkboxTimer.isChanged()) {
         hideAnswers = checkboxTimer.checked();
         if (!hideAnswers) {
@@ -369,20 +357,6 @@ function closeSettingsWindow() {
         }
         resetGame();
     }
-}
-
-function changeTenses() {
-
-    let newForms = [];
-    if (checkboxPast.checked()) {
-        newForms.push(...formNamesPast);
-    }
-    if (checkboxFuture.checked()) {
-        newForms.push(...formNamesFuture);
-    }
-
-    roots = filterRoots(newForms, [""]);
-    resetGame();
 }
 
 function resetGame() {

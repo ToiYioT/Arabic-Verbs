@@ -59,6 +59,7 @@ export function filterRoots(forms, lessons) {
         }
     }
 
+    console.log(`Filtered: ${filteredData.length} roots`);
     // var endTime = performance.now()
     // console.log(`Call to filteringRoots took ${endTime - startTime} milliseconds`);
 
