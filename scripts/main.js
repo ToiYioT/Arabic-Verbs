@@ -66,6 +66,7 @@ window.addEventListener('load', (event) => {
 
     /// FILTERING
     roots = filterRoots(...getFilteringParams());
+    // roots = filterRoots(["bittallam"], ["", 1, 2, 3, 4, 5, 6, 7, 8]);
     setConfuseType();
 
     container = document.getElementById("container");

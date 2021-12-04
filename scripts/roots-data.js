@@ -411,6 +411,13 @@ export const allRoots = [
     { hebrew: "משתעל", arabic: "קח", form: "bihutt", lesson: "" },
     { hebrew: "מצרף", arabic: "צ'ם", form: "bihutt", lesson: "" },
     { hebrew: "נכנס", arabic: "דח'ל", form: "buktol", lesson: 6 },
-    { hebrew: "כותב", arabic: "כּתבּ", form: "bimsek", lesson: 6 }
+    { hebrew: "כותב", arabic: "כּתבּ", form: "bimsek", lesson: 6 },
+    { hebrew: "לומד", arabic: "עלם", form: "bittallam", lesson: 3 },
+    {
+        hebrew: "עובד",
+        arabic: "שע'ל",
+        form: "bishtrel",
+        lesson: 3
+    }
 ]
 

@@ -18,6 +18,7 @@ export const formNamesPast = ["katab", "nizel", "haka", "nisi", "habb", "rah", "
 export const formNamesParticiple = ["saken", "rayeh", "mashi", "mittakked", "mawjood"];
 export const formNamesPresent = ["buktol", "bimsek", "bisma", "biruh", "bijib", "bihki", "binsa", "bihibb", "bihutt"];
 export const formNamesFuture = ["yuktol", "yimsek", "yisma", "iruh", "ijib", "ihki", "insa", "ihibb", "ihutt"];
+export const formNamesPresent210 = ["bikarrer", "bisaafer", "bittallam", "bitnaazal", "binimsek", "bishtrel", "bistaamel"]
 
 
 const Ana = createPronoun("Ana", "אני", "אַנַא", "זכר");

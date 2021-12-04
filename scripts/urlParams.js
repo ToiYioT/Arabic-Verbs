@@ -1,9 +1,9 @@
 import {
-    formNamesPast, formNamesParticiple, formNamesFuture, formNamesPresent
+    formNamesPast, formNamesParticiple, formNamesFuture, formNamesPresent, formNamesPresent210
 } from "./data.js";
 
 let allFormNames = [...formNamesPast, ...formNamesPresent, ...formNamesFuture,
-...formNamesParticiple];
+...formNamesParticiple, ...formNamesPresent210];
 let allLessons = ["", 1, 2, 3, 4, 5, 6, 7, 8];
 
 export function getFilteringParams() {
