@@ -1,7 +1,13 @@
 
 const TENSE = "present210";
+const BIKARRER = "bikarrer";
+const BISAAFER = "bisaafer";
 const BITTALLAM = "bittallam";
+const BITNAAZAL = "bitnaazal";
+const BINIMSEK = "binimsek";
 const BISHTREL = "bishtrel";
+const BISTAAMEL = "bistaamel";
+
 
 function buildPronoun(template, distractions) {
     return {
@@ -44,6 +50,44 @@ function createNewForm() {
     }
 }
 
+/// measure 2
+const bikarrer = createNewForm();
+bikarrer.formName = BIKARRER;
+bikarrer.Ana = buildPronoun("בַּפַעֵّל", []);
+bikarrer.Inte = buildPronoun("בִּתְפַעֵّל", []);
+bikarrer.Inti = buildPronoun("בִּתְפַעֵّלִי", []);
+bikarrer.Huwe = buildPronoun("בִּיפַעֵّל", []);
+bikarrer.Hiye = buildPronoun("בִּתְפַעֵّל", []);
+bikarrer.Ihna = buildPronoun("מִנְפַעֵّל", []);
+bikarrer.Intu = buildPronoun("בִּתְפַעֵّלוּ", []);
+bikarrer.Humme = buildPronoun("בִּיפַעֵّלוּ", []);
+bikarrer.addDistractingFormsToAll([BISHTREL, "buktol", "bisma"]);
+bikarrer.populateRemainingPronouns();
+bikarrer.processingToForm = {
+    "bishtrel": "פעל",
+    "buktol": "פעל",
+    "bisma": "פעל",
+};
+
+/// measure 3
+const bisaafer = createNewForm();
+bisaafer.formName = BISAAFER;
+bisaafer.Ana = buildPronoun("בַּפַאעֵל", []);
+bisaafer.Inte = buildPronoun("בִּתְפַאעֵל", []);
+bisaafer.Inti = buildPronoun("בִּתְפַאעְלי", []);
+bisaafer.Huwe = buildPronoun("בִּיפַאעֵל", []);
+bisaafer.Hiye = buildPronoun("בִּתְפַאעֵל", []);
+bisaafer.Ihna = buildPronoun("מִנְפַאעֵל", []);
+bisaafer.Intu = buildPronoun("בִּתְפַאעְלוּ", []);
+bisaafer.Humme = buildPronoun("בִּיפַאעְלוּ", []);
+bisaafer.addDistractingFormsToAll([BISHTREL, "buktol", "bisma"]);
+bisaafer.populateRemainingPronouns();
+bisaafer.processingToForm = {
+    "bishtrel": "פעל",
+    "buktol": "פעל",
+    "bisma": "פעל",
+};
+
 /// measure 5
 const bittallam = createNewForm();
 bittallam.formName = BITTALLAM;
@@ -64,7 +108,47 @@ bittallam.processingToForm = {
 };
 
 
-/// measure 5
+/// measure 6
+const bitnaazal = createNewForm();
+bitnaazal.formName = BITNAAZAL;
+bitnaazal.Ana = buildPronoun("בַּתְפַאעַל", []);
+bitnaazal.Inte = buildPronoun("בְּתִתְפַאעַל", []);
+bitnaazal.Inti = buildPronoun("בְּתִתְפַאעַלִי", []);
+bitnaazal.Huwe = buildPronoun("בִּיתְפַאעַל", []);
+bitnaazal.Hiye = buildPronoun("בְּתִתְפַאעַל", []);
+bitnaazal.Ihna = buildPronoun("מְנִתְפַאעַל", []);
+bitnaazal.Intu = buildPronoun("בְּתִתְפַאעַלוּ", []);
+bitnaazal.Humme = buildPronoun("בִּיתְפַאעַלוּ", []);
+bitnaazal.addDistractingFormsToAll([BISHTREL, "buktol", "bisma"]);
+bitnaazal.populateRemainingPronouns();
+bitnaazal.processingToForm = {
+    "bishtrel": "פעל",
+    "buktol": "פעל",
+    "bisma": "פעל",
+};
+
+
+/// measure 7
+const binimsek = createNewForm();
+binimsek.formName = BINIMSEK;
+binimsek.Ana = buildPronoun("בַּנִפְעֵל", []);
+binimsek.Inte = buildPronoun("בְּתִנִפְעֵל", []);
+binimsek.Inti = buildPronoun("בְּתִנְפִעְלִי", []);
+binimsek.Huwe = buildPronoun("בִּינִפְעֵל", []);
+binimsek.Hiye = buildPronoun("בְּתִנִפְעֵל", []);
+binimsek.Ihna = buildPronoun("מְנִנִפְעֵל", []);
+binimsek.Intu = buildPronoun("בְּתִנְפִעְלוּ", []);
+binimsek.Humme = buildPronoun("בִּינְפִעְלוּ", []);
+binimsek.addDistractingFormsToAll([BISHTREL, "buktol", "bisma"]);
+binimsek.populateRemainingPronouns();
+binimsek.processingToForm = {
+    "bishtrel": "פעל",
+    "buktol": "פעל",
+    "bisma": "פעל",
+};
+
+
+/// measure 8
 const bishtrel = createNewForm();
 bishtrel.formName = BISHTREL;
 bishtrel.Ana = buildPronoun("בַּפְתְעֵל", []);
@@ -83,7 +167,42 @@ bishtrel.processingToForm = {
     "bisma": "פעל",
 };
 
+
+/// measure 10
+const bistaamel = createNewForm();
+bistaamel.formName = BISTAAMEL;
+bistaamel.Ana = buildPronoun("בַּסְתַפְעֵל", []);
+bistaamel.Inte = buildPronoun("בְּתִסְתַפְעֵל", []);
+bistaamel.Inti = buildPronoun("בְּתִסְתַפִעְלִי", []);
+bistaamel.Huwe = buildPronoun("בִּיסְתַפְעֵל", []);
+bistaamel.Hiye = buildPronoun("בְּתִסְתַפְעֵל", []);
+bistaamel.Ihna = buildPronoun("מְנִסְתַפְעֵל", []);
+bistaamel.Intu = buildPronoun("בְּתִסְתַפִעְלוּ", []);
+bistaamel.Humme = buildPronoun("בִּיסְתַפִעְלוּ", []);
+bistaamel.addDistractingFormsToAll([BITTALLAM, "buktol", "bisma"]);
+bistaamel.populateRemainingPronouns();
+bistaamel.processingToForm = {
+    "bittallam": "פעל",
+    "buktol": "פעל",
+    "bisma": "פעל",
+};
+
+
+
 export const formsPresent210 = {
     "bittallam": bittallam,
     "bishtrel": bishtrel,
+    "bikarrer": bikarrer,
+    "bisaafer": bisaafer,
+    "bitnaazal": bitnaazal,
+    "binimsek": binimsek,
+    "bistaamel": bistaamel,
 }
+
+// const BIKARRER = "bikarrer";
+// const BISAAFER = "bisaafer";
+// const BITTALLAM = "bittallam";
+// const BITNAAZAL = "bitnaazal";
+// const BINIMSEK = "binimsek";
+// const BISHTREL = "bishtrel";
+// const BISTAAMEL = "bistaamel";
