@@ -62,12 +62,12 @@ yikarrer.Hiye = buildPronoun("תְפַעֵّל", []);
 yikarrer.Ihna = buildPronoun("נְפַעֵّל", []);
 yikarrer.Intu = buildPronoun("תְפַעֵّלוּ", []);
 yikarrer.Humme = buildPronoun("יְפַעֵّלוּ", []);
-yikarrer.addDistractingFormsToAll(["yisaafer", "yittallam", "bisma"]);
+yikarrer.addDistractingFormsToAll(["yisaafer", "yittallam", "yisma"]);
 yikarrer.populateRemainingPronouns();
 yikarrer.processingToForm = {
     "yisaafer": "פעל",
     "yittallam": "פעל",
-    "bisma": "פעל",
+    "yisma": "פעל",
 };
 
 const yikarreb = createNewForm();
@@ -80,12 +80,12 @@ yikarreb.Hiye = buildPronoun("תְפַעֵّל", []);
 yikarreb.Ihna = buildPronoun("נְפַעֵّל", []);
 yikarreb.Intu = buildPronoun("תְפַעְّלוּ", []);
 yikarreb.Humme = buildPronoun("יְפַעְّלוּ", []);
-yikarreb.addDistractingFormsToAll(["yisaafer", "yittallam", "bisma"]);
+yikarreb.addDistractingFormsToAll(["yisaafer", "yittallam", "yisma"]);
 yikarreb.populateRemainingPronouns();
 yikarreb.processingToForm = {
     "yisaafer": "פעל",
     "yittallam": "פעל",
-    "bisma": "פעל",
+    "yisma": "פעל",
 };
 
 
@@ -119,12 +119,12 @@ yittallam.Hiye = buildPronoun("תִתְפַעַّל", []);
 yittallam.Ihna = buildPronoun("נִתְפַעַّל", []);
 yittallam.Intu = buildPronoun("תִתְפַעַّלוּ", []);
 yittallam.Humme = buildPronoun("יִתְפַעַّלוּ", []);
-yittallam.addDistractingFormsToAll(["yinimsek", "yitnaazal", "bisma"]);
+yittallam.addDistractingFormsToAll(["yinimsek", "yitnaazal", "yisma"]);
 yittallam.populateRemainingPronouns();
 yittallam.processingToForm = {
     "yinimsek": "פעל",
     "yitnaazal": "פעל",
-    "bisma": "פעל",
+    "yisma": "פעל",
 };
 
 
@@ -159,12 +159,12 @@ yinimsek.Hiye = buildPronoun("תִנִפְעֵל", []);
 yinimsek.Ihna = buildPronoun("נִנִפְעֵל", []);
 yinimsek.Intu = buildPronoun("תִנְפִעְלוּ", []);
 yinimsek.Humme = buildPronoun("יִנְפִעְלוּ", []);
-yinimsek.addDistractingFormsToAll([YISHTREL, "bisma", "yistaamel"]);
+yinimsek.addDistractingFormsToAll([YISHTREL, "yisma", "yistaamel"]);
 yinimsek.populateRemainingPronouns();
 yinimsek.processingToForm = {
     "yishtrel": "פעל",
     "yistaamel": "פעל",
-    "bisma": "פעל",
+    "yisma": "פעל",
 };
 
 
@@ -179,11 +179,11 @@ yishtrel.Hiye = buildPronoun("תִפְתְעֵל", []);
 yishtrel.Ihna = buildPronoun("נִפְתְעֵל", []);
 yishtrel.Intu = buildPronoun("תִפְתִעְלוּ", []);
 yishtrel.Humme = buildPronoun("יִפְתִעְלוּ", []);
-yishtrel.addDistractingFormsToAll([YITTALLAM, "buktol", "yinimsek"]);
+yishtrel.addDistractingFormsToAll([YITTALLAM, "yuktol", "yinimsek"]);
 yishtrel.populateRemainingPronouns();
 yishtrel.processingToForm = {
     "yittallam": "פעל",
-    "buktol": "פעל",
+    "yuktol": "פעל",
     "yinimsek": "פעל",
 };
 
@@ -199,12 +199,11 @@ yistaamel.Hiye = buildPronoun("תִסְתַפְעֵל", []);
 yistaamel.Ihna = buildPronoun("נִסְתַפְעֵל", []);
 yistaamel.Intu = buildPronoun("תִסְתַפִעְלוּ", []);
 yistaamel.Humme = buildPronoun("יִסְתַפִעְלוּ", []);
-yistaamel.addDistractingFormsToAll([YITTALLAM, "bisma", "yisaafer"]);
+yistaamel.addDistractingFormsToAll([YITTALLAM, "yisma", "yisaafer"]);
 yistaamel.populateRemainingPronouns();
 yistaamel.processingToForm = {
     "yittallam": "פעל",
-    "buktol": "פעל",
-    "bisma": "פעל",
+    "yisma": "פעל",
     "yisaafer": "פעל",
 };
 

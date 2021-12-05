@@ -1,9 +1,11 @@
 import {
     formNamesPast, formNamesParticiple, formNamesFuture, formNamesPresent, formNamesPresent210
+    , formNamesFuture210, formNamesPast210
 } from "./data.js";
 
+
 let allFormNames = [...formNamesPast, ...formNamesPresent, ...formNamesFuture,
-...formNamesParticiple, ...formNamesPresent210];
+...formNamesParticiple, ...formNamesPresent210, ...formNamesPast210, ...formNamesFuture210];
 let allLessons = ["", 1, 2, 3, 4, 5, 6, 7, 8];
 
 export function getFilteringParams() {
@@ -28,6 +30,9 @@ export function getFilteringParams() {
             break;
         case "present":
             formFiltering = formNamesPresent;
+            break;
+        case "210":
+            formFiltering = [...formNamesPresent210, ...formNamesPast210, ...formNamesFuture210];
             break;
         case "participle":
             formFiltering = formNamesParticiple;
