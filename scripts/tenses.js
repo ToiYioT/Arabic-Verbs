@@ -2,6 +2,7 @@ import { formsFuture } from "./measure-1-future.js";
 import { formsPast } from "./measure-1-past.js";
 import { formsPresent } from "./measure-1-present.js";
 import { formsPresent210 } from "./measures-2-10-present.js";
+import { formsFuture210 } from "./measures-2-10-future.js";
 import { formsParticiple } from "./participle.js";
 
 import { hebConjugatePast } from "./heb-past.js";
@@ -9,7 +10,7 @@ import { hebConjugatePresent } from "./heb-present.js";
 import { hebConjugateFuture } from "./heb-future.js";
 
 export const forms = Object.assign(formsFuture, formsPast, formsParticiple, formsPresent
-    , formsPresent210);
+    , formsPresent210, formsFuture210);
 
 export const tenses = {
     future: {
