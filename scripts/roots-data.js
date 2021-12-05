@@ -131,7 +131,7 @@ export const allRoots = [
     { hebrew: "השתעל", arabic: "קח", form: "habb", lesson: "" },
     { hebrew: "צלצל", arabic: "רן", form: "habb", lesson: "" },
     { hebrew: "ירה", arabic: "טח", form: "habb", lesson: "" },
-    { hebrew: "קילל", arabic: "סב", form: "habb", lesson: "" },
+    { hebrew: "קילל", arabic: "סבּ", form: "habb", lesson: "" },
     { hebrew: "הלך", arabic: "ראח", form: "rah", lesson: "" },
     { hebrew: "היה", arabic: "כּאן", form: "rah", lesson: "" },
     { hebrew: "ראה", arabic: "שאף", form: "rah", lesson: "" },
@@ -251,7 +251,7 @@ export const allRoots = [
     { hebrew: "יטגן", arabic: "קלי", form: "ihki", lesson: "" },
     { hebrew: "ישקה", arabic: "סקי", form: "ihki", lesson: "" },
     { hebrew: "ילך", arabic: "משי", form: "ihki", lesson: 7 },
-    { hebrew: "יבכה", arabic: "בכּי", form: "ihki", lesson: "" },
+    { hebrew: "יבכה", arabic: "בּכּי", form: "ihki", lesson: "" },
     { hebrew: "יעשה על האש", arabic: "שוי", form: "ihki", lesson: "" },
     { hebrew: "ישאר", arabic: "בּקא", form: "insa", lesson: "" },
     { hebrew: "ישכח", arabic: "נסא", form: "insa", lesson: "" },
@@ -413,41 +413,22 @@ export const allRoots = [
     { hebrew: "נכנס", arabic: "דח'ל", form: "buktol", lesson: 6 },
     { hebrew: "כותב", arabic: "כּתבּ", form: "bimsek", lesson: 6 },
     { hebrew: "לומד", arabic: "עלם", form: "bittallam", lesson: 3 },
-    {
-        hebrew: "עובד",
-        arabic: "שע'ל",
-        form: "bishtrel",
-        lesson: 3
-    },
-    {
-        hebrew: "מחליט",
-        arabic: "קרר",
-        form: "bikarrer",
-        lesson: ""
-    },
-    {
-        hebrew: "נוסע לחו\"ל",
-        arabic: "ספר",
-        form: "bisaafer",
-        lesson: ""
-    },
-    {
-        hebrew: "מוותר",
-        arabic: "נזל",
-        form: "bitnaazal",
-        lesson: ""
-    },
-    {
-        hebrew: "נתפס",
-        arabic: "מסכּ",
-        form: "binimsek",
-        lesson: ""
-    },
-    {
-        hebrew: "משתמש",
-        arabic: "עמל",
-        form: "bistaamel",
-        lesson: ""
-    }
+    { hebrew: "עובד", arabic: "שע'ל", form: "bishtrel", lesson: 3 },
+    { hebrew: "מחליט", arabic: "קרר", form: "bikarrer", lesson: "" },
+    { hebrew: "נוסע לחו\"ל", arabic: "ספר", form: "bisaafer", lesson: "" },
+    { hebrew: "מוותר", arabic: "נזל", form: "bitnaazal", lesson: "" },
+    { hebrew: "נתפס", arabic: "מסכּ", form: "binimsek", lesson: "" },
+    { hebrew: "משתמש", arabic: "עמל", form: "bistaamel", lesson: "" },
+    { hebrew: "מנסה", arabic: "ג'רבּ", form: "bikarreb", lesson: "" },
+    { hebrew: "מסיע", arabic: "וצל", form: "bikarreb", lesson: "" },
+    { hebrew: "חוסך", arabic: "ופר", form: "bikarreb", lesson: "" },
+    { hebrew: "מכאיב", arabic: "וג'ע", form: "bikarreb", lesson: "" },
+    { hebrew: "מנסה", arabic: "חול", form: "bisaafer", lesson: "" },
+    { hebrew: "מגן", arabic: "דפע", form: "bisaafer", lesson: "" },
+    { hebrew: "מתקדם", arabic: "קדם", form: "bittallam", lesson: "" },
+    { hebrew: "חי בדו קיום", arabic: "עיש", form: "bitnaazal", lesson: "" },
+    { hebrew: "קיבל כוויה", arabic: "חרק", form: "binimsek", lesson: "" },
+    { hebrew: "נשרף", arabic: "חרק", form: "bishtrel", lesson: "" },
+    { hebrew: "מכבד", arabic: "חרם", form: "bishtrel", lesson: "" },
+    { hebrew: "מברר", arabic: "פהם", form: "bistaamel", lesson: "" }
 ]
-

@@ -44,29 +44,12 @@ var getAnswers;
 var container;
 var debugContainer;
 
-function setConfuseType() {
-    let confuseType = getConfuseType();
-
-    switch (confuseType) {
-        case "form":
-            getAnswers = getAnswersConfuseWithForms;
-            break;
-        case "pronoun":
-            getAnswers = getAnswersConfuseWithPronouns;
-            break;
-        case "mixed":
-            getAnswers = getAnswersAlternateConfuse;
-            break;
-        default:
-            getAnswers = getAnswersConfuseWithForms;
-    }
-}
 
 window.addEventListener('load', (event) => {
 
     /// FILTERING
     roots = filterRoots(...getFilteringParams());
-    // roots = filterRoots(["bistaamel"], ["", 1, 2, 3, 4, 5, 6, 7, 8]);
+    // roots = filterRoots(["bikarreb"], ["", 1, 2, 3, 4, 5, 6, 7, 8]);
     setConfuseType();
 
     container = document.getElementById("container");
@@ -93,6 +76,24 @@ window.addEventListener('load', (event) => {
     // debugShowConjugations();
     // debugShowConjugationHebrew();
 });
+
+function setConfuseType() {
+    let confuseType = getConfuseType();
+
+    switch (confuseType) {
+        case "form":
+            getAnswers = getAnswersConfuseWithForms;
+            break;
+        case "pronoun":
+            getAnswers = getAnswersConfuseWithPronouns;
+            break;
+        case "mixed":
+            getAnswers = getAnswersAlternateConfuse;
+            break;
+        default:
+            getAnswers = getAnswersConfuseWithForms;
+    }
+}
 
 function setTense(form) {
     tense = tenses[form.tense];
@@ -459,7 +460,7 @@ function debugShowConjugations() {
     ]
 
     // // to set specific root and forms:
-    // let root = "ח׳לץ";
+    // let root = "פהם";
     // rootForm = forms.ihutt;
     // let conjugateTo = forms.ihutt;
 
