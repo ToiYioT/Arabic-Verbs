@@ -53,7 +53,7 @@ function createNewForm() {
 
 const buktol = createNewForm();
 buktol.formName = BUKTOL;
-buktol.Ana = buildPronoun("בָּפְעֺל", []);
+buktol.Ana = buildPronoun("בַּפְעֺל", []);
 buktol.Inte = buildPronoun("בְּתֻפְעֺל", []);
 buktol.Inti = buildPronoun("בְּתֻפֻעְלִי", []);
 buktol.Huwe = buildPronoun("בּוּפְעֺל", []);
@@ -72,7 +72,7 @@ buktol.processingToForm = {
 
 const bimsek = createNewForm();
 bimsek.formName = BIMSEK;
-bimsek.Ana = buildPronoun("בָּפְעֵל", []);
+bimsek.Ana = buildPronoun("בַּפְעֵל", []);
 bimsek.Inte = buildPronoun("בְּתִפְעֵל", []);
 bimsek.Inti = buildPronoun("בְּתִפִעְלִי", []);
 bimsek.Huwe = buildPronoun("בִּיפְעֵל", []);
@@ -91,7 +91,7 @@ bimsek.processingToForm = {
 
 const bisma = createNewForm();
 bisma.formName = BISMA;
-bisma.Ana = buildPronoun("בָּפְעַל", []);
+bisma.Ana = buildPronoun("בַּפְעַל", []);
 bisma.Inte = buildPronoun("בְּתִפְעַל", []);
 bisma.Inti = buildPronoun("בְּתִפְעַלִי", []);
 bisma.Huwe = buildPronoun("בִּיפְעַל", []);
@@ -147,7 +147,7 @@ bijib.processingToForm = {
 
 const bihki = createNewForm();
 bihki.formName = BIHKI;
-bihki.Ana = buildPronoun("בָּפְעִי", [BINSA]);
+bihki.Ana = buildPronoun("בַּפְעִי", [BINSA]);
 bihki.Inte = buildPronoun("בְּתִפְעִי", [BINSA]);
 bihki.Inti = buildPronoun("בְּתִפְעִי", [BIJIB]);
 bihki.Huwe = buildPronoun("בִּיפְעִי", [BINSA]);
@@ -166,7 +166,7 @@ bihki.processingToForm = {
 
 const binsa = createNewForm();
 binsa.formName = BINSA;
-binsa.Ana = buildPronoun("בָּפְעַא", [BIRUH]);
+binsa.Ana = buildPronoun("בַּפְעַא", [BIRUH]);
 binsa.Inte = buildPronoun("בְּתִפְעַא", [BIRUH]);
 binsa.Inti = buildPronoun("בְּתִפְעִי", [BISMA]);
 binsa.Huwe = buildPronoun("בִּיפְעַא", [BIRUH]);
