@@ -11,6 +11,7 @@ var pronouns = pronounsConst;
 
 // settings
 var hideAnswers = true;
+const totalNumOfQuestions = 5;
 const numOfAnswers = 4;
 const progressBarUpdateInterval = 20;
 const revealAnswersAfter = 3000;
@@ -350,8 +351,7 @@ function answerClickHandler(clickedButton) {
 
 function updateScore() {
     score.setText(
-        "שאלה מספר: " + questionNumber + ",    " +
-        "תשובות נכונות: " + numOfCorrectAnswers
+        `שאלה מספר ${questionNumber} מתוך ${totalNumOfQuestions}`
     );
 }
 
