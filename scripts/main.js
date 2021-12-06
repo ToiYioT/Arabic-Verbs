@@ -4,6 +4,7 @@ import { pronounsConst, filterRoots } from "./data.js";
 import { forms, tenses } from "./tenses.js";
 import { getConfuseType, getFilteringParams } from "./urlParams.js";
 import { AnswerButton, Label, MainButton, Checkbox } from "./views.js";
+import { questionDispenser } from "./question-dispenser-infinite.js"
 
 var tense;
 var roots;
@@ -14,7 +15,6 @@ var hideAnswers = true;
 const totalNumOfQuestions = 5;
 const numOfAnswers = 4;
 const progressBarUpdateInterval = 20;
-const revealAnswersAfter = 3000;
 
 var numOfProgressBarUpdates = 0;
 const progressBarMaxUpdates = 150;
@@ -34,12 +34,8 @@ var checkboxTimer;
 var correctAnswer;
 var numOfCorrectAnswers = 0;
 
-var questionNumber = 0;
-var currentQuestionParams;
-var questionQueue = [];
-var incorrectAnswer = false;
 var progressBarTimer;
-var getAnswers;
+var getAnswersFunction;
 
 // debug
 var container;
@@ -82,16 +78,16 @@ function setConfuseType() {
 
     switch (confuseType) {
         case "form":
-            getAnswers = getAnswersConfuseWithForms;
+            getAnswersFunction = getAnswersConfuseWithForms;
             break;
         case "pronoun":
-            getAnswers = getAnswersConfuseWithPronouns;
+            getAnswersFunction = getAnswersConfuseWithPronouns;
             break;
         case "mixed":
-            getAnswers = getAnswersAlternateConfuse;
+            getAnswersFunction = getAnswersAlternateConfuse;
             break;
         default:
-            getAnswers = getAnswersConfuseWithForms;
+            getAnswersFunction = getAnswersConfuseWithForms;
     }
 }
 
@@ -122,41 +118,13 @@ function buttonHandler() {
 
 function initQuestion() {
 
-    if (incorrectAnswer) {
-        incorrectAnswer = false;
-        questionQueue.push(currentQuestionParams);
-
-    } else {
-        addRandomQuestionsToQueue(1);
-    }
-
-    currentQuestionParams = questionQueue[questionNumber];
-    initQuestionFromParams(currentQuestionParams);
-}
-
-function addRandomQuestionsToQueue(numberOfQuestionsToAdd) {
-
-    for (let i = 0; i < numberOfQuestionsToAdd; i++) {
-        let randomParams = generateRandomQuestionParams();
-        questionQueue.push(randomParams);
-    }
-}
-
-function generateRandomQuestionParams() {
-
-    let randomRootIndex = Math.floor(Math.random() * roots.length);
-    let pronounIndex = Math.floor(Math.random() * pronouns.length);
-
-    let randomQuestionParams = {
-        root: roots[randomRootIndex],
-        pronoun: pronouns[pronounIndex]
-    }
-
-    return randomQuestionParams;
+    questionDispenser.handleNewQuestion();
+    initQuestionFromParams(questionDispenser.getCurrentQuestion());
 }
 
 function initQuestionFromParams(qParams) {
-    resetQuestionState();
+    questionAnswered = false;
+    updateScore();
 
     let pronoun = qParams.pronoun;
     // first one is the correct root form:
@@ -164,7 +132,7 @@ function initQuestionFromParams(qParams) {
     setTense(answerForms[0]);
 
     conjugateHebrew(qParams.root.hebrew, pronoun);
-    let answers = getAnswers(qParams.root.arabic, answerForms, pronoun);
+    let answers = getAnswersFunction(qParams.root.arabic, answerForms, pronoun);
 
     correctAnswer = answers[0];
     util.shuffle(answers);
@@ -283,13 +251,6 @@ function setAnswersToButtons(answers) {
     }
 }
 
-function resetQuestionState() {
-
-    questionNumber++;
-    questionAnswered = false;
-    updateScore();
-}
-
 function hideAllIcons() {
     for (let i = 0; i < 4; i++) {
         answerButtons[i].setNoIcons();
@@ -338,7 +299,7 @@ function answerClickHandler(clickedButton) {
 
             if (clickedButton == answerButtons[i]) {
                 answerButtons[i].setIncorrect();
-                incorrectAnswer = true;
+                questionDispenser.registerIncorrectAnswer();
 
             } else {
                 answerButtons[i].setFaded();
@@ -351,7 +312,7 @@ function answerClickHandler(clickedButton) {
 
 function updateScore() {
     score.setText(
-        `שאלה מספר ${questionNumber} מתוך ${totalNumOfQuestions}`
+        `שאלה מספר ${questionDispenser.getQuestionNumber()} מתוך ${totalNumOfQuestions}`
     );
 }
 
@@ -387,12 +348,9 @@ function closeSettingsWindow() {
 }
 
 function resetGame() {
-    questionQueue.length = 0;
-    addRandomQuestionsToQueue(5);
-    incorrectAnswer = false;
+    questionDispenser.resetGame(roots, pronouns);
 
     numOfCorrectAnswers = 0;
-    questionNumber = 0;
 
     if (hideAnswers) {
         answerSection.classList.add("hide");
