@@ -12,7 +12,7 @@ const HebConjugatePresent = {
             return root + "ה";
 
         } else {
-            if (root.length == 2) {
+            if (root.length < 4) {
                 return root + "ה";
             } else {
                 return root + "ת";
