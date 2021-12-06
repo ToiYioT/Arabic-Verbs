@@ -22,6 +22,9 @@ export const formNamesPresent210 = ["bikarrer", "bikarreb", "bisaafer", "bittall
 export const formNamesPast210 = ["karrar", "saafar", "tallam", "tnaazal", "inmasak", "ishtaral", "istaamal"];
 export const formNamesFuture210 = ["yikarrer", "yikarreb", "yisaafer", "yittallam", "yitnaazal", "yinimsek", "yishtrel", "yistaamel"];
 
+export const allFormNames = formNamesPast.concat(formNamesPresent, formNamesFuture,
+    formNamesParticiple, formNamesPresent210, formNamesPast210, formNamesFuture210);
+
 const Ana = createPronoun("Ana", "אני", "אַנַא", "זכר");
 const Inte = createPronoun("Inte", "אתה", "אִנְתֵ");
 const Inti = createPronoun("Inti", "את", "אִנְתִי");
@@ -46,17 +49,22 @@ export const pronounsConst = [
 ]
 
 
-export function filterRoots(forms, lessons) {
+export function filterRoots(filteringParams) {
     // var startTime = performance.now()
+    let forms = filteringParams.forms;
+    let lessons = filteringParams.lessons;
+    let hebrewWords = filteringParams.words;
 
     let filteredData = [];
 
     for (let i = 0; i < allRoots.length; i++) {
 
-        let formMatch = forms.indexOf(allRoots[i].form) > -1;
-        let lessonMatch = lessons.indexOf(allRoots[i].lesson) > -1;
+        let formMatch = forms && forms.includes(allRoots[i].form) || forms === null;
+        let lessonMatch = lessons && lessons.includes(allRoots[i].lesson) || lessons === null;
+        let hebrewWordMatch = hebrewWords &&
+            hebrewWords.includes(allRoots[i].hebrew) || hebrewWords == null;
 
-        if (formMatch && lessonMatch) {
+        if (formMatch && lessonMatch && hebrewWordMatch) {
             filteredData.push(allRoots[i]);
         }
     }

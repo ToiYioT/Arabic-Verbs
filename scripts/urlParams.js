@@ -1,11 +1,8 @@
 import {
     formNamesPast, formNamesParticiple, formNamesFuture, formNamesPresent, formNamesPresent210
-    , formNamesFuture210, formNamesPast210
+    , formNamesFuture210, formNamesPast210, allFormNames,
 } from "./data.js";
 
-
-let allFormNames = [...formNamesPast, ...formNamesPresent, ...formNamesFuture,
-...formNamesParticiple, ...formNamesPresent210, ...formNamesPast210, ...formNamesFuture210];
 let allLessons = ["", 1, 2, 3, 4, 5, 6, 7, 8];
 
 export function getFilteringParams() {
@@ -14,11 +11,16 @@ export function getFilteringParams() {
     let lessonFiltering;
 
     let urlParams = new URLSearchParams(document.location.search);
-    let forms = urlParams.get("forms"); // all, future, past, present, participle
+    let formURL = urlParams.get("form"); // all, future, past, present, participle
     let lessonFrom = parseInt(urlParams.get("lf"));
     let lessonTo = parseInt(urlParams.get("lt"));
+    let hebrewWord = urlParams.get("hebrew");
+    if (hebrewWord) hebrewWord = hebrewWord.split(",");
 
-    switch (forms) {
+    switch (formURL) {
+        case null:
+            formFiltering = allFormNames;
+            break;
         case "all":
             formFiltering = allFormNames;
             break;
@@ -38,7 +40,14 @@ export function getFilteringParams() {
             formFiltering = formNamesParticiple;
             break;
         default:
-            formFiltering = allFormNames;
+            let arrayOfForms = formURL.split(",");
+
+            if (arrayOfForms.every((form) => allFormNames.includes(form))) {
+                formFiltering = arrayOfForms;
+            } else {
+                console.log("Can't read form from urlParam, defaulting to all forms");
+                formFiltering = allFormNames;
+            }
     }
 
     let lessonQueryFailed = isNaN(lessonFrom) || isNaN(lessonTo) ||
@@ -53,7 +62,14 @@ export function getFilteringParams() {
         }
         lessonFiltering = lessonArray;
     }
-    let output = [formFiltering, lessonFiltering];
+
+    let output = {
+        forms: formFiltering,
+        lessons: lessonFiltering,
+        words: hebrewWord
+    };
+    console.log(output);
+
     return output;
 }
 
@@ -63,6 +79,9 @@ export function getConfuseType() {
     let confuseType;
 
     switch (confuseQuery) {
+        case null:
+            confuseType = "form";
+            break;
         case "form":
             confuseType = "form";
             break;
@@ -73,6 +92,7 @@ export function getConfuseType() {
             confuseType = "mixed";
             break;
         default:
+            console.log("Can't read confuse type from urlParam, defaulting form");
             confuseType = "form";
     }
     return confuseType;
