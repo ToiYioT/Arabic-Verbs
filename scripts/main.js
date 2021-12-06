@@ -49,7 +49,7 @@ window.addEventListener('load', (event) => {
 
     /// FILTERING
     roots = filterRoots(...getFilteringParams());
-    // roots = filterRoots(["bikarreb"], ["", 1, 2, 3, 4, 5, 6, 7, 8]);
+    // roots = filterRoots(["yistaamel"], ["", 1, 2, 3, 4, 5, 6, 7, 8]);
     setConfuseType();
 
     container = document.getElementById("container");
@@ -463,10 +463,13 @@ function debugShowConjugations() {
     // let root = "פהם";
     // rootForm = forms.ihutt;
     // let conjugateTo = forms.ihutt;
+    let outputs = [];  /////
 
     for (let c = 0; c < conjugateToArray.length; c++) {
         let whereToPutText = debugCols[c];
 
+        let allAnswers = []; /////
+        outputs.push(allAnswers); ////
 
         for (let i = 0; i < pronouns.length; i++) {
 
@@ -480,11 +483,25 @@ function debugShowConjugations() {
                 conjugator.getWord(conjugateTo[pronoun.name].template);
             output = util.substituteLetterAtEndToEndingLetter(output, true);
             output = util.postProcess(output);
+            allAnswers.push(output); ////
 
             whereToPutText.innerHTML += output + "</br>";
         }
     }
+    //////////// Testing if all answers are unique
+    let nthOfEvery = (n) => outputs.map((innerArray) => innerArray[n]);
+
+    for (let i = 0; i < 12; i++) {
+        let pronounAnswer = nthOfEvery(i);
+
+        let set = new Set(pronounAnswer);
+        if (set.size !== pronounAnswer.length) {
+            console.log(`There is a duplicate at ${i}`);
+            console.log(pronounAnswer);
+        }
+    }
 }
+
 
 var debugCols = [];
 function loadDebugCols() {

@@ -174,6 +174,7 @@ jab.processingToForm = {
     "nisi": "פלי",
     "habb": "פל",
     "rah": "פעל",
+    "katab": "פעל",
 };
 
 
