@@ -88,7 +88,7 @@ function getScoreTitleText() {
         return `שאלה מספר ${questionNumber + 1} מתוך ${totalNumOfQuestions}`;
 
     } else if (mode == MODE_INFINITE) {
-        return `ענית נכון על ${correctAnswerCounter} שאלות מתוך ${questionNumber}`;
+        return `ענית נכון על ${correctAnswerCounter} שאלות מתוך ${questionNumber + 1}`;
     }
 }
 

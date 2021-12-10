@@ -248,7 +248,6 @@ function substituteLastAnswerWithConfusingPronoun(
     answer = util.substituteLetterAtEndToEndingLetter(answer, true);
     answer = util.postProcess(answer);
     answers[answers.length - 1] = answer;
-    console.log(answers);
     return answers;
 }
 
