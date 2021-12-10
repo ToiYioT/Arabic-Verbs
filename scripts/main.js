@@ -1,4 +1,5 @@
 import { util } from "./util.js";
+import { debug } from "./debug.js";
 import { conjugator } from "./conjugator.js";
 import { pronounsConst, filterRoots } from "./data.js";
 import { forms, tenses } from "./tenses.js";
@@ -35,15 +36,8 @@ var checkboxTimer;
 
 // logic variables 
 var correctAnswer;
-var numOfCorrectAnswers = 0;
-
 var progressBarTimer;
 var getAnswersFunction;
-
-// debug
-var container;
-var debugContainer;
-
 
 window.addEventListener('load', (event) => {
 
@@ -51,7 +45,6 @@ window.addEventListener('load', (event) => {
     roots = filterRoots(filteringParams);
     setConfuseType();
 
-    container = document.getElementById("container");
     questionHolder = document.getElementById("question");
     quizSummarySection = document.getElementById("quiz-summary-section");
     summaryTitle = document.getElementById("summary-title");
@@ -63,7 +56,6 @@ window.addEventListener('load', (event) => {
     progressBar = document.getElementById("progress-bar");
 
     answerSection = document.getElementById("answer-section");
-    debugContainer = document.getElementById("debug-container");
 
     settingsWindow = document.getElementsByClassName("settings-overlay")[0];
     document.getElementsByClassName("cog")[0].onclick = openSettingsWindow;
@@ -76,8 +68,8 @@ window.addEventListener('load', (event) => {
     }
 
     resetGame();
-    // debugShowConjugations();
-    // debugShowConjugationHebrew();
+    // debug.showConjugations(roots, pronouns, conjugator, forms);
+    // debug.showConjugationHebrew(roots, pronouns, tenses, forms);
 });
 
 function setConfuseType() {
@@ -324,7 +316,6 @@ function answerClickHandler(clickedButton) {
             answerButtons[i].setCorrect();
 
             if (clickedButton == answerButtons[i]) {
-                numOfCorrectAnswers++;
                 questionDispenser.registerCorrectAnswer();
             }
         } else {
@@ -338,6 +329,7 @@ function answerClickHandler(clickedButton) {
             }
         }
     }
+
     if (questionDispenser.isQuizMode() && questionDispenser.isLastQuestion()) {
         button.setEndQuiz();
 
@@ -392,8 +384,6 @@ function resetGame() {
     questionHolder.style.display = "flex";
     answerSection.style.display = "flex";
 
-    numOfCorrectAnswers = 0;
-
     if (hideAnswers) {
         answerSection.classList.add("hide");
         startProgressBarAnimation();
@@ -405,117 +395,5 @@ function resetGame() {
 
     hideAllIcons();
     initQuestion();
-
     updateScore();
-}
-
-
-//// DEBUG CODE
-//// DEBUG CODE
-
-function debugShowConjugationHebrew() {
-    loadDebugCols();
-
-    for (let v = 0; v < 7; v++) {
-        let whereToPutText = debugCols[v];
-
-        let randomRootNum = Math.floor(Math.random() * roots.length);
-        let root = roots[randomRootNum];
-        let rootHebrew = root.hebrew;
-        let hebConjugate = tenses[forms[root.form].tense].hebConjugate;
-        // rootHebrew = "ילך לאיבוד"
-
-        let firstWordEndingAt = util.getIndexOfFirstWordEnding(rootHebrew);
-        if (firstWordEndingAt == -1) firstWordEndingAt = rootHebrew.length;
-
-        let firstWord = rootHebrew.substring(0, firstWordEndingAt);
-        firstWord = util.substituteEndingLettersToNormal(firstWord);
-        let remainderOfTranslation = rootHebrew.substring(firstWordEndingAt, rootHebrew.length);
-
-        for (let i = 0; i < 12; i++) {
-            let pronoun = pronouns[i];
-            let conjugatedWord = hebConjugate[pronoun.name](firstWord);
-            conjugatedWord = util.substituteLetterAtEndToEndingLetter(conjugatedWord);
-
-            whereToPutText.innerHTML += pronoun.hebrew + " " +
-                conjugatedWord + remainderOfTranslation + "<br/>";
-        }
-    }
-}
-
-function debugShowConjugations() {
-    loadDebugCols();
-
-    let rootNum = Math.floor(Math.random() * roots.length);
-    let root = roots[rootNum].arabic;
-    let formName = roots[rootNum].form;
-
-    let rootForm = forms[formName];
-    let conjugateToArray = [
-        rootForm,
-        forms[rootForm.Ana.distractingForms[0]],
-        forms[rootForm.Ana.distractingForms[1]],
-        forms[rootForm.Ana.distractingForms[2]],
-    ];
-
-    // let conjugateToArray = [
-    //     forms["karrar"],
-    //     forms["saafar"],
-    //     forms["tallam"],
-    //     forms["tnaazal"],
-    // ]
-
-    // // to set specific root and forms:
-    // let root = "בּסם";
-    // let rootForm = forms["karrar"];
-    // let conjugateTo = forms.ihutt;
-    let outputs = [];  /////
-
-    for (let c = 0; c < conjugateToArray.length; c++) {
-        let whereToPutText = debugCols[c];
-
-        let allAnswers = []; /////
-        outputs.push(allAnswers); ////
-
-        for (let i = 0; i < pronouns.length; i++) {
-
-            let pronoun = pronouns[i];
-            // let conjugateTo = conjugateToArray[i];
-            let conjugateTo = forms[rootForm[pronoun.name].distractingForms[c - 1]];
-            if (c == 0) conjugateTo = rootForm;
-
-            conjugator.rootProcessing(root, rootForm, conjugateTo);
-
-            let output = pronoun.arabic + " " +
-                conjugator.getWord(conjugateTo[pronoun.name].template);
-            output = util.substituteLetterAtEndToEndingLetter(output, true);
-            output = util.postProcess(output);
-            allAnswers.push(output); ////
-
-            whereToPutText.innerHTML += output + "</br>";
-        }
-    }
-    //////////// Testing if all answers are unique
-    let nthOfEvery = (n) => outputs.map((innerArray) => innerArray[n]);
-
-    for (let i = 0; i < 12; i++) {
-        let pronounAnswer = nthOfEvery(i);
-
-        let set = new Set(pronounAnswer);
-        if (set.size !== pronounAnswer.length) {
-            console.log(`There is a duplicate at ${i}`);
-            console.log(pronounAnswer);
-        }
-    }
-}
-
-
-var debugCols = [];
-function loadDebugCols() {
-
-    container.style.display = "none";
-    debugContainer.style.display = "flex";
-    for (let i = 0; i < 7; i++) {
-        debugCols.push(document.getElementById("col" + (i + 1)));
-    }
 }
