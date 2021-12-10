@@ -91,6 +91,27 @@ body {
     align-items: center;
 }
 
+#quiz-summary-section{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    flex: 3;
+    padding: 1rem;
+}
+
+#summary-title{
+
+}
+
+#summary-score{
+
+}
+
+#summary-mistakes{
+
+}
+
 .hide{
     visibility: hidden;
 }

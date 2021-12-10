@@ -9,9 +9,10 @@ export class Label {
 }
 
 export class MainButton {
-    constructor(id, handler) {
+    constructor(id, handler, onEndQuiz) {
         this.element = document.getElementById(id);
         this.handler = handler;
+        this.onEndQuiz = onEndQuiz;
         this.state = "";
     }
 
@@ -31,6 +32,19 @@ export class MainButton {
         this.enable();
         this.setText("השאלה הבאה");
         this.state = "next-question";
+    }
+
+    setEndQuiz() {
+        this.element.onclick = this.onEndQuiz;
+        this.element.classList.remove("faded-button");
+        this.setText("לסיום");
+        this.state = "end-quiz";
+    }
+
+    setRestartQuiz(onResetGame) {
+        this.setText("לתרגל עוד");
+        this.state = "restart-quiz";
+        this.element.onclick = onResetGame;
     }
 
     setText(text) {

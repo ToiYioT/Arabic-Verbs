@@ -4,7 +4,7 @@ import { pronounsConst, filterRoots } from "./data.js";
 import { forms, tenses } from "./tenses.js";
 import { getConfuseType, getFilteringParams } from "./urlParams.js";
 import { AnswerButton, Label, MainButton, Checkbox } from "./views.js";
-import { questionDispenser } from "./question-dispenser-infinite.js"
+import { questionDispenser } from "./question-dispenser.js"
 
 var tense;
 var roots;
@@ -12,7 +12,7 @@ var pronouns = pronounsConst;
 
 // settings
 var hideAnswers = true;
-const totalNumOfQuestions = 5;
+const totalNumOfQuestions = 2;
 const numOfAnswers = 4;
 const progressBarUpdateInterval = 20;
 
@@ -26,6 +26,9 @@ var questionHolder;
 var button;
 var score;
 var progressBar;
+
+var quizSummarySection;
+var summaryTitle, summaryScore, summaryMistakes;
 
 var settingsWindow;
 var checkboxTimer;
@@ -50,8 +53,12 @@ window.addEventListener('load', (event) => {
 
     container = document.getElementById("container");
     questionHolder = document.getElementById("question");
-    button = new MainButton("main-button", buttonHandler);
+    quizSummarySection = document.getElementById("quiz-summary-section");
+    summaryTitle = document.getElementById("summary-title");
+    summaryScore = document.getElementById("summary-score");
+    summaryMistakes = document.getElementById("summary-mistakes");
 
+    button = new MainButton("main-button", buttonHandler, showSummaryScreen);
     score = new Label("score");
     progressBar = document.getElementById("progress-bar");
 
@@ -108,18 +115,42 @@ function buttonHandler() {
 
         } else if (button.state == "next-question") {
             hideAllIcons();
-            startProgressBarAnimation();
             answerSection.classList.add("hide");
+
+            startProgressBarAnimation();
             button.setShowAnswers();
             initQuestion();
         }
     }
 }
 
+function showSummaryScreen() {
+
+    let quizLength = questionDispenser.getQuizLength();
+    let wrongNum = questionDispenser.getNumOfWrongAnswers();
+    let rightNum = quizLength - wrongNum;
+    let percentageOfRight = Math.round(100 * rightNum / quizLength);
+
+    score.setText("מושלם");
+    progressBar.style.width = "100%";
+    answerSection.classList.add("hide");
+    button.setRestartQuiz(resetGame);
+
+    quizSummarySection.style.display = "flex";
+    questionHolder.style.display = "none";
+    answerSection.style.display = "none";
+
+
+    summaryTitle.innerHTML = `ענית נכון על ${rightNum} שאלות מתוך ${quizLength}`;
+    summaryScore.innerHTML = `ציון: ${percentageOfRight}%`;
+}
+
 function initQuestion() {
 
     questionDispenser.handleNewQuestion();
-    initQuestionFromParams(questionDispenser.getCurrentQuestion());
+    let currentQuestion = questionDispenser.getCurrentQuestion();
+
+    initQuestionFromParams(currentQuestion);
 }
 
 function initQuestionFromParams(qParams) {
@@ -216,7 +247,8 @@ function substituteLastAnswerWithConfusingPronoun(
         + conjugator.getWord(rootForm[confusingPronoun.name].template);
     answer = util.substituteLetterAtEndToEndingLetter(answer, true);
     answer = util.postProcess(answer);
-    answers[answers.length] = answer;
+    answers[answers.length - 1] = answer;
+    console.log(answers);
     return answers;
 }
 
@@ -294,6 +326,7 @@ function answerClickHandler(clickedButton) {
 
             if (clickedButton == answerButtons[i]) {
                 numOfCorrectAnswers++;
+                questionDispenser.registerCorrectAnswer();
             }
         } else {
 
@@ -306,14 +339,20 @@ function answerClickHandler(clickedButton) {
             }
         }
     }
-    button.setNextQuestion();
+    if (questionDispenser.isQuizMode() && questionDispenser.isLastQuestion()) {
+        button.setEndQuiz();
+
+    } else {
+        button.setNextQuestion();
+    }
+
     updateScore();
 }
 
 function updateScore() {
-    score.setText(
-        `שאלה מספר ${questionDispenser.getQuestionNumber()} מתוך ${totalNumOfQuestions}`
-    );
+
+    let titleText = questionDispenser.getScoreTitleText();
+    score.setText(titleText);
 }
 
 function createAnswerForms(qParams) {
@@ -348,7 +387,11 @@ function closeSettingsWindow() {
 }
 
 function resetGame() {
-    questionDispenser.resetGame(roots, pronouns);
+    questionDispenser.resetGame("quiz", roots, pronouns, totalNumOfQuestions);
+
+    quizSummarySection.style.display = "none";
+    questionHolder.style.display = "flex";
+    answerSection.style.display = "flex";
 
     numOfCorrectAnswers = 0;
 
@@ -414,11 +457,18 @@ function debugShowConjugations() {
         forms[rootForm.Ana.distractingForms[0]],
         forms[rootForm.Ana.distractingForms[1]],
         forms[rootForm.Ana.distractingForms[2]],
-    ]
+    ];
+
+    // let conjugateToArray = [
+    //     forms["karrar"],
+    //     forms["saafar"],
+    //     forms["tallam"],
+    //     forms["tnaazal"],
+    // ]
 
     // // to set specific root and forms:
-    // let root = "פהם";
-    // rootForm = forms.ihutt;
+    // let root = "בּסם";
+    // let rootForm = forms["karrar"];
     // let conjugateTo = forms.ihutt;
     let outputs = [];  /////
 
@@ -431,6 +481,7 @@ function debugShowConjugations() {
         for (let i = 0; i < pronouns.length; i++) {
 
             let pronoun = pronouns[i];
+            // let conjugateTo = conjugateToArray[i];
             let conjugateTo = forms[rootForm[pronoun.name].distractingForms[c - 1]];
             if (c == 0) conjugateTo = rootForm;
 
