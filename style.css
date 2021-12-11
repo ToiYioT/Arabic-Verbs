@@ -1,17 +1,32 @@
 :root {
-    --green: green;
-  --blue: #CEDBE8;
-  --blue-accent: #90B2D0;
-  --button-disabled-color: #b4c6d8;
-  --blue-accent-darker: #7aa1c3;
-  --blue-darkest: #4c6c88;
+  --main-bg: #ffffff;
   --white : white;
+  --light-grey: rgb(233,233,233);
+  --accent: #7aa1c3;
+  --accent-dark: #4c6c88;
+
   --text-color: rgb(44, 44, 44);
   --text-color-faded: rgb(190, 190, 190);
+  --button-color-faded: rgb(231, 231, 231);
+  --answer-border-faded: rgb(243, 243, 243);
+
   --correct-answer-color: rgb(34, 223, 34);
   --incorrect-answer-color: red;
-  --answer-highlight-color: rgb(240, 248, 255);
-  --border-color: rgb(184, 204, 216);
+
+  /* DARK MODEEE */
+
+  /* --main-bg: rgb(39, 39, 39);
+  --white : rgb(255, 255, 255);
+  --light-grey: rgb(122, 122, 122);
+  --accent: #435362;
+  --accent-dark: #5c86ac;
+
+  --text-color: rgb(218, 216, 216);
+  --text-color-faded: rgb(100, 100, 100);
+  --button-color-faded: rgb(54, 54, 54);
+
+  --correct-answer-color: rgb(34, 223, 34);
+  --incorrect-answer-color: red; */
 }
 
 * {
@@ -29,7 +44,7 @@ html, body {
 }
 
 body {
-    background-color: var(--blue);
+    background-color: var(--main-bg);
     /* font-family: 'IBM Plex Sans Hebrew', sans-serif; */
     font-family: sans-serif;
 }
@@ -42,10 +57,8 @@ body {
     margin: auto;
     flex-direction: column;
 
-    /* border-left: solid var(--answer-highlight-color); 
-    border-right: solid var(--answer-highlight-color);  */
     border-width: 5px;
-    box-shadow: 0 0 20px 10px var(--border-color);
+    box-shadow: 0 0 20px 1px var(--light-grey);
 }
 .header{
     display: flex;
@@ -68,9 +81,10 @@ body {
 }
 
 #progress-bar {
-    min-height: 1%;
+    min-height: 2px;
+
     width: 0%;
-    background-color: var(--border-color);
+    background-color: var(--light-grey);
 }
 
 #question {
@@ -80,6 +94,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 2.0rem;
+    color: var(--text-color);
 }
 
 #answer-section {
@@ -121,9 +136,8 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    border-radius: .8em;
-    border: solid transparent;
-    border-width: 3px;
+    border-radius: .2em;
+    border: 2px solid var(--light-grey);
     cursor: pointer;
 
     height: 56px;
@@ -131,34 +145,32 @@ body {
     margin: 4px 0px;
     padding-right: 1rem;
     font-size: 1.5rem;
-    background-color: var(--answer-highlight-color);
     color: var(--text-color);
 }
 
 
 .answer:hover{
-    background-color: var(--white);
-    box-shadow: 0 0 10px rgb(197, 234, 255);
+    /* box-shadow: 0 0 10px var(--light-grey); */
 }
 
 .answer.correct {
     color: var(--correct-answer-color);
     border-color: var(--correct-answer-color);
     cursor: default;
-
-    background-color: white;
+    pointer-events: none;
 }
 
 .answer.incorrect {
     color: var(--incorrect-answer-color);
     border-color: var(--incorrect-answer-color);
-    background-color: white;
     cursor: default;
+    pointer-events: none;
 }
 
 .answer.faded{
     color: var(--text-color-faded);
     pointer-events: none;
+    border: 2px solid var(--answer-border-faded);
 }
 
 .answer-holder{
@@ -190,20 +202,19 @@ body {
     width: 320px;
     height: 96px;
     color: var(--white);
-    background-color: var(--blue-accent-darker);
-    border-radius: 1em;
+    background-color: var(--accent);
+    border-radius: 0.2em;
     margin: 24px 16px;
     cursor: pointer;
 }
 
 .faded-button{
-    background-color: var(--button-disabled-color);
-    color: rgb(223, 231, 241);
+    background-color: var(--button-color-faded);
+    color: var(--text-color-faded);
     pointer-events: none;
 }
 
 .next-button:hover{
-    background-color: var(--blue-accent-darker);
     cursor: pointer;
 }
 
@@ -229,13 +240,13 @@ body {
     flex-direction: column;
     align-items: flex-end;
 
-    background-color: var(--blue);
-    border: .3rem solid var(--blue-darkest);
+    background-color: var(--main-bg);
+    border: .3rem solid var(--accent-dark);
     width: 80%;
     height: 400px;
     max-width: 500px;
     border-radius: 1rem;
-    color: var(--blue-darkest);
+    color: var(--accent-dark);
 }
 
 .settings-title-container{
@@ -245,7 +256,7 @@ body {
     margin-bottom: 1rem;
     font-weight: bold;
 
-    border-bottom: 1px solid var(--blue-darkest);
+    border-bottom: 1px solid var(--accent-dark);
 }
 .x-button{
     align-self: stretch;
@@ -280,21 +291,31 @@ body {
 }
 
 
-
-/* @media only screen and (max-width: 360px) {
-  #container{
-      width: 100%;
-      background-color: red;
-  }
- }
-
- */
-
  @media only screen and (min-width: 660px) {
      body{
          zoom: 150%;
      }
  } 
+
+ @media (prefers-color-scheme: dark) {
+     :root{
+    /* DARK MODEEE */
+  --main-bg: rgb(39, 39, 39);
+  --white : rgb(255, 255, 255);
+  --light-grey: rgb(122, 122, 122);
+  --accent: #435362;
+  --accent-dark: #5c86ac;
+
+  --text-color: rgb(218, 216, 216);
+  --text-color-faded: rgb(100, 100, 100);
+  --button-color-faded: rgb(54, 54, 54);
+  --answer-border-faded: rgb(65, 65, 65);
+
+  --correct-answer-color: rgb(34, 223, 34);
+  --incorrect-answer-color: red;
+
+     }
+}
 
 
 /* debug */

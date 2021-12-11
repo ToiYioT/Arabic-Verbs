@@ -299,6 +299,7 @@ function progressBarUpdate() {
 
 function cancelTimerAndShowQuestion() {
     clearInterval(progressBarTimer);
+    progressBar.style.width = "100%";
     progressBarTimer = false;
     answerSection.classList.remove("hide");
     button.setChooseAnswer();
