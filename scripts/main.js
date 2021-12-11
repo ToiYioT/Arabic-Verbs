@@ -39,6 +39,11 @@ var correctAnswer;
 var progressBarTimer;
 var getAnswersFunction;
 
+// audio
+const soundCorrect = new Audio('correct.mp3');
+const soundIncorrect = new Audio('incorrect.mp3');
+const soundFinish = new Audio('finish.mp3');
+
 window.addEventListener('load', (event) => {
 
     let filteringParams = getFilteringParams();
@@ -118,12 +123,13 @@ function buttonHandler() {
 
 function showSummaryScreen() {
 
+    soundFinish.play();
     let quizLength = questionDispenser.getQuizLength();
     let wrongNum = questionDispenser.getNumOfWrongAnswers();
     let rightNum = quizLength - wrongNum;
     let percentageOfRight = Math.round(100 * rightNum / quizLength);
 
-    score.setText("מושלם");
+    score.setText("");
     progressBar.style.width = "100%";
     answerSection.classList.add("hide");
     button.setRestartQuiz(resetGame);
@@ -318,12 +324,14 @@ function answerClickHandler(clickedButton) {
 
             if (clickedButton == answerButtons[i]) {
                 questionDispenser.registerCorrectAnswer();
+                soundCorrect.play();
             }
         } else {
 
             if (clickedButton == answerButtons[i]) {
                 answerButtons[i].setIncorrect();
                 questionDispenser.registerIncorrectAnswer();
+                soundIncorrect.play();
 
             } else {
                 answerButtons[i].setFaded();
