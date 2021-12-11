@@ -290,18 +290,11 @@ body {
 
  */
 
- /* @media only screen and (min-width: 660px) {
-     #score{
-         font-size: 1.2rem;
+ @media only screen and (min-width: 660px) {
+     body{
+         zoom: 150%;
      }
-     #question{
-         font-size: 3rem;
-     }
-
-     .answer{
-        font-size: 2rem;
-     }
- }  */
+ } 
 
 
 /* debug */
