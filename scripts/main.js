@@ -145,6 +145,10 @@ function showSummaryScreen() {
 
 function initQuestion() {
 
+    soundFinish.src = "finish.mp3";
+    soundIncorrect.src = "incorrect.mp3";
+    soundCorrect.src = "correct.mp3";
+
     questionDispenser.handleNewQuestion();
     let currentQuestion = questionDispenser.getCurrentQuestion();
 
