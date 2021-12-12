@@ -37,13 +37,20 @@ export class MainButton {
     setEndQuiz() {
         this.element.onclick = this.onEndQuiz;
         this.element.classList.remove("faded-button");
+        this.element.classList.add("finish-button");
         this.setText("לסיום");
         this.state = "end-quiz";
     }
 
     setRestartQuiz(onResetGame) {
         this.setText("לתרגל עוד");
+        this.element.classList.remove("finish-button");
         this.state = "restart-quiz";
+        this.element.onclick = "";
+        setTimeout(() => this.element.onclick = onResetGame, 1000);
+    }
+
+    setResetGame(onResetGame) {
         this.element.onclick = onResetGame;
     }
 

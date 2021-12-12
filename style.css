@@ -198,6 +198,10 @@ body {
     cursor: pointer;
 }
 
+.finish-button{
+    background-color: var(--correct-answer-color);
+}
+
 .faded-button{
     background-color: var(--button-color-faded);
     color: var(--text-color-faded);

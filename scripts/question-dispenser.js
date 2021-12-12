@@ -9,7 +9,7 @@ var roots, pronouns;
 const MODE_INFINITE = "infinite";
 const MODE_QUIZ = "quiz";
 var mode = MODE_INFINITE;
-const totalNumOfQuestions = 10;
+const totalNumOfQuestions = 3;
 var correctAnswerCounter;
 
 
