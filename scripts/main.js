@@ -273,7 +273,7 @@ function conjugateHebrew(rootHebrew, pronoun) {
         (tense == tenses.participle && pronoun.name.includes("Ana")
             && rootHebrew.charAt(rootHebrew.length - 1) == "ה")) {
 
-        questionHolder.innerHTML += " ❨" + pronoun.gender + "❩" + "<br/>";
+        questionHolder.innerHTML += " (" + pronoun.gender + ")" + "<br/>";
     }
 }
 

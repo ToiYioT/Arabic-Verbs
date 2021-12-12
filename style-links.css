@@ -31,14 +31,16 @@ body{
 }
 
 .link{
+    direction: rtl;
     background-color: var(--green);
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     text-decoration: none;
     padding: 1rem;
     color: rgb(212, 212, 212);
     border: 2px solid transparent;
     border-radius: .2rem;
+    width: 80%;
 }
 
 .link:hover{

@@ -74,6 +74,8 @@ body {
 }
 
 #question {
+    direction: rtl;
+    margin: 0rem 1rem;
     display: flex;
     flex: 1;
     flex-basis: 0;
