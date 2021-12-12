@@ -69,7 +69,7 @@ export function filterRoots(filteringParams) {
         }
     }
 
-    console.log(`Filtered: ${filteredData.length} roots`);
+    // console.log(`Filtered: ${filteredData.length} roots`);
     // var endTime = performance.now()
     // console.log(`Call to filteringRoots took ${endTime - startTime} milliseconds`);
 

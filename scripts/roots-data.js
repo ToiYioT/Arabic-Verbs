@@ -497,5 +497,4 @@ export const allRoots = [
     { "hebrew": "מחייך", "arabic": "בּסם", "form": "bishtrel", "lesson": "" },
     { "hebrew": "יחייך", "arabic": "בּסם", "form": "yishtrel", "lesson": "" },
     { "hebrew": "הרוג", "arabic": "קתל", "form": "mawjood", "lesson": "" },
-    { "hebrew": "מבסוט", "arabic": "בּסט", "form": "mawjood", "lesson": "" }
 ]

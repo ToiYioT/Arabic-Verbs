@@ -1,6 +1,6 @@
 :root{
-    --green: rgb(66, 138, 72);
-    --blue: rgb(76, 142, 168);
+    --green: rgb(230, 230, 230);
+    --blue: rgb(255, 255, 255);
     --green-light: rgb(149, 194, 157);
     --font: rgb(212, 212, 212);
 
@@ -9,7 +9,7 @@
 body{
     font-size: 1rem;
     margin: 0;
-    color: rgb(212, 212, 212);
+    color: rgb(39, 39, 39);
     background-color: var(--blue);
 }
 
@@ -24,9 +24,9 @@ body{
 
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     align-items: center;
-    padding-top: 4rem;
+    padding-top: 1rem;
     padding-bottom: 4rem;
 }
 
@@ -36,15 +36,15 @@ body{
     display: flex;
     justify-content: flex-start;
     text-decoration: none;
-    padding: 1rem;
-    color: rgb(212, 212, 212);
+    padding: .5rem;
+    color: rgb(29, 85, 38);
     border: 2px solid transparent;
     border-radius: .2rem;
-    width: 80%;
+    width: 60%;
 }
 
 .link:hover{
-    border: 2px solid rgb(149, 194, 157);
+    border: 2px solid rgb(166, 194, 171);
 
 }
 

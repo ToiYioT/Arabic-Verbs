@@ -33,6 +33,12 @@ export function getFilteringParams() {
         case "present":
             formFiltering = formNamesPresent;
             break;
+        case "present-future":
+            formFiltering = [...formNamesPresent, ...formNamesFuture];
+            break;
+        case "measure1":
+            formFiltering = [...formNamesPresent, ...formNamesFuture, ...formNamesPast];
+            break;
         case "210":
             formFiltering = [...formNamesPresent210, ...formNamesPast210, ...formNamesFuture210];
             break;
@@ -68,7 +74,7 @@ export function getFilteringParams() {
         lessons: lessonFiltering,
         words: hebrewWord
     };
-    console.log(output);
+    // console.log(output);
 
     return output;
 }
