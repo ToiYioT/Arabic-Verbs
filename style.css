@@ -33,6 +33,7 @@ body {
     background-color: var(--main-bg);
     /* font-family: 'IBM Plex Sans Hebrew', sans-serif; */
     font-family: sans-serif;
+    min-height: 550px;
 }
 
 #container {
