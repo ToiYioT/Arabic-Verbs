@@ -75,7 +75,7 @@ body {
 
 #question {
     direction: rtl;
-    margin: 0rem 1rem;
+    margin: 2rem 1rem;
     display: flex;
     flex: 1;
     flex-basis: 0;
@@ -188,7 +188,7 @@ body {
     transition-duration: 0.2s;
 
     font-size: 1.5rem;
-    min-height: 56px;
+    min-height: 96px;
     width: 320px;
     height: 96px;
     color: var(--white);
@@ -285,7 +285,7 @@ body {
 }
 
 
- @media only screen and (min-width: 660px) {
+ @media only screen and (min-width: 1200px) and (min-height: 900px){
      body{
          zoom: 150%;
      }
