@@ -22,10 +22,10 @@
 html{
     background-color: rgb(255, 196, 196);
     user-select: none;
+    height: 100%;
 }
 
 html, body {
-    height: 100%;
     margin: 0;
 }
 
@@ -34,12 +34,13 @@ body {
     /* font-family: 'IBM Plex Sans Hebrew', sans-serif; */
     font-family: sans-serif;
     min-height: 550px;
+    height: 100%;
 }
 
 #container {
+    height: 100%;
     display: flex;
     width: 550px;
-    height: 100%;
     max-width: 100%;
     margin: auto;
     flex-direction: column;
@@ -288,7 +289,10 @@ body {
 
  @media only screen and (min-width: 1200px) and (min-height: 900px){
      body{
-         zoom: 150%;
+        zoom: 150%;
+     }
+     #container{
+        min-height: 66.6666vh;
      }
  } 
 
