@@ -142,7 +142,7 @@ body {
 
 
 .answer:hover{
-    /* box-shadow: 0 0 10px var(--light-grey); */
+    box-shadow: 0 0 10px var(--light-grey);
 }
 
 .answer.correct {
@@ -198,6 +198,10 @@ body {
     border-radius: 0.2em;
     margin: 24px 16px;
     cursor: pointer;
+}
+
+.main-button:hover{
+    opacity: 90%;
 }
 
 .finish-button{
