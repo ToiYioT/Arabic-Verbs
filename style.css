@@ -214,10 +214,6 @@ body {
     pointer-events: none;
 }
 
-.next-button:hover{
-    cursor: pointer;
-}
-
 .settings-overlay{
     position: absolute;
     display: flex;
@@ -299,6 +295,15 @@ body {
         min-height: 66.6666vh;
      }
  } 
+
+ @media (pointer:none), (pointer:coarse) {
+     .answer{
+         cursor: default;
+     }
+     .main-button{
+         cursor: default;
+     }
+}
 
  @media (prefers-color-scheme: dark) {
      :root{
