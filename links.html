@@ -22,6 +22,92 @@
 
 <body>
     <div class="header">תרגול ממוקד</div>
+    <section class="filtering">
+
+        <div class="filtering-section">
+            <div class="filtering-section-title">שיעורי מדרסה</div>
+            <div class="filtering-option">
+                <input type="checkbox" id="madrasa-begginer" class="checkbox" checked>
+                <label for="madrasa-begginer">מדרסה מתחילים</label>
+            </div>
+            <div class="filtering-option">
+                <input type="checkbox" id="madrasa-advanced" class="checkbox" checked>
+                <label for="madrasa-advanced">מדרסה ממשיכים</label>
+            </div>
+            <div class="filtering-option">
+                <input type="checkbox" id="outside-madrasa" class="checkbox" checked>
+                <label for="outside-madrasa">לא ממדרסה</label>
+            </div>
+            <div class="filtering-section-title">או שיעורים ספציפיים</div>
+
+            <div class="filtering-option">
+                <label for="lesson-from">משיעור </label>
+                <input type="number" id="lesson-from" class="number-picker" min="1" max="16">
+            </div>
+            <div class="filtering-option">
+                <label for="lesson-to">עד שיעור</label>
+                <input type="number" id="lesson-to" class="number-picker" min="1" max="16">
+            </div>
+
+        </div>
+
+        <div class="filtering-section">
+            <div class="filtering-section-title">בניין</div>
+            <div class="filtering-option">
+                <input type="checkbox" id="measure1" class="checkbox" checked>
+                <label for="measure1">בניין 1</label>
+            </div>
+            <div class="filtering-option">
+                <input type="checkbox" id="measure210" class="checkbox" checked>
+                <label for="measure210">בניינים 2-10</label>
+            </div>
+        </div>
+
+
+        <div class="filtering-section">
+            <div class="filtering-section-title">זמנים</div>
+            <div class="filtering-option">
+                <input type="checkbox" id="past" class="checkbox" checked>
+                <label for="past">עבר</label>
+            </div>
+            <div class="filtering-option">
+                <input type="checkbox" id="present" class="checkbox" checked>
+                <label for="present">הווה</label>
+            </div>
+            <div class="filtering-option">
+                <input type="checkbox" id="future" class="checkbox" checked>
+                <label for="future">עתיד</label>
+            </div>
+            <div class="filtering-option">
+                <input type="checkbox" id="participle" class="checkbox" checked>
+                <label for="participle">בינוני פועל-פעול</participlelabel>
+            </div>
+        </div>
+
+
+
+        <div class="filtering-section">
+            <div class="filtering-section-title">תשובות מבלבלות</div>
+            <div class="filtering-option">
+                <input type="radio" id="forms" name="confusing" value="forms" checked>
+                <label for="forms">צורות הטייה</label>
+            </div>
+
+            <div class="filtering-option">
+                <input type="radio" id="pronouns" name="confusing" value="pronouns">
+                <label for="pronouns">גופים</label>
+            </div>
+
+            <div class="filtering-option">
+                <input type="radio" id="random" name="confusing" value="random">
+                <label for="random">אקראי</label>
+            </div>
+        </div>
+
+
+
+
+    </section>
     <div class="container">
 
         <a href="index.html" class="link" target="_blank">לתרגול כל סוגי הפעלים</a>
