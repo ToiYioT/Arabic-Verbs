@@ -1,0 +1,22 @@
+{
+    "short_name": "פעלים בערבית",
+    "name": "הטיית פעלים בערבית מדוברת",
+    "dir": "rtl",
+    "id": "/index.html",
+    "lang": "he",
+    "icons": [
+        {
+            "src": "splash.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "madrasa-icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/index.html",
+    "display": "standalone",
+    "orientation": "portrait"
+}

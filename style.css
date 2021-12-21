@@ -39,6 +39,7 @@ body {
 
     display: flex;
     flex-direction: column;
+    overscroll-behavior-y: contain;
 }
 
 #container {
