@@ -1,1 +1,21 @@
-{}
+// {
+//     "liveServer.settings.https": {
+//         "enable": true, //set it true to enable the feature.
+//         "cert": "C:\\Users\\toiyi\\Desktop\\Coding\\server.csr", //full path of the certificate
+//         "key": "C:\\Users\\toiyi\\Desktop\\Coding\\server.key.org", //full path of the private key
+//         "passphrase": "123456"
+//     }
+// }
+{
+    // "liveServer.settings.port": 5500,
+    // "liveServer.settings.root": "/",
+    // // "liveServer.settings.CustomBrowser": "chrome",
+    // "liveServer.settings.https": {
+    //     "enable": false,
+    //     "cert": "C:\\Users\\toiyi\\Desktop\\Coding\\localhost.pem", //full path of the certificate
+    //     // "cert": "/Users/steve/Documents/code/https/localhost.pem",
+    //     // "key": "/Users/steve/Documents/code/https/localhost.key",
+    //     "key": "C:\\Users\\toiyi\\Desktop\\Coding\\localhost.key", //full path of the private key
+    //     "passphrase": "e512rw"
+    // }
+}
