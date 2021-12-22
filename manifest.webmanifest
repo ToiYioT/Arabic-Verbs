@@ -2,7 +2,6 @@
     "short_name": "פעלים בערבית",
     "name": "הטיית פעלים בערבית מדוברת",
     "dir": "rtl",
-    "id": "./index.html",
     "lang": "he",
     "icons": [
         {
@@ -16,7 +15,7 @@
             "type": "image/png"
         }
     ],
-    "start_url": "./index.html",
+    "start_url": "./",
     "display": "standalone",
     "orientation": "portrait"
 }
