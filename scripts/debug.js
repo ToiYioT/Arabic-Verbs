@@ -34,7 +34,7 @@ function showConjugations(roots, pronouns, conjugator, forms) {
     loadDebugCols();
 
     let rootNum = Math.floor(Math.random() * roots.length);
-    let root = roots[rootNum].arabic;
+    // let root = roots[rootNum].arabic;
     let formName = roots[rootNum].form;
 
     let rootForm = forms[formName];
@@ -53,7 +53,7 @@ function showConjugations(roots, pronouns, conjugator, forms) {
     // ]
 
     // // to set specific root and forms:
-    // let root = "בּסם";
+    let root = "פכּר";
     // let rootForm = forms["karrar"];
     // let conjugateTo = forms.ihutt;
     let outputs = [];  /////

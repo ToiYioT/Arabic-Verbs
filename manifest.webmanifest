@@ -5,12 +5,12 @@
     "lang": "he",
     "icons": [
         {
-            "src": "./splash.png",
+            "src": "./icons/splash.png",
             "sizes": "512x512",
             "type": "image/png"
         },
         {
-            "src": "./madrasa-icon.png",
+            "src": "./icons/madrasa-icon.png",
             "sizes": "192x192",
             "type": "image/png"
         }
