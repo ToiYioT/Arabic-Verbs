@@ -18,6 +18,7 @@ function buildPronoun(template, distractions) {
 
 function createNewForm() {
     return {
+        representativeRoot: "",
         formName: "default",
         tense: TENSE,
         Ana: "",
@@ -53,6 +54,7 @@ function createNewForm() {
 /// measure 2
 const karrar = createNewForm();
 karrar.formName = KARRAR;
+karrar.representativeRoot = "קרר";
 karrar.Ana = buildPronoun("פַעַّלֵת", []);
 karrar.Inte = buildPronoun("פַעַّלֵת", []);
 karrar.Inti = buildPronoun("פַעַّלְתי", []);
@@ -73,6 +75,7 @@ karrar.processingToForm = {
 /// measure 3
 const saafar = createNewForm();
 saafar.formName = SAAFAR;
+saafar.representativeRoot = "ספר";
 saafar.Ana = buildPronoun("פַאעַלֵת", []);
 saafar.Inte = buildPronoun("פַאעַלֵת", []);
 saafar.Inti = buildPronoun("פַאעַלְתִי", []);
@@ -92,6 +95,7 @@ saafar.processingToForm = {
 /// measure 5
 const tallam = createNewForm();
 tallam.formName = TALLAM;
+tallam.representativeRoot = "עלם";
 tallam.Ana = buildPronoun("תְפַעַّלֵת", []);
 tallam.Inte = buildPronoun("תְפַעַّלֵת", []);
 tallam.Inti = buildPronoun("תְפַעַّלְתִי", []);
@@ -112,6 +116,7 @@ tallam.processingToForm = {
 /// measure 6
 const tnaazal = createNewForm();
 tnaazal.formName = TNAAZAL;
+tnaazal.representativeRoot = "נזל";
 tnaazal.Ana = buildPronoun("תְפַאעַלֵת", []);
 tnaazal.Inte = buildPronoun("תְפַאעַלֵת", []);
 tnaazal.Inti = buildPronoun("תְפַאעַלְתִי", []);
@@ -132,6 +137,7 @@ tnaazal.processingToForm = {
 /// measure 7
 const inmasak = createNewForm();
 inmasak.formName = INMASAK;
+inmasak.representativeRoot = "מסכּ";
 inmasak.Ana = buildPronoun("אִנְפַעַלֵת", []);
 inmasak.Inte = buildPronoun("אִנְפַעַלֵת", []);
 inmasak.Inti = buildPronoun("אִנְפַעַלְתִי", []);
@@ -152,6 +158,7 @@ inmasak.processingToForm = {
 /// measure 8
 const ishtaral = createNewForm();
 ishtaral.formName = ISHTARAL;
+ishtaral.representativeRoot = "שע'ל";
 ishtaral.Ana = buildPronoun("אִפְתַעַלֵת", []);
 ishtaral.Inte = buildPronoun("אִפְתַעַלֵת", []);
 ishtaral.Inti = buildPronoun("אִפְתַעַלְתִי", []);
@@ -172,6 +179,7 @@ ishtaral.processingToForm = {
 /// measure 10
 const istaamal = createNewForm();
 istaamal.formName = ISTAAMAL;
+istaamal.representativeRoot = "עמל";
 istaamal.Ana = buildPronoun("אִסְתַפְעַלֵת", []);
 istaamal.Inte = buildPronoun("אִסְתַפְעַלֵת", []);
 istaamal.Inti = buildPronoun("אִסְתַפְעַלְתִי", []);

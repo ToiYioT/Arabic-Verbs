@@ -1,0 +1,56 @@
+:root {
+  --main-bg: #ffffff;
+  --white : white;
+  --light-grey: rgb(233,233,233);
+  --accent: #7aa1c3;
+  --accent-dark: #4c6c88;
+
+  --text-color: rgb(44, 44, 44);
+  --text-color-faded: rgb(190, 190, 190);
+  --button-color-faded: rgb(231, 231, 231);
+  --answer-border-faded: rgb(243, 243, 243);
+
+  --correct-answer-color: rgb(34, 223, 34);
+  --incorrect-answer-color: red;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.form-title{
+    font-size: 2rem;
+}
+
+.table-container{
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+}
+
+.practice-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    align-self: center;
+    transition-duration: 0.2s;
+
+    font-size: 1.5rem;
+    min-height: 96px;
+    max-width: 90vw;
+    width: 320px;
+    height: 96px;
+    color: var(--white);
+    background-color: var(--accent);
+    border-radius: 0.2em;
+    margin: 24px 16px;
+    cursor: pointer;
+}

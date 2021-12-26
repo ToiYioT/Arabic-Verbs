@@ -19,6 +19,7 @@ function buildPronoun(template, distractions) {
 
 function createNewForm() {
     return {
+        representativeRoot: "",
         formName: "default",
         tense: TENSE,
         Ana: "",
@@ -42,6 +43,7 @@ function createNewForm() {
 
 const yuktol = createNewForm();
 yuktol.formName = YUKTOL;
+yuktol.representativeRoot = "קתל";
 yuktol.Ana = buildPronoun("אַפְעֺל", [YIMSEK, YISMA, IRUH]);
 yuktol.Inte = buildPronoun("תֻפְעֺל", [YIMSEK, YISMA, IRUH]);
 yuktol.Inti = buildPronoun("תֻפֻעְלִי", [YIMSEK, YISMA, IRUH]);
@@ -60,6 +62,7 @@ yuktol.processingToForm = {
 
 const yimsek = createNewForm();
 yimsek.formName = YIMSEK;
+yimsek.representativeRoot = "מסכּ";
 yimsek.Ana = buildPronoun("אַפְעֵל", [YUKTOL, YISMA, IRUH]);
 yimsek.Inte = buildPronoun("תִפְעֵל", [YUKTOL, YISMA, IRUH]);
 yimsek.Inti = buildPronoun("תִפִעְלִי", [YUKTOL, YISMA, IRUH]);
@@ -78,6 +81,7 @@ yimsek.processingToForm = {
 
 const yisma = createNewForm();
 yisma.formName = YISMA;
+yisma.representativeRoot = "סמע";
 yisma.Ana = buildPronoun("אַפְעַל", [YUKTOL, YIMSEK, IRUH]);
 yisma.Inte = buildPronoun("תִפְעַל", [YUKTOL, YIMSEK, IRUH]);
 yisma.Inti = buildPronoun("תִפְעַלִי", [YUKTOL, YIMSEK, IRUH]);
@@ -96,6 +100,7 @@ yisma.processingToForm = {
 
 const iruh = createNewForm();
 iruh.formName = IRUH;
+iruh.representativeRoot = "רוח";
 iruh.Ana = buildPronoun("אַפוּל", [IJIB, INSA, IHUTT]);
 iruh.Inte = buildPronoun("תְפוּל", [IJIB, INSA, IHUTT]);
 iruh.Inti = buildPronoun("תְפוּלי", [IJIB, INSA, IHUTT]);
@@ -113,6 +118,7 @@ iruh.processingToForm = {
 
 const ijib = createNewForm();
 ijib.formName = IJIB;
+ijib.representativeRoot = "ג'יבּ";
 ijib.Ana = buildPronoun("אַפִיל", [YISMA, INSA, IHIBB]);
 ijib.Inte = buildPronoun("תְפִיל", [YISMA, INSA, IHIBB]);
 ijib.Inti = buildPronoun("תְפִילִי", [YISMA, INSA, IHIBB]);
@@ -131,6 +137,7 @@ ijib.processingToForm = {
 
 const ihki = createNewForm();
 ihki.formName = IHKI;
+ihki.representativeRoot = "חכּי";
 ihki.Ana = buildPronoun("אַפְעִי", [IRUH, INSA, IHIBB]);
 ihki.Inte = buildPronoun("תִפְעִי", [IRUH, INSA, IHIBB]);
 ihki.Inti = buildPronoun("תִפְעִי", [IRUH, IJIB, IHIBB]);
@@ -149,6 +156,7 @@ ihki.processingToForm = {
 
 const insa = createNewForm();
 insa.formName = INSA;
+insa.representativeRoot = "נסא";
 insa.Ana = buildPronoun("אַפְעַא", [YIMSEK, IRUH, IHUTT]);
 insa.Inte = buildPronoun("תִפְעַא", [YIMSEK, IRUH, IHUTT]);
 insa.Inti = buildPronoun("תִפְעִי", [YIMSEK, YISMA, IHUTT]);
@@ -167,6 +175,7 @@ insa.processingToForm = {
 
 const ihibb = createNewForm();
 ihibb.formName = IHIBB;
+ihibb.representativeRoot = "חבּ";
 ihibb.Ana = buildPronoun("אַפִעّ", [IJIB, INSA, IHUTT]);
 ihibb.Inte = buildPronoun("תְפִעّ", [IJIB, INSA, IHUTT]);
 ihibb.Inti = buildPronoun("תְפִעִّי", [IJIB, INSA, IHUTT]);
@@ -184,6 +193,7 @@ ihibb.processingToForm = {
 
 const ihutt = createNewForm();
 ihutt.formName = IHUTT;
+ihutt.representativeRoot = "חט";
 ihutt.Ana = buildPronoun("אַפֻעّ", [IRUH, INSA, IHIBB]);
 ihutt.Inte = buildPronoun("תְפֻעّ", [IRUH, INSA, IHIBB]);
 ihutt.Inti = buildPronoun("תְפֻעִّי", [IRUH, INSA, IHIBB]);

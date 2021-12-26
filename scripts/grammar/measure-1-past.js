@@ -17,6 +17,7 @@ function buildPronoun(template, distractions) {
 
 function createNewForm() {
     return {
+        representativeRoot: "",
         formName: "default",
         tense: TENSE,
         Ana: "",
@@ -41,6 +42,7 @@ function createNewForm() {
 
 const katab = createNewForm();
 katab.formName = KATAB;
+katab.representativeRoot = "כּתבּ";
 katab.Ana = buildPronoun("פַעַלְת", [NIZEL, HAKA, HABB, RAH]);
 katab.Inte = buildPronoun("פַעַלְת", [NIZEL, HAKA, HABB, RAH]);
 katab.Inti = buildPronoun("פַעַלְתִי", [NIZEL, HAKA, HABB, RAH]);
@@ -61,6 +63,7 @@ katab.processingToForm = {
 
 const nizel = createNewForm();
 nizel.formName = NIZEL;
+nizel.representativeRoot = "נזל";
 nizel.Ana = buildPronoun("פְעִלְת", [KATAB, HAKA, HABB, RAH]);
 nizel.Inte = buildPronoun("פְעִלְת", [KATAB, HAKA, HABB, RAH]);
 nizel.Inti = buildPronoun("פְעִלְתִי", [KATAB, HAKA, HABB, RAH]);
@@ -81,6 +84,7 @@ nizel.processingToForm = {
 
 const haka = createNewForm();
 haka.formName = HAKA;
+haka.representativeRoot = "חכּא";
 haka.Ana = buildPronoun("פַעֵית", [NISI, HABB, RAH, JAB]);
 haka.Inte = buildPronoun("פַעֵית", [NISI, HABB, RAH, JAB]);
 haka.Inti = buildPronoun("פַעֵיתִי", [NISI, HABB, RAH, JAB]);
@@ -102,6 +106,7 @@ haka.processingToForm = {
 
 const nisi = createNewForm();
 nisi.formName = NISI;
+nisi.representativeRoot = "נסי";
 nisi.Ana = buildPronoun("פְעִית", [HAKA, HABB, RAH, JAB]);
 nisi.Inte = buildPronoun("פְעִית", [HAKA, HABB, RAH, JAB]);
 nisi.Inti = buildPronoun("פְעִיתִי", [HAKA, HABB, RAH, JAB]);
@@ -121,6 +126,7 @@ nisi.processingToForm = {
 
 const habb = createNewForm();
 habb.formName = HABB;
+habb.representativeRoot = "חבּ";
 habb.Ana = buildPronoun("פַעֵّית", [NISI, RAH, JAB]);
 habb.Inte = buildPronoun("פַעֵّית", [NISI, RAH, JAB]);
 habb.Inti = buildPronoun("פַעֵّיתִי", [NISI, RAH, JAB]);
@@ -141,6 +147,7 @@ habb.processingToForm = {
 
 const rah = createNewForm();
 rah.formName = RAH;
+rah.representativeRoot = "ראח";
 rah.Ana = buildPronoun("פֻלְת", [HAKA, NISI, HABB, JAB]);
 rah.Inte = buildPronoun("פֻלְת", [HAKA, NISI, HABB, JAB]);
 rah.Inti = buildPronoun("פֻלְתִי", [HAKA, NISI, HABB, JAB]);
@@ -160,6 +167,7 @@ rah.processingToForm = {
 
 const jab = createNewForm();
 jab.formName = JAB;
+jab.representativeRoot = "ג'אבּ";
 jab.Ana = buildPronoun("פִלְת", [HAKA, NISI, HABB, RAH]);
 jab.Inte = buildPronoun("פִלְת", [HAKA, NISI, HABB, RAH]);
 jab.Inti = buildPronoun("פִלְתִי", [HAKA, NISI, HABB, RAH]);

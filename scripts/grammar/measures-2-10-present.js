@@ -19,6 +19,7 @@ function buildPronoun(template, distractions) {
 
 function createNewForm() {
     return {
+        representativeRoot: "",
         formName: "default",
         tense: TENSE,
         Ana: "",
@@ -54,6 +55,7 @@ function createNewForm() {
 /// measure 2
 const bikarrer = createNewForm();
 bikarrer.formName = BIKARRER;
+bikarrer.representativeRoot = "קרר";
 bikarrer.Ana = buildPronoun("בַּפַעֵّל", []);
 bikarrer.Inte = buildPronoun("בִּתְפַעֵّל", []);
 bikarrer.Inti = buildPronoun("בִּתְפַעֵّלִי", []);
@@ -72,6 +74,7 @@ bikarrer.processingToForm = {
 
 const bikarreb = createNewForm();
 bikarreb.formName = BIKARREB;
+bikarreb.representativeRoot = "קרבּ";
 bikarreb.Ana = buildPronoun("בַּפַעֵّל", []);
 bikarreb.Inte = buildPronoun("בִּתְפַעֵّל", []);
 bikarreb.Inti = buildPronoun("בִּתְפַעְّלִי", []);
@@ -92,6 +95,7 @@ bikarreb.processingToForm = {
 /// measure 3
 const bisaafer = createNewForm();
 bisaafer.formName = BISAAFER;
+bisaafer.representativeRoot = "ספר";
 bisaafer.Ana = buildPronoun("בַּפַאעֵל", []);
 bisaafer.Inte = buildPronoun("בִּתְפַאעֵל", []);
 bisaafer.Inti = buildPronoun("בִּתְפַאעְלי", []);
@@ -111,6 +115,7 @@ bisaafer.processingToForm = {
 /// measure 5
 const bittallam = createNewForm();
 bittallam.formName = BITTALLAM;
+bittallam.representativeRoot = "עלם";
 bittallam.Ana = buildPronoun("בַּתְפַעַّל", []);
 bittallam.Inte = buildPronoun("בְּתִתְפַעַّל", []);
 bittallam.Inti = buildPronoun("בְּתִתְפַעַّלִי", []);
@@ -131,6 +136,7 @@ bittallam.processingToForm = {
 /// measure 6
 const bitnaazal = createNewForm();
 bitnaazal.formName = BITNAAZAL;
+bitnaazal.representativeRoot = "נזל";
 bitnaazal.Ana = buildPronoun("בַּתְפַאעַל", []);
 bitnaazal.Inte = buildPronoun("בְּתִתְפַאעַל", []);
 bitnaazal.Inti = buildPronoun("בְּתִתְפַאעַלִי", []);
@@ -151,6 +157,7 @@ bitnaazal.processingToForm = {
 /// measure 7
 const binimsek = createNewForm();
 binimsek.formName = BINIMSEK;
+binimsek.representativeRoot = "מסכּ";
 binimsek.Ana = buildPronoun("בַּנִפְעֵל", []);
 binimsek.Inte = buildPronoun("בְּתִנִפְעֵל", []);
 binimsek.Inti = buildPronoun("בְּתִנְפִעְלִי", []);
@@ -171,6 +178,7 @@ binimsek.processingToForm = {
 /// measure 8
 const bishtrel = createNewForm();
 bishtrel.formName = BISHTREL;
+bishtrel.representativeRoot = "שע'ל";
 bishtrel.Ana = buildPronoun("בַּפְתְעֵל", []);
 bishtrel.Inte = buildPronoun("בְּתִפְתְעֵל", []);
 bishtrel.Inti = buildPronoun("בְּתִפְתִעְלִי", []);
@@ -191,6 +199,7 @@ bishtrel.processingToForm = {
 /// measure 10
 const bistaamel = createNewForm();
 bistaamel.formName = BISTAAMEL;
+bistaamel.representativeRoot = "עמל";
 bistaamel.Ana = buildPronoun("בַּסְתַפְעֵל", []);
 bistaamel.Inte = buildPronoun("בְּתִסְתַפְעֵל", []);
 bistaamel.Inti = buildPronoun("בְּתִסְתַפִעְלִי", []);

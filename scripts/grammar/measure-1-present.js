@@ -19,6 +19,7 @@ function buildPronoun(template, distractions) {
 
 function createNewForm() {
     return {
+        representativeRoot: "",
         formName: "default",
         tense: TENSE,
         Ana: "",
@@ -53,6 +54,7 @@ function createNewForm() {
 
 const buktol = createNewForm();
 buktol.formName = BUKTOL;
+buktol.representativeRoot = "קתל";
 buktol.Ana = buildPronoun("בַּפְעֺל", []);
 buktol.Inte = buildPronoun("בְּתֻפְעֺל", []);
 buktol.Inti = buildPronoun("בְּתֻפֻעְלִי", []);
@@ -72,6 +74,7 @@ buktol.processingToForm = {
 
 const bimsek = createNewForm();
 bimsek.formName = BIMSEK;
+bimsek.representativeRoot = "מסכּ";
 bimsek.Ana = buildPronoun("בַּפְעֵל", []);
 bimsek.Inte = buildPronoun("בְּתִפְעֵל", []);
 bimsek.Inti = buildPronoun("בְּתִפִעְלִי", []);
@@ -91,6 +94,7 @@ bimsek.processingToForm = {
 
 const bisma = createNewForm();
 bisma.formName = BISMA;
+bisma.representativeRoot = "סמע";
 bisma.Ana = buildPronoun("בַּפְעַל", []);
 bisma.Inte = buildPronoun("בְּתִפְעַל", []);
 bisma.Inti = buildPronoun("בְּתִפְעַלִי", []);
@@ -110,6 +114,7 @@ bisma.processingToForm = {
 
 const biruh = createNewForm();
 biruh.formName = BIRUH;
+biruh.representativeRoot = "רוח";
 biruh.Ana = buildPronoun("בַּפוּל", []);
 biruh.Inte = buildPronoun("בִּתְפוּל", []);
 biruh.Inti = buildPronoun("בִּתְפוּלי", []);
@@ -128,6 +133,7 @@ biruh.processingToForm = {
 
 const bijib = createNewForm();
 bijib.formName = BIJIB;
+bijib.representativeRoot = "ג'יבּ";
 bijib.Ana = buildPronoun("בַּפִיל", []);
 bijib.Inte = buildPronoun("בִּתְפִיל", []);
 bijib.Inti = buildPronoun("בִּתְפִילִי", []);
@@ -147,6 +153,7 @@ bijib.processingToForm = {
 
 const bihki = createNewForm();
 bihki.formName = BIHKI;
+bihki.representativeRoot = "חכּי";
 bihki.Ana = buildPronoun("בַּפְעִי", [BINSA]);
 bihki.Inte = buildPronoun("בְּתִפְעִי", [BINSA]);
 bihki.Inti = buildPronoun("בְּתִפְעִי", [BIJIB]);
@@ -166,6 +173,7 @@ bihki.processingToForm = {
 
 const binsa = createNewForm();
 binsa.formName = BINSA;
+binsa.representativeRoot = "נסא";
 binsa.Ana = buildPronoun("בַּפְעַא", [BIRUH]);
 binsa.Inte = buildPronoun("בְּתִפְעַא", [BIRUH]);
 binsa.Inti = buildPronoun("בְּתִפְעִי", [BISMA]);
@@ -185,6 +193,7 @@ binsa.processingToForm = {
 
 const bihibb = createNewForm();
 bihibb.formName = BIHIBB;
+bihibb.representativeRoot = "חבּ";
 bihibb.Ana = buildPronoun("בַּפִעّ", []);
 bihibb.Inte = buildPronoun("בִּתְפִעّ", []);
 bihibb.Inti = buildPronoun("בִּתְפִעִّי", []);
@@ -203,6 +212,7 @@ bihibb.processingToForm = {
 
 const bihutt = createNewForm();
 bihutt.formName = BIHUTT;
+bihutt.representativeRoot = "חט";
 bihutt.Ana = buildPronoun("בַּפֻעّ", []);
 bihutt.Inte = buildPronoun("בִּתְפֻעّ", []);
 bihutt.Inti = buildPronoun("בִּתְפֻעִّי", []);

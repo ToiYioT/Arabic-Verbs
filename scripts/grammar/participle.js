@@ -18,6 +18,7 @@ function buildPronoun(template, distractions) {
 
 function createNewForm() {
     return {
+        representativeRoot: "",
         formName: "default",
         tense: TENSE,
 
@@ -49,6 +50,7 @@ function createNewForm() {
 
 const saken = createNewForm();
 saken.formName = SAKEN;
+saken.representativeRoot = "סכּן";
 saken.Ana = buildPronoun("פַאעֵל", []);
 saken.AnaFem = buildPronoun("פַאעְלֵה", []);
 saken.Ihna = buildPronoun("פַאעְלִין", []);
@@ -64,6 +66,7 @@ saken.processingToForm = {
 
 const rayeh = createNewForm();
 rayeh.formName = RAYEH;
+rayeh.representativeRoot = "ריח";
 rayeh.Ana = buildPronoun("פַאעֵל", [SAKAN]);
 rayeh.AnaFem = buildPronoun("פַאעְלַה", [SAKEN]);
 rayeh.Ihna = buildPronoun("פַאעְלִין", [SAKAN]);
@@ -80,6 +83,7 @@ rayeh.processingToForm = {
 
 const mashi = createNewForm();
 mashi.formName = MASHI;
+mashi.representativeRoot = "משי";
 mashi.Ana = buildPronoun("פַאעִל", []);
 mashi.AnaFem = buildPronoun("פַאעְלֵה", []);
 mashi.Ihna = buildPronoun("פַאעְלִין", []);
@@ -95,6 +99,7 @@ mashi.processingToForm = {
 
 const mittakked = createNewForm();
 mittakked.formName = MITTAKKED;
+mittakked.representativeRoot = "אכּד";
 mittakked.Ana = buildPronoun("מִתְפַעֵّל", []);
 mittakked.AnaFem = buildPronoun("מִתְפַעְّלֵה", []);
 mittakked.Ihna = buildPronoun("מִתְפַעְّלִין", []);
@@ -110,6 +115,7 @@ mittakked.processingToForm = {
 
 const mawjood = createNewForm();
 mawjood.formName = MAWJOOD;
+mawjood.representativeRoot = "וג'ד";
 mawjood.Ana = buildPronoun("מַפְעוּל", []);
 mawjood.AnaFem = buildPronoun("מַפְעוּלֵה", []);
 mawjood.Ihna = buildPronoun("מַפְעוּלִין", []);
@@ -127,6 +133,7 @@ mawjood.processingToForm = {
 
 const sakan = createNewForm();
 sakan.formName = SAKAN;
+sakan.representativeRoot = "סכּן";
 sakan.Ana = buildPronoun("פַאעַל", []);
 sakan.AnaFem = buildPronoun("פַאעְלַה", []);
 sakan.Ihna = buildPronoun("פַאעַלִין", []);
@@ -137,6 +144,7 @@ sakan.processingToForm = {
 
 const muwajeed = createNewForm();
 muwajeed.formName = MUWAJEED;
+muwajeed.representativeRoot = "וג'ד";
 muwajeed.Ana = buildPronoun("מֻפַאעִיל", []);
 muwajeed.AnaFem = buildPronoun("מֻפַאעְלֵה", []);
 muwajeed.Ihna = buildPronoun("מֻפַאעְלִין", []);

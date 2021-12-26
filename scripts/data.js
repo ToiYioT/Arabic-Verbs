@@ -44,9 +44,8 @@ AnaFem.setConfusingPronoun(Inti);
 Inti.setConfusingPronoun(Ana);
 
 export const pronounsConst = [
-    Ana, Inte, Inti, Huwe, Hiye, Ihna, Intu, Humme,
-    AnaFem, IhnaFem, IntuFem, Henne
-]
+    Ana, AnaFem, Inte, Inti, Huwe, Hiye,
+    Ihna, IhnaFem, Intu, IntuFem, Humme, Henne];
 
 
 export function filterRoots(filteringParams) {

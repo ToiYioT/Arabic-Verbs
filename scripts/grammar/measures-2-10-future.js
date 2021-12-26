@@ -19,6 +19,7 @@ function buildPronoun(template, distractions) {
 
 function createNewForm() {
     return {
+        representativeRoot: "",
         formName: "default",
         tense: TENSE,
         Ana: "",
@@ -54,6 +55,7 @@ function createNewForm() {
 /// measure 2
 const yikarrer = createNewForm();
 yikarrer.formName = YIKARRER;
+yikarrer.representativeRoot = "קרר";
 yikarrer.Ana = buildPronoun("אַפַעֵّל", []);
 yikarrer.Inte = buildPronoun("תְפַעֵّל", []);
 yikarrer.Inti = buildPronoun("תְפַעֵّלִי", []);
@@ -72,6 +74,7 @@ yikarrer.processingToForm = {
 
 const yikarreb = createNewForm();
 yikarreb.formName = YIKARREB;
+yikarreb.representativeRoot = "קרבּ";
 yikarreb.Ana = buildPronoun("אַפַעֵّל", []);
 yikarreb.Inte = buildPronoun("תְפַעֵّל", []);
 yikarreb.Inti = buildPronoun("תְפַעְّלִי", []);
@@ -92,6 +95,7 @@ yikarreb.processingToForm = {
 /// measure 3
 const yisaafer = createNewForm();
 yisaafer.formName = YISAAFER;
+yisaafer.representativeRoot = "ספר";
 yisaafer.Ana = buildPronoun("אַפַאעֵל", []);
 yisaafer.Inte = buildPronoun("תְפַאעֵל", []);
 yisaafer.Inti = buildPronoun("תְפַאעְלי", []);
@@ -111,6 +115,7 @@ yisaafer.processingToForm = {
 /// measure 5
 const yittallam = createNewForm();
 yittallam.formName = YITTALLAM;
+yittallam.representativeRoot = "עלם";
 yittallam.Ana = buildPronoun("אַתְפַעַّל", []);
 yittallam.Inte = buildPronoun("תִתְפַעַّל", []);
 yittallam.Inti = buildPronoun("תִתְפַעַّלִי", []);
@@ -131,6 +136,7 @@ yittallam.processingToForm = {
 /// measure 6
 const yitnaazal = createNewForm();
 yitnaazal.formName = YITNAAZAL;
+yitnaazal.representativeRoot = "נזל";
 yitnaazal.Ana = buildPronoun("אַתְפַאעַל", []);
 yitnaazal.Inte = buildPronoun("תִתְפַאעַל", []);
 yitnaazal.Inti = buildPronoun("תִתְפַאעַלִי", []);
@@ -151,6 +157,7 @@ yitnaazal.processingToForm = {
 /// measure 7
 const yinimsek = createNewForm();
 yinimsek.formName = YINIMSEK;
+yinimsek.representativeRoot = "מסכּ";
 yinimsek.Ana = buildPronoun("אַנִפְעֵל", []);
 yinimsek.Inte = buildPronoun("תִנִפְעֵל", []);
 yinimsek.Inti = buildPronoun("תִנְפִעְלִי", []);
@@ -171,6 +178,7 @@ yinimsek.processingToForm = {
 /// measure 8
 const yishtrel = createNewForm();
 yishtrel.formName = YISHTREL;
+yishtrel.representativeRoot = "שע'ל";
 yishtrel.Ana = buildPronoun("אַפְתְעֵל", []);
 yishtrel.Inte = buildPronoun("תִפְתְעֵל", []);
 yishtrel.Inti = buildPronoun("תִפְתִעְלִי", []);
@@ -191,6 +199,7 @@ yishtrel.processingToForm = {
 /// measure 10
 const yistaamel = createNewForm();
 yistaamel.formName = YISTAAMEL;
+yistaamel.representativeRoot = "עמל";
 yistaamel.Ana = buildPronoun("אַסְתַפְעֵל", []);
 yistaamel.Inte = buildPronoun("תִסְתַפְעֵל", []);
 yistaamel.Inti = buildPronoun("תִסְתַפִעְלִי", []);
