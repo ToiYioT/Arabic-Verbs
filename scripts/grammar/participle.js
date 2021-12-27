@@ -50,7 +50,7 @@ function createNewForm() {
 
 const saken = createNewForm();
 saken.formName = SAKEN;
-saken.representativeRoot = "סכּן";
+saken.representativeRoot = "סכּנ";
 saken.Ana = buildPronoun("פַאעֵל", []);
 saken.AnaFem = buildPronoun("פַאעְלֵה", []);
 saken.Ihna = buildPronoun("פַאעְלִין", []);

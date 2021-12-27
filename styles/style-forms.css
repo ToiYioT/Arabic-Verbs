@@ -4,6 +4,7 @@
   --light-grey: rgb(233,233,233);
   --accent: #7aa1c3;
   --accent-dark: #4c6c88;
+  --accent-green: rgb(116, 218, 116);
 
   --text-color: rgb(44, 44, 44);
   --text-color-faded: rgb(190, 190, 190);
@@ -32,8 +33,27 @@ body{
     display: flex;
     flex-direction: column;
     gap: .5rem;
-
 }
+
+.other-roots, .all-forms{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem;
+    gap: .3rem;
+}
+
+.other-roots div, .all-forms div{
+    background-color: var(--accent);
+    color: white;
+    padding: .3rem .6rem;
+    border-radius: .2rem;
+    cursor: pointer;
+}
+
+.other-roots div:hover, .all-forms div:hover{
+    background-color: var(--accent-green);
+}
+
 
 .practice-button{
     display: flex;
@@ -53,4 +73,8 @@ body{
     border-radius: 0.2em;
     margin: 24px 16px;
     cursor: pointer;
+}
+
+.practice-button:hover{
+    background-color: var(--accent-green);
 }

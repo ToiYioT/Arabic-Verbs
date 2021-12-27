@@ -1,35 +1,45 @@
-import { pronounsConst, filterRoots, allFormNames } from "./scripts/data.js";
+import { pronounsConst, filterRoots, allFormNames, getArabicRootOfForm } from "./scripts/data.js";
 import { getFilteringParams } from "./scripts/urlParams.js";
 import { conjugator } from "./scripts/conjugator.js";
-import { forms } from "./scripts/tenses.js";
+import { forms, tenses } from "./scripts/tenses.js";
 import { util } from "./scripts/util.js";
+
 const pronouns = pronounsConst;
+const allLessons = ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+let currentForm = "";
+let formTitle = null;
 
 window.addEventListener("load", () => {
+
+    formTitle = document.getElementsByClassName("form-title")[0];
     populateAllForms();
-    getConjugations();
-})
+    const formName = getFilteringParams().forms[0];
+    currentForm = forms[formName];
+    changeForm(currentForm);
+});
+
+function changeForm(form) {
+    formTitle.innerHTML = "משקל " + conjugate(form.representativeRoot, form, pronouns[4]);
+    populateTable(form);
+    populateAllRootsOfForm(form);
+}
 
 
-function getConjugations() {
-    const form = getFilteringParams().forms[0];
+function populateTable(rootForm, rootArabic = rootForm.representativeRoot) {
 
-    const formTitle = document.getElementsByClassName("form-title")[0];
     const tableRows = document.getElementsByClassName("table-row");
 
-    const rootForm = forms[form];
-    const rootArabic = rootForm.representativeRoot;
-
-    populateAllRootsOfForm(rootForm);
-
-    formTitle.innerHTML += conjugate(rootArabic, rootForm, pronouns[4]);
+    const rootObject = getArabicRootOfForm(rootArabic, rootForm.formName);
 
     for (let i = 0; i < tableRows.length; i++) {
         const pronoun = pronouns[i];
-        tableRows[i].innerHTML += " - " + pronoun.arabic + " "
-            + conjugate(rootArabic, rootForm, pronoun);
-    }
 
+        const wholeRow = pronoun.hebrew + " " +
+            conjugateHebrew(rootObject.hebrew, rootForm, pronoun) +
+            " - " + pronoun.arabic + " " + tenses[rootForm.tense].answerPrefix
+            + conjugate(rootArabic, rootForm, pronoun);
+        tableRows[i].innerHTML = util.postProcess(wholeRow);
+    }
 }
 
 function conjugate(rootArabic, conjugationForm, pronoun) {
@@ -40,29 +50,94 @@ function conjugate(rootArabic, conjugationForm, pronoun) {
     return output;
 }
 
+function conjugateHebrew(rootHebrew, rootForm, pronoun) {
+
+    const hebConjugate = tenses[rootForm.tense].hebConjugate;
+
+    let firstWordEndingAt = util.getIndexOfFirstWordEnding(rootHebrew);
+    if (firstWordEndingAt == -1) firstWordEndingAt = rootHebrew.length;
+
+    let firstWord = rootHebrew.substring(0, firstWordEndingAt);
+    firstWord = util.substituteEndingLettersToNormal(firstWord);
+    let remainderOfTranslation = rootHebrew.substring(firstWordEndingAt, rootHebrew.length);
+
+    let conjugatedWord = hebConjugate[pronoun.name](firstWord);
+    conjugatedWord = util.substituteLetterAtEndToEndingLetter(conjugatedWord);
+
+    return conjugatedWord + remainderOfTranslation;
+}
+
 function populateAllRootsOfForm(form) {
 
-    const allLessons = ["", 1, 2, 3, 4, 5, 6, 7, 8];
     const allFormRoots = filterRoots({ forms: [form.formName], lessons: allLessons });
     const otherRootsContainer = document.getElementsByClassName("other-roots")[0];
+    otherRootsContainer.innerHTML = "";
 
     for (let i = 0; i < allFormRoots.length; i++) {
         const root = allFormRoots[i];
         const conjugated = conjugate(root.arabic, form, pronouns[4]);
-        otherRootsContainer.textContent += conjugated + " - " + root.hebrew + ", ";
+        new RootButton(root.arabic, conjugated, root.hebrew, otherRootsContainer);
     }
 }
 
 function populateAllForms() {
 
     const allFormsContainer = document.getElementsByClassName("all-forms")[0];
-
     for (const [formName, form] of Object.entries(forms)) {
 
         const representativeRoot = form.representativeRoot;
         conjugator.rootProcessing(representativeRoot, form, form);
         const conjugated = conjugate(representativeRoot, form, pronouns[4]);
-        allFormsContainer.textContent += conjugated + ", ";
+        new FormButton(form, conjugated, allFormsContainer);
+    }
+}
+
+class FormButton {
+    constructor(form, formNameArabic, parent) {
+        this.form = form;
+        this.formNameArabic = formNameArabic;
+        this.parent = parent;
+
+        this.element = this.#createHTMLButton();
+        this.element.onclick = () => this.#onClick();
+    }
+
+    #createHTMLButton() {
+
+        const newButton = document.createElement("div");
+        const newContent = document.createTextNode(this.formNameArabic);
+        newButton.appendChild(newContent);
+        this.parent.appendChild(newButton);
+        return newButton;
+    }
+
+    #onClick() {
+        currentForm = this.form;
+        changeForm(this.form);
+    }
+}
+
+class RootButton {
+    constructor(arabicRoot, arabicConjugated, hebrew, parent) {
+        this.arabicRoot = arabicRoot;
+        this.arabicConjugated = arabicConjugated;
+        this.hebrew = hebrew;
+        this.parent = parent;
+
+        this.element = this.#createHTMLButton();
+        this.element.onclick = () => this.#onClick();
+    }
+
+    #createHTMLButton() {
+        const newButton = document.createElement("div");
+        const newContent = document.createTextNode(this.arabicConjugated + " - " + this.hebrew);
+        newButton.appendChild(newContent);
+        this.parent.appendChild(newButton);
+        return newButton;
+    }
+
+    #onClick() {
+        populateTable(currentForm, this.arabicRoot);
     }
 }
 

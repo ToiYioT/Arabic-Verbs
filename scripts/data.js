@@ -53,6 +53,7 @@ export function filterRoots(filteringParams) {
     let forms = filteringParams.forms;
     let lessons = filteringParams.lessons;
     let hebrewWords = filteringParams.words;
+    let arabicRoot = filteringParams.arabic;
 
     let filteredData = [];
 
@@ -73,4 +74,13 @@ export function filterRoots(filteringParams) {
     // console.log(`Call to filteringRoots took ${endTime - startTime} milliseconds`);
 
     return filteredData;
+}
+
+export function getArabicRootOfForm(arabicRoot, form) {
+
+    for (let i = 0; i < allRoots.length; i++) {
+        if (allRoots[i].arabic == arabicRoot && allRoots[i].form == form) {
+            return allRoots[i];
+        }
+    }
 }
