@@ -82,13 +82,25 @@ function populateAllRootsOfForm(form) {
 
 function populateAllForms() {
 
-    const allFormsContainer = document.getElementsByClassName("all-forms")[0];
+    const allTenses = ["present", "participle", "future", "past",
+        "present210", "future210", "past210"];
+
+    for (let i = 0; i < allTenses.length; i++) {
+
+        const container = document.getElementsByClassName(allTenses[i] + "-forms")[0];
+        populateFormOfTense(allTenses[i], container);
+    }
+}
+
+function populateFormOfTense(tense, parent) {
+
     for (const [formName, form] of Object.entries(forms)) {
+        if (form.tense != tense) continue;
 
         const representativeRoot = form.representativeRoot;
         conjugator.rootProcessing(representativeRoot, form, form);
         const conjugated = conjugate(representativeRoot, form, pronouns[4]);
-        new FormButton(form, conjugated, allFormsContainer);
+        new FormButton(form, conjugated, parent);
     }
 }
 
@@ -114,6 +126,8 @@ class FormButton {
     #onClick() {
         currentForm = this.form;
         changeForm(this.form);
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        // window.scrollTo(0);
     }
 }
 

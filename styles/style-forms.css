@@ -35,14 +35,16 @@ body{
     gap: .5rem;
 }
 
-.other-roots, .all-forms{
+.other-roots, .past-forms, .present-forms, .future-forms, .participle-forms
+, .past210-forms, .present210-forms, .future210-forms{
     display: flex;
     flex-wrap: wrap;
     margin: 1rem;
     gap: .3rem;
 }
 
-.other-roots div, .all-forms div{
+.other-roots div, .past-forms div, .present-forms div, .future-forms div
+, .participle-forms div, .past210-forms div, .present210-forms div, .future210-forms div{
     background-color: var(--accent);
     color: white;
     padding: .3rem .6rem;
