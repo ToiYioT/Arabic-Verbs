@@ -22,8 +22,17 @@ function changeForm(form) {
     formTitle.innerHTML = "משקל " + conjugate(form.representativeRoot, form, pronouns[4]);
     populateTable(form);
     populateAllRootsOfForm(form);
+    addPracticeLink(form);
 }
 
+function addPracticeLink(form) {
+    console.log(form);
+    const practiceButton = document.getElementsByClassName("practice-button")[0];
+    practiceButton.addEventListener('click', function () {
+        location.href = './index.html?form=' + form.formName;
+        console.log("got here, clicked");
+    }, false);
+}
 
 function populateTable(rootForm, rootArabic = rootForm.representativeRoot) {
 

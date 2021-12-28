@@ -1,18 +1,17 @@
 :root {
   --main-bg: #ffffff;
-  --white : white;
-  --light-grey: rgb(233,233,233);
   --accent: #7aa1c3;
   --accent-dark: #4c6c88;
   --accent-green: rgb(116, 218, 116);
-
-  --text-color: rgb(44, 44, 44);
-  --text-color-faded: rgb(190, 190, 190);
-  --button-color-faded: rgb(231, 231, 231);
-  --answer-border-faded: rgb(243, 243, 243);
-
-  --correct-answer-color: rgb(34, 223, 34);
-  --incorrect-answer-color: red;
+  --background-green: rgb(116, 218, 116);
+  --practice-button-text: white;
+  --table-border: black;
+  --table-2n: rgb(235, 235, 235);
+  --forms-separator: rgb(235, 235, 235);
+  --roots-text: white;
+  --forms-text: rgb(37, 37, 37);
+  --forms-border: white;
+  --forms-hover: rgb(155, 255, 155);
 }
 
 body{
@@ -22,34 +21,91 @@ body{
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
+    margin: 0;
+    background-color: var(--main-bg);
 }
 
 .form-title{
     font-size: 2rem;
+    margin-top: 2rem;
 }
 
 .table-container{
     margin: 2rem;
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    border: 1px solid var(--table-border);
+    border-radius: .2rem;
+    z-index: 1;
+    overflow: hidden;
+    width: 90%;
+    max-width: 500px;
 }
 
-.other-roots, .past-forms, .present-forms, .future-forms, .participle-forms
-, .past210-forms, .present210-forms, .future210-forms{
+.table-row{
+    padding: .3rem;
+    text-align: center;
+}
+
+.table-row:nth-child(2n){
+    background-color: var(--table-2n);
+}
+
+.roots-section{
+    width: 100%;
+    max-width: 600px;
+}
+
+.all-forms-section{
+    padding: 2rem 0rem;
+    background-color: var(--background-green);
+    width: 100%;
+}
+
+
+#form-description{
+    background-color: var(--background-green);
+    cursor: default;
+    border: 0px;
+}
+
+.roots-description{
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+
+.other-roots, .forms{
     display: flex;
     flex-wrap: wrap;
     margin: 1rem;
     gap: .3rem;
 }
 
-.other-roots div, .past-forms div, .present-forms div, .future-forms div
-, .participle-forms div, .past210-forms div, .present210-forms div, .future210-forms div{
+.forms{
+    border-bottom: dashed 1px var(--forms-separator);
+    padding: 1rem;
+    margin: 0;
+}
+
+.other-roots div {
     background-color: var(--accent);
-    color: white;
+    color: var(--roots-text);
     padding: .3rem .6rem;
     border-radius: .2rem;
     cursor: pointer;
+}
+
+.forms div{
+    background-color: var(--accent-green);
+    color: var(--forms-text);
+    padding: .3rem .6rem;
+    border: 1px solid var(--forms-border);
+    border-radius: .2rem;
+    cursor: pointer;
+}
+
+.forms div:hover{
+    background-color: var(--forms-hover);
 }
 
 .other-roots div:hover, .all-forms div:hover{
@@ -70,7 +126,7 @@ body{
     max-width: 90vw;
     width: 320px;
     height: 96px;
-    color: var(--white);
+    color: var(--practice-button-text);
     background-color: var(--accent);
     border-radius: 0.2em;
     margin: 24px 16px;
@@ -80,3 +136,12 @@ body{
 .practice-button:hover{
     background-color: var(--accent-green);
 }
+
+ @media only screen and (min-width: 1000px) {
+     body{
+        zoom: 150%;
+     }
+     #container{
+        min-height: 66.6666vh;
+     }
+ } 
