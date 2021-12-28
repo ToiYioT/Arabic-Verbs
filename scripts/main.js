@@ -40,9 +40,9 @@ var progressBarTimer;
 var getAnswersFunction;
 
 // audio
-const soundCorrect = new Audio('/sounds/correct.mp3');
-const soundIncorrect = new Audio('/sounds/incorrect.mp3');
-const soundFinish = new Audio('/sounds/finish.mp3');
+const soundCorrect = new Audio('./sounds/correct.mp3');
+const soundIncorrect = new Audio('./sounds/incorrect.mp3');
+const soundFinish = new Audio('./sounds/finish.mp3');
 
 window.addEventListener('load', (event) => {
 
@@ -145,9 +145,9 @@ function showSummaryScreen() {
 
 function initQuestion() {
 
-    soundFinish.src = "/sounds/finish.mp3";
-    soundIncorrect.src = "/sounds/incorrect.mp3";
-    soundCorrect.src = "/sounds/correct.mp3";
+    soundFinish.src = "./sounds/finish.mp3";
+    soundIncorrect.src = "./sounds/incorrect.mp3";
+    soundCorrect.src = "./sounds/correct.mp3";
 
     questionDispenser.handleNewQuestion();
     let currentQuestion = questionDispenser.getCurrentQuestion();
