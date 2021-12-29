@@ -139,8 +139,8 @@ sakan.AnaFem = buildPronoun("פַאעְלַה", []);
 sakan.Ihna = buildPronoun("פַאעַלִין", []);
 sakan.IhnaFem = buildPronoun("פַאעַלַאת", []);
 sakan.populateRemainingPronouns();
-sakan.processingToForm = {
-};
+sakan.fakeForm = true;
+
 
 const muwajeed = createNewForm();
 muwajeed.formName = MUWAJEED;
@@ -151,8 +151,8 @@ muwajeed.Ihna = buildPronoun("מֻפַאעְלִין", []);
 muwajeed.IhnaFem = buildPronoun("מֻפַאעְלַאת", []);
 muwajeed.addDistractingFormsToAll([MITTAKKED, SAKEN]);
 muwajeed.populateRemainingPronouns();
-muwajeed.processingToForm = {
-};
+muwajeed.fakeForm = true;
+
 
 export const formsParticiple = {
     "saken": saken,

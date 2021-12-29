@@ -3,7 +3,7 @@ import {
     , formNamesFuture210, formNamesPast210, allFormNames,
 } from "./data.js";
 
-let allLessons = ["", 1, 2, 3, 4, 5, 6, 7, 8];
+let allLessons = ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
 export function getFilteringParams() {
 
@@ -57,7 +57,7 @@ export function getFilteringParams() {
     }
 
     let lessonQueryFailed = isNaN(lessonFrom) || isNaN(lessonTo) ||
-        lessonFrom < 1 || lessonTo > 8 || lessonFrom > lessonTo;
+        lessonFrom < 1 || lessonTo > 16 || lessonFrom > lessonTo;
 
     if (lessonQueryFailed) {
         lessonFiltering = allLessons;

@@ -26,7 +26,6 @@ function changeForm(form) {
 }
 
 function addPracticeLink(form) {
-    console.log(form);
     const practiceButton = document.getElementsByClassName("practice-button")[0];
     practiceButton.addEventListener('click', function () {
         location.href = './index.html?form=' + form.formName;
@@ -104,7 +103,7 @@ function populateAllForms() {
 function populateFormOfTense(tense, parent) {
 
     for (const [formName, form] of Object.entries(forms)) {
-        if (form.tense != tense) continue;
+        if (form.tense != tense || form.fakeForm) continue;
 
         const representativeRoot = form.representativeRoot;
         conjugator.rootProcessing(representativeRoot, form, form);
