@@ -5,6 +5,8 @@ var incorrectAnswer = false;
 var questionNumber = 0;
 var currentQuestionParams;
 
+let questionHistory = [];
+
 var roots, pronouns;
 const MODE_INFINITE = "infinite";
 const MODE_QUIZ = "quiz";
@@ -21,7 +23,7 @@ function addRandomQuestionsToQueue(numberOfQuestionsToAdd) {
     }
 }
 
-function registerIncorrectAnswer() {
+function registerIncorrectAnswer(question, correctAnswer, clickedAnswer) {
     if (mode == MODE_INFINITE) {
         incorrectAnswer = true;
         questionQueue.push(currentQuestionParams);
@@ -29,11 +31,23 @@ function registerIncorrectAnswer() {
     }
     if (mode == MODE_QUIZ) {
         wrongAnswersQueue.push(currentQuestionParams);
+        questionHistory.push(
+            {
+                question: question,
+                correctAnswer: correctAnswer,
+                clickedAnswer: clickedAnswer
+            });
     }
 }
 
-function registerCorrectAnswer() {
+function registerCorrectAnswer(question, correctAnswer, clickedAnswer) {
     correctAnswerCounter++;
+    questionHistory.push(
+        {
+            question: question,
+            correctAnswer: correctAnswer,
+            clickedAnswer: clickedAnswer
+        });
 }
 
 function handleNewQuestion() {
@@ -102,13 +116,47 @@ function resetGame(gameMode, rootsFromMain, pronounsFromMain) {
     questionNumber = -1;
     questionQueue = [...wrongAnswersQueue];
     wrongAnswersQueue.length = 0;
+    questionHistory.length = 0;
 
-    let numOfQuestionsToAdd = isQuizMode() ? totalNumOfQuestions : 5;
+    const numOfQuestionsToAdd = isQuizMode() ? totalNumOfQuestions - questionQueue.length : 5;
     addRandomQuestionsToQueue(numOfQuestionsToAdd);
 }
 
 function isQuizMode() {
     return mode == MODE_QUIZ;
+}
+
+function getSummary() {
+
+    let str = "";
+    for (let i = 0; i < questionHistory.length; i++) {
+        const correctAnswer = questionHistory[i].correctAnswer;
+        const clickedAnswer = questionHistory[i].clickedAnswer;
+        const correct = clickedAnswer == correctAnswer;
+
+        str += '<div class="summary-question';
+        if (!correct) {
+            str += ' summary-question-false';
+        }
+        str += '">';
+
+        str += '<div class="summary-question-title">';
+        str += questionHistory[i].question;
+        str += "</div>";
+
+        if (correct) {
+            str += " - ";
+        } else {
+            str += "<br>";
+            str += "ענית: ";
+            str += questionHistory[i].clickedAnswer + "<br>";
+            str += "התשובה הנכונה: ";
+        }
+        str += questionHistory[i].correctAnswer;
+        str += "</div>";
+    }
+
+    return str;
 }
 
 
@@ -125,4 +173,5 @@ export const questionDispenser = {
     isQuizMode,
     getScoreTitleText,
     getQuizLength,
+    getSummary,
 }

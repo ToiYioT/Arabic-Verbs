@@ -138,6 +138,8 @@ function showSummaryScreen() {
     questionHolder.style.display = "none";
     answerSection.style.display = "none";
 
+    summaryMistakes.innerHTML = questionDispenser.getSummary();
+
 
     summaryTitle.innerHTML = `ענית נכון על ${rightNum} שאלות מתוך ${quizLength}`;
     summaryScore.innerHTML = `ציון: ${percentageOfRight}%`;
@@ -273,7 +275,7 @@ function conjugateHebrew(rootHebrew, pronoun) {
         (tense == tenses.participle && pronoun.name.includes("Ana")
             && rootHebrew.charAt(rootHebrew.length - 1) == "ה")) {
 
-        questionHolder.innerHTML += " (" + pronoun.gender + ")" + "<br/>";
+        questionHolder.innerHTML += " (" + pronoun.gender + ")";
     }
 }
 
@@ -327,14 +329,20 @@ function answerClickHandler(clickedButton) {
             answerButtons[i].setCorrect();
 
             if (clickedButton == answerButtons[i]) {
-                questionDispenser.registerCorrectAnswer();
+                questionDispenser.registerCorrectAnswer(
+                    questionHolder.innerHTML,
+                    correctAnswer,
+                    answerButtons[i].answer);
                 soundCorrect.play();
             }
         } else {
 
             if (clickedButton == answerButtons[i]) {
                 answerButtons[i].setIncorrect();
-                questionDispenser.registerIncorrectAnswer();
+                questionDispenser.registerIncorrectAnswer(
+                    questionHolder.innerHTML,
+                    correctAnswer,
+                    answerButtons[i].answer);
                 soundIncorrect.play();
 
             } else {
