@@ -38,15 +38,27 @@ function populateTable(rootForm, rootArabic = rootForm.representativeRoot) {
     const tableRows = document.getElementsByClassName("table-row");
 
     const rootObject = getArabicRootOfForm(rootArabic, rootForm.formName);
+    const tense = tenses[rootForm.tense];
 
     for (let i = 0; i < tableRows.length; i++) {
         const pronoun = pronouns[i];
 
-        const wholeRow = pronoun.hebrew + " " +
-            conjugateHebrew(rootObject.hebrew, rootForm, pronoun) +
-            " - " + pronoun.arabic + " " + tenses[rootForm.tense].answerPrefix
+        let hebrewPart = pronoun.hebrew + " " +
+            conjugateHebrew(rootObject.hebrew, rootForm, pronoun);
+
+        if (tense.specifyPronounGender && pronoun.gender != ""
+            ||
+            (tense == tenses.participle && pronoun.name.includes("Ana")
+                && rootObject.hebrew.charAt(rootObject.hebrew.length - 1) == "ה")) {
+
+            hebrewPart += " (" + pronoun.gender + ")";
+        }
+        tableRows[i].innerHTML = '<div class="hebrew-part">' + util.postProcess(hebrewPart) + '</div>';
+
+        let arabicPart = " - " + pronoun.arabic + " " + tense.answerPrefix
             + conjugate(rootArabic, rootForm, pronoun);
-        tableRows[i].innerHTML = util.postProcess(wholeRow);
+
+        tableRows[i].innerHTML += '<div class="arabic-part">' + util.postProcess(arabicPart) + '</div>';
     }
 }
 

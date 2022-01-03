@@ -47,11 +47,22 @@ body{
 
 .table-row{
     padding: .3rem;
-    text-align: center;
+    display: flex;
 }
 
 .table-row:nth-child(2n){
     background-color: var(--table-2n);
+}
+
+.hebrew-part{
+    display: inline;
+    flex: 1;
+    text-align: end;
+    margin-left: .3rem;
+}
+.arabic-part{
+    display: inline;
+    flex: 1;
 }
 
 .roots-section{

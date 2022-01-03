@@ -1,3 +1,4 @@
+import { util } from "./util.js";
 
 var questionQueue = [];
 var wrongAnswersQueue = [];
@@ -120,6 +121,7 @@ function resetGame(gameMode, rootsFromMain, pronounsFromMain) {
 
     const numOfQuestionsToAdd = isQuizMode() ? totalNumOfQuestions - questionQueue.length : 5;
     addRandomQuestionsToQueue(numOfQuestionsToAdd);
+    questionQueue = util.shuffle(questionQueue);
 }
 
 function isQuizMode() {
