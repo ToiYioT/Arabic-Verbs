@@ -1,5 +1,6 @@
 :root {
   --main-bg: #ffffff;
+  --text-color: black;
   --accent: #7aa1c3;
   --accent-dark: #4c6c88;
   --accent-green: rgb(116, 218, 116);
@@ -12,6 +13,7 @@
   --forms-text: rgb(37, 37, 37);
   --forms-border: white;
   --forms-hover: rgb(155, 255, 155);
+    scroll-behavior: smooth;
 }
 
 body{
@@ -23,6 +25,7 @@ body{
     font-family: sans-serif;
     margin: 0;
     background-color: var(--main-bg);
+    color: var(--text-color);
 }
 
 .form-title{
@@ -93,6 +96,7 @@ body{
     padding: .3rem .6rem;
     border-radius: .2rem;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .forms div{
@@ -111,7 +115,6 @@ body{
 .other-roots div:hover, .all-forms div:hover{
     background-color: var(--accent-green);
 }
-
 
 .practice-button{
     display: flex;
@@ -145,3 +148,26 @@ body{
         min-height: 66.6666vh;
      }
  } 
+
+ @media (prefers-color-scheme: dark) {
+     :root{
+    /* DARK MODEEE */
+  --main-bg: rgb(39, 39, 39);
+  --text-color: rgb(218, 218, 218);
+  --white : rgb(255, 255, 255);
+  --accent: #435362;
+  --accent-dark: #5c86ac;
+
+
+  --accent-green: rgb(100, 172, 100);
+  --background-green: rgb(56, 107, 56);
+  --practice-button-text: white;
+  --table-border: rgb(209, 209, 209);
+  --table-2n: rgb(63, 63, 63);
+  --forms-separator: rgb(235, 235, 235);
+  --roots-text: white;
+  --forms-text: #ffffff;
+  --forms-border: white;
+  --forms-hover: rgb(78, 126, 78);
+  }
+}
