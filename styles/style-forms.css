@@ -68,6 +68,7 @@ body{
 .roots-section{
     width: 100%;
     max-width: 600px;
+    margin-bottom: 2rem;
 }
 
 .all-forms-section{
@@ -143,7 +144,8 @@ body{
     color: var(--practice-button-text);
     background-color: var(--accent);
     border-radius: 0.2em;
-    margin: 24px 16px;
+    margin: 0px 16px;
+    margin-bottom: 24px;
     cursor: pointer;
 }
 

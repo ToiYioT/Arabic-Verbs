@@ -8,6 +8,7 @@ const pronouns = pronounsConst;
 const allLessons = ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 let currentForm = "";
 let formTitle = null;
+let currentFormArabic = "";
 
 window.addEventListener("load", () => {
 
@@ -19,17 +20,21 @@ window.addEventListener("load", () => {
 });
 
 function changeForm(form) {
-    formTitle.innerHTML = "משקל " + conjugate(form.representativeRoot, form, pronouns[4]);
+    currentFormArabic = conjugate(form.representativeRoot, form, pronouns[4]);
+    formTitle.innerHTML = "משקל " + currentFormArabic;
     populateTable(form);
     populateAllRootsOfForm(form);
     addPracticeLink(form);
 }
 
 function addPracticeLink(form) {
-    const practiceButton = document.getElementsByClassName("practice-button")[0];
-    practiceButton.addEventListener('click', function () {
+    const practiceButton = document.getElementsByClassName("practice-button");
+    practiceButton[0].addEventListener('click', function () {
         location.href = './index.html?form=' + form.formName;
-        console.log("got here, clicked");
+    }, false);
+    practiceButton[0].innerHTML = "לתרגול המשקל " + currentFormArabic;
+    practiceButton[1].addEventListener('click', function () {
+        location.href = './index.html';
     }, false);
 }
 
