@@ -51,10 +51,10 @@ function createNewForm() {
 const saken = createNewForm();
 saken.formName = SAKEN;
 saken.representativeRoot = "סכּנ";
-saken.Ana = buildPronoun("פַאעֵל", []);
-saken.AnaFem = buildPronoun("פַאעְלֵה", []);
-saken.Ihna = buildPronoun("פַאעְלִין", []);
-saken.IhnaFem = buildPronoun("פַאעְלַאת", []);
+saken.Ana = buildPronoun("פַֽ֫אעֵֽל", []);
+saken.AnaFem = buildPronoun("פַֽ֫אעְלֵֽה", []);
+saken.Ihna = buildPronoun("פַֽאעְלִֽ֫ין", []);
+saken.IhnaFem = buildPronoun("פַֽאעְלַֽ֫את", []);
 saken.addDistractingFormsToAll([SAKAN, MAWJOOD, MITTAKKED]);
 saken.populateRemainingPronouns();
 saken.processingToForm = {
@@ -67,10 +67,10 @@ saken.processingToForm = {
 const rayeh = createNewForm();
 rayeh.formName = RAYEH;
 rayeh.representativeRoot = "ריח";
-rayeh.Ana = buildPronoun("פַאעֵל", [SAKAN]);
-rayeh.AnaFem = buildPronoun("פַאעְלַה", [SAKEN]);
-rayeh.Ihna = buildPronoun("פַאעְלִין", [SAKAN]);
-rayeh.IhnaFem = buildPronoun("פַאעְלַאת", [SAKAN]);
+rayeh.Ana = buildPronoun("פַֽ֫אעֵֽל", [SAKAN]);
+rayeh.AnaFem = buildPronoun("פַֽ֫אעְלַֽה", [SAKEN]);
+rayeh.Ihna = buildPronoun("פַֽאעְלִֽ֫ין", [SAKAN]);
+rayeh.IhnaFem = buildPronoun("פַֽאעְלַֽ֫את", [SAKAN]);
 rayeh.addDistractingFormsToAll([MITTAKKED, MAWJOOD]);
 rayeh.populateRemainingPronouns();
 rayeh.processingToForm = {
@@ -84,10 +84,10 @@ rayeh.processingToForm = {
 const mashi = createNewForm();
 mashi.formName = MASHI;
 mashi.representativeRoot = "משי";
-mashi.Ana = buildPronoun("פַאעִל", []);
-mashi.AnaFem = buildPronoun("פַאעְלֵה", []);
-mashi.Ihna = buildPronoun("פַאעְלִין", []);
-mashi.IhnaFem = buildPronoun("פַאעְלַאת", []);
+mashi.Ana = buildPronoun("פַֽ֫אעִֽל", []);
+mashi.AnaFem = buildPronoun("פַֽ֫אעְלֵֽה", []);
+mashi.Ihna = buildPronoun("פַֽאעְלִֽ֫ין", []);
+mashi.IhnaFem = buildPronoun("פַֽאעְלַֽ֫את", []);
 mashi.addDistractingFormsToAll([SAKAN, MAWJOOD, MITTAKKED]);
 mashi.populateRemainingPronouns();
 mashi.processingToForm = {
@@ -100,10 +100,10 @@ mashi.processingToForm = {
 const mittakked = createNewForm();
 mittakked.formName = MITTAKKED;
 mittakked.representativeRoot = "אכּד";
-mittakked.Ana = buildPronoun("מִתְפַעֵّל", []);
-mittakked.AnaFem = buildPronoun("מִתְפַעְّלֵה", []);
-mittakked.Ihna = buildPronoun("מִתְפַעְّלִין", []);
-mittakked.IhnaFem = buildPronoun("מִתְפַעְّלַאת", []);
+mittakked.Ana = buildPronoun("מִֽתְפַֽ֫עֵֽّל", []);
+mittakked.AnaFem = buildPronoun("מִֽתְפַֽ֫עְّלֵֽה", []);
+mittakked.Ihna = buildPronoun("מִֽתְפַֽעְّלִֽ֫ין", []);
+mittakked.IhnaFem = buildPronoun("מִֽתְפַֽעְّלַֽ֫את", []);
 mittakked.addDistractingFormsToAll([MAWJOOD, SAKEN, SAKAN]);
 mittakked.populateRemainingPronouns();
 mittakked.processingToForm = {
@@ -116,10 +116,10 @@ mittakked.processingToForm = {
 const mawjood = createNewForm();
 mawjood.formName = MAWJOOD;
 mawjood.representativeRoot = "וג'ד";
-mawjood.Ana = buildPronoun("מַפְעוּל", []);
-mawjood.AnaFem = buildPronoun("מַפְעוּלֵה", []);
-mawjood.Ihna = buildPronoun("מַפְעוּלִין", []);
-mawjood.IhnaFem = buildPronoun("מַפְעוּלַאת", []);
+mawjood.Ana = buildPronoun("מַֽפְעֽ֫וּל", []);
+mawjood.AnaFem = buildPronoun("מַֽפְעֽ֫וּלֵֽה", []);
+mawjood.Ihna = buildPronoun("מַֽפְעֽוּלִֽ֫ין", []);
+mawjood.IhnaFem = buildPronoun("מַֽפְעֽוּלַֽ֫את", []);
 mawjood.addDistractingFormsToAll([MITTAKKED, SAKEN, MUWAJEED]);
 mawjood.populateRemainingPronouns();
 mawjood.processingToForm = {

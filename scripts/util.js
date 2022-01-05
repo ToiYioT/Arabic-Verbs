@@ -2,6 +2,8 @@ const geresh = "׳";
 const shadde = "ّ";
 const letters = "אבגדהוזחטיכלמנסעפצקרשתץףךםן";
 const sgolta = "֒";
+const stressMarker = "֫";
+const syllableMarker = "ֽ";
 
 function shuffle(array) {
     let currentIndex = array.length, randomIndex;
@@ -117,6 +119,8 @@ function replaceApostropheWithGeresh(word) {
 
 function postProcess(word) {
     word = word.replaceAll(shadde, sgolta);
+    word = word.replaceAll(stressMarker, "");
+    word = word.replaceAll(syllableMarker, "");
     return handleGeresh(word);
 }
 

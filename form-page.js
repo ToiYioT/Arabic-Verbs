@@ -3,6 +3,7 @@ import { getFilteringParams } from "./scripts/urlParams.js";
 import { conjugator } from "./scripts/conjugator.js";
 import { forms, tenses } from "./scripts/tenses.js";
 import { util } from "./scripts/util.js";
+import { syllables } from "./scripts/syllables.js";
 
 const pronouns = pronounsConst;
 const allLessons = ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
@@ -60,18 +61,23 @@ function populateTable(rootForm, rootArabic = rootForm.representativeRoot) {
         }
         tableRows[i].innerHTML = '<div class="hebrew-part">' + util.postProcess(hebrewPart) + '</div>';
 
-        let arabicPart = " - " + pronoun.arabic + " " + tense.answerPrefix
-            + conjugate(rootArabic, rootForm, pronoun);
+        let arabicConjugated = conjugate(rootArabic, rootForm, pronoun, false);
+        let conjugatedSyllables = syllables.separateIntoSyllables(arabicConjugated);
+        arabicConjugated = conjugatedSyllables;
 
-        tableRows[i].innerHTML += '<div class="arabic-part">' + util.postProcess(arabicPart) + '</div>';
+        let arabicPart = " - " + pronoun.arabic + " " + tense.answerPrefix;
+
+        tableRows[i].innerHTML += '<div class="arabic-part">' + util.postProcess(arabicPart) +
+            arabicConjugated + '</div>';
     }
 }
 
-function conjugate(rootArabic, conjugationForm, pronoun) {
+function conjugate(rootArabic, conjugationForm, pronoun, postProcess = true) {
     conjugator.rootProcessing(rootArabic, conjugationForm, conjugationForm);
     let output = conjugator.getWord(conjugationForm[pronoun.name].template);
     output = util.substituteLetterAtEndToEndingLetter(output, true);
-    output = util.postProcess(output);
+
+    if (postProcess) output = util.postProcess(output);
     return output;
 }
 
