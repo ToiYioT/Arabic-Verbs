@@ -18,6 +18,7 @@ let syllablePool;
 let tense;
 let correctAnswer;
 
+let correctColor, incorrectColor;
 let correctIcon, incorrectIcon;
 let answerSubmited = false;
 
@@ -39,6 +40,9 @@ function init(qDispenser, button, playSoundFunction, updateScoreFunction) {
     correctIcon.src = "icons/correct.png";
     incorrectIcon = createElement(null, "img", "icon-syllables");
     incorrectIcon.src = "icons/incorrect.png";
+
+    correctColor = getComputedStyle(typeSection).getPropertyValue("--correct-answer-color");
+    incorrectColor = getComputedStyle(typeSection).getPropertyValue("--incorrect-answer-color");
 }
 
 
@@ -103,17 +107,16 @@ function createButtonsFromSyllables(syllables) {
 
 function onSyllablePoolButtonClick() {
     if (answerSubmited) return;
-    this.parentNode.removeChild(this);
-    this.onclick = onAnswerBoxButtonClick;
-    answerBox.appendChild(this);
+
+    const clonedButton = this.cloneNode(true);
+    clonedButton.onclick = onAnswerBoxButtonClick;
+    answerBox.appendChild(clonedButton);
     mainButton.setSubmitAnswer(onSubmitAnswer);
 }
 
 function onAnswerBoxButtonClick() {
     if (answerSubmited) return;
     this.parentNode.removeChild(this);
-    this.onclick = onSyllablePoolButtonClick;
-    syllablePool.appendChild(this);
 }
 
 function onSubmitAnswer() {
@@ -133,6 +136,7 @@ function onSubmitAnswer() {
             answerInBox);
         playSound("correct");
         answerBox.appendChild(correctIcon);
+        setAnswerBoxButtonsToColor("green");
     } else {
         questionDispenser.registerIncorrectAnswer(
             questionHolder.innerHTML,
@@ -141,6 +145,7 @@ function onSubmitAnswer() {
         playSound("incorrect");
         answerBox.appendChild(incorrectIcon);
         appendCorrectAnswer(answerBox);
+        setAnswerBoxButtonsToColor("red");
     }
 
     if (questionDispenser.isQuizMode() && questionDispenser.isLastQuestion()) {
@@ -151,11 +156,19 @@ function onSubmitAnswer() {
     }
 }
 
+function setAnswerBoxButtonsToColor(color) {
+
+    for (let i = 0; i < answerBox.children.length; i++) {
+        const child = answerBox.children[i];
+        if (child.className != "syllable-button") continue;
+
+        child.style.backgroundColor = color == "green" ? correctColor : incorrectColor;
+    }
+}
+
 function appendCorrectAnswer(e) {
-    console.log("appending correct");
     const correctAnswerElement = createElement(null, "div", "correct-answer-syllable");
 
-    // const answerPrefix = util.postProcess(qParams.pronoun.arabic + tense.answerPrefix);
     const answerPrefix = "התשובה הנכונה: ";
     const correctAnswerContent = document.createTextNode(answerPrefix + correctAnswer);
     correctAnswerElement.appendChild(correctAnswerContent);
