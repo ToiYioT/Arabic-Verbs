@@ -54,6 +54,19 @@ export class MainButton {
         this.element.onclick = onResetGame;
     }
 
+    // states for syllable input
+    setChooseSyllable() {
+        this.disable();
+        this.setText("הרכיבו את התשובה");
+    }
+
+    setSubmitAnswer(handler) {
+        this.element.classList.remove("faded-button");
+        this.setText("לאישור");
+        this.element.onclick = handler;
+    }
+    ///////
+
     setText(text) {
         this.element.innerHTML = text;
     }

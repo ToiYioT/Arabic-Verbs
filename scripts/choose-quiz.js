@@ -221,7 +221,12 @@ function substituteLastAnswerWithConfusingPronoun(
     return answers;
 }
 
+function onTimerEnded() {
+    mainButton.setChooseAnswer();
+}
+
 export const chooseQuiz = {
     init,
     initQuestionFromParams,
+    onTimerEnded,
 }

@@ -6,6 +6,7 @@ import { getFilteringParams } from "./urlParams.js";
 import { Label, MainButton, Checkbox } from "./views.js";
 import { questionDispenser } from "./question-dispenser.js"
 import { chooseQuiz } from "./choose-quiz.js";
+import { typeQuiz } from "./type-quiz.js";
 
 var tense;
 var roots;
@@ -41,7 +42,7 @@ const soundFinish = new Audio('./sounds/finish.mp3');
 
 
 // new restructuring:
-let currentQuestionEngine = chooseQuiz;
+let currentQuestionEngine = typeQuiz;
 
 window.addEventListener('load', (event) => {
 
@@ -58,7 +59,7 @@ window.addEventListener('load', (event) => {
     score = new Label("score");
     progressBar = document.getElementById("progress-bar");
 
-    chooseQuiz.init(questionDispenser, mainButton, playSound, updateScore);
+    currentQuestionEngine.init(questionDispenser, mainButton, playSound, updateScore);
 
     answerSection = document.getElementById("answer-section");
 
@@ -194,7 +195,7 @@ function cancelTimerAndShowQuestion() {
     progressBar.style.width = "100%";
     progressBarTimer = false;
     answerSection.classList.remove("hide");
-    mainButton.setChooseAnswer();
+    currentQuestionEngine.onTimerEnded();
 }
 
 

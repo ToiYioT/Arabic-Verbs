@@ -6,7 +6,7 @@ const niqud = "ַ" + "ֵ" + "ִ" + "ֹ" + "ֻ"; // a e i o u
 const stressMarker = "֫";
 const syllableMarker = "ֽ";
 
-function separateIntoSyllables(word) {
+function separateIntoSyllables(word, join = true) {
 
     const numOfLetters = util.numOfLetters(word);
     const wordLetters = [];
@@ -29,7 +29,11 @@ function separateIntoSyllables(word) {
         }
     }
     syllables.push(wordLetters.slice(syllableStartIndex, wordLetters[wordLetters.length]).join(""));
-    return joinSyllables(syllables);
+
+    if (join) {
+        return joinSyllables(syllables);
+    }
+    return syllables;
 }
 
 function joinSyllables(syllables) {
@@ -42,7 +46,6 @@ function joinSyllables(syllables) {
         const stressed = syllables[i].includes(stressMarker);
 
         if (stressed) {
-            console.log("got into stressed syllable part");
             joined += `<div class="stressed-syllable">`;
             joined += processedSyllable;
             joined += `</div>`;
