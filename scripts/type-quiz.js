@@ -7,7 +7,6 @@ import { pronounsConst as pronouns } from "./data.js";
 let questionDispenser;
 let mainButton;
 let playSound;
-let updateScore;
 let questionHolder;
 let answerSection;
 
@@ -22,17 +21,17 @@ let correctColor, incorrectColor;
 let correctIcon, incorrectIcon;
 let answerSubmited = false;
 
-function init(qDispenser, button, playSoundFunction, updateScoreFunction) {
+function init(qDispenser, button, playSoundFunction) {
     questionDispenser = qDispenser;
     mainButton = button;
     playSound = playSoundFunction;
-    updateScore = updateScoreFunction;
 
     questionHolder = document.getElementById("question");
     answerSection = document.getElementById("answer-section");
     answerSection.innerHTML = "";
 
     typeSection = util.createElement(answerSection, "div", "type-section");
+    typeSection.style.display = "none";
     answerBox = util.createElement(typeSection, "div", "answer-box");
     syllablePool = util.createElement(typeSection, "div", "syllable-pool");
 
@@ -48,8 +47,8 @@ function init(qDispenser, button, playSoundFunction, updateScoreFunction) {
 
 function initQuestionFromParams(qParams) {
 
+    typeSection.style.display = "flex";
     answerSubmited = false;
-    updateScore();
     const form = forms[qParams.root.form];
     tense = tenses[form.tense];
     const rootArabic = qParams.root.arabic;
@@ -182,8 +181,13 @@ function onTimerEnded() {
     mainButton.setChooseSyllable();
 }
 
+function hideDisplay() {
+    typeSection.style.display = "none";
+}
+
 export const typeQuiz = {
     init,
     initQuestionFromParams,
     onTimerEnded,
+    hideDisplay
 }

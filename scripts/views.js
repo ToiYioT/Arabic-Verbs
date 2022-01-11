@@ -1,3 +1,5 @@
+import { util } from "./util.js";
+
 export class Label {
     constructor(id) {
         this.element = document.getElementById(id);
@@ -108,19 +110,23 @@ export class Checkbox {
 }
 
 export class AnswerButton {
-    constructor(num, callback) {
+    constructor(num, callback, parent) {
         this.answerNum = num;
         this.answer = "";
         this.callback = callback;
-        this.element = document.getElementById("answer" + num);
+
+        const answerHolder = util.createElement(parent, "div", "answer-holder");
+        this.element = util.createElement(answerHolder, "div", "answer");
 
         const self = this;
         this.element.onclick = function () {
             self.callback(self);
         }
 
-        this.correctIcon = document.getElementById("icon-correct" + num)
-        this.incorrectIcon = document.getElementById("icon-incorrect" + num)
+        this.correctIcon = util.createElement(answerHolder, "img", "icon");
+        this.incorrectIcon = util.createElement(answerHolder, "img", "icon");
+        this.correctIcon.src = "icons/correct.png";
+        this.incorrectIcon.src = "icons/incorrect.png";
     }
 
     setNoIcons() {

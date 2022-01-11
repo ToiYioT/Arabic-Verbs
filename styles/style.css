@@ -106,6 +106,14 @@ body {
     /* padding: 0rem 4rem; */
 }
 
+.choose-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* align-items: center; */
+    align-content: center;
+}
+
 #quiz-summary-section{
     display: none;
     flex-direction: column;
@@ -210,6 +218,7 @@ body {
     margin: .2rem .5rem;
     display: flex;
     max-width: 90vw;
+    height: 56px;
 }
 
 .icon{

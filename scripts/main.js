@@ -42,7 +42,7 @@ const soundFinish = new Audio('./sounds/finish.mp3');
 
 
 // new restructuring:
-let currentQuestionEngine = typeQuiz;
+let currentQuestionEngine = chooseQuiz;
 
 window.addEventListener('load', (event) => {
 
@@ -59,7 +59,9 @@ window.addEventListener('load', (event) => {
     score = new Label("score");
     progressBar = document.getElementById("progress-bar");
 
-    currentQuestionEngine.init(questionDispenser, mainButton, playSound, updateScore);
+    // currentQuestionEngine.init(questionDispenser, mainButton, playSound, updateScore);
+    typeQuiz.init(questionDispenser, mainButton, playSound);
+    chooseQuiz.init(questionDispenser, mainButton, playSound);
 
     answerSection = document.getElementById("answer-section");
 
@@ -124,14 +126,26 @@ function initQuestion() {
     soundFinish.src = "./sounds/finish.mp3";
     soundIncorrect.src = "./sounds/incorrect.mp3";
     soundCorrect.src = "./sounds/correct.mp3";
-    updateScore();
 
     questionDispenser.handleNewQuestion();
     const qParams = questionDispenser.getCurrentQuestion();
     setTense(qParams);
     conjugateHebrew(qParams.root.hebrew, qParams.pronoun);
 
+    switchQuestionEngineIfNeeded(qParams);
     currentQuestionEngine.initQuestionFromParams(qParams);
+    updateScore();
+}
+
+function switchQuestionEngineIfNeeded(qParams) {
+    const switchRequired = true;
+    if (currentQuestionEngine == typeQuiz) {
+        currentQuestionEngine = chooseQuiz;
+        typeQuiz.hideDisplay();
+    } else {
+        currentQuestionEngine = typeQuiz;
+        chooseQuiz.hideDisplay();
+    }
 }
 
 function playSound(state) {

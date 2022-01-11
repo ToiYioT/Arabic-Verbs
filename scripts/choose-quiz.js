@@ -15,25 +15,30 @@ let questionHolder;
 let questionDispenser;
 
 let playSound;
-let updateScore;
 let mainButton;
 
-function init(qDispenser, button, playSoundFunction, updateScoreFunction) {
+let answerSection, chooseSection;
+
+function init(qDispenser, button, playSoundFunction) {
     questionDispenser = qDispenser;
     playSound = playSoundFunction;
-    updateScore = updateScoreFunction;
     mainButton = button;
 
     questionHolder = document.getElementById("question");
+    answerSection = document.getElementById("answer-section");
+
+    chooseSection = util.createElement(answerSection, "div", "choose-section");
+    chooseSection.style.display = "none";
     setConfuseType();
 
     for (let i = 0; i < numOfAnswers; i++) {
-        answerButtons.push(new AnswerButton(i + 1, answerClickHandler));
+        answerButtons.push(new AnswerButton(i + 1, answerClickHandler, chooseSection));
     }
 }
 
 function initQuestionFromParams(qParams) {
 
+    chooseSection.style.display = "flex";
     hideAllIcons();
     questionAnswered = false;
     setTense(qParams);
@@ -91,7 +96,6 @@ function answerClickHandler(clickedButton) {
     } else {
         mainButton.setNextQuestion();
     }
-    updateScore();
 }
 
 function createAnswerForms(qParams) {
@@ -225,8 +229,13 @@ function onTimerEnded() {
     mainButton.setChooseAnswer();
 }
 
+function hideDisplay() {
+    chooseSection.style.display = "none";
+}
+
 export const chooseQuiz = {
     init,
     initQuestionFromParams,
     onTimerEnded,
+    hideDisplay,
 }
