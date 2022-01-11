@@ -32,26 +32,19 @@ function init(qDispenser, button, playSoundFunction, updateScoreFunction) {
     answerSection = document.getElementById("answer-section");
     answerSection.innerHTML = "";
 
-    typeSection = createElement(answerSection, "div", "type-section");
-    answerBox = createElement(typeSection, "div", "answer-box");
-    syllablePool = createElement(typeSection, "div", "syllable-pool");
+    typeSection = util.createElement(answerSection, "div", "type-section");
+    answerBox = util.createElement(typeSection, "div", "answer-box");
+    syllablePool = util.createElement(typeSection, "div", "syllable-pool");
 
-    correctIcon = createElement(null, "img", "icon-syllables");
+    correctIcon = util.createElement(null, "img", "icon-syllables");
     correctIcon.src = "icons/correct.png";
-    incorrectIcon = createElement(null, "img", "icon-syllables");
+    incorrectIcon = util.createElement(null, "img", "icon-syllables");
     incorrectIcon.src = "icons/incorrect.png";
 
     correctColor = getComputedStyle(typeSection).getPropertyValue("--correct-answer-color");
     incorrectColor = getComputedStyle(typeSection).getPropertyValue("--incorrect-answer-color");
 }
 
-
-function createElement(parent, type, classToAdd) {
-    const newElement = document.createElement(type);
-    newElement.classList.add(classToAdd)
-    if (parent) parent.appendChild(newElement);
-    return newElement;
-}
 
 function initQuestionFromParams(qParams) {
 
@@ -72,7 +65,7 @@ function initQuestionFromParams(qParams) {
 
 function addAnswerPrefix(addToElement, qParams) {
 
-    const answerPrefixElement = createElement(null, "div", "answer-prefix");
+    const answerPrefixElement = util.createElement(null, "div", "answer-prefix");
 
     const answerPrefix = util.postProcess(qParams.pronoun.arabic + tense.answerPrefix);
     const answerPrefixContent = document.createTextNode(answerPrefix);
@@ -98,7 +91,7 @@ function createButtonsFromSyllables(syllables) {
 
     for (let i = 0; i < syllables.length; i++) {
 
-        const syllableButton = createElement(syllablePool, "div", "syllable-button");
+        const syllableButton = util.createElement(syllablePool, "div", "syllable-button");
         const buttonContent = document.createTextNode(syllables[i]);
         syllableButton.appendChild(buttonContent);
         syllableButton.onclick = onSyllablePoolButtonClick;
@@ -167,7 +160,7 @@ function setAnswerBoxButtonsToColor(color) {
 }
 
 function appendCorrectAnswer(e) {
-    const correctAnswerElement = createElement(null, "div", "correct-answer-syllable");
+    const correctAnswerElement = util.createElement(null, "div", "correct-answer-syllable");
 
     const answerPrefix = "התשובה הנכונה: ";
     const correctAnswerContent = document.createTextNode(answerPrefix + correctAnswer);

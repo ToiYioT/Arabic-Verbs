@@ -182,6 +182,13 @@ function substituteFAAL(root, template) {
     return template;
 }
 
+function createElement(parent, type, classToAdd) {
+    const newElement = document.createElement(type);
+    newElement.classList.add(classToAdd)
+    if (parent) parent.appendChild(newElement);
+    return newElement;
+}
+
 export const util = {
     shuffle,
     getIndexOfFirstWordEnding,
@@ -196,5 +203,6 @@ export const util = {
     separateRootIntoLetters,
     replaceApostropheWithGeresh,
     substituteFAAL,
-    numOfLetters
+    numOfLetters,
+    createElement,
 }
