@@ -29,7 +29,7 @@ let answerSection;
 var quizSummarySection;
 var summaryTitle, summaryScore, summaryMistakes;
 
-var settingsWindow;
+var settingsOverlay, settingsWindow;
 var checkboxTimer;
 
 // logic variables 
@@ -65,7 +65,8 @@ window.addEventListener('load', (event) => {
 
     answerSection = document.getElementById("answer-section");
 
-    settingsWindow = document.getElementsByClassName("settings-overlay")[0];
+    settingsOverlay = document.getElementsByClassName("settings-overlay")[0];
+    settingsWindow = document.getElementsByClassName("settings-container")[0];
     document.getElementsByClassName("cog")[0].onclick = openSettingsWindow;
     document.getElementsByClassName("x-button")[0].onclick = closeSettingsWindow;
     checkboxTimer = new Checkbox("checkbox-timer");
@@ -221,11 +222,15 @@ function updateScore() {
 
 
 function openSettingsWindow() {
-    settingsWindow.style.visibility = "visible";
+    settingsOverlay.style.visibility = "visible";
+    settingsOverlay.style.opacity = "100%";
+    settingsWindow.style.transform = "translateY(0px)";
 }
 
 function closeSettingsWindow() {
-    settingsWindow.style.visibility = "hidden";
+    settingsOverlay.style.visibility = "hidden";
+    settingsOverlay.style.opacity = "0%";
+    settingsWindow.style.transform = "translateY(100px)";
 
     if (checkboxTimer.isChanged()) {
         hideAnswers = checkboxTimer.checked();

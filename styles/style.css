@@ -344,6 +344,8 @@ body {
 
     z-index: 2;
     visibility: hidden;
+    opacity: 0%;
+    transition: .2s;
 }
 
 .settings-container{
@@ -359,6 +361,8 @@ body {
     max-width: 500px;
     border-radius: 1rem;
     color: var(--accent-dark);
+    transform: translateY(100px);
+    transition: .2s;
 }
 
 .settings-title-container{
