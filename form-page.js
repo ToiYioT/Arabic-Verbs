@@ -10,8 +10,14 @@ const allLessons = ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 let currentForm = "";
 let formTitle = null;
 let currentFormArabic = "";
+let helpOverlay, helpWindow;
 
 window.addEventListener("load", () => {
+
+    helpOverlay = document.getElementsByClassName("help-overlay")[0];
+    helpWindow = document.getElementsByClassName("help-container")[0];
+    document.getElementsByClassName("table-help-icon")[0].onclick = openHelpWindow;
+    document.getElementsByClassName("x-button")[0].onclick = closeHelpWindow;
 
     formTitle = document.getElementsByClassName("form-title")[0];
     populateAllForms();
@@ -133,6 +139,20 @@ function populateFormOfTense(tense, parent) {
         const conjugated = conjugate(representativeRoot, form, pronouns[4]);
         new FormButton(form, conjugated, parent);
     }
+}
+
+function openHelpWindow() {
+    helpOverlay.style.visibility = "visible";
+    helpOverlay.style.opacity = "100%";
+    helpWindow.style.transform = "translateY(0px)";
+    document.body.style.overflow = "hidden";
+}
+
+function closeHelpWindow() {
+    helpOverlay.style.visibility = "hidden";
+    helpOverlay.style.opacity = "0%";
+    helpWindow.style.transform = "translateY(100px)";
+    document.body.style.overflow = "scroll";
 }
 
 class FormButton {

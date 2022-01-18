@@ -28,9 +28,101 @@ body{
     color: var(--text-color);
 }
 
+.title-container{
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    margin-top: 2rem;
+    position: relative;
+}
+
 .form-title{
     font-size: 2rem;
-    margin-top: 2rem;
+}
+
+.table-icon-container{
+    position: absolute;
+    display: flex;
+    left: 0;
+    height: 100%;
+}
+
+.table-help-icon{
+    margin: auto .0rem;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.help-overlay{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.609);
+    top: 0;
+    bottom: -50%;
+    left: 0;
+    right: 0;
+
+    z-index: 2;
+    visibility: hidden;
+    opacity: 0%;
+    transition: .2s;
+}
+
+
+.help-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin: 4rem 0rem;
+    background-color: var(--main-bg);
+    border: .3rem solid var(--accent-dark);
+    width: 80%;
+    height: 400px;
+    max-width: 500px;
+    border-radius: 1rem;
+    color: var(--accent-dark);
+    transform: translateY(100px);
+    transition: .2s;
+}
+
+.help-content{
+    padding: 0rem 1rem;
+    padding-bottom: 1rem;
+    line-height: 1.6rem;
+    overflow-y: scroll;
+}
+
+.help-content div{
+    margin: .5rem 0rem;
+}
+
+
+.settings-title-container{
+    display: flex;
+    justify-content:space-between;
+    align-self: stretch;
+    margin-bottom: 1rem;
+    font-weight: bold;
+
+    border-bottom: 1px solid var(--accent-dark);
+}
+.x-button{
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.settings-title{
+    padding: .7rem 1.5rem;
+    font-size: 1.5rem;
 }
 
 .table-container{
@@ -164,12 +256,9 @@ body{
     background-color: var(--accent-green);
 }
 
- @media only screen and (min-width: 1000px) {
+ @media only screen and (min-width: 800px) {
      body{
         zoom: 150%;
-     }
-     #container{
-        min-height: 66.6666vh;
      }
  } 
 
@@ -194,4 +283,13 @@ body{
   --forms-border: white;
   --forms-hover: rgb(78, 126, 78);
   }
+}
+
+ @media (pointer:none), (pointer:coarse) {
+     .table-help-icon{
+         cursor: default;
+     }
+     .x-button{
+         cursor: default;
+     }
 }

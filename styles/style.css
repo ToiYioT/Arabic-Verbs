@@ -350,7 +350,7 @@ body {
 
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
 
     background-color: var(--main-bg);
     border: .3rem solid var(--accent-dark);
@@ -386,6 +386,10 @@ body {
 
 .settings-category{
     margin: 1rem 1.5rem;
+}
+
+.setting-description{
+    margin-left: 1rem;
 }
 
 .setting{
