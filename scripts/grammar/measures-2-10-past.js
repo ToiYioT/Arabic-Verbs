@@ -8,6 +8,11 @@ const INMASAK = "inmasak";
 const ISHTARAL = "ishtaral";
 const ISTAAMAL = "istaamal";
 
+const TASSHA = "tassha"; // 5
+const ISHTARA = "ishtara"; // 8
+const ISTAFAZ = "istafaz"; // 10
+const ITTASAL = "ittasal";
+
 
 function buildPronoun(template, distractions) {
     return {
@@ -197,6 +202,86 @@ istaamal.processingToForm = {
 };
 
 
+/// measure 5, lo shalem
+const tassha = createNewForm();
+tassha.formName = TASSHA;
+tassha.representativeRoot = "עשא";
+tassha.Ana = buildPronoun("תְֽפַעֵֽّ֫ית", []);
+tassha.Inte = buildPronoun("תְֽפַעֵֽّ֫ית", []);
+tassha.Inti = buildPronoun("תְֽפַעֵֽّ֫יתִֽי", []);
+tassha.Huwe = buildPronoun("תְֽֽ֫פַעַֽّא", []);
+tassha.Hiye = buildPronoun("תְֽ֫פַעַֽّת", []);
+tassha.Ihna = buildPronoun("תְֽפַעֵֽّ֫ינַֽא", []);
+tassha.Intu = buildPronoun("תְֽפַעֵֽّ֫יתֽוּ", []);
+tassha.Humme = buildPronoun("תְֽ֫פַעֽّוּ", []);
+tassha.addDistractingFormsToAll(["inmasak", "tnaazal", "katab"]);
+tassha.populateRemainingPronouns();
+tassha.processingToForm = {
+    "inmasak": "פעל",
+    "tnaazal": "פעל",
+    "katab": "פעל",
+};
+
+/// measure 8, lo shalem
+const ishtara = createNewForm();
+ishtara.formName = ISHTARA;
+ishtara.representativeRoot = "שרא";
+ishtara.Ana = buildPronoun("אִֽיפְתַֽעֵֽ֫ית", []);
+ishtara.Inte = buildPronoun("אִֽיפְתַֽעֵֽ֫ית", []);
+ishtara.Inti = buildPronoun("אִֽיפְתַֽעֵֽ֫יתִֽי", []);
+ishtara.Huwe = buildPronoun("אִֽיפְתַֽ֫עַֽא", []);
+ishtara.Hiye = buildPronoun("אִֽיפְתַֽ֫עַֽת", []);
+ishtara.Ihna = buildPronoun("אִֽיפְתַֽעֵֽ֫ינַֽא", []);
+ishtara.Intu = buildPronoun("אִֽיפְתַֽעֵֽ֫יתֽוּ", []);
+ishtara.Humme = buildPronoun("אִֽיפְתַֽ֫עֽוּ", []);
+ishtara.addDistractingFormsToAll([TALLAM, "katab", "inmasak"]);
+ishtara.populateRemainingPronouns();
+ishtara.processingToForm = {
+    "tallam": "פעל",
+    "katab": "פעל",
+    "inmasak": "פעל",
+};
+
+/// measure 10 ,kaful
+const istafaz = createNewForm();
+istafaz.formName = ISTAFAZ;
+istafaz.representativeRoot = "פז";
+istafaz.Ana = buildPronoun("אִֽיסְתַֽפַֽעֵֽّ֫ית", []);
+istafaz.Inte = buildPronoun("אִֽיסְתַֽפַֽעֵֽّ֫ית", []);
+istafaz.Inti = buildPronoun("אִֽיסְתַֽפַֽעֵֽّ֫יתִֽי", []);
+istafaz.Huwe = buildPronoun("אִֽיסְתַֽפַֽ֫עّ", []);
+istafaz.Hiye = buildPronoun("אִֽיסְתַֽפַֽ֫עַֽّת", []);
+istafaz.Ihna = buildPronoun("אִֽיסְתַֽפַֽעֵֽّ֫ינַֽא", []);
+istafaz.Intu = buildPronoun("אִֽיסְתַֽפַֽעֵֽّ֫יתֽוּ", []);
+istafaz.Humme = buildPronoun("אִֽיסְתַֽפַֽ֫עֽّוּ", []);
+istafaz.addDistractingFormsToAll([TALLAM, "katab", "saafar"]);
+istafaz.populateRemainingPronouns();
+istafaz.processingToForm = {
+    "tallam": "פאע",
+    "katab": "פאע",
+    "saafar": "פעע",
+};
+
+
+const ittasal = createNewForm();
+ittasal.formName = ITTASAL;
+ittasal.representativeRoot = "תצל";
+ittasal.Ana = buildPronoun("אִֽיפַֽّעַֽ֫לֵֽת", []);
+ittasal.Inte = buildPronoun("אִֽיפַֽّעַֽ֫לֵֽת", []);
+ittasal.Inti = buildPronoun("אִֽיפַֽّעַֽלְתִֽ֫י", []);
+ittasal.Huwe = buildPronoun("אִֽיפַֽّ֫עַֽל", []);
+ittasal.Hiye = buildPronoun("אִֽיפַֽّ֫עְלַֽת", []);
+ittasal.Ihna = buildPronoun("אִֽיפַֽّעַֽ֫לְנַֽא", []);
+ittasal.Intu = buildPronoun("אִֽיפַֽّעַֽ֫לְתֽוּ", []);
+ittasal.Humme = buildPronoun("אִֽיפַֽّ֫עַֽלֽוּ", []);
+ittasal.addDistractingFormsToAll(["inmasak", "tnaazal", "katab"]);
+ittasal.populateRemainingPronouns();
+ittasal.processingToForm = {
+    "inmasak": "פעל",
+    "tnaazal": "פעל",
+    "katab": "פעל",
+};
+
 
 export const formsPast210 = {
     "karrar": karrar,
@@ -206,4 +291,8 @@ export const formsPast210 = {
     "inmasak": inmasak,
     "ishtaral": ishtaral,
     "istaamal": istaamal,
+    "tassha": tassha,
+    "ishtara": ishtara,
+    "istafaz": istafaz,
+    "ittasal": ittasal,
 }

@@ -5,6 +5,7 @@ const RAYEH = "rayeh";
 const MASHI = "mashi";
 const MITTAKKED = "mittakked";
 const MAWJOOD = "mawjood";
+const MSAAFER = "msaafer";
 
 const SAKAN = "sakan";
 const MUWAJEED = "muwajeed";
@@ -128,6 +129,20 @@ mawjood.processingToForm = {
     "muwajeed": "פעל",
 };
 
+const msaafer = createNewForm();
+msaafer.formName = MSAAFER;
+msaafer.representativeRoot = "ספר";
+msaafer.Ana = buildPronoun("מְֽ֫פַאעֵֽל", []);
+msaafer.AnaFem = buildPronoun("מְֽ֫פַאעְלֵֽה", []);
+msaafer.Ihna = buildPronoun("מְֽפַאעְלִֽ֫ין", []);
+msaafer.IhnaFem = buildPronoun("מְֽפַאעְלַֽ֫את", []);
+msaafer.addDistractingFormsToAll([MAWJOOD, SAKEN, SAKAN]);
+msaafer.populateRemainingPronouns();
+msaafer.processingToForm = {
+    "mawjood": "פעל",
+    "saken": "פעל",
+    "sakan": "פעל",
+};
 
 // distracting forms, not real
 
@@ -160,6 +175,7 @@ export const formsParticiple = {
     "mashi": mashi,
     "mittakked": mittakked,
     "mawjood": mawjood,
+    "msaafer": msaafer,
 
     "sakan": sakan,
     "muwajeed": muwajeed

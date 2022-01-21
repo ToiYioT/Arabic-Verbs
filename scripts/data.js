@@ -15,11 +15,11 @@ function createPronoun(name, hebrew, arabic, gender = "") {
 
 
 export const formNamesPast = ["katab", "nizel", "haka", "nisi", "habb", "rah", "jab"];
-export const formNamesParticiple = ["saken", "rayeh", "mashi", "mittakked", "mawjood"];
+export const formNamesParticiple = ["saken", "rayeh", "mashi", "mittakked", "mawjood", "msaafer"];
 export const formNamesPresent = ["buktol", "bimsek", "bisma", "biruh", "bijib", "bihki", "binsa", "bihibb", "bihutt"];
 export const formNamesFuture = ["yuktol", "yimsek", "yisma", "iruh", "ijib", "ihki", "insa", "ihibb", "ihutt"];
 export const formNamesPresent210 = ["bikarrer", "bikarreb", "bisaafer", "bittallam", "bitnaazal", "binimsek", "bishtrel", "bistaamel"];
-export const formNamesPast210 = ["karrar", "saafar", "tallam", "tnaazal", "inmasak", "ishtaral", "istaamal"];
+export const formNamesPast210 = ["karrar", "saafar", "tallam", "tnaazal", "inmasak", "ishtaral", "istaamal", "tassha", "ishtara", "istafaz", "ittasal"];
 export const formNamesFuture210 = ["yikarrer", "yikarreb", "yisaafer", "yittallam", "yitnaazal", "yinimsek", "yishtrel", "yistaamel"];
 
 export const allFormNames = formNamesPast.concat(formNamesPresent, formNamesFuture,
@@ -69,7 +69,7 @@ export function filterRoots(filteringParams) {
         }
     }
 
-    // console.log(`Filtered: ${filteredData.length} roots`);
+    console.log(`Filtered: ${filteredData.length} roots`);
     // var endTime = performance.now()
     // console.log(`Call to filteringRoots took ${endTime - startTime} milliseconds`);
 
