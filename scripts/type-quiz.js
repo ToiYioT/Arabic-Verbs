@@ -1,6 +1,6 @@
 import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
-import { forms, tenses } from "./tenses.js";
+import { tenses } from "./tenses.js";
 import { syllables } from "./syllables.js";
 import { pronounsConst as pronouns } from "./data.js";
 
@@ -14,6 +14,7 @@ let typeSection;
 let answerBox;
 let syllablePool;
 
+let forms;
 let tense;
 let correctAnswer;
 
@@ -21,10 +22,11 @@ let correctColor, incorrectColor;
 let correctIcon, incorrectIcon;
 let answerSubmited = false;
 
-function init(qDispenser, button, playSoundFunction) {
+function init(qDispenser, button, playSoundFunction, formsRef) {
     questionDispenser = qDispenser;
     mainButton = button;
     playSound = playSoundFunction;
+    forms = formsRef;
 
     questionHolder = document.getElementById("question");
     answerSection = document.getElementById("answer-section");

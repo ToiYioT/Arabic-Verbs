@@ -25,14 +25,11 @@ var mainButton;
 var score;
 var progressBar;
 let answerSection;
-
 var quizSummarySection;
 var summaryTitle, summaryScore, summaryMistakes;
-
 var settingsOverlay, settingsWindow;
 var checkboxTimer;
 
-// logic variables 
 var progressBarTimer;
 
 // audio
@@ -40,14 +37,17 @@ const soundCorrect = new Audio('./sounds/correct.mp3');
 const soundIncorrect = new Audio('./sounds/incorrect.mp3');
 const soundFinish = new Audio('./sounds/finish.mp3');
 
-
-// new restructuring:
 let currentQuestionEngine = chooseQuiz;
 
 window.addEventListener('load', (event) => {
 
     let filteringParams = getFilteringParams();
+    if (!filteringParams.lessons.includes("")) {
+        changePronounsToMardrasaStyle();
+    }
     roots = filterRoots(filteringParams);
+
+    console.log(forms);
 
     questionHolder = document.getElementById("question");
     quizSummarySection = document.getElementById("quiz-summary-section");
@@ -60,8 +60,8 @@ window.addEventListener('load', (event) => {
     progressBar = document.getElementById("progress-bar");
 
     // currentQuestionEngine.init(questionDispenser, mainButton, playSound, updateScore);
-    typeQuiz.init(questionDispenser, mainButton, playSound);
-    chooseQuiz.init(questionDispenser, mainButton, playSound);
+    typeQuiz.init(questionDispenser, mainButton, playSound, forms);
+    chooseQuiz.init(questionDispenser, mainButton, playSound, forms);
 
     answerSection = document.getElementById("answer-section");
 
@@ -75,6 +75,15 @@ window.addEventListener('load', (event) => {
     // debug.showConjugations(roots, pronouns, conjugator, forms);
     // debug.showConjugationHebrew(roots, pronouns, tenses, forms);
 });
+
+function changePronounsToMardrasaStyle() {
+    for (let [formName, form] of Object.entries(forms)) {
+        if (form.tense == "participle") {
+            form.IhnaFem = form.Ihna;
+            form.populateRemainingPronouns();
+        }
+    }
+}
 
 
 

@@ -1,7 +1,7 @@
 import { AnswerButton } from "./views.js";
 import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
-import { forms, tenses } from "./tenses.js";
+import { tenses } from "./tenses.js";
 import { getConfuseType } from "./urlParams.js";
 
 const numOfAnswers = 4;
@@ -10,6 +10,7 @@ let answerButtons = [];
 let getAnswersFunction;
 let correctAnswer;
 
+let forms;
 let tense;
 let questionHolder;
 let questionDispenser;
@@ -19,10 +20,11 @@ let mainButton;
 
 let answerSection, chooseSection;
 
-function init(qDispenser, button, playSoundFunction) {
+function init(qDispenser, button, playSoundFunction, formsRef) {
     questionDispenser = qDispenser;
     playSound = playSoundFunction;
     mainButton = button;
+    forms = formsRef;
 
     questionHolder = document.getElementById("question");
     answerSection = document.getElementById("answer-section");
