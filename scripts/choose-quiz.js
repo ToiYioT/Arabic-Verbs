@@ -3,6 +3,7 @@ import { util } from "./util.js";
 import { conjugator } from "./conjugator.js";
 import { tenses } from "./tenses.js";
 import { getConfuseType } from "./urlParams.js";
+import { pronounsConst } from "./data.js";
 
 const numOfAnswers = 4;
 
@@ -10,6 +11,7 @@ let answerButtons = [];
 let getAnswersFunction;
 let correctAnswer;
 
+let pronouns = pronounsConst;
 let forms;
 let tense;
 let questionHolder;
