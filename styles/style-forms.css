@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
 :root {
   --main-bg: #ffffff;
   --text-color: black;
@@ -13,6 +17,7 @@
   --forms-text: rgb(37, 37, 37);
   --forms-border: white;
   --forms-hover: rgb(155, 255, 155);
+
     scroll-behavior: smooth;
 }
 
@@ -42,6 +47,18 @@ body{
     font-size: 2rem;
 }
 
+.lesson-title{
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.root-info{
+    font-size: 1.5rem;
+}
+.form-info a{
+    text-decoration: none;
+}
+
 .table-icon-container{
     position: absolute;
     display: flex;
@@ -57,7 +74,7 @@ body{
 }
 
 .help-overlay{
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.609);
@@ -127,6 +144,7 @@ body{
 
 .table-container{
     margin: 2rem;
+    margin-top: .5rem;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--table-border);
@@ -189,7 +207,7 @@ body{
 
 .roots-description{
     margin: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .other-roots, .forms{

@@ -8,29 +8,29 @@ import { questionDispenser } from "./question-dispenser.js"
 import { chooseQuiz } from "./choose-quiz.js";
 import { typeQuiz } from "./type-quiz.js";
 
-var tense;
-var roots;
-var pronouns = pronounsConst;
+let tense;
+let roots;
+let pronouns = pronounsConst;
 
 // settings
-var hideAnswers = true;
+let hideAnswers = true;
 const progressBarUpdateInterval = 20;
 
-var numOfProgressBarUpdates = 0;
+let numOfProgressBarUpdates = 0;
 const progressBarMaxUpdates = 150;
 
 // html elements
-var questionHolder;
-var mainButton;
-var score;
-var progressBar;
+let questionHolder;
+let mainButton;
+let score;
+let progressBar;
 let answerSection;
-var quizSummarySection;
-var summaryTitle, summaryScore, summaryMistakes;
-var settingsOverlay, settingsWindow;
-var checkboxTimer;
+let quizSummarySection;
+let summaryTitle, summaryScore, summaryMistakes;
+let settingsOverlay, settingsWindow;
+let checkboxTimer;
 
-var progressBarTimer;
+let progressBarTimer;
 
 // audio
 const soundCorrect = new Audio('./sounds/correct.mp3');
@@ -43,7 +43,7 @@ window.addEventListener('load', (event) => {
 
     let filteringParams = getFilteringParams();
     if (!filteringParams.lessons.includes("")) {
-        changePronounsToMardrasaStyle();
+        util.changePronounsToMardrasaStyle(forms);
     }
     roots = filterRoots(filteringParams);
 
@@ -75,17 +75,6 @@ window.addEventListener('load', (event) => {
     // debug.showConjugations(roots, pronouns, conjugator, forms);
     // debug.showConjugationHebrew(roots, pronouns, tenses, forms);
 });
-
-function changePronounsToMardrasaStyle() {
-    for (let [formName, form] of Object.entries(forms)) {
-        if (form.tense == "participle") {
-            form.IhnaFem = form.Ihna;
-            form.populateRemainingPronouns();
-        }
-    }
-}
-
-
 
 function buttonHandler() {
 

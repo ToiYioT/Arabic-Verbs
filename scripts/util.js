@@ -189,6 +189,15 @@ function createElement(parent, type, classToAdd) {
     return newElement;
 }
 
+function changePronounsToMardrasaStyle(forms) {
+    for (let [formName, form] of Object.entries(forms)) {
+        if (form.tense == "participle") {
+            form.IhnaFem = form.Ihna;
+            form.populateRemainingPronouns();
+        }
+    }
+}
+
 export const util = {
     shuffle,
     getIndexOfFirstWordEnding,
@@ -205,4 +214,5 @@ export const util = {
     substituteFAAL,
     numOfLetters,
     createElement,
+    changePronounsToMardrasaStyle,
 }

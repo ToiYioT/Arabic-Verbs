@@ -7,47 +7,56 @@ import { syllables } from "./scripts/syllables.js";
 
 const courses = ["beginner", "advanced"];
 const courseHebrewNames = ["מדרסה מתחילים", "מדרסה ממשיכים"];
-
 const pronouns = pronounsConst;
-const allLessons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-let lessonTitle = null;
 
 let currentRoot = null;
-let currentFormArabic = "";
-
-let otherRootsContainer;
-let tableRows;
-let helpOverlay, helpWindow;
 let rootsOfCurrentLesson;
+
+const otherRootsContainer = document.querySelector(".other-roots");
+const tableRows = document.querySelectorAll(".table-row");
+const helpOverlay = document.querySelector(".help-overlay");
+const helpWindow = document.querySelector(".help-container");
+const rootInfo = document.querySelector(".root-info");
+const formInfo = document.querySelector(".form-info");
+const courseTitle = document.querySelector(".form-title");
+const lessonTitle = document.querySelector(".lesson-title");
 
 window.addEventListener("load", () => {
 
-    otherRootsContainer = document.getElementsByClassName("other-roots")[0];
-    tableRows = document.getElementsByClassName("table-row");
-    helpOverlay = document.getElementsByClassName("help-overlay")[0];
-    helpWindow = document.getElementsByClassName("help-container")[0];
-    document.getElementsByClassName("table-help-icon")[0].onclick = openHelpWindow;
-    document.getElementsByClassName("x-button")[0].onclick = closeHelpWindow;
+    util.changePronounsToMardrasaStyle(forms);
+    document.querySelector(".table-help-icon").onclick = openHelpWindow;
+    document.querySelector(".x-button").onclick = closeHelpWindow;
 
-    lessonTitle = document.getElementsByClassName("form-title")[0];
     populateAllLessons();
-    changeLesson(0, 1);
+
+    const lessonNum = getFilteringParams().lessons[0];
+    // the math is mapping lessons 1-16 to the correct course and lesson nums:
+    changeLesson(Math.floor((lessonNum - 1) / 8), (lessonNum - 1) % 8 + 1);
 });
 
 function changeLesson(courseNum, lessonNum) {
-    console.log("course: " + courseNum + ", lessonNum: " + lessonNum);
-    lessonTitle.innerHTML = courseHebrewNames[courseNum] + " " + "שיעור " + lessonNum;
+    console.log("course num: " + courseNum);
+    console.log("lesson num: " + lessonNum);
+    courseTitle.innerHTML = courseHebrewNames[courseNum];
+    lessonTitle.innerHTML = "שיעור " + lessonNum;
     populateAllRootsOfLesson(courseNum * 8 + lessonNum);
     populateTable(currentRoot);
-    // addPracticeLink(form);
+    addPracticeLink(courseNum * 8 + lessonNum);
 }
 
-function addPracticeLink(form) {
-    const practiceButton = document.getElementsByClassName("practice-button");
-    practiceButton[0].addEventListener('click', function () {
-        location.href = './index.html?form=' + form.formName;
-    }, false);
-    practiceButton[0].innerHTML = "לתרגול המשקל " + currentFormArabic;
+function addPracticeLink(lessonNum) {
+    const practiceButton = document.getElementsByClassName("practice-button")[0];
+    if (rootsOfCurrentLesson.length == 0) {
+        practiceButton.onclick = "";
+        practiceButton.innerHTML = "השיעור ריק";
+        return;
+    }
+
+    practiceButton.onclick = () => {
+        location.href = './index.html?lf=' + lessonNum + "&lt=" + lessonNum;
+    };
+
+    practiceButton.innerHTML = "לתרגול השיעור";
 }
 
 function populateTable(root) {
@@ -56,6 +65,8 @@ function populateTable(root) {
         setNoRootsInTable();
         return;
     }
+
+    populateRootInfo(root);
 
     const rootForm = forms[root.form];
     const tense = tenses[rootForm.tense];
@@ -84,6 +95,25 @@ function populateTable(root) {
         tableRows[i].innerHTML += '<div class="arabic-part">' + util.postProcess(arabicPart) +
             arabicConjugated + '</div>';
     }
+}
+
+function populateRootInfo(root) {
+    rootInfo.innerHTML = "";
+    rootInfo.innerHTML += conjugate(root.arabic, root.form, pronouns[4]);
+    rootInfo.innerHTML += " - " + root.hebrew;
+
+    let linkText = "משקל ";
+    const formRoot = forms[root.form].representativeRoot;
+    const formNameArabic = conjugate(formRoot, root.form, pronouns[4]);
+    linkText += formNameArabic;
+
+    const a = document.createElement('a');
+    var link = document.createTextNode(linkText);
+    a.appendChild(link);
+    a.title = "This is Link";
+    a.href = "/form.html?form=" + root.form;
+    formInfo.innerHTML = "";
+    formInfo.appendChild(a);
 }
 
 function conjugate(rootArabic, formName, pronoun, postProcess = true) {
@@ -189,8 +219,10 @@ class lessonButton {
     }
 
     #onClick() {
-        changeLesson(this.courseNum, this.lessonNum);
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        const dbLessonNum = this.courseNum * 8 + this.lessonNum;
+        window.location.href = "/madrasa.html?lf=" + dbLessonNum + "&lt=" + dbLessonNum;
+        // changeLesson(this.courseNum, this.lessonNum);
+        // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         // window.scrollTo(0);
     }
 }
