@@ -22,6 +22,9 @@ let correctColor, incorrectColor;
 let correctIcon, incorrectIcon;
 let answerSubmited = false;
 
+const typeSound = new Audio('./sounds/type.wav');
+const deleteSound = new Audio('./sounds/delete.wav');
+
 function init(qDispenser, button, playSoundFunction, formsRef) {
     questionDispenser = qDispenser;
     mainButton = button;
@@ -102,6 +105,9 @@ function createButtonsFromSyllables(syllables) {
 function onSyllablePoolButtonClick() {
     if (answerSubmited) return;
 
+    typeSound.src = "./sounds/type.wav";
+    typeSound.play();
+
     const clonedButton = this.cloneNode(true);
     clonedButton.onclick = onAnswerBoxButtonClick;
     answerBox.appendChild(clonedButton);
@@ -110,6 +116,9 @@ function onSyllablePoolButtonClick() {
 
 function onAnswerBoxButtonClick() {
     if (answerSubmited) return;
+
+    deleteSound.src = "./sounds/delete.wav";
+    deleteSound.play();
     this.parentNode.removeChild(this);
 }
 
