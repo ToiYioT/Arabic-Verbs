@@ -111,7 +111,7 @@ function populateRootInfo(root) {
     var link = document.createTextNode(linkText);
     a.appendChild(link);
     a.title = "This is Link";
-    a.href = "form.html?form=" + root.form;
+    a.href = "./form.html?form=" + root.form;
     formInfo.innerHTML = "";
     formInfo.appendChild(a);
 }
@@ -220,7 +220,7 @@ class lessonButton {
 
     #onClick() {
         const dbLessonNum = this.courseNum * 8 + this.lessonNum;
-        window.location.href = "madrasa.html?lf=" + dbLessonNum + "&lt=" + dbLessonNum;
+        window.location.href = "./madrasa.html?lf=" + dbLessonNum + "&lt=" + dbLessonNum;
         // changeLesson(this.courseNum, this.lessonNum);
         // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         // window.scrollTo(0);
